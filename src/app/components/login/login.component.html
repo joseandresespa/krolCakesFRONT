@@ -1,1 +1,24 @@
-<p>login works!</p>
+
+<h1 class="login-title">INICIAR SESIÓN</h1>
+
+<mat-card class="form-container">
+
+  <img src="assets/logo.png" alt="Descripción de la imagen" class="logo">
+  <form (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Correo electrónico</mat-label>
+          <input matInput type="email" [(ngModel)]="email" name="email" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Contraseña</mat-label>
+        <input matInput [type]="showPassword ? 'text' : 'password'" [(ngModel)]="password" name="password" required>
+        <mat-icon matSuffix (click)="toggleShowPassword()" class="eye-icon">{{ showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </mat-form-field>
+
+      <div class="button-container">
+        <button mat-raised-button class="custom-button" type="submit">Iniciar Sesión</button>
+      </div>
+  </form>
+</mat-card>
+

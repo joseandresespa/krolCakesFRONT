@@ -1,0 +1,59 @@
+.vision-container {
+    max-width: 1200px; 
+    margin: 20px auto; 
+    padding: 20px; 
+    background-color: rgba(233, 201, 152, 0.9); /* Aumenta opacidad para más claridad */
+    border-radius: 8px; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); 
+    overflow-y: auto; /* Agrega desplazamiento vertical */
+    max-height: calc(100vh - 160px); /* Limita la altura para que no se superponga con navbar y footer */
+}
+
+.vision-titulo {
+    background-color: #333; /* Cambiar a un gris más oscuro */
+    color: white;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px; 
+    margin-bottom: 20px; 
+    font-size: 28px; /* Aumentar el tamaño para destacar más */
+}
+
+.org {
+    display: block; 
+    margin: 20px auto; /* Añadir margen superior e inferior */
+    width: 80%; /* Usar porcentaje para ser más responsivo */
+    max-width: 600px; /* Limitar el ancho máximo */
+    height: auto; 
+}
+
+.choco-left, .choco-right {
+    width: 80px; /* Ajustar el ancho */
+    height: auto; 
+    position: fixed; 
+    top: 70px; 
+    z-index: 1000; 
+}
+
+.choco-left {
+    left: 10px; 
+}
+
+.choco-right {
+    right: 10px; 
+}
+
+/* Asegurarse de que haya espacio suficiente entre las imágenes */
+.choco-left, .choco-right {
+    margin-top: 20px; /* Espacio superior para evitar superposiciones */
+}
+
+p {
+    font-family: 'Arial', sans-serif; /* Cambiar la fuente */
+    font-size: 20px; /* Tamaño de letra */
+    line-height: 1.5; /* Interlineado */
+    margin: 10px 0; /* Espaciado superior e inferior */
+    color: #333; /* Color del texto */
+    text-align: justify; /* Justifica el texto */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra del texto */
+}

@@ -1,0 +1,53 @@
+.vision-container, .mision-container {
+    max-width: 800px; /* Ancho máximo del contenedor */
+    margin: 20px auto; /* Centra el contenedor en la página */
+    padding: 20px; /* Espaciado interno */
+    background-color: rgba(249, 202, 233, 0.9); /* Fondo blanco semitransparente */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+    max-height: 80vh; /* Limita la altura del contenedor */
+    overflow-y: auto; /* Habilita el scroll vertical si el contenido excede la altura */
+    transition: transform 0.3s; /* Añade una transición suave */
+}
+
+.vision-container:hover, .mision-container:hover {
+    transform: scale(1.02); /* Escala ligeramente al pasar el ratón */
+}
+
+.vision-titulo, .mision-titulo {
+    background-color: #333; /* Color de fondo más suave */
+    color: #fff;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px; /* Bordes redondeados */
+    margin: 0 auto 20px auto; /* Centrar horizontalmente y margen inferior */
+    font-size: 28px; /* Tamaño de fuente más grande */
+    width: fit-content; /* Ajusta el ancho al contenido */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.cupcake-left, .cupcake-right {
+    width: 100px; /* Ancho de la imagen */
+    height: auto; /* Mantiene la relación de aspecto */
+    position: fixed; /* Posiciona la imagen en relación a la ventana del navegador */
+    top: 70px; /* Ajusta la distancia desde la parte superior de la página, más allá del header */
+    z-index: 1000; /* Asegura que el GIF esté encima de otros elementos de la página */
+}
+
+.cupcake-left {
+    left: 10px; /* Ajusta la distancia desde la parte izquierda de la página */
+}
+
+.cupcake-right {
+    right: 10px; /* Ajusta la distancia desde la parte derecha de la página */
+}
+
+p {
+    font-family: 'Arial', sans-serif; /* Cambiar la fuente */
+    font-size: 16px; /* Tamaño de letra */
+    line-height: 1.5; /* Interlineado */
+    margin: 10px 0; /* Espaciado superior e inferior */
+    color: #333; /* Color del texto */
+    text-align: justify; /* Justifica el texto */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra del texto */
+  }

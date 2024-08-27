@@ -1,0 +1,174 @@
+<div class="cotizar-container">
+    <img src="assets/logo.png" alt="Descripción de la imagen" class="logo">
+    <h1 class="coti-titulo">COTIZACIÓN</h1>
+    
+    <form>
+        <mat-card>
+            <mat-card-content>
+                <h3 class="contact-title">Contacto</h3> <!-- Título colocado aquí -->
+                <div class="client-info">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Ingrese su nombre</mat-label>
+                        <input matInput placeholder="Ingresa tu nombre" required>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Teléfono</mat-label>
+                        <input matInput placeholder="Ingresa tu teléfono" required>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>NIT</mat-label> 
+                        <input matInput placeholder="Ingresa tu NIT" required>
+                    </mat-form-field>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+
+        <mat-card>
+            <mat-card-content>
+                <h3 class="des-title">Descripcion de su pedido</h3> <!-- Título colocado aquí -->
+                <mat-form-field appearance="fill" style="width: 100%;"> <!-- Asegura que ocupe todo el ancho -->
+                    <mat-label>Descripción del pedido</mat-label>
+                    <textarea matInput placeholder="Describe tu pedido" required></textarea>
+                </mat-form-field>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card>
+            <mat-card-content>
+                <h3 class="cotizacion-title">Pasteles</h3> <!-- Título de la sección -->
+                <div class="pastel-container" *ngFor="let pastel of pasteles; let i = index">
+                    <div class="pastelDatos">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Sabor del pastel</mat-label>
+                            <mat-select [(ngModel)]="pastel.sabor" required>
+                                <mat-option value="chocolate">Chocolate</mat-option>
+                                <mat-option value="vainilla">Vainilla</mat-option>
+                                <mat-option value="tres_leches">Tres Leches</mat-option>
+                                <mat-option value="fresas">Fresas</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Cantidad de pisos</mat-label>
+                            <input matInput type="number" [(ngModel)]="pastel.pisos" min="1" max="50" step="1" required>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Cantidad de porciones</mat-label>
+                            <input matInput type="number" [(ngModel)]="pastel.porciones" min="1" max="50" step="1" required>
+                        </mat-form-field>
+                        <button mat-button color="warn" class="eliminar-pastel-btn" (click)="eliminarPastel(i)">Eliminar</button>
+                    </div>
+                </div>
+                <button mat-raised-button class="custom-agregar-btn" (click)="agregarPastel()">+ Agregar pastel</button>
+            </mat-card-content>
+        </mat-card>
+        
+
+        <mat-card>
+            <mat-card-content>
+                <h3 class="imagen">Subir Imágenes de Referencia(Sube o arrastra tus imagenes)</h3>
+                <input type="file" (change)="onFileSelected($event)" multiple accept="image/*">
+                <div *ngIf="selectedFiles.length > 0">
+                    <h4>Imágenes seleccionadas:</h4>
+                    <ul>
+                        <li *ngFor="let file of selectedFiles">{{ file.name }}</li>
+                    </ul>
+                    <button mat-raised-button class="custom-borrar-btn" (click)="clearImages()">Borrar imágenes</button>
+                </div>
+            </mat-card-content>
+        </mat-card>
+
+        <mat-card>
+            <mat-card-content>
+                <h3 class="dulces-title">Dulces extra</h3>
+                <div class="dulces-container" *ngFor="let dulce of dulces; let i = index">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Agregar dulce</mat-label>
+                        <mat-select [(ngModel)]="dulce.tipo" required>
+                            <mat-option value="Cupcakes">Cupcakes</mat-option>
+                            <mat-option value="Alfajores">Alfajores</mat-option>
+                            <mat-option value="Galletas">Galletas</mat-option>
+                            <mat-option value="Paletas">Paletas de chocolate</mat-option>
+                            <mat-option value="Cakepops">Cakepops</mat-option>
+                            <mat-option value="Macarons">Macarons</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Cantidad</mat-label>
+                        <input matInput type="number" [(ngModel)]="dulce.cantidad" min="1" max="50" step="1" required>
+                    </mat-form-field>
+                    <button mat-button color="warn" class="eliminar-item-btn" (click)="eliminarDulce(i)">Eliminar</button>
+                </div>
+                <button mat-raised-button class="custom-agregar-dulce-btn" (click)="agregarDulce()">+ Agregar dulce</button>
+            </mat-card-content>
+        </mat-card>
+        
+        
+
+
+
+        <mat-card>
+            <mat-card-content>
+              <h3 class="cotizacion-title">Envio</h3> <!-- Título de la sección -->
+          
+              <mat-form-field appearance="fill">
+                <mat-label>Envio</mat-label>
+                <mat-select [(value)]="tipoEnvio" (selectionChange)="onEnvioChange($event.value)">
+                  <mat-option value="local">Local</mat-option>
+                  <mat-option value="domicilio">A domicilio</mat-option>
+                </mat-select>
+              </mat-form-field>
+          
+              <div *ngIf="tipoEnvio === 'domicilio'">
+                <mat-form-field appearance="fill">
+                  <mat-label>Dirección de Envio</mat-label>
+                  <textarea matInput [(ngModel)]="direccionEnvio" placeholder="Ingresa la dirección"></textarea>
+                </mat-form-field>
+              </div>
+          
+            </mat-card-content>
+          </mat-card>
+          
+
+
+
+
+        <mat-card>
+            <mat-card-content>
+                <div class="FechaHora">
+                    <h3 class="horario">Fecha y Hora</h3>
+                    <div class="date-picker-container">
+                        <mat-form-field appearance="fill">
+                            <mat-label>Hora de entrega</mat-label>
+                            <input matInput type="time" [(ngModel)]="selectedTime" required 
+                                   (keydown)="handleKeyDown($event)">
+                        </mat-form-field>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Fecha de entrega</mat-label>
+                            <input matInput [matDatepicker]="datePicker" type="date" placeholder="Selecciona la fecha" required 
+                                   (keydown)="handleKeyDown($event)" (change)="onDateChange($event)">
+                            <mat-datepicker #datePicker></mat-datepicker>
+                        </mat-form-field>
+                        
+                       
+                        
+                        <button mat-raised-button class="custom-confirm-btn" (click)="confirmDate()">Confirmar</button>
+
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+        
+
+
+
+
+        <div class="button-group">
+            <button mat-raised-button class="custom-enviar-btn">Enviar Cotización</button>
+            <button mat-button type="reset">Restablecer</button>
+        </div>
+    </form>
+
+
+   
+</div>

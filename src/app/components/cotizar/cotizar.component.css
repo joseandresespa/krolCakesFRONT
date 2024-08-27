@@ -1,0 +1,199 @@
+.cotizar-container {
+    max-width: 800px; /* Ancho máximo del contenedor */
+    margin: 20px auto; /* Centra el contenedor en la página */
+    padding: 20px; /* Espaciado interno */
+    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
+    max-height: 80vh; /* Limita la altura del contenedor */
+    overflow-y: auto; /* Habilita el scroll vertical si el contenido excede la altura */
+}
+
+h2 {
+    text-align: center; /* Centra el título */
+    margin-bottom: 20px; /* Margen inferior */
+}
+
+mat-card {
+    margin-bottom: 20px; /* Margen inferior entre tarjetas */
+}
+
+button {
+    display: block; /* Hace que el botón ocupe todo el ancho */
+    width: 100%; /* Asegura que el botón sea del ancho completo */
+}
+.client-info {
+    display: flex;
+    flex-direction: row; /* Alinea los campos horizontalmente */
+    gap: 20px; /* Espacio entre los campos */
+    flex-wrap: wrap; /* Permite que los campos se envuelvan si no caben en la línea */
+}
+
+mat-form-field {
+    flex: 1; /* Hace que cada campo ocupe el mismo ancho */
+    min-width: 150px; /* Establece un ancho mínimo para cada campo */
+}
+.contact-title {
+    margin-bottom: 20px; /* Espacio entre el título y los campos */
+    font-size: 20px; /* Tamaño del texto del título */
+    
+    color: #333; /* Color del texto (puedes ajustar según tu diseño) */
+}
+
+.des-title {
+    margin-bottom: 20px; /* Espacio entre el título y los campos */
+    font-size: 20px; /* Tamaño del texto del título */
+    
+    color: #333; /* Color del texto (puedes ajustar según tu diseño) */
+}
+
+.cotizacion-title {
+    margin-bottom: 20px; /* Espacio entre el título y el contenido */
+    font-size: 20px; /* Tamaño del texto del título */
+    color: #333; /* Color del texto (ajusta según tu diseño) */
+}
+
+
+@media (max-width: 600px) {
+    .client-info {
+        flex-direction: column; /* Cambia a vertical en pantallas pequeñas */
+    }
+    
+    mat-form-field {
+        width: 100%; /* Asegura que los campos ocupen el 100% del ancho */
+    }
+}
+.date-picker-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre los campos */
+}
+
+mat-form-field {
+    flex: 0 1 200px; /* Ajusta el ancho del campo de fecha */
+}
+
+.date-picker-container button {
+    padding: 4px 12px; /* Tamaño más pequeño del botón */
+    min-width: auto;
+    width: auto; /* Elimina el ancho completo del botón */
+    height: 36px; /* Asegura que la altura del botón coincida con el campo de fecha */
+}
+
+
+.sabor {
+    display: flex;
+    align-items: center; /* Alinea verticalmente los elementos */
+    gap: 10px; /* Espacio entre los elementos */
+}
+
+
+.pastelDatos {
+    display: flex;
+    flex-direction: row; /* Alinea los campos horizontalmente */
+    gap: 20px; /* Espacio entre los campos */
+    flex-wrap: wrap; /* Permite que los campos se envuelvan si no caben en la línea */
+}
+
+.imagen {
+    margin-bottom: 20px; /* Espacio entre el título y el contenido */
+    font-size: 20px; /* Tamaño del texto del título */
+    color: #333; /* Color del texto (ajusta según tu diseño) */
+}
+
+button {
+    margin-top: 10px; /* Espacio superior para separar del input */
+}
+
+.dulces-container {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Espacio entre los campos */
+    margin-bottom: 15px; /* Espacio entre cada dulce */
+}
+
+.eliminar-item-btn {
+    font-size: 12px; /* Tamaño de fuente más pequeño */
+    padding: 4px 8px; /* Tamaño del padding para hacerlo más pequeño */
+    margin-left: 10px; /* Espacio entre el campo y el botón */
+    align-self: center; /* Alinea verticalmente el botón */
+}
+
+.eliminar-pastel-btn {
+    font-size: 12px; /* Tamaño de fuente más pequeño */
+    padding: 4px 8px; /* Tamaño del padding para hacerlo más pequeño */
+    margin-left: 10px; /* Espacio entre el campo y el botón */
+    align-self: center; /* Alinea verticalmente el botón */
+}
+/* Ajusta según el diseño */
+.mat-form-field {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .logo {
+    display: block; /* Hace que la imagen sea un bloque */
+    margin: 0 auto; /* Centra la imagen horizontalmente */
+    width: 100px; /* Ancho de la imagen (ajusta según sea necesario) */
+    height: auto; /* Mantiene la relación de aspecto */
+    margin-bottom: 20px; /* Espacio entre la imagen y el formulario */
+  }
+
+  .custom-agregar-btn {
+    background-color: #865911; /* Cambia esto al color que desees */
+    color: white; /* Cambia el color del texto si es necesario */
+  }
+  
+  .custom-agregar-btn:hover {
+    background-color: #9d7b44; /* Cambia el color al hacer hover si es necesario */
+  }
+
+
+
+
+  .custom-agregar-dulce-btn {
+    background-color: #865911; /* Cambia esto al color que desees */
+    color: white; /* Cambia el color del texto si es necesario */
+  }
+  
+  .custom-agregar-dulce-btn:hover {
+    background-color: #9d7b44; /* Cambia el color al hacer hover si es necesario */
+  }
+  
+  .custom-confirm-btn {
+    background-color: #865911; /* Cambia esto al color que desees */
+    color: white; /* Cambia el color del texto si es necesario */
+  }
+  
+  .custom-confirm-btn:hover {
+    background-color: #9d7b44; /* Cambia el color al hacer hover si es necesario */
+  }
+  .custom-enviar-btn {
+    background-color: #76336e; /* Cambia esto al color que desees */
+    color: white; /* Cambia el color del texto si es necesario */
+}
+
+.custom-enviar-btn:hover {
+    background-color: #6b1260; /* Cambia el color al hacer hover si es necesario */
+}
+
+.custom-borrar-btn {
+    background-color: #cd0000; /* Cambia esto al color que desees */
+    color: white; /* Cambia el color del texto si es necesario */
+}
+
+.custom-borrar-btn:hover {
+    background-color: #a30000; /* Cambia el color al hacer hover si es necesario */
+}
+
+.coti-titulo {
+    background-color: black;
+    color: white;
+    text-align: center; /* Centra el texto dentro del título */
+    padding: 15px;
+    border-radius: 8px; /* Bordes redondeados */
+    margin: 0 auto 20px auto; /* Centra el título y deja espacio debajo */
+    font-size: 24px; /* Tamaño de fuente */
+    width: 30%; /* Asegura que el título ocupe el 50% del ancho disponible */
+    display: block; /* Asegura que el elemento sea tratado como un bloque */
+}

@@ -1,0 +1,68 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Agrega espacio interno */
+  max-width: 300px; /* Ancho máximo del contenedor */
+  margin: 0 auto; /* Centra el contenedor */
+}
+
+.form-field {
+  width: 100%; /* Campos de entrada ocupan todo el ancho del contenedor */
+  margin-bottom: 16px; /* Espacio entre los campos */
+}
+
+mat-card {
+  width: 100%; /* El mat-card ocupa todo el ancho permitido */
+  max-width: 400px; /* Limita el ancho máximo del card */
+  margin: auto; /* Centra el mat-card en la página */
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Centra el botón horizontalmente */
+  width: 100%; /* El contenedor del botón ocupa todo el ancho */
+}
+.eye-icon {
+    cursor: pointer; /* Cambia el cursor a puntero cuando se pasa el ratón sobre el ícono */
+    
+    
+}
+.custom-button {
+  background-color: #deab10; /* Cambia este color a lo que desees */
+  color: white; /* Color del texto */
+}
+
+/* Agrega un efecto hover */
+.custom-button:hover {
+  background-color: #e9c24d; /* Color al pasar el mouse */
+}
+
+.logo {
+  display: block; /* Hace que la imagen sea un bloque */
+  margin: 0 auto; /* Centra la imagen horizontalmente */
+  width: 100px; /* Ancho de la imagen (ajusta según sea necesario) */
+  height: auto; /* Mantiene la relación de aspecto */
+  margin-bottom: 20px; /* Espacio entre la imagen y el formulario */
+}
+.login-title {
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  border-radius: 8px; /* Bordes redondeados, puedes ajustar este valor */
+  margin-bottom: 20px; /* Espacio debajo del título */
+  font-size: 24px; /* Tamaño de fuente, ajusta según tus necesidades */
+  width: 92%; /* Asegura que el título ocupe todo el ancho disponible */
+}
+
+p {
+  font-family: 'Arial', sans-serif; /* Cambiar la fuente */
+  font-size: 16px; /* Tamaño de letra */
+  line-height: 1.5; /* Interlineado */
+  margin: 10px 0; /* Espaciado superior e inferior */
+  color: #333; /* Color del texto */
+  text-align: justify; /* Justifica el texto */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra del texto */
+}
