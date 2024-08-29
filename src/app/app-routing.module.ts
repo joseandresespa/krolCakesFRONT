@@ -6,6 +6,7 @@ import { MisionComponent } from './components/mision/mision.component';
 import { OrganizacionComponent } from './components/organizacion/organizacion.component';
 import { QsComponent } from './components/qs/qs.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
+import { InicioComponent } from './inicio/inicio.component';
 
 
 
@@ -13,13 +14,14 @@ import { ContactoComponent } from './components/contacto/contacto.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' }, // Ruta por defecto
-  { path: 'login', component: LoginComponent }, // Ruta principal para el LoginComponent
+  { path: 'inicio', component: InicioComponent },
+  { path: 'login', component: LoginComponent }, 
   { path: 'cotizar', component: CotizarComponent },
   { path: 'mision', component: MisionComponent },
   { path: 'organizacion', component: OrganizacionComponent },
   { path: 'qs', component: QsComponent },
-  { path: 'contacto', component: ContactoComponent },
+  { path: 'contacto', component: ContactoComponent }
+
 
   
   

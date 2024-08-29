@@ -66,3 +66,143 @@ p {
   text-align: justify; /* Justifica el texto */
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Sombra del texto */
 }
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Asegura que el cuerpo ocupe al menos toda la altura de la ventana */
+  margin: 0; /* Elimina el margen por defecto */
+  background-image:url('http://localhost:4200/assets/image.jpg');
+  background-size: cover; /* La imagen cubre toda la pantalla */
+  background-position: center; /* Centra la imagen */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  background-attachment: fixed; /* Mantiene la imagen fija al hacer scroll */
+  height: 100%;
+}
+
+.navbar {
+  background-color: #be05b5;  /* Color de respaldo si la imagen no se carga */
+  background-image: url('http://localhost:4200/assets/chis2.jpg'); /* Ruta a la imagen de fondo */
+  background-size: cover; /* Ajusta la imagen para que cubra toda el área */
+  background-position: center; /* Centra la imagen en la barra */
+  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  overflow: hidden;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  
+}
+
+.navbar ul {
+  list-style-type: none; /* Elimina los puntos de la lista */
+  padding: 0; /* Elimina el padding por defecto */
+  margin: 0; /* Elimina el margen por defecto */
+  display: flex; /* Muestra los elementos de la lista en línea */
+  align-items: center; /* Alinea verticalmente al centro */
+  height: 100%; /* Asegura que la altura sea la de la barra */
+}
+
+.navbar li {
+  padding: 10px 20px; /* Espaciado interno para los elementos de la lista */
+  transition: background-color 0.3s; /* Transición suave al cambiar el color de fondo */
+}
+
+
+
+.navbar a {
+  color: rgb(0, 0, 0); /* Color del texto */
+  text-decoration: none; /* Elimina el subrayado */
+  display: block; /* Hace que el enlace ocupe todo el espacio del li */
+  height: 100%; /* Asegura que el enlace ocupe toda la altura del li */
+}
+
+.app-container {
+  flex: 1; /* Hace que este contenedor ocupe el espacio restante */
+  display: flex;
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+  padding: 20px; /* Espacio alrededor del contenido */
+  margin-top: 60px; /* Margen superior para evitar superposición con el navbar */
+    margin-bottom: 50px; /* Margen inferior para evitar superposición con el footer */
+}
+
+.footer {
+  position: fixed; 
+  bottom: 0;
+  left: 0; 
+  right: 0;
+  background-color: #333; /* Color del footer */
+  color: red;
+  text-align: center;
+  padding: 10px 0; /* Espaciado en la parte superior e inferior */
+  z-index: 1000; /* Asegura que esté por encima del contenido */
+}
+
+.btn-special {
+  background-color: #ffe883; /* Color de fondo personalizado */
+  color: rgb(255, 255, 255); /* Color del texto */
+  padding: 10px 20px; /* Espaciado interno del botón */
+  border-radius: 10px; /* Bordes más ovalados */
+  text-decoration: none; /* Elimina el subrayado */
+  transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+  display: inline-block; /* Asegura que se comporte como un botón */
+}
+
+.btn-special:hover {
+  background-color: #f7db50; /* Color de fondo al pasar el mouse */
+  transform: scale(1.05); /* Pequeño efecto de aumento */
+}
+
+.btn-login {
+  background-color: #d8cefe; /* Color de fondo personalizado */
+  color: rgb(255, 255, 255); /* Color del texto */
+  padding: 10px 20px; /* Espaciado interno del botón */
+  border-radius: 10px; /* Bordes más ovalados */
+  text-decoration: none; /* Elimina el subrayado */
+  transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+  display: inline-block; /* Asegura que se comporte como un botón */
+}
+
+.btn-login:hover {
+  background-color:   #e6e2f7; /* Color de fondo al pasar el mouse */
+  transform: scale(1.05); /* Pequeño efecto de aumento */
+}
+.btn-cotizar {
+  background-color: #d8cefe; /* Color de fondo personalizado */
+  color: rgb(255, 255, 255); /* Color del texto */
+  padding: 10px 20px; /* Espaciado interno del botón */
+  border-radius: 10px; /* Bordes más ovalados */
+  text-decoration: none; /* Elimina el subrayado */
+  transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+  display: inline-block; /* Asegura que se comporte como un botón */
+}
+
+.btn-cotizar:hover {
+  background-color:   #e6e2f7; /* Color de fondo al pasar el mouse */
+  transform: scale(1.05); /* Pequeño efecto de aumento */
+}
+
+.btn-login mat-icon {
+  margin-right: 5px; /* Espacio entre el ícono y el texto */
+  vertical-align: middle; /* Alinea el ícono verticalmente */
+  font-size: 25px; /* Tamaño del ícono */
+  
+}
+.btn-special mat-icon {
+  margin-right: 5px; /* Espacio entre el ícono y el texto */
+  vertical-align: middle; /* Alinea el ícono verticalmente */
+  font-size: 25px; /* Tamaño del ícono */
+  
+}
+
+.btn-cotizar mat-icon {
+  margin-right: 5px; /* Espacio entre el ícono y el texto */
+  vertical-align: middle; /* Alinea el ícono verticalmente */
+  font-size: 25px; /* Tamaño del ícono */
+  
+}
+
+
+  
