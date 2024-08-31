@@ -1,0 +1,67 @@
+<body>
+
+<div class="sidebar">
+    <!-- Usuario -->
+    <div class="user-section">
+        <p  class="n_usuario">Usuario</p>
+        <img src="assets/usuario.jpg"alt="Usuario" class="user-image">
+    </div>
+  
+    <!-- Menú desplegable -->
+    <div class="nav-item" (click)="toggleDropdown('cotizaciones')">
+        <mat-icon>assignment</mat-icon>
+        Cotizaciones
+        <div class="dropdown" [ngClass]="{'show': isDropdownOpen('cotizaciones')}">
+            <a href="#">item1</a>
+            <a href="#">item2</a>
+            <a href="#">item3</a>
+        </div>
+    </div>
+
+    <div class="nav-item" (click)="toggleDropdown('agenda')">
+        <mat-icon>calendar_today</mat-icon>
+        Agenda
+        <div class="dropdown" [ngClass]="{'show': isDropdownOpen('agenda')}">
+            <a href="#">item1</a>
+            <a href="#">item2</a>
+            <a href="#">item3</a>
+        </div>
+    </div>
+
+    <div class="nav-item" (click)="toggleDropdown('ventas')">
+        <mat-icon>shopping_cart</mat-icon>
+        Ventas
+        <div class="dropdown" [ngClass]="{'show': isDropdownOpen('ventas')}">
+            <a href="#">item1</a>
+            <a href="#">item2</a>
+            <a href="#">item3</a>
+        </div>
+    </div>
+
+    <div class="nav-item" (click)="toggleDropdown('inventario')">
+        <mat-icon>inventory</mat-icon>
+        Inventario
+        <div class="dropdown" [ngClass]="{'show': isDropdownOpen('inventario')}">
+            <a href="#">item1</a>
+            <a href="#">item2</a>
+            <a href="#">item3</a>
+        </div>
+    </div>
+
+    <div class="nav-item" (click)="toggleDropdown('usuarios')">
+        <mat-icon>person</mat-icon>
+        Usuarios
+        <div class="dropdown" [ngClass]="{'show': isDropdownOpen('usuarios')}">
+            <a href="/mantenimiento"><mat-icon>edit</mat-icon>Mantenimiento</a>
+            <a href="#">item2</a>
+            <a href="#">item3</a>
+        </div>
+    </div>
+
+    
+</div>
+<div class="main-content">
+
+    <ng-content></ng-content>
+</div>
+</body>

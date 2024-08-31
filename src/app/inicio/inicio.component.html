@@ -22,8 +22,12 @@
         </div>
         
         <div class="app-container">    
-            <router-outlet></router-outlet>
+            <ng-content></ng-content>
         </div>
+
+        <button a routerLink="/sistema" class="system-button" >
+            <mat-icon>cake</mat-icon> <!-- icono -->
+          </button>
         
         <div class="footer">
             <p>© 2024 Krol Cakes. Todos los derechos reservados.</p>

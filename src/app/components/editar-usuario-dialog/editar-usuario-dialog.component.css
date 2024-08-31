@@ -1,0 +1,37 @@
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .dialog-header h2 {
+    background-color: #000; /* Fondo negro */
+    color: #fff; /* Texto blanco */
+    padding: 3px 20px;
+    border-radius: 8px; /* Esquinas redondeadas */
+    margin: 0; /* Eliminar el margen del h2 */
+  }
+  
+  .close-button {
+    cursor: pointer;
+  }
+  
+  .mat-dialog-title {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .mat-dialog-content {
+    overflow: hidden;
+  }
+  
+  .mat-dialog-actions {
+    justify-content: flex-end;
+  }
+  
+  .mat-form-field {
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  

@@ -26,6 +26,16 @@
   import { InicioComponent } from './inicio/inicio.component';
 import { SesionService } from 'src/services/sesion.service';
 import { HttpClientModule } from '@angular/common/http';
+import { SistemaComponent } from './sistema/sistema.component';
+import { MantenimientoComponent } from './components/mantenimiento/mantenimiento.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ReactiveFormsModule } from '@angular/forms';
+import { AgregarUsuarioDialogComponent } from './components/agregar-usuario-dialog/agregar-usuario-dialog.component';
+import { EditarUsuarioDialogComponent } from './components/editar-usuario-dialog/editar-usuario-dialog.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+
 
 
 
@@ -43,6 +53,13 @@ import { HttpClientModule } from '@angular/common/http';
       ContactoComponent,
       InicioComponent,
       OrganizacionComponent,
+      SistemaComponent,
+      MantenimientoComponent,
+      AgregarUsuarioDialogComponent,
+      EditarUsuarioDialogComponent,
+      ConfirmDialogComponent
+         
+      
     
       
       
@@ -65,7 +82,12 @@ import { HttpClientModule } from '@angular/common/http';
       MatFormFieldModule,
       BrowserAnimationsModule,
       RouterModule,
-      HttpClientModule
+      HttpClientModule,
+      MatTableModule,
+      MatPaginatorModule,
+      MatDialogModule,
+      ReactiveFormsModule
+      
     ],
     providers: [SesionService],
     bootstrap: [AppComponent]

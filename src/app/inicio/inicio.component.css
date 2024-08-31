@@ -135,6 +135,31 @@ body {
     
   }
   
+  .system-button {
+    position: fixed;
+    bottom: 80px; /* Ajusta esto según el tamaño del footer */
+    right: 20px;
+    background-color: #fff533; /* Color de fondo personalizado */
+    color: rgb(0, 0, 0); /* Color del icono */
+    padding: 10px; /* Espaciado interno del botón */
+    border-radius: 50%; /* Redondea el botón para que sea circular */
+    border: none;
+    text-decoration: none; /* Elimina el subrayado */
+    transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra del botón */
+  }
   
-    
+  .system-button mat-icon {
+    font-size: 24px; /* Tamaño del icono */
+  }
   
+  /* Efecto de hover */
+  .system-button:hover {
+    background-color: #ffeb3b; /* Color de fondo cuando el cursor está sobre el botón */
+    transform: scale(1.1); /* Aumenta el tamaño del botón ligeramente */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Efecto de sombra en hover */
+  }

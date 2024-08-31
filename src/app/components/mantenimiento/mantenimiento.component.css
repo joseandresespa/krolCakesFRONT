@@ -1,0 +1,123 @@
+.container {
+  max-width: 1200px; /* Ajusta este valor según tus necesidades */
+  width: 100%; /* Asegura que el contenedor ocupe el 100% del espacio disponible */
+  margin: 30px 20px 20px 300px; /* Añade margen izquierdo para mover el cuadro hacia la derecha */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #ff8c0060;
+  
+}
+
+h2 {
+  text-align: center;
+  color:#ffffff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse; /* Eliminamos espacios entre celdas */
+  
+}
+
+th.mat-header-cell, td.mat-cell {
+  text-align: left; /* Alineación a la izquierda */
+  padding: 12px 8px; /* Espacio interno en celdas */
+}
+
+th.mat-header-cell {
+  background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+td.mat-cell {
+  font-size: 14px;
+}
+
+td.mat-cell button {
+  margin: 0 4px;
+}
+
+tr.mat-header-row {
+  border-bottom: 2px solid #e0e0e0; /* Línea debajo del encabezado */
+}
+
+tr.mat-row {
+  border-bottom: 1px solid #e0e0e0; /* Líneas entre las filas */
+}
+
+.agregar-usuario {
+  position: fixed;
+  bottom: 80px; /* Ajusta esto según el tamaño del footer */
+  right: 20px;
+  background-color: #fff533; /* Color de fondo personalizado */
+  color: rgb(0, 0, 0); /* Color del icono */
+  padding: 10px; /* Espaciado interno del botón */
+  border-radius: 50%; /* Redondea el botón para que sea circular */
+  border: none;
+  text-decoration: none; /* Elimina el subrayado */
+  transition: background-color 0.3s, transform 0.2s, width 0.3s; /* Transiciones suaves */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra del botón */
+  width: 50px; /* Ancho inicial */
+  overflow: hidden; /* Oculta el texto al inicio */
+}
+
+.agregar-usuario mat-icon {
+  font-size: 24px; /* Tamaño del icono */
+}
+
+.agregar-usuario .texto {
+  display: none; /* Oculta el texto por defecto */
+  margin-left: 8px; /* Espacio entre el icono y el texto */
+  font-size: 10px; /* Tamaño de la letra reducido */
+  white-space: nowrap; /* Evita que el texto se divida en múltiples líneas */
+}
+
+.agregar-usuario:hover {
+  background-color: #ffeb3b; /* Color de fondo cuando el cursor está sobre el botón */
+  transform: scale(1.1); /* Aumenta el tamaño del botón ligeramente */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Efecto de sombra en hover */
+  width: 150px; /* Ancho al hacer hover para mostrar el texto */
+}
+
+.agregar-usuario:hover .texto {
+  display: inline; /* Muestra el texto al hacer hover */
+}
+
+button.mat-raised-button {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+button.mat-raised-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.container {
+  text-align: center; /* Centrar el contenido del contenedor */
+}
+
+.titulo-container {
+  background-color: black; /* Fondo negro */
+  border-radius: 8px; /* Esquinas redondeadas */
+  padding: 5px 15px; /* Espaciado interno reducido */
+  display: inline-block; /* Hacer que el contenedor sea del tamaño del contenido */
+  transition: transform 0.3s; /* Transición para el aumento de tamaño */
+  margin: 0 auto; /* Centrar el contenedor */
+  cursor: pointer; /* Cambiar el cursor a una manita */
+}
+
+.titulo-container:hover {
+  transform: scale(1.1); /* Aumentar el tamaño al pasar el mouse */
+}
+
+.titulo-container h2 {
+  color: white; /* Color del texto */
+  margin: 0; /* Elimina el margen del h2 */
+  font-size: 1.2em; /* Tamaño de fuente ajustable */
+}

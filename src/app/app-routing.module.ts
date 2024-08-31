@@ -7,6 +7,8 @@ import { OrganizacionComponent } from './components/organizacion/organizacion.co
 import { QsComponent } from './components/qs/qs.component';
 import { ContactoComponent } from './components/contacto/contacto.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { SistemaComponent } from './sistema/sistema.component';
+import { MantenimientoComponent } from './components/mantenimiento/mantenimiento.component';
 
 
 
@@ -20,7 +22,10 @@ const routes: Routes = [
   { path: 'mision', component: MisionComponent },
   { path: 'organizacion', component: OrganizacionComponent },
   { path: 'qs', component: QsComponent },
-  { path: 'contacto', component: ContactoComponent }
+  { path: 'contacto', component: ContactoComponent },
+  { path: 'sistema', component: SistemaComponent },
+  { path: 'mantenimiento', component: MantenimientoComponent },
+
 
 
   
