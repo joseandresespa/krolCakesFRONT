@@ -16,14 +16,23 @@
 
   <mat-form-field>
     <mat-label>Contraseña</mat-label>
-    <input matInput [(ngModel)]="data.contrasena" type="password">
+    <input matInput [(ngModel)]="data.contrasenia" type="password">
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Rol</mat-label>
-    <mat-select [(ngModel)]="data.rol">
-      <mat-option value="Admin">Admin</mat-option>
-      <mat-option value="User">User</mat-option>
+    <mat-select [(ngModel)]="data.id_rol">
+      <mat-option *ngFor="let rol of roles" [value]="rol.id">
+        {{ rol.nombre }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Estado</mat-label>
+    <mat-select [(ngModel)]="data.visibilidad">
+      <mat-option [value]="true">Inactivo</mat-option>
+      <mat-option [value]="false">Activo</mat-option>
     </mat-select>
   </mat-form-field>
 </div>

@@ -1,40 +1,40 @@
-<!-- agregar-usuario-dialog.component.html -->
-<div mat-dialog-title class="dialog-header">
-    <h2>Agregar Usuario</h2>
-    <button mat-icon-button (click)="onNoClick()" class="close-button">
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
-  <div mat-dialog-content>
-    <form [formGroup]="usuarioForm">
-      <!-- Campos del formulario -->
-      <mat-form-field>
-        <mat-label>Nombre</mat-label>
-        <input matInput formControlName="nombre">
-      </mat-form-field>
-  
-      <mat-form-field>
-        <mat-label>Correo</mat-label>
-        <input matInput formControlName="correo">
-      </mat-form-field>
-  
-      <mat-form-field>
-        <mat-label>Contraseña</mat-label>
-        <input matInput formControlName="contrasena" type="password">
-      </mat-form-field>
-  
-      <mat-form-field>
-        <mat-label>Rol</mat-label>
-        <mat-select formControlName="rol">
-          <mat-option value="Admin">Admin</mat-option>
-          <mat-option value="User">User</mat-option>
-        </mat-select>
-      </mat-form-field>
-    </form>
-  </div>
-  <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">Cancelar</button>
-    <button mat-button [mat-dialog-close]="usuarioForm.value" [disabled]="!usuarioForm.valid">Guardar</button>
-  </div>
-  
 
+<div mat-dialog-title class="dialog-header">
+  <h2>Agregar Usuario</h2>
+  <button mat-icon-button (click)="onNoClick()" class="close-button">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<div mat-dialog-content>
+  <form [formGroup]="usuarioForm">
+    <!-- Campos del formulario -->
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Correo</mat-label>
+      <input matInput formControlName="correo">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Contraseña</mat-label>
+      <input matInput formControlName="contrasenia" type="password">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Rol</mat-label>
+      <mat-select formControlName="id_rol">
+        <mat-option *ngFor="let rol of roles" [value]="rol.id">
+          {{ rol.nombre }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+
+  <button mat-button color="primary" (click)="onSubmit()" [disabled]="!usuarioForm.valid">Guardar</button>
+</div>

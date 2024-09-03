@@ -3,6 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { AgregarUsuarioDialogComponent } from '../agregar-usuario-dialog/agregar-usuario-dialog.component';
 import { EditarUsuarioDialogComponent } from '../editar-usuario-dialog/editar-usuario-dialog.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { Usuario, UsuarioCompleto } from 'src/app/models/usuario.interface'; 
+import { CatalogosService } from 'src/services/catalogos.service'; 
+
 
 @Component({
   selector: 'app-mantenimiento',
@@ -11,7 +14,7 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 })
 export class MantenimientoComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'correo', 'contraseña', 'visibilidad', 'rol', 'acciones'];
-  dataSource: any[] = []; // Inicializa dataSource como un array vacío sin datos
+  dataSource: UsuarioCompleto[] = []; // Inicializa dataSource como un array vacío sin datos
 
   // Paginación
   currentPage = 1;
@@ -19,10 +22,18 @@ export class MantenimientoComponent implements OnInit {
   totalPages = Math.ceil(this.dataSource.length / this.itemsPerPage);
   pages: number[] = [];
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private service: CatalogosService) { }
 
   ngOnInit(): void {
-    this.calculatePages();
+    this.cargarUsuarios();
+  }
+
+  cargarUsuarios(): void {
+    this.service.usuarios().subscribe(data => {
+      this.dataSource = data;
+      this.totalPages = Math.ceil(this.dataSource.length / this.itemsPerPage);
+      this.calculatePages();
+    });
   }
 
   calculatePages() {
@@ -59,7 +70,7 @@ export class MantenimientoComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         // Actualiza el usuario en la dataSource
-        const index = this.dataSource.findIndex(u => u.id === user.id);
+        const index = this.dataSource.findIndex(u => u.id_usuario === user.id);
         if (index !== -1) {
           this.dataSource[index] = result; // Reemplaza el usuario editado
         }
@@ -73,7 +84,7 @@ export class MantenimientoComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         // Si el usuario confirma la eliminación, procede a eliminarlo
-        this.dataSource = this.dataSource.filter(u => u.id !== user.id);
+        this.dataSource = this.dataSource.filter(u => u.id_usuario !== user.id);
         // Actualiza la paginación después de eliminar
         this.totalPages = Math.ceil(this.dataSource.length / this.itemsPerPage);
         this.calculatePages();
