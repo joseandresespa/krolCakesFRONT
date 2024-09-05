@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario.interface'; 
 import { SesionService } from 'src/services/sesion.service'; 
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,11 +12,10 @@ import { SesionService } from 'src/services/sesion.service';
 export class LoginComponent {
   email: string = '';
   password: string = '';
-  showPassword: boolean = false; // Inicializa la propiedad showPassword
+  showPassword: boolean = false;
 
-  constructor(private sesionService: SesionService) {}
+  constructor(private sesionService: SesionService, private router: Router) {}
 
-  // Método para alternar la visibilidad de la contraseña
   toggleShowPassword() {
     this.showPassword = !this.showPassword;
   }
@@ -23,15 +25,26 @@ export class LoginComponent {
       correo: this.email,
       contrasenia: this.password
     };
-      this.sesionService.sesion(credenciales).subscribe(
+
+    this.sesionService.sesion(credenciales).subscribe(
       (response: Usuario) => {
-        alert('Usuario autenticado: '+ response);
-        // Aquí puedes redirigir al usuario a otra página o guardar su información en localStorage
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Usuario autenticado correctamente',
+          confirmButtonText: 'Aceptar'
+        });
+        this.router.navigate(['/sisprincipal']);
       },
       (error) => {
-        console.error('Error en la autenticación: '+ error);
-        // Aquí puedes mostrar un mensaje de error al usuario
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error en la autenticación. Por favor, verifica tus credenciales.',
+          confirmButtonText: 'Intentar de nuevo'
+        });
       }
     );
   }
 }
+

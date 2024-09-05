@@ -1,10 +1,29 @@
 <app-sistema>
-  <br>
   <div class="container">
     <div class="titulo-container">
       <h2>Mantenimiento de Usuarios</h2>
     </div>
+    <br><br>
+    <div class="search-container">  <!-- Busqueda inteligente -->
+      <mat-icon>search</mat-icon>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Buscar usuarios">
+     
+    </div>
+
+    
+  <div class="sort-container"> <!-- Busqueda por orden alfabetico -->
+    <mat-form-field>
+      <mat-label>Ordenar por</mat-label>
+      <mat-select [(value)]="selectedOrder" (selectionChange)="sortData()">
+        <mat-option value="asc">Nombre Ascendente</mat-option>
+        <mat-option value="desc">Nombre Descendente</mat-option>
+        <mat-option value="none">Sin orden</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  
     <br> <br>
+    
     <table mat-table [dataSource]="paginatedData" class="mat-elevation-z8">
       <!-- Definiciones de columnas -->
       <ng-container matColumnDef="id">

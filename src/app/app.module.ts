@@ -36,6 +36,7 @@ import { AgregarUsuarioDialogComponent } from './components/agregar-usuario-dial
 import { EditarUsuarioDialogComponent } from './components/editar-usuario-dialog/editar-usuario-dialog.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { CatalogosService } from 'src/services/catalogos.service';
+import { SisprincipalComponent } from './components/sisprincipal/sisprincipal.component';
 
 
 
@@ -58,7 +59,8 @@ import { CatalogosService } from 'src/services/catalogos.service';
       MantenimientoComponent,
       AgregarUsuarioDialogComponent,
       EditarUsuarioDialogComponent,
-      ConfirmDialogComponent
+      ConfirmDialogComponent,
+      SisprincipalComponent
          
       
     

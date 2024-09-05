@@ -8,6 +8,11 @@
     </div>
   
     <!-- Menú desplegable -->
+    <div class="nav-item" (click)="navigateTo('/sisprincipal')"><!-- Botón de regresar al menu principal -->
+        <mat-icon>computer</mat-icon>
+        Inicio
+    </div>
+
     <div class="nav-item" (click)="toggleDropdown('cotizaciones')">
         <mat-icon>assignment</mat-icon>
         Cotizaciones
@@ -53,11 +58,14 @@
         Usuarios
         <div class="dropdown" [ngClass]="{'show': isDropdownOpen('usuarios')}">
             <a href="/mantenimiento"><mat-icon>edit</mat-icon>Mantenimiento</a>
-            <a href="#">item2</a>
-            <a href="#">item3</a>
         </div>
     </div>
 
+
+      <div class="logout-section" (click)="onLogout()"><!-- Botón de salir -->
+        <mat-icon>exit_to_app</mat-icon>
+        Salir del sistema
+    </div>
     
 </div>
 <div class="main-content">

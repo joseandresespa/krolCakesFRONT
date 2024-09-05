@@ -9,6 +9,7 @@ import { ContactoComponent } from './components/contacto/contacto.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { SistemaComponent } from './sistema/sistema.component';
 import { MantenimientoComponent } from './components/mantenimiento/mantenimiento.component';
+import { SisprincipalComponent } from './components/sisprincipal/sisprincipal.component';
 
 
 
@@ -25,7 +26,7 @@ const routes: Routes = [
   { path: 'contacto', component: ContactoComponent },
   { path: 'sistema', component: SistemaComponent },
   { path: 'mantenimiento', component: MantenimientoComponent },
-
+  { path: 'sisprincipal', component: SisprincipalComponent },
 
 
   

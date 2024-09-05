@@ -14,13 +14,17 @@ import { CatalogosService } from 'src/services/catalogos.service';
 })
 export class MantenimientoComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'correo', 'contraseña', 'visibilidad', 'rol', 'acciones'];
-  dataSource: UsuarioCompleto[] = []; // Inicializa dataSource como un array vacío sin datos
-
+  dataSource: UsuarioCompleto[] = []; // Array con todos los datos
+  filteredData: UsuarioCompleto[] = []; // Array con los datos filtrados
+  selectedOrder: string = 'none'; // Orden seleccionado
+  
+  
   // Paginación
   currentPage = 1;
   itemsPerPage = 5;
-  totalPages = Math.ceil(this.dataSource.length / this.itemsPerPage);
+  totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
   pages: number[] = [];
+  filterValue: string = ''; // Valor de búsqueda
 
   constructor(private dialog: MatDialog, private service: CatalogosService) { }
 
@@ -31,9 +35,30 @@ export class MantenimientoComponent implements OnInit {
   cargarUsuarios(): void {
     this.service.usuarios().subscribe(data => {
       this.dataSource = data;
-      this.totalPages = Math.ceil(this.dataSource.length / this.itemsPerPage);
+      this.filteredData = data;
+      this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
       this.calculatePages();
     });
+  }
+
+  applyFilter(event: Event) {
+    this.filterValue = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.filteredData = this.dataSource.filter(user => {
+      return Object.values(user).some(value => 
+        String(value).toLowerCase().includes(this.filterValue)
+      );
+    });
+    this.sortData(); // Aplica el ordenamiento después de filtrar
+    this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
+    this.calculatePages();
+  }
+  
+  sortData() {
+    if (this.selectedOrder === 'asc') {
+      this.filteredData.sort((a, b) => (a.nombre ?? '').localeCompare(b.nombre ?? ''));
+    } else if (this.selectedOrder === 'desc') {
+      this.filteredData.sort((a, b) => (b.nombre ?? '').localeCompare(a.nombre ?? ''));
+    }
   }
 
   calculatePages() {
@@ -42,7 +67,7 @@ export class MantenimientoComponent implements OnInit {
 
   get paginatedData() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    return this.dataSource.slice(startIndex, startIndex + this.itemsPerPage);
+    return this.filteredData.slice(startIndex, startIndex + this.itemsPerPage);
   }
 
   goToPage(page: number) {
@@ -73,6 +98,7 @@ export class MantenimientoComponent implements OnInit {
         const index = this.dataSource.findIndex(u => u.id_usuario === user.id);
         if (index !== -1) {
           this.dataSource[index] = result; // Reemplaza el usuario editado
+          this.applyFilter({ target: { value: this.filterValue } } as any); // Vuelve a aplicar el filtro
         }
       }
     });
@@ -85,8 +111,8 @@ export class MantenimientoComponent implements OnInit {
       if (result) {
         // Si el usuario confirma la eliminación, procede a eliminarlo
         this.dataSource = this.dataSource.filter(u => u.id_usuario !== user.id);
-        // Actualiza la paginación después de eliminar
-        this.totalPages = Math.ceil(this.dataSource.length / this.itemsPerPage);
+        this.filteredData = this.filteredData.filter(u => u.id_usuario !== user.id);
+        this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
         this.calculatePages();
       }
     });
@@ -104,12 +130,10 @@ export class MantenimientoComponent implements OnInit {
           ...result,                      // Los datos del nuevo usuario
           visibilidad: 'Visible'          // Asigna visibilidad por defecto
         });
-
-        // Recalcula la paginación
-        this.totalPages = Math.ceil(this.dataSource.length / this.itemsPerPage);
-        this.calculatePages();
+        this.applyFilter({ target: { value: this.filterValue } } as any); // Vuelve a aplicar el filtro
       }
     });
   }
-}
 
+  
+}
