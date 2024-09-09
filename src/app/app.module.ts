@@ -37,6 +37,19 @@ import { EditarUsuarioDialogComponent } from './components/editar-usuario-dialog
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { CatalogosService } from 'src/services/catalogos.service';
 import { SisprincipalComponent } from './components/sisprincipal/sisprincipal.component';
+import { ListarCotizacionesComponent } from './components/listar-cotizaciones/listar-cotizaciones.component';
+import { MasasComponent } from './components/masas/masas.component';
+import { RellenoComponent } from './components/relleno/relleno.component';
+import { RecetaComponent } from './components/receta/receta.component';
+import { ProductoComponent } from './components/producto/producto.component';
+import { ClienteComponent } from './components/cliente/cliente.component';
+import { TipoEntregaComponent } from './components/tipo-entrega/tipo-entrega.component';
+import { TipoEventoComponent } from './components/tipo-evento/tipo-evento.component';
+import { UmpsComponent } from './components/umps/umps.component';
+import { TipoInsumoUtencilioComponent } from './components/tipo-insumo-utencilio/tipo-insumo-utencilio.component';
+import { MotivoSalidaComponent } from './components/motivo-salida/motivo-salida.component';
+import { ProveedorComponent } from './components/proveedor/proveedor.component';
+import { ModalGenericoComponent } from './components/modal-generico/modal-generico.component';
 
 
 
@@ -60,7 +73,20 @@ import { SisprincipalComponent } from './components/sisprincipal/sisprincipal.co
       AgregarUsuarioDialogComponent,
       EditarUsuarioDialogComponent,
       ConfirmDialogComponent,
-      SisprincipalComponent
+      SisprincipalComponent,
+      ListarCotizacionesComponent,
+      MasasComponent,
+      RellenoComponent,
+      RecetaComponent,
+      ProductoComponent,
+      ClienteComponent,
+      TipoEntregaComponent,
+      TipoEventoComponent,
+      UmpsComponent,
+      TipoInsumoUtencilioComponent,
+      MotivoSalidaComponent,
+      ProveedorComponent,
+      ModalGenericoComponent
          
       
     

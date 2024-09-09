@@ -17,9 +17,10 @@
         <mat-icon>assignment</mat-icon>
         Cotizaciones
         <div class="dropdown" [ngClass]="{'show': isDropdownOpen('cotizaciones')}">
-            <a href="#">item1</a>
-            <a href="#">item2</a>
-            <a href="#">item3</a>
+            <a href="/listar-cotizaciones"><mat-icon>book</mat-icon>Ver cotizaciones</a>
+            <a href="/cliente"><mat-icon>person</mat-icon>Clientes</a>
+            <a href="/tipo-entrega"><mat-icon>face</mat-icon>Entregas</a>
+            <a href="/tipo-evento"><mat-icon>house</mat-icon>Eventos</a>
         </div>
     </div>
 
@@ -37,9 +38,9 @@
         <mat-icon>shopping_cart</mat-icon>
         Ventas
         <div class="dropdown" [ngClass]="{'show': isDropdownOpen('ventas')}">
-            <a href="#">item1</a>
-            <a href="#">item2</a>
-            <a href="#">item3</a>
+            <a href="/tipo-insumo-utencilio"><mat-icon>kitchen</mat-icon>Tipos de insumos y utencilios</a>
+            <a href="/motivo-salida"><mat-icon>kitchen</mat-icon>Motivos de salidas de inventario</a>
+            <a href="/proveedor"><mat-icon>persons</mat-icon>Proveedores</a>
         </div>
     </div>
 
@@ -47,9 +48,11 @@
         <mat-icon>inventory</mat-icon>
         Inventario
         <div class="dropdown" [ngClass]="{'show': isDropdownOpen('inventario')}">
-            <a href="#">item1</a>
-            <a href="#">item2</a>
-            <a href="#">item3</a>
+            <a href="/masas"><mat-icon>cake</mat-icon>Masas</a>
+            <a href="/relleno"><mat-icon>cake</mat-icon>Rellenos</a>
+            <a href="/receta"><mat-icon>cake</mat-icon>Recetas</a>
+            <a href="/producto"><mat-icon>cake</mat-icon>Productos</a>
+            <a href="/umps"><mat-icon>house</mat-icon>Unidades de medida</a>
         </div>
     </div>
 
