@@ -1,3 +1,4 @@
+
 <app-inicio>
     <div class="app-container">    
         <div class="cotizar-container">
@@ -7,7 +8,7 @@
             <form>
                 <mat-card>
                     <mat-card-content>
-                        <h3 class="contact-title">Contacto</h3> <!-- Título colocado aquí -->
+                        <h3 class="contact-title">Contacto</h3>
                         <div class="client-info">
                             <mat-form-field appearance="fill">
                                 <mat-label>Ingrese su nombre</mat-label>
@@ -17,19 +18,14 @@
                                 <mat-label>Teléfono</mat-label>
                                 <input matInput placeholder="Ingresa tu teléfono" required>
                             </mat-form-field>
-                            <mat-form-field appearance="fill">
-                                <mat-label>NIT</mat-label> 
-                                <input matInput placeholder="Ingresa tu NIT" required>
-                            </mat-form-field>
                         </div>
                     </mat-card-content>
                 </mat-card>
-        
-        
+
                 <mat-card>
                     <mat-card-content>
-                        <h3 class="des-title">Descripcion de su pedido</h3> <!-- Título colocado aquí -->
-                        <mat-form-field appearance="fill" style="width: 100%;"> <!-- Asegura que ocupe todo el ancho -->
+                        <h3 class="des-title">Descripción de su pedido</h3>
+                        <mat-form-field appearance="fill" style="width: 100%;">
                             <mat-label>Descripción del pedido</mat-label>
                             <textarea matInput placeholder="Describe tu pedido" required></textarea>
                         </mat-form-field>
@@ -38,7 +34,7 @@
         
                 <mat-card>
                     <mat-card-content>
-                        <h3 class="cotizacion-title">Pasteles</h3> <!-- Título de la sección -->
+                        <h3 class="cotizacion-title">Pasteles</h3>
                         <div class="pastel-container" *ngFor="let pastel of pasteles; let i = index">
                             <div class="pastelDatos">
                                 <mat-form-field appearance="fill">
@@ -65,10 +61,9 @@
                     </mat-card-content>
                 </mat-card>
                 
-        
                 <mat-card>
                     <mat-card-content>
-                        <h3 class="imagen">Subir Imágenes de Referencia(Sube o arrastra tus imagenes)</h3>
+                        <h3 class="imagen">Subir Imágenes de Referencia (Sube o arrastra tus imágenes)</h3>
                         <input type="file" (change)="onFileSelected($event)" multiple accept="image/*">
                         <div *ngIf="selectedFiles.length > 0">
                             <h4>Imágenes seleccionadas:</h4>
@@ -79,13 +74,13 @@
                         </div>
                     </mat-card-content>
                 </mat-card>
-        
+
                 <mat-card>
                     <mat-card-content>
-                        <h3 class="dulces-title">Dulces extra</h3>
+                        <h3 class="dulces-title">Productos</h3>
                         <div class="dulces-container" *ngFor="let dulce of dulces; let i = index">
                             <mat-form-field appearance="fill">
-                                <mat-label>Agregar dulce</mat-label>
+                                <mat-label>Agregar producto</mat-label>
                                 <mat-select [(ngModel)]="dulce.tipo" required>
                                     <mat-option value="Cupcakes">Cupcakes</mat-option>
                                     <mat-option value="Alfajores">Alfajores</mat-option>
@@ -99,42 +94,35 @@
                                 <mat-label>Cantidad</mat-label>
                                 <input matInput type="number" [(ngModel)]="dulce.cantidad" min="1" max="50" step="1" required>
                             </mat-form-field>
+                            <div class="precio-container">
+                                <label>Precio:Q0</label>  <!-- Mostrar el precio estático en 0 Q -->
+                               
+                            </div>
                             <button mat-button color="warn" class="eliminar-item-btn" (click)="eliminarDulce(i)">Eliminar</button>
                         </div>
-                        <button mat-raised-button class="custom-agregar-dulce-btn" (click)="agregarDulce()">+ Agregar dulce</button>
+                        <button mat-raised-button class="custom-agregar-dulce-btn" (click)="agregarDulce()">+ Agregar producto</button>
                     </mat-card-content>
                 </mat-card>
                 
                 
-        
-        
-        
+                
+                
+
                 <mat-card>
                     <mat-card-content>
-                      <h3 class="cotizacion-title">Envio</h3> <!-- Título de la sección -->
-                  
-                      <mat-form-field appearance="fill">
-                        <mat-label>Envio</mat-label>
-                        <mat-select [(value)]="tipoEnvio" (selectionChange)="onEnvioChange($event.value)">
-                          <mat-option value="local">Local</mat-option>
-                          <mat-option value="domicilio">A domicilio</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                  
-                      <div *ngIf="tipoEnvio === 'domicilio'">
+                        <h3 class="cotizacion-title">Envío</h3>
+                        <mat-checkbox [checked]="envioLocal" (change)="onEnvioChange('local')">Entrega local</mat-checkbox>
+                        <br>
+                        <mat-checkbox [checked]="tipoEnvio === 'domicilio'" (change)="onEnvioChange('domicilio')">Envío a domicilio</mat-checkbox>
+                
                         <mat-form-field appearance="fill">
-                          <mat-label>Dirección de Envio</mat-label>
-                          <textarea matInput [(ngModel)]="direccionEnvio" placeholder="Ingresa la dirección"></textarea>
+                            <mat-label>Dirección de Envío</mat-label>
+                            <textarea matInput [(ngModel)]="direccionEnvio" placeholder="Ingresa la dirección" [disabled]="envioLocal"></textarea>
                         </mat-form-field>
-                      </div>
-                  
                     </mat-card-content>
-                  </mat-card>
-                  
-        
-        
-        
-        
+                </mat-card>
+                
+
                 <mat-card>
                     <mat-card-content>
                         <div class="FechaHora">
@@ -142,40 +130,24 @@
                             <div class="date-picker-container">
                                 <mat-form-field appearance="fill">
                                     <mat-label>Hora de entrega</mat-label>
-                                    <input matInput type="time" [(ngModel)]="selectedTime" required 
-                                           (keydown)="handleKeyDown($event)">
+                                    <input matInput type="time" [(ngModel)]="selectedTime" required (keydown)="handleKeyDown($event)">
                                 </mat-form-field>
                                 <mat-form-field appearance="fill">
                                     <mat-label>Fecha de entrega</mat-label>
-                                    <input matInput [matDatepicker]="datePicker" type="date" placeholder="Selecciona la fecha" required 
-                                           (keydown)="handleKeyDown($event)" (change)="onDateChange($event)">
+                                    <input matInput [matDatepicker]="datePicker" type="date" placeholder="Selecciona la fecha" required (keydown)="handleKeyDown($event)" (change)="onDateChange($event)">
                                     <mat-datepicker #datePicker></mat-datepicker>
                                 </mat-form-field>
-                                
-                               
-                                
-                                <button mat-raised-button class="custom-confirm-btn" (click)="confirmDate()">Confirmar</button>
-        
+                                <button mat-raised-button class="custom-confirm-btn" (click)="confirmDate()">Confirmar fecha</button>
                             </div>
                         </div>
                     </mat-card-content>
                 </mat-card>
-                
-        
-        
-        
-        
+
                 <div class="button-group">
                     <button mat-raised-button class="custom-enviar-btn">Enviar Cotización</button>
                     <button mat-button type="reset">Restablecer</button>
                 </div>
             </form>
-        
-        
-           
         </div>
     </div>
-    
- 
 </app-inicio>
-

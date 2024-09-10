@@ -50,7 +50,7 @@ import { TipoInsumoUtencilioComponent } from './components/tipo-insumo-utencilio
 import { MotivoSalidaComponent } from './components/motivo-salida/motivo-salida.component';
 import { ProveedorComponent } from './components/proveedor/proveedor.component';
 import { ModalGenericoComponent } from './components/modal-generico/modal-generico.component';
-
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 
@@ -115,7 +115,8 @@ import { ModalGenericoComponent } from './components/modal-generico/modal-generi
       MatTableModule,
       MatPaginatorModule,
       MatDialogModule,
-      ReactiveFormsModule
+      ReactiveFormsModule,
+      MatCheckboxModule
       
     ],
     providers: [SesionService, CatalogosService],
