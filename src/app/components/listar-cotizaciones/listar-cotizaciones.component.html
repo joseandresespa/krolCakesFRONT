@@ -40,7 +40,7 @@
           <!-- Precio Aproximado Column -->
           <ng-container matColumnDef="precio_aproximado">
               <th mat-header-cell *matHeaderCellDef> Precio Aproximado </th>
-              <td mat-cell *matCellDef="let cotizacion"> {{ cotizacion.precio_aproximado | currency }} </td>
+              <td mat-cell *matCellDef="let cotizacion"> Q{{ cotizacion.precio_aproximado }} </td>
           </ng-container>
 
           <!-- Envío Column -->
@@ -54,6 +54,7 @@
               <th mat-header-cell *matHeaderCellDef> Acciones </th>
               <td mat-cell *matCellDef="let cotizacion">
                   <button mat-button color="warn" (click)="eliminarCotizacion(cotizacion)">Eliminar</button>
+                  <button mat-button (click)="editarCotizacion(cotizacion)">Editar</button> <!-- Botón para editar -->
               </td>
           </ng-container>
 

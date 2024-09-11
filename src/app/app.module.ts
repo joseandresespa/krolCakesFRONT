@@ -51,6 +51,7 @@ import { MotivoSalidaComponent } from './components/motivo-salida/motivo-salida.
 import { ProveedorComponent } from './components/proveedor/proveedor.component';
 import { ModalGenericoComponent } from './components/modal-generico/modal-generico.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ModalEditarComponent } from './components/modal-editar/modal-editar.component';
 
 
 
@@ -86,7 +87,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
       TipoInsumoUtencilioComponent,
       MotivoSalidaComponent,
       ProveedorComponent,
-      ModalGenericoComponent
+      ModalGenericoComponent,
+      ModalEditarComponent
          
       
     

@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>{{ data.titulo }}</h2>
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <div *ngFor="let campo of data.campos">
+      <mat-form-field class="full-width">
+        <mat-label>{{ campo }}</mat-label>
+        <input matInput [formControlName]="campo" placeholder="Ingresa {{ campo }}" />
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button (click)="onSubmit()" cdkFocusInitial>Editar</button>
+</mat-dialog-actions>
+

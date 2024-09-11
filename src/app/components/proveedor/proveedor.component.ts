@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalGenericoComponent } from '../modal-generico/modal-generico.component'; // Ajusta la ruta si es necesario
+import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
+import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 
 export interface Proveedor {
   id: number;
@@ -17,9 +18,8 @@ export interface Proveedor {
 export class ProveedorComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'telefono', 'descripcion', 'acciones'];
 
-   
- // Se inicializa el array para que quede vacio
- proveedores: Proveedor[] = [];
+  // Se inicializa el array con un dato de prueba
+  proveedores: Proveedor[] = []; 
 
   currentPage: number = 1;
   itemsPerPage: number = 2;
@@ -77,12 +77,36 @@ export class ProveedorComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('El modal fue cerrado');
       if (result) {
-        console.log('Datos recibidos del modal:', result);
-        // Aquí podrías agregar el proveedor a la lista
+        const newId = this.proveedores.length ? Math.max(...this.proveedores.map(p => p.id)) + 1 : 1; // Generar nuevo ID
+        this.proveedores.push({ id: newId, ...result });
+        this.updatePagination();
+      }
+    });
+  }
+//EDITAR
+  editarProveedor(proveedor: Proveedor): void {
+    const dialogRef = this.dialog.open(ModalEditarComponent, {
+      width: '400px',
+      data: {
+        titulo: 'Editar Proveedor',
+        campos: ['nombre', 'telefono', 'descripcion'],
+        valores: {
+          nombre: proveedor.nombre,
+          telefono: proveedor.telefono,
+          descripcion: proveedor.descripcion
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const proveedorEditado = this.proveedores.find(p => p.id === proveedor.id);
+        if (proveedorEditado) {
+          Object.assign(proveedorEditado, result);
+          this.updatePagination();
+        }
       }
     });
   }
 }
-

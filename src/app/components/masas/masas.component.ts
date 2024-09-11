@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
+import { ModalEditarComponent } from '../modal-editar/modal-editar.component'; // importar el componente de edición
 
 export interface Masa {
   id: number;
@@ -16,7 +17,7 @@ export class MasasComponent implements OnInit {
   displayedColumns: string[] = ['id', 'sabor', 'acciones'];
 
   // Se inicializa el array para que quede vacio
-  masas: Masa[] = []; 
+  masas: Masa[] = [];
 
   currentPage: number = 1;
   itemsPerPage: number = 5;
@@ -80,6 +81,27 @@ export class MasasComponent implements OnInit {
       if (result) {
         this.masas.push(result);
         this.updatePagination();
+      }
+    });
+  }
+
+  abrirModalEditar(masa: Masa): void {
+    const dialogRef = this.dialog.open(ModalEditarComponent, {
+      width: '400px',
+      data: {
+        titulo: 'Editar Masa',
+        campos: ['sabor'],
+        valores: { sabor: masa.sabor } // Precargar el valor actual de la masa
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const index = this.masas.findIndex(m => m.id === masa.id);
+        if (index !== -1) {
+          this.masas[index] = { ...this.masas[index], ...result };
+          this.updatePagination();
+        }
       }
     });
   }

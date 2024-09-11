@@ -36,6 +36,7 @@
                 <th mat-header-cell *matHeaderCellDef> Acciones </th>
                 <td mat-cell *matCellDef="let proveedor">
                     <button mat-button color="warn" (click)="eliminarProveedor(proveedor)">Eliminar</button>
+                    <button mat-button (click)="editarProveedor(proveedor)">Editar</button> <!-- Botón para editar -->
                 </td>
             </ng-container>
 
