@@ -60,15 +60,17 @@ export class CotizarComponent implements OnInit {
   }
 
   enviarCotizacion(): void {
+    console.log('Opción de entrega:', this.opcionEntrega);
     const cotizacion: cotizaciononline = {
+      id:0,
       nombre: this.nombre,
       descripcion: this.descripcion,
       telefono: this.telefono,  
       precio_aproximado: this.totalGeneral.toString(),  
-      envio: this.opcionEntrega === 'envio'? true : false,
+      envio: this.opcionEntrega === 'recogida'? false : true,
       fecha: this.fechaEntrega,
       hora: this.horaEntrega,
-      direccion: this.opcionEntrega === 'envio' ? this.direccionEnvio : '',
+      direccion: this.opcionEntrega === 'envio' ? this.direccionEnvio : 'Recoge en Pasteleria',
       imagenes: [],  
       desgloses: this.productosSeleccionados.map(item => ({
         id_producto: item.producto.id,

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Usuario, UsuarioCompleto } from 'src/app/models/usuario.interface'; 
 import { rol } from 'src/app/models/rol.interface';
 import { cotizaciononline } from 'src/app/models/cotizaciononline.interface';
+import { producto } from 'src/app/models/producto.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -32,7 +33,7 @@ export class CatalogosService {
     return this.http.post<any>(`${this.baseUrl}actualizar-usuario`, datos);
   }
     // ---------------------------PRODUCTO---------------------------------------
-    productos(): Observable<rol[]> {
+    productos(): Observable<producto[]> {
       return this.http.get<any[]>(`${this.baseUrl}productos`);
     }
     nuevoProducto(datos: any){
@@ -44,6 +45,10 @@ export class CatalogosService {
     // ---------------------------COTIZACION ONLINE---------------------------------------
     enviarCotizacion(cotizacion: cotizaciononline): Observable<any> {
       return this.http.post<any>( `${this.baseUrl}nueva-cotizaciononline`, cotizacion);
+    }
+
+    cotizaciones(): Observable<cotizaciononline[]> {
+      return this.http.get<any[]>(`${this.baseUrl}cotizaciononline`);
     }
 
    

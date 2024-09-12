@@ -3,12 +3,10 @@ import { desgloseonline } from "./desgloseonline.interface";
 import { imagenreferenciaonline } from "./imagenreferenciaonline.interface";
 
 export interface cotizaciononline {
-    id?: number;
+    id: number;
     nombre?: string;
     descripcion?: string;
     telefono?: number;
-    porciones?: number;
-    cant_cupcakes?: number;
     precio_aproximado?: string;
     direccion?: string;
     envio?: Boolean;

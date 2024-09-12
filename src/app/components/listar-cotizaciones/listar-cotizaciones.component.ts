@@ -1,17 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
-import { ModalEditarComponent } from '../modal-editar/modal-editar.component'; // Importar el modal de edición
-
-export interface Cotizacion {
-  id: number;
-  descripcion: string;
-  telefono: string;
-  porciones: number;
-  cant_cupcakes: number;
-  precio_aproximado: number;
-  envio: string;
-}
+import { cotizaciononline } from 'src/app/models/cotizaciononline.interface';
+import { CatalogosService } from 'src/services/catalogos.service';
 
 @Component({
   selector: 'app-listar-cotizaciones',
@@ -19,20 +9,23 @@ export interface Cotizacion {
   styleUrls: ['./listar-cotizaciones.component.css']
 })
 export class ListarCotizacionesComponent implements OnInit {
-  cotizaciones: Cotizacion[] = []; 
+  cotizaciones: cotizaciononline[] = []; 
 
 
-  displayedColumns: string[] = ['id', 'descripcion', 'telefono', 'porciones', 'cant_cupcakes', 'precio_aproximado', 'envio', 'acciones'];
+  displayedColumns: string[] = ['id', 'nombre','telefono','descripcion','precio_aproximado','direccion','envio','fecha','hora', 'acciones'];
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalPages: number = 1;
   pages: number[] = [];
-  dataSource: Cotizacion[] = [];
+  dataSource: cotizaciononline[] = [];
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private service: CatalogosService) { }
 
   ngOnInit(): void {
-    this.updatePagination();
+    this.service.cotizaciones().subscribe((cotizaciones: cotizaciononline[]) => {
+      this.cotizaciones = cotizaciones;
+      this.updatePagination();
+    });
   }
 
   updatePagination(): void {
@@ -66,56 +59,50 @@ export class ListarCotizacionesComponent implements OnInit {
     this.paginate();
   }
 
-  eliminarCotizacion(cotizacion: Cotizacion): void {
-    console.log('Cotización eliminada:', cotizacion);
-    this.cotizaciones = this.cotizaciones.filter(c => c.id !== cotizacion.id);
-    this.updatePagination();
-  }
+  // abrirModal(): void {
+  //   const dialogRef = this.dialog.open(ModalGenericoComponent, {
+  //     width: '400px',
+  //     data: {
+  //       titulo: 'Agregar Cotización',
+  //       campos: ['descripcion', 'telefono', 'porciones', 'cant_cupcakes', 'precio_aproximado', 'envio']
+  //     }
+  //   });
 
-  abrirModal(): void {
-    const dialogRef = this.dialog.open(ModalGenericoComponent, {
-      width: '400px',
-      data: {
-        titulo: 'Agregar Cotización',
-        campos: ['descripcion', 'telefono', 'porciones', 'cant_cupcakes', 'precio_aproximado', 'envio']
-      }
-    });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result) {
+  //       const newId = this.cotizaciones.length ? Math.max(...this.cotizaciones.map(c => c.id)) + 1 : 1; // Generar nuevo ID
+  //       this.cotizaciones.push({ id: newId, ...result });
+  //       this.updatePagination();
+  //     }
+  //   });
+  // }
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        const newId = this.cotizaciones.length ? Math.max(...this.cotizaciones.map(c => c.id)) + 1 : 1; // Generar nuevo ID
-        this.cotizaciones.push({ id: newId, ...result });
-        this.updatePagination();
-      }
-    });
-  }
+  // // EDITAR
+  // editarCotizacion(cotizacion: cotizaciononline): void {
+  //   const dialogRef = this.dialog.open(ModalEditarComponent, {
+  //     width: '400px',
+  //     data: {
+  //       titulo: 'Editar Cotización',
+  //       campos: ['descripcion', 'telefono', 'porciones', 'cant_cupcakes', 'precio_aproximado', 'envio'],
+  //       valores: {
+  //         descripcion: cotizacion.descripcion,
+  //         telefono: cotizacion.telefono,
+  //         porciones: cotizacion.porciones,
+  //         cant_cupcakes: cotizacion.cant_cupcakes,
+  //         precio_aproximado: cotizacion.precio_aproximado,
+  //         envio: cotizacion.envio
+  //       }
+  //     }
+  //   });
 
-  // EDITAR
-  editarCotizacion(cotizacion: Cotizacion): void {
-    const dialogRef = this.dialog.open(ModalEditarComponent, {
-      width: '400px',
-      data: {
-        titulo: 'Editar Cotización',
-        campos: ['descripcion', 'telefono', 'porciones', 'cant_cupcakes', 'precio_aproximado', 'envio'],
-        valores: {
-          descripcion: cotizacion.descripcion,
-          telefono: cotizacion.telefono,
-          porciones: cotizacion.porciones,
-          cant_cupcakes: cotizacion.cant_cupcakes,
-          precio_aproximado: cotizacion.precio_aproximado,
-          envio: cotizacion.envio
-        }
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        const cotizacionEditada = this.cotizaciones.find(c => c.id === cotizacion.id);
-        if (cotizacionEditada) {
-          Object.assign(cotizacionEditada, result);
-          this.updatePagination();
-        }
-      }
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result) {
+  //       const cotizacionEditada = this.cotizaciones.find(c => c.id === cotizacion.id);
+  //       if (cotizacionEditada) {
+  //         Object.assign(cotizacionEditada, result);
+  //         this.updatePagination();
+  //       }
+  //     }
+  //   });
+  // }
 }
