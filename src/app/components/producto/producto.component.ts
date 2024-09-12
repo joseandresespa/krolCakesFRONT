@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
 
 export interface Producto {
@@ -19,9 +18,8 @@ export interface Producto {
 export class ProductoComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'precioOnline', 'acciones'];
   
-
-  // Se inicializa el array para que quede vacio
-  productos: Producto[] = []; 
+  // Array vacio
+  productos: Producto[] = [];
 
   currentPage: number = 1;
   itemsPerPage: number = 2;
@@ -29,7 +27,7 @@ export class ProductoComponent implements OnInit {
   pages: number[] = [];
   dataSource: Producto[] = [];
 
-  constructor(private dialog: MatDialog, private fb: FormBuilder) { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.updatePagination();
@@ -72,11 +70,39 @@ export class ProductoComponent implements OnInit {
     this.updatePagination();
   }
 
+  
+// EDITAR
+  editarProducto(producto: Producto): void {
+    const dialogRef = this.dialog.open(ModalEditarComponent, {
+      data: {
+        titulo: 'Editar Producto',
+        campos: ['nombre', 'descripcion', 'precioOnline'],
+        valores: {
+          nombre: producto.nombre,
+          descripcion: producto.descripcion,
+          precioOnline: producto.precioOnline
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const productoEditado = this.productos.find(p => p.id === producto.id);
+        if (productoEditado) {
+          productoEditado.nombre = result.nombre;
+          productoEditado.descripcion = result.descripcion;
+          productoEditado.precioOnline = result.precioOnline;
+          this.updatePagination();
+        }
+      }
+    });
+  }
+
   openModal(): void {
     const dialogRef = this.dialog.open(ModalGenericoComponent, {
       data: {
         titulo: 'Agregar Producto',
-        campos: ['nombre', 'descripcion', 'precio Online']
+        campos: ['nombre', 'descripcion', 'precioOnline']
       }
     });
 

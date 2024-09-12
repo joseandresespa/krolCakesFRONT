@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
+import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 
 export interface TipoEvento {
   id: number;
@@ -15,8 +16,8 @@ export interface TipoEvento {
 export class TipoEventoComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'acciones'];
 
- // Se inicializa el array para que quede vacio
- tiposEvento: TipoEvento[] = []; 
+  // array vacio
+  tiposEvento: TipoEvento[] = []; 
 
   currentPage: number = 1;
   itemsPerPage: number = 2;
@@ -80,6 +81,30 @@ export class TipoEventoComponent implements OnInit {
       if (result) {
         this.tiposEvento.push(result);
         this.updatePagination();
+      }
+    });
+  }
+
+  // EDITAR
+  editarTipoEvento(tipoEvento: TipoEvento): void {
+    const dialogRef = this.dialog.open(ModalEditarComponent, {
+      width: '400px',
+      data: {
+        titulo: 'Editar Tipo de Evento',
+        campos: ['nombre'],
+        valores: {
+          nombre: tipoEvento.nombre
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const tipoEventoEditado = this.tiposEvento.find(t => t.id === tipoEvento.id);
+        if (tipoEventoEditado) {
+          tipoEventoEditado.nombre = result.nombre;
+          this.updatePagination();
+        }
       }
     });
   }

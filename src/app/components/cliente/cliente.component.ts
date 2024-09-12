@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
+import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 
 export interface Cliente {
   id: number;
   nombre: string;
   telefono: string;
-  nit: string;
+ 
 }
 
 @Component({
@@ -15,9 +16,9 @@ export interface Cliente {
   styleUrls: ['./cliente.component.css']
 })
 export class ClienteComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'nombre', 'telefono', 'nit', 'acciones'];
+  displayedColumns: string[] = ['id', 'nombre', 'telefono', 'acciones'];
 
-  // Se inicializa el array para que quede vacio
+  // array para que quede vacío
   clientes: Cliente[] = []; 
 
   currentPage: number = 1;
@@ -74,7 +75,7 @@ export class ClienteComponent implements OnInit {
       width: '400px',
       data: {
         titulo: 'Agregar Cliente',
-        campos: ['nombre', 'telefono', 'nit']
+        campos: ['nombre', 'telefono']
       }
     });
 
@@ -82,6 +83,34 @@ export class ClienteComponent implements OnInit {
       if (result) {
         this.clientes.push(result);
         this.updatePagination();
+      }
+    });
+  }
+
+
+  // EDITAR
+  editarCliente(cliente: Cliente): void {
+    const dialogRef = this.dialog.open(ModalEditarComponent, {
+      width: '400px',
+      data: {
+        titulo: 'Editar Cliente',
+        campos: ['nombre', 'telefono'],
+        valores: {
+          nombre: cliente.nombre,
+          telefono: cliente.telefono,
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const clienteEditado = this.clientes.find(c => c.id === cliente.id);
+        if (clienteEditado) {
+          clienteEditado.nombre = result.nombre;
+          clienteEditado.telefono = result.telefono;
+         
+          this.updatePagination();
+        }
       }
     });
   }

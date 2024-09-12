@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
 
 export interface Receta {
@@ -18,9 +17,8 @@ export interface Receta {
 export class RecetaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'acciones'];
   
-  // Se inicializa el array para que quede vacio
-  recetas: Receta[] = []; 
-
+  // Se inicializa con un dato de prueba
+  recetas: Receta[] = [];
 
   currentPage: number = 1;
   itemsPerPage: number = 2;
@@ -28,7 +26,7 @@ export class RecetaComponent implements OnInit {
   pages: number[] = [];
   dataSource: Receta[] = [];
 
-  constructor(private dialog: MatDialog, private fb: FormBuilder) { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.updatePagination();
@@ -69,6 +67,29 @@ export class RecetaComponent implements OnInit {
     console.log('Receta eliminada:', receta);
     this.recetas = this.recetas.filter(r => r.id !== receta.id);
     this.updatePagination();
+  }
+
+
+  // EDITAR
+  editarReceta(receta: Receta): void {
+    const dialogRef = this.dialog.open(ModalEditarComponent, {
+      data: {
+        titulo: 'Editar Receta',
+        campos: ['nombre', 'descripcion'],
+        valores: receta
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const recetaEditada = this.recetas.find(r => r.id === receta.id);
+        if (recetaEditada) {
+          recetaEditada.nombre = result.nombre;
+          recetaEditada.descripcion = result.descripcion;
+          this.updatePagination();
+        }
+      }
+    });
   }
 
   openModal(): void {

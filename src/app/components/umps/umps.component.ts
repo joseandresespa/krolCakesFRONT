@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
+import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 
 export interface Umps {
   id: number;
@@ -15,8 +16,8 @@ export interface Umps {
 export class UmpsComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'acciones'];
 
- // Se inicializa el array para que quede vacio
- umps: Umps[] = []; 
+  // array vacio
+  umps: Umps[] = []; 
 
   currentPage: number = 1;
   itemsPerPage: number = 2;
@@ -81,6 +82,31 @@ export class UmpsComponent implements OnInit {
         const newId = this.umps.length ? Math.max(...this.umps.map(u => u.id)) + 1 : 1; // Generar nuevo ID
         this.umps.push({ id: newId, nombre: result.nombre });
         this.updatePagination();
+      }
+    });
+  }
+
+  
+  // EDITAR
+  editarUmps(umps: Umps): void {
+    const dialogRef = this.dialog.open(ModalEditarComponent, {
+      width: '400px',
+      data: {
+        titulo: 'Editar Unidad de Medida',
+        campos: ['nombre'],
+        valores: {
+          nombre: umps.nombre
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const umpsEditado = this.umps.find(u => u.id === umps.id);
+        if (umpsEditado) {
+          umpsEditado.nombre = result.nombre;
+          this.updatePagination();
+        }
       }
     });
   }

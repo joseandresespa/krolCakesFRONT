@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
+import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 
 export interface TipoEntrega {
   id: number;
@@ -15,8 +16,7 @@ export interface TipoEntrega {
 export class TipoEntregaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'acciones'];
 
-
- // Se inicializa el array para que quede vacio
+  // Array vacio
   tiposEntrega: TipoEntrega[] = []; 
 
   currentPage: number = 1;
@@ -81,6 +81,31 @@ export class TipoEntregaComponent implements OnInit {
       if (result) {
         this.tiposEntrega.push(result);
         this.updatePagination();
+      }
+    });
+  }
+
+  
+  // EDITAR
+  editarTipoEntrega(tipoEntrega: TipoEntrega): void {
+    const dialogRef = this.dialog.open(ModalEditarComponent, {
+      width: '400px',
+      data: {
+        titulo: 'Editar Tipo de Entrega',
+        campos: ['nombre'],
+        valores: {
+          nombre: tipoEntrega.nombre
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const tipoEntregaEditado = this.tiposEntrega.find(t => t.id === tipoEntrega.id);
+        if (tipoEntregaEditado) {
+          tipoEntregaEditado.nombre = result.nombre;
+          this.updatePagination();
+        }
       }
     });
   }

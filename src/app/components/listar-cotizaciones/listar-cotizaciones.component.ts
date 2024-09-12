@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
+import { ModalEditarComponent } from '../modal-editar/modal-editar.component'; // Importar el modal de edición
 
 export interface Cotizacion {
   id: number;
@@ -18,8 +19,8 @@ export interface Cotizacion {
   styleUrls: ['./listar-cotizaciones.component.css']
 })
 export class ListarCotizacionesComponent implements OnInit {
- // Se inicializa el array para que quede vacio
- cotizaciones: Cotizacion[] = []; 
+  cotizaciones: Cotizacion[] = []; 
+
 
   displayedColumns: string[] = ['id', 'descripcion', 'telefono', 'porciones', 'cant_cupcakes', 'precio_aproximado', 'envio', 'acciones'];
   currentPage: number = 1;
@@ -88,5 +89,33 @@ export class ListarCotizacionesComponent implements OnInit {
       }
     });
   }
-}
 
+  // EDITAR
+  editarCotizacion(cotizacion: Cotizacion): void {
+    const dialogRef = this.dialog.open(ModalEditarComponent, {
+      width: '400px',
+      data: {
+        titulo: 'Editar Cotización',
+        campos: ['descripcion', 'telefono', 'porciones', 'cant_cupcakes', 'precio_aproximado', 'envio'],
+        valores: {
+          descripcion: cotizacion.descripcion,
+          telefono: cotizacion.telefono,
+          porciones: cotizacion.porciones,
+          cant_cupcakes: cotizacion.cant_cupcakes,
+          precio_aproximado: cotizacion.precio_aproximado,
+          envio: cotizacion.envio
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const cotizacionEditada = this.cotizaciones.find(c => c.id === cotizacion.id);
+        if (cotizacionEditada) {
+          Object.assign(cotizacionEditada, result);
+          this.updatePagination();
+        }
+      }
+    });
+  }
+}

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
+import { ModalEditarComponent } from '../modal-editar/modal-editar.component'; // importar el componente de edición
 
 export interface MotivoSalida {
   id: number;
@@ -14,9 +15,9 @@ export interface MotivoSalida {
 })
 export class MotivoSalidaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'acciones'];
-  
- // Se inicializa el array para que quede vacio
- motivosSalida: MotivoSalida[] = []; 
+
+  // array vacio
+  motivosSalida: MotivoSalida[] = [];
 
   currentPage: number = 1;
   itemsPerPage: number = 2;
@@ -81,6 +82,28 @@ export class MotivoSalidaComponent implements OnInit {
         const newId = this.motivosSalida.length ? Math.max(...this.motivosSalida.map(m => m.id)) + 1 : 1; // Generar nuevo ID
         this.motivosSalida.push({ id: newId, ...result });
         this.updatePagination();
+      }
+    });
+  }
+
+  // EDITAR
+  editarMotivo(motivoSalida: MotivoSalida): void {
+    const dialogRef = this.dialog.open(ModalEditarComponent, {
+      width: '400px',
+      data: {
+        titulo: 'Editar Motivo de Salida',
+        campos: ['nombre'],
+        valores: { nombre: motivoSalida.nombre } // Precargar el valor actual del motivo de salida
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const index = this.motivosSalida.findIndex(m => m.id === motivoSalida.id);
+        if (index !== -1) {
+          this.motivosSalida[index] = { ...this.motivosSalida[index], ...result };
+          this.updatePagination();
+        }
       }
     });
   }

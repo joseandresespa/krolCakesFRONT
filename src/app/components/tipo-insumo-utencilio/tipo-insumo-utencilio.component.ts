@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
+import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 
 export interface TipoInsumoUtencilio {
   id: number;
@@ -14,9 +15,9 @@ export interface TipoInsumoUtencilio {
 })
 export class TipoInsumoUtencilioComponent implements OnInit {
   displayedColumns: string[] = ['id', 'tipo', 'acciones'];
-  
- // Se inicializa el array para que quede vacio
- tiposInsumoUtencilio: TipoInsumoUtencilio[] = []; 
+
+  // Se inicializa el array con un dato de prueba
+  tiposInsumoUtencilio: TipoInsumoUtencilio[] = []; 
 
   currentPage: number = 1;
   itemsPerPage: number = 2;
@@ -79,9 +80,34 @@ export class TipoInsumoUtencilioComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const newId = this.tiposInsumoUtencilio.length ? Math.max(...this.tiposInsumoUtencilio.map(t => t.id)) + 1 : 1; // Generar nuevo ID
-        this.tiposInsumoUtencilio.push({ id: newId, ...result });
+        this.tiposInsumoUtencilio.push({ id: newId, tipo: result.tipo });
         this.updatePagination();
       }
     });
   }
+
+  // EDITAR
+  editarTipoInsumoUtencilio(tipoInsumoUtencilio: TipoInsumoUtencilio): void {
+    const dialogRef = this.dialog.open(ModalEditarComponent, {
+      width: '400px',
+      data: {
+        titulo: 'Editar Tipo de Insumo o Utensilio',
+        campos: ['tipo'],
+        valores: {
+          tipo: tipoInsumoUtencilio.tipo
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const tipoEditado = this.tiposInsumoUtencilio.find(t => t.id === tipoInsumoUtencilio.id);
+        if (tipoEditado) {
+          tipoEditado.tipo = result.tipo;
+          this.updatePagination();
+        }
+      }
+    });
+  }
 }
+
