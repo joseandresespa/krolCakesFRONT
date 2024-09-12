@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { cotizaciononline } from 'src/app/models/cotizaciononline.interface';
 import { CatalogosService } from 'src/services/catalogos.service';
+import { ModalCotizacionComponent } from './modal-cotizacion/modal-cotizacion.component';
 
 @Component({
   selector: 'app-listar-cotizaciones',
@@ -57,6 +58,13 @@ export class ListarCotizacionesComponent implements OnInit {
   goToPage(page: number): void {
     this.currentPage = page;
     this.paginate();
+  }
+
+  abrirModalDetalle(cotizacion: cotizaciononline): void {
+    this.dialog.open(ModalCotizacionComponent, {
+      width: '600px',
+      data: cotizacion
+    });
   }
 
   // abrirModal(): void {

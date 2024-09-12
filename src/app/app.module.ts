@@ -52,6 +52,7 @@ import { ProveedorComponent } from './components/proveedor/proveedor.component';
 import { ModalGenericoComponent } from './components/modal-generico/modal-generico.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ModalEditarComponent } from './components/modal-editar/modal-editar.component';
+import { ModalCotizacionComponent } from './components/listar-cotizaciones/modal-cotizacion/modal-cotizacion.component';
 
 
 
@@ -88,7 +89,8 @@ import { ModalEditarComponent } from './components/modal-editar/modal-editar.com
       MotivoSalidaComponent,
       ProveedorComponent,
       ModalGenericoComponent,
-      ModalEditarComponent
+      ModalEditarComponent,
+      ModalCotizacionComponent
          
       
     
