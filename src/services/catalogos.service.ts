@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http"
 import { Observable } from 'rxjs';
 import { Usuario, UsuarioCompleto } from 'src/app/models/usuario.interface'; 
 import { rol } from 'src/app/models/rol.interface';
+import { cotizaciononline } from 'src/app/models/cotizaciononline.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -30,4 +31,21 @@ export class CatalogosService {
   ActualizarRol(datos: any){
     return this.http.post<any>(`${this.baseUrl}actualizar-usuario`, datos);
   }
+    // ---------------------------PRODUCTO---------------------------------------
+    productos(): Observable<rol[]> {
+      return this.http.get<any[]>(`${this.baseUrl}productos`);
+    }
+    nuevoProducto(datos: any){
+      return this.http.post<any>(`${this.baseUrl}nuevo-producto`, datos);
+    }
+    actualizarProducto(datos: any){
+      return this.http.post<any>(`${this.baseUrl}actualizar-producto`, datos);
+    }
+    // ---------------------------COTIZACION ONLINE---------------------------------------
+    enviarCotizacion(cotizacion: cotizaciononline): Observable<any> {
+      return this.http.post<any>( `${this.baseUrl}nueva-cotizaciononline`, cotizacion);
+    }
+
+   
+
 }

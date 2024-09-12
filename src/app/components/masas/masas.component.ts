@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
-
-export interface Masa {
-  id: number;
-  sabor: string;
-}
+import { masa } from 'src/app/models/masa.interface';
 
 @Component({
   selector: 'app-masas',
@@ -16,13 +12,13 @@ export class MasasComponent implements OnInit {
   displayedColumns: string[] = ['id', 'sabor', 'acciones'];
 
   // Se inicializa el array para que quede vacio
-  masas: Masa[] = []; 
+  masas: masa[] = []; 
 
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalPages: number = 1;
   pages: number[] = [];
-  dataSource: Masa[] = [];
+  dataSource: masa[] = [];
 
   constructor(public dialog: MatDialog) { }
 
@@ -61,7 +57,7 @@ export class MasasComponent implements OnInit {
     this.paginate();
   }
 
-  eliminarMasa(masa: Masa): void {
+  eliminarMasa(masa: masa): void {
     console.log('Masa eliminada:', masa);
     this.masas = this.masas.filter(m => m.id !== masa.id);
     this.updatePagination();
@@ -80,7 +76,7 @@ export class MasasComponent implements OnInit {
       if (result) {
         this.masas.push(result);
         this.updatePagination();
-      }
+      } 
     });
   }
 }
