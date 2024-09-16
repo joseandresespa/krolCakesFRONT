@@ -5,6 +5,7 @@ import { cotizaciononline } from 'src/app/models/cotizaciononline.interface';
 import { imagenreferencia } from 'src/app/models/imagenreferencia.interface';
 import { desgloseonline } from 'src/app/models/desgloseonline.interface';   
 import { Time } from '@angular/common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cotizar',
@@ -12,6 +13,9 @@ import { Time } from '@angular/common';
   styleUrls: ['./cotizar.component.css']
 })
 export class CotizarComponent implements OnInit {
+
+ imagenesSeleccionadas: string[] = [];
+  
   productosDisponibles: producto[] = [];
   productosSeleccionados: { producto: producto; cantidad: number; total: number }[] = [];
   totalGeneral: number = 0;
@@ -26,6 +30,8 @@ export class CotizarComponent implements OnInit {
   horaEntrega: Time | undefined; // Agregar hora de entrega
   nombre: string = ''; 
   telefono: number | undefined; 
+
+  
 
   constructor(private service: CatalogosService) {}
 
@@ -54,8 +60,15 @@ export class CotizarComponent implements OnInit {
 
   onFileSelected(event: any): void {
     const files: FileList = event.target.files;
+    this.imagenesSeleccionadas = []; // Reiniciar el array
+
     for (let i = 0; i < files.length; i++) {
       console.log('Archivo seleccionado:', files[i].name);
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.imagenesSeleccionadas.push(e.target.result); // Agregar la URL de la imagen
+      };
+      reader.readAsDataURL(files[i]);
     }
   }
 

@@ -1,122 +1,126 @@
 
-
-/* Estilo general para el formulario */
-form {
-  max-width: 1200px; /* Ancho ajustado */
-  margin: 20px auto; /* Márgenes */
-  padding: 30px; /* Padding interno */
-  max-height: 850px; /* Altura máxima */
-  overflow-y: auto;
-  background-color: #d6a803b8; /* Fondo suave */
-  border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-  border: 1px solid #040303; /* Borde */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición para el efecto */
+/* Contenedor del título */
+.titulo-container {
+  background-color: black; /* Color de fondo */
+  border-radius: 0.5rem; /* Esquinas redondeadas */
+  padding: 0.5rem 1rem; /* Ajusta el espaciado interno */
+  text-align: center; /* Centra el texto */
+  transition: transform 0.3s ease; /* Para la animación */
+  width: fit-content; /* Ajusta el ancho al contenido */
+  margin: 0 auto; /* Centra el contenedor en el medio */
+  cursor: pointer; /* Cambia el cursor al pasar el ratón */
 }
 
+.titulo-container:hover {
+  transform: scale(1.05); /* Aumenta el tamaño al pasar el ratón */
+}
+
+.titulo-container h2 {
+  color: white; /* Color del texto */
+  margin: 0; /* Elimina el margen */
+}
+
+/* Alineación de campos dentro del formulario */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+/* Estilos para cada grupo de formulario */
+.form-group {
+  flex: 1;
+  margin: 10px;
+}
+
+/* Estilos específicos para columnas de diferentes tamaños */
+.col-md-8 {
+  flex: 2; /* Toma el doble de espacio que col-md-4 */
+  margin-right: 10px;
+}
+
+.col-md-4 {
+  flex: 1; /* Toma la mitad del espacio que col-md-8 */
+  margin-left: 10px;
+}
+
+/* Estilos para los botones y opciones */
+.form-check {
+  margin: 10px 0;
+}
+
+/* Ajustes para pantallas pequeñas */
+@media (max-width: 576px) {
+  .form-row {
+    flex-direction: column;
+  }
+
+  .col-md-8,
+  .col-md-4 {
+    flex: 1; /* En pantallas pequeñas, ambos tomarán el mismo ancho */
+    margin: 0 0 10px 0; /* Márgenes ajustados para pantallas pequeñas */
+  }
+}
+
+/* Estilos para la tarjeta */
 .card {
-  margin-bottom: 30px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  transition: box-shadow 0.3s, transform 0.3s;
-}
-
-.card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  transform: scale(1.02); /* Aumenta ligeramente el tamaño al pasar el mouse */
-}
-
-/* Estilo general para los campos de entrada */
-.form-control {
-  border: 1px solid #ced4da;
-  border-radius: 6px;
-  padding: 10px;
-  transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
-}
-
-.form-control:hover {
-  border-color: #80bdff; /* Cambia el color del borde */
-  box-shadow: 0 0 6px rgba(0, 123, 255, 0.25); /* Añade un pequeño brillo */
-  transform: scale(1.02); /* Aumenta ligeramente el tamaño al pasar el mouse */
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .card-header {
-  background-color: #f1f1f1;
-  padding: 15px;
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #343a40;
-  border-bottom: 1px solid #e0e0e0;
-  border-radius: 8px 8px 0 0;
-  text-align: center; /* Centrar los títulos */
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 15px;
 }
 
 .card-body {
-  padding: 20px;
+  padding: 15px;
 }
 
-h5, h6 {
-  font-size: 1.3rem;
-  margin-bottom: 10px;
-  text-align: center; /* Centrar los títulos */
-  font-weight: bold; /* Negrita */
-}
-
-h6 {
-  font-size: 1.1rem;
-}
-
-.form-control {
-  border: 1px solid #ced4da;
-  border-radius: 6px;
+/* Botón de envío */
+/* Botón de envío */
+button[type="submit"] {
+  display: block;
+  width: 50%; /* Ancho del botón */
+  margin: 0 auto; /* Centrar horizontalmente #ae9400 */
   padding: 10px;
-  transition: border-color 0.3s, box-shadow 0.3s;
+  background-color: #c4ab20;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: transform 0.2s; /* Transición para el efecto de tamaño */
+  cursor: pointer; /* Cambiar cursor al pasar el ratón */
+  font-size: 18px; /* Tamaño de la fuente aumentado */
 }
 
-.form-control:focus {
-  border-color: #80bdff;
-  box-shadow: 0 0 6px rgba(0, 123, 255, 0.25);
+/* Efecto hover */
+button[type="submit"]:hover {
+  background-color: #ae9400;
+  transform: scale(1.05); /* Aumentar ligeramente de tamaño */
 }
 
-.btn {
+/* Estilos para el botón de agregar producto */
+button.btn-primary {
+  display: block;
+  margin-top: 10px;
+  background-color: #007bff;
+  border: none;
   padding: 10px 15px;
   border-radius: 5px;
+  color: #fff;
   transition: background-color 0.3s, box-shadow 0.2s;
 }
 
-.btn-primary {
-  background-color: #007bff;
-  border: none;
-}
-
-.btn-primary:hover {
+button.btn-primary:hover {
   background-color: #0056b3;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.btn-danger {
-  background-color: #dc3545;
-  border: none;
-}
-
-.btn-danger:hover {
-  background-color: #c82333;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.btn-success {
-  background-color: #28a745;
-  border: none;
-  width: 100%;
-  font-size: 1.1rem;
-  transition: background-color 0.3s, box-shadow 0.2s;
-}
-
-.btn-success:hover {
-  background-color: #218838;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
+/* Lista de productos seleccionados */
 .list-group-item {
   border: 1px solid #dee2e6;
   border-radius: 5px;
@@ -125,49 +129,36 @@ h6 {
   background-color: #f8f9fa;
 }
 
-.mt-3 {
-  margin-top: 20px;
+/* Ajustes adicionales para mejorar el diseño */
+input.form-control,
+select.form-control {
+  width: 100%;
 }
 
-@media (max-width: 576px) {
-  form {
-    padding: 15px;
-  }
-  
-  .form-row {
-    flex-direction: column;
-  }
-
-  .form-control {
-    font-size: 0.9rem;
-  }
-
-  .btn-success {
-    font-size: 1rem;
-  }
-
-  h5, h6 {
-    font-size: 1rem;
-  }
+label {
+  font-weight: bold;
 }
 
-.titulo-container {
-  background-color: black; /* Fondo negro */
-  border-radius: 8px; /* Esquinas redondeadas */
-  padding: 5px 15px; /* Espaciado interno reducido */
-  text-align: center; /* Centra el texto dentro del contenedor */
-  width: fit-content; /* Ajusta el ancho al tamaño del contenido */
-  transition: transform 0.3s; /* Transición para el aumento de tamaño */
-  cursor: pointer; /* Cambiar el cursor a una manita */
-  margin: 0 auto; /* Centra horizontalmente el contenedor */
+form {
+  max-height: 80vh; /* Ajusta este valor según lo necesites */
+  overflow-y: auto;
+  scrollbar-width: none; /* Oculta el scrollbar en Firefox */
+  -ms-overflow-style: none;  /* Oculta el scrollbar en IE y Edge */
 }
 
-.titulo-container:hover {
-  transform: scale(1.1); /* Aumentar el tamaño al pasar el mouse */
+form::-webkit-scrollbar {
+  width: 0px; /* Oculta el scrollbar en Chrome, Safari y Opera */
+  background: transparent; /* Opcional: Puedes establecerlo transparente */
 }
 
-.titulo-container h2 {
-  color: white; /* Color del texto */
-  margin: 0; /* Elimina el margen del h2 */
-  font-size: 1.2em; /* Tamaño de fuente ajustable */
+.image-thumbnails {
+  display: flex;
+  flex-wrap: wrap;
 }
+
+.image-thumbnails img {
+  max-width: 100px; /* Ajusta el tamaño según sea necesario */
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+

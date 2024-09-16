@@ -1,0 +1,86 @@
+/* Estilos generales del modal */
+mat-dialog-content {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+h2[mat-dialog-title] {
+    font-size: 24px;
+    color: #333;
+    background-color: #af8b4c;
+    padding: 10px 20px;
+    border-radius: 10px;
+    text-align: center; /* Centrando el título */
+    color: white;
+    margin-bottom: 20px;
+}
+
+h2[mat-dialog-title]:hover {
+    background-color: #a98d5d;
+}
+
+h3 {
+    font-size: 20px;
+    color: #000000;
+    background-color: #f2e0f0;
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    text-align: center; /* Centrando los subtítulos */
+}
+
+h3:hover {
+    background-color: #d2b2df;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 15px;
+}
+
+img {
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+img:hover {
+    transform: scale(1.05);
+}
+
+p {
+    margin: 5px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+mat-dialog-actions {
+    display: flex;
+    justify-content: center; /* Centrando el botón */
+    padding: 10px 20px;
+}
+
+button[mat-button] {
+    background-color: #754caf;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease; /* Suavizando la transición */
+}
+
+button[mat-button]:hover {
+    background-color: #a0459b;
+    transform: scale(1.05); /* Aumentando tamaño del botón al hacer hover */
+}
+
+/* Estilo para los mensajes de "No hay..." */
+ng-template p {
+    font-style: italic;
+    color: #757575;
+}
