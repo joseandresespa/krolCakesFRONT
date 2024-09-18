@@ -53,6 +53,10 @@ import { ModalGenericoComponent } from './components/modal-generico/modal-generi
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ModalEditarComponent } from './components/modal-editar/modal-editar.component';
 import { ModalCotizacionComponent } from './components/listar-cotizaciones/modal-cotizacion/modal-cotizacion.component';
+import { ModalConfirmarComponent } from './components/listar-cotizaciones/modal-confirmar/modal-confirmar.component';
+import { ModalObservacionComponent } from './components/listar-cotizaciones/modal-observacion/modal-observacion.component';
+import { PedidoComponent } from './components/pedido/pedido.component';
+import { ModalAgregarComponent } from './components/pedido/modal-agregar/modal-agregar.component';
 
 
 
@@ -90,7 +94,11 @@ import { ModalCotizacionComponent } from './components/listar-cotizaciones/modal
       ProveedorComponent,
       ModalGenericoComponent,
       ModalEditarComponent,
-      ModalCotizacionComponent
+      ModalCotizacionComponent,
+      ModalConfirmarComponent,
+      ModalObservacionComponent,
+      PedidoComponent,
+      ModalAgregarComponent
          
       
     

@@ -1,24 +1,23 @@
 .container {
-  max-width: 1200px; /* Ajusta este valor según tus necesidades */
+  max-width: 1200px; /* Este valor se puede ajustar */
   width: 100%; /* Asegura que el contenedor ocupe el 100% del espacio disponible */
-  margin: 30px 20px 20px 300px; /* Añade margen izquierdo para mover el cuadro hacia la derecha */
+  margin: 30px auto; /* Centra el contenedor y añade margen superior */
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #ff8c0060;
-  
+  text-align: center; /* Centrar el contenido del contenedor */
 }
 
 h2 {
   text-align: center;
-  color:#ffffff;
+  color: #ffffff;
 }
 
 table {
   width: 100%;
   border-collapse: collapse; /* Eliminamos espacios entre celdas */
-  
 }
 
 th.mat-header-cell, td.mat-cell {
@@ -98,10 +97,6 @@ button.mat-raised-button:hover {
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.container {
-  text-align: center; /* Centrar el contenido del contenedor */
-}
-
 .titulo-container {
   background-color: black; /* Fondo negro */
   border-radius: 8px; /* Esquinas redondeadas */
@@ -122,8 +117,7 @@ button.mat-raised-button:hover {
   font-size: 1.2em; /* Tamaño de fuente ajustable */
 }
 
-
-  .search-container {
+.search-container {
   float: left;
   margin: 40px 0 20px 0; /* Aumenta el margen superior para moverla hacia abajo */
 }

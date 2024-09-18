@@ -1,29 +1,27 @@
 .table-container {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Asegura que el contenido interno esté centrado */
     align-items: center;
-    width: 80%;
+    width: 80%; /* Mantiene el ancho del 80% */
     overflow-x: auto; 
     padding: 20px;
     background-color: #f0f0f0;
-    margin-left: 280px;
-    margin-right: 100px;
-    position: relative;
+    margin: 20px auto; /* Centra el contenedor horizontalmente y agrega márgenes superior e inferior */
+    position: relative; /* Mantiene la posición relativa para el contenido interno */
 }
 
 table {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1000px; /* Mantiene el ancho máximo de la tabla */
 }
-
 
 .button-container {
     position: fixed;
     bottom: 20px;
     right: 20px;
-  }
+}
 
-  .fab-button {
+.fab-button {
     position: fixed; /* Esto asegura que el botón esté fijo en la pantalla */
     bottom: 16px; /* Ajusta el valor según el espacio que deseas desde el borde inferior */
     right: 16px; /* Ajusta el valor según el espacio que deseas desde el borde derecho */
@@ -38,8 +36,7 @@ table {
     width: fit-content; /* Ajusta el ancho al tamaño del contenido */
     transition: transform 0.3s; /* Transición para el aumento de tamaño */
     cursor: pointer; /* Cambiar el cursor a una manita */
-    margin-left: 800px; /* Ajusta este valor para mover el contenedor a la derecha */
-    margin-right: 20px; /* Ajusta este valor para mover el contenedor a la izquierda */
+    margin: 20px auto; /* Centra el contenedor y agrega márgenes superior e inferior */
 }
 
 .titulo-container:hover {

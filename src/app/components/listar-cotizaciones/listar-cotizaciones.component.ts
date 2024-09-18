@@ -1,8 +1,11 @@
+
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { cotizaciononline } from 'src/app/models/cotizaciononline.interface';
 import { CatalogosService } from 'src/services/catalogos.service';
 import { ModalCotizacionComponent } from './modal-cotizacion/modal-cotizacion.component';
+import { ModalConfirmarComponent } from './modal-confirmar/modal-confirmar.component';
+import { ModalObservacionComponent } from './modal-observacion/modal-observacion.component';
 
 @Component({
   selector: 'app-listar-cotizaciones',
@@ -13,7 +16,7 @@ export class ListarCotizacionesComponent implements OnInit {
   cotizaciones: cotizaciononline[] = []; 
 
 
-  displayedColumns: string[] = ['id', 'nombre','telefono','descripcion','precio_aproximado','direccion','envio','fecha','hora', 'acciones'];
+  displayedColumns: string[] = ['id', 'nombre','telefono','descripcion','precio_aproximado','direccion','envio','fecha','hora','estado','mano_obra','presupuesto_insumos', 'total_presupuesto', 'acciones'];
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalPages: number = 1;
@@ -62,6 +65,20 @@ export class ListarCotizacionesComponent implements OnInit {
 
   abrirModalDetalle(cotizacion: cotizaciononline): void {
     this.dialog.open(ModalCotizacionComponent, {
+      width: '600px',
+      data: cotizacion
+    });
+  }
+
+  abrirModalConfirmar(cotizacion: cotizaciononline): void {
+    this.dialog.open(ModalConfirmarComponent, {
+      width: '600px',
+      data: cotizacion
+    });
+  }
+
+  abrirModalObservacion(cotizacion: cotizaciononline): void {
+    this.dialog.open(ModalObservacionComponent, {
       width: '600px',
       data: cotizacion
     });

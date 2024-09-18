@@ -1,0 +1,53 @@
+<h2 mat-dialog-title>Observación de Cotización</h2>
+<mat-dialog-content>
+  <div class="modal-container">
+    <div class="info-container">
+      <div class="info-item">
+        <strong>Nombre:</strong> {{ data.nombre }}
+      </div>
+      <div class="info-item">
+        <strong>Teléfono:</strong> {{ data.telefono }}
+      </div>
+      <div class="info-item">
+        <strong>Descripción:</strong> {{ data.descripcion }}
+      </div>
+      <div class="info-item">
+        <strong>Precio Aproximado:</strong> Q.{{ data.precio_aproximado }}
+      </div>
+      <div class="info-item">
+        <strong>Dirección:</strong> {{ data.direccion }}
+      </div>
+      <div class="info-item">
+        <strong>Envío:</strong> {{ data.envio ? 'Necesita envío' : 'Recoge en pastelería' }}
+      </div>
+      <div class="info-item">
+        <strong>Fecha:</strong> {{ data.fecha }}
+      </div>
+      <div class="info-item">
+        <strong>Hora:</strong> {{ data.hora }}
+      </div>
+      <div class="info-item">
+        <strong>Estado:</strong> {{ data.estado }}
+      </div>
+      <div class="info-item">
+        <strong>Mano de Obra:</strong> {{ data.mano_obra }}
+      </div>
+      <div class="info-item">
+        <strong>Presupuesto Insumos:</strong> {{ data.presupuesto_insumos }}
+      </div>
+      <div class="info-item">
+        <strong>Total Presupuesto:</strong> {{ data.total_presupuesto }}
+      </div>
+    </div>
+
+    <mat-form-field class="observation-field">
+      <mat-label>Observación:</mat-label>
+      <textarea matInput [(ngModel)]="observacion" name="observacion"></textarea>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onNoClick()">Cerrar</button>
+    <button mat-button color="primary" (click)="confirmObservation()">Confirmar</button>
+</mat-dialog-actions>

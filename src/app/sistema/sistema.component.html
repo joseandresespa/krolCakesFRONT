@@ -1,3 +1,4 @@
+
 <body>
 
 <div class="sidebar">
@@ -11,6 +12,11 @@
     <div class="nav-item" (click)="navigateTo('/sisprincipal')"><!-- Botón de regresar al menu principal -->
         <mat-icon>computer</mat-icon>
         Inicio
+    </div>
+
+    <div class="nav-item" (click)="navigateTo('/pedido')"><!-- Botón de regresar al menu principal -->
+        <mat-icon>cake</mat-icon>
+        Pedidos
     </div>
 
     <div class="nav-item" (click)="toggleDropdown('cotizaciones')">
@@ -76,3 +82,4 @@
     <ng-content></ng-content>
 </div>
 </body>
+

@@ -1,0 +1,72 @@
+<h2 mat-dialog-title>Confirmar Cotización</h2>
+<mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="data.nombre" name="nombre">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Teléfono</mat-label>
+      <input matInput [(ngModel)]="data.telefono" name="telefono">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Descripción</mat-label>
+      <input matInput [(ngModel)]="data.descripcion" name="descripcion">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Precio Aproximado</mat-label>
+      <input matInput [(ngModel)]="data.precio_aproximado" name="precio_aproximado">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Dirección</mat-label>
+      <input matInput [(ngModel)]="data.direccion" name="direccion">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Envio</mat-label>
+      <mat-select [(ngModel)]="data.envio" name="envio">
+        <mat-option [value]="true">Necesita envío</mat-option>
+        <mat-option [value]="false">Recoge en pastelería</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Fecha</mat-label>
+      <input matInput [(ngModel)]="data.fecha" name="fecha">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Hora</mat-label>
+      <input matInput [(ngModel)]="data.hora" name="hora">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Estado</mat-label>
+      <input matInput [(ngModel)]="data.estado" name="estado">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Mano de Obra</mat-label>
+      <input matInput [(ngModel)]="data.mano_obra" name="mano_obra">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Presupuesto Insumos</mat-label>
+      <input matInput [(ngModel)]="data.presupuesto_insumos" name="presupuesto_insumos">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Total Presupuesto</mat-label>
+      <input matInput [(ngModel)]="data.total_presupuesto" name="total_presupuesto">
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button color="primary">Confirmar</button>
+</mat-dialog-actions>

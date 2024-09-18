@@ -2,26 +2,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80%;
+    width: 80%; /* Mantiene el ancho del 80% */
     overflow-x: auto; 
     padding: 20px;
     background-color: #f0f0f0;
-    margin-left: 280px;
-    margin-right: 100px;
+    margin: 0 auto; /* Centra el contenedor */
 }
 
 table {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1000px; /* Mantiene el ancho máximo de la tabla */
 }
 
 .add-button {
     position: fixed;
     bottom: 16px;
     right: 16px;
-  }
-  
-  .titulo-container {
+}
+
+.titulo-container {
     background-color: black; /* Fondo negro */
     border-radius: 8px; /* Esquinas redondeadas */
     padding: 5px 15px; /* Espaciado interno reducido */
@@ -29,8 +28,7 @@ table {
     width: fit-content; /* Ajusta el ancho al tamaño del contenido */
     transition: transform 0.3s; /* Transición para el aumento de tamaño */
     cursor: pointer; /* Cambiar el cursor a una manita */
-    margin-left: 800px; /* Ajusta este valor para mover el contenedor a la derecha */
-    margin-right: 20px; /* Ajusta este valor para mover el contenedor a la izquierda */
+    margin: 0 auto; /* Centra el contenedor */
 }
 
 .titulo-container:hover {

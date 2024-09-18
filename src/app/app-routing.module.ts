@@ -22,6 +22,7 @@ import { UmpsComponent } from './components/umps/umps.component';
 import { TipoInsumoUtencilioComponent } from './components/tipo-insumo-utencilio/tipo-insumo-utencilio.component'
 import { MotivoSalidaComponent } from './components/motivo-salida/motivo-salida.component'
 import { ProveedorComponent } from './components/proveedor/proveedor.component';
+import { PedidoComponent } from './components/pedido/pedido.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirige a 'login' por defecto
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: 'tipo-insumo-utencilio', component:  TipoInsumoUtencilioComponent },
   { path: 'motivo-salida', component:  MotivoSalidaComponent },
   { path: 'proveedor', component:  ProveedorComponent },
+  { path: 'pedido', component:  PedidoComponent },
 ];
 
 @NgModule({

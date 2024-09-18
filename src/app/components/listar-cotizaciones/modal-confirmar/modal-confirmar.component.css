@@ -1,0 +1,23 @@
+mat-dialog-content {
+    padding: 16px; /* Añadir un poco de espacio alrededor del contenido */
+  }
+  
+  .form-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+    gap: 16px; /* Espacio entre los elementos */
+  }
+  
+  mat-form-field {
+    flex: 1 1 calc(50% - 16px); /* Dos campos por fila, ajustando el espacio */
+    min-width: 200px; /* Ancho mínimo para los campos */
+  }
+  
+  /* Para pantallas más pequeñas, hacer que los campos ocupen todo el ancho */
+  @media (max-width: 600px) {
+    mat-form-field {
+      flex: 1 1 100%; /* Un campo por fila en pantallas pequeñas */
+    }
+  }
+  
+  
