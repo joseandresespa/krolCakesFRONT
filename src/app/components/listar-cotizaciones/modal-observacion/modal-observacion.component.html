@@ -1,53 +1,37 @@
 <h2 mat-dialog-title>Observación de Cotización</h2>
 <mat-dialog-content>
-  <div class="modal-container">
-    <div class="info-container">
-      <div class="info-item">
-        <strong>Nombre:</strong> {{ data.nombre }}
-      </div>
-      <div class="info-item">
-        <strong>Teléfono:</strong> {{ data.telefono }}
-      </div>
-      <div class="info-item">
-        <strong>Descripción:</strong> {{ data.descripcion }}
-      </div>
-      <div class="info-item">
-        <strong>Precio Aproximado:</strong> Q.{{ data.precio_aproximado }}
-      </div>
-      <div class="info-item">
-        <strong>Dirección:</strong> {{ data.direccion }}
-      </div>
-      <div class="info-item">
-        <strong>Envío:</strong> {{ data.envio ? 'Necesita envío' : 'Recoge en pastelería' }}
-      </div>
-      <div class="info-item">
-        <strong>Fecha:</strong> {{ data.fecha }}
-      </div>
-      <div class="info-item">
-        <strong>Hora:</strong> {{ data.hora }}
-      </div>
-      <div class="info-item">
-        <strong>Estado:</strong> {{ data.estado }}
-      </div>
-      <div class="info-item">
-        <strong>Mano de Obra:</strong> {{ data.mano_obra }}
-      </div>
-      <div class="info-item">
-        <strong>Presupuesto Insumos:</strong> {{ data.presupuesto_insumos }}
-      </div>
-      <div class="info-item">
-        <strong>Total Presupuesto:</strong> {{ data.total_presupuesto }}
-      </div>
-    </div>
-
-    <mat-form-field class="observation-field">
-      <mat-label>Observación:</mat-label>
-      <textarea matInput [(ngModel)]="observacion" name="observacion"></textarea>
-    </mat-form-field>
+  <h3>Imágenes de Referencia</h3>
+  <div *ngIf="data.imagenes?.length; else noImages">
+    <ul>
+      <li *ngFor="let imagen of data.imagenes">
+        <img [src]="imagen.ruta" alt="Imagen de referencia" width="150" />
+        <p>Observación: {{ imagen.observacion }}</p>
+      </li>
+    </ul>
   </div>
+  <ng-template #noImages>
+    <p>No hay imágenes de referencia.</p>
+  </ng-template>
+
+  <h3>Desglose</h3>
+  <div *ngIf="data.desgloses?.length; else noDesglose">
+    <ul>
+      <li *ngFor="let desglose of data.desgloses">
+        <p>Producto ID: {{ desglose.id_producto }}, Cantidad: {{ desglose.cantidad }}, Subtotal: Q.{{ desglose.subtotal }}</p>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noDesglose>
+    <p>No hay desglose disponible.</p>
+  </ng-template>
+
+  <mat-form-field class="observation-field">
+    <mat-label>Observación:</mat-label>
+    <textarea matInput [(ngModel)]="observacion" name="observacion"></textarea>
+  </mat-form-field>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-    <button mat-button (click)="onNoClick()">Cerrar</button>
-    <button mat-button color="primary" (click)="confirmObservation()">Confirmar</button>
+  <button mat-button (click)="onNoClick()">Cerrar</button>
+  <button mat-button color="primary" (click)="confirmObservation()">Confirmar</button>
 </mat-dialog-actions>

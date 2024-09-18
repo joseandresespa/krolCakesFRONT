@@ -1,72 +1,133 @@
 <h2 mat-dialog-title>Confirmar Cotización</h2>
 <mat-dialog-content>
-  <form>
-    <mat-form-field>
-      <mat-label>Nombre</mat-label>
-      <input matInput [(ngModel)]="data.nombre" name="nombre">
-    </mat-form-field>
+  <form (ngSubmit)="confirmar()">
+    <div class="titulo-container">
+      <h2>FORMULARIO DE COTIZACIÓN</h2>
+    </div>
+    <br>
 
-    <mat-form-field>
-      <mat-label>Teléfono</mat-label>
-      <input matInput [(ngModel)]="data.telefono" name="telefono">
-    </mat-form-field>
+    <!-- Datos generales -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5>Datos Generales</h5>
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" id="nombre" [(ngModel)]="data.nombre" name="nombre" class="form-control" required>
+          </div>
 
-    <mat-form-field>
-      <mat-label>Descripción</mat-label>
-      <input matInput [(ngModel)]="data.descripcion" name="descripcion">
-    </mat-form-field>
+          <div class="form-group">
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" [(ngModel)]="data.telefono" name="telefono" class="form-control" required>
+          </div>
 
-    <mat-form-field>
-      <mat-label>Precio Aproximado</mat-label>
-      <input matInput [(ngModel)]="data.precio_aproximado" name="precio_aproximado">
-    </mat-form-field>
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <input type="text" id="descripcion" [(ngModel)]="data.descripcion" name="descripcion" class="form-control" required>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <mat-form-field>
-      <mat-label>Dirección</mat-label>
-      <input matInput [(ngModel)]="data.direccion" name="direccion">
-    </mat-form-field>
+    <!-- Selección de producto y cantidad -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5>Seleccionar Productos</h5>
+      </div>
+      <div class="card-body">
+        <div class="form-row">
+          <div class="col-md-8">
+            <label for="producto">Producto</label>
+            <select id="producto" [(ngModel)]="data.productoSeleccionado" name="productoSeleccionado" class="form-control">
+              <option *ngFor="let producto of data.productosDisponibles" [ngValue]="producto">
+                {{ producto.nombre }} - Q{{ producto.precio_online }}
+              </option>
+            </select>
+          </div>
 
-    <mat-form-field>
-      <mat-label>Envio</mat-label>
-      <mat-select [(ngModel)]="data.envio" name="envio">
-        <mat-option [value]="true">Necesita envío</mat-option>
-        <mat-option [value]="false">Recoge en pastelería</mat-option>
-      </mat-select>
-    </mat-form-field>
+          <div class="col-md-4">
+            <label for="cantidad">Cantidad/Porciones</label>
+            <input type="number" id="cantidad" [(ngModel)]="data.cantidadProducto" name="cantidadProducto" class="form-control" min="1" value="1">
+          </div>
+        </div>
 
-    <mat-form-field>
-      <mat-label>Fecha</mat-label>
-      <input matInput [(ngModel)]="data.fecha" name="fecha">
-    </mat-form-field>
+        <!-- Botón agregar producto -->
+        <button type="button" class="btn btn-primary" (click)="agregarProducto()">Agregar Producto</button>
 
-    <mat-form-field>
-      <mat-label>Hora</mat-label>
-      <input matInput [(ngModel)]="data.hora" name="hora">
-    </mat-form-field>
+        <!-- Productos seleccionados -->
+        <div *ngIf="data.productosSeleccionados.length > 0" class="mt-3">
+          <h6>Productos seleccionados</h6>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of data.productosSeleccionados; let i = index">
+              {{ item.producto.nombre }} - Q{{ item.producto.precio_online }} x {{ item.cantidad }} = Q{{ item.total }}
+              <button type="button" class="btn btn-danger btn-sm" (click)="eliminarProducto(i)">Eliminar</button>
+            </li>
+          </ul>
+          <h4 class="mt-3">Total: Q.{{ data.totalGeneral }}</h4>
+        </div>
+      </div>
+    </div>
 
-    <mat-form-field>
-      <mat-label>Estado</mat-label>
-      <input matInput [(ngModel)]="data.estado" name="estado">
-    </mat-form-field>
+    <!-- Subir imágenes -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5>Subir Imágenes</h5>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="imagenes">Seleccionar imágenes</label>
+          <input type="file" id="imagenes" class="form-control" (change)="onFileSelected($event)" multiple>
+        </div>
+        <div class="mt-3">
+          <h6>Imagenes seleccionadas:</h6>
+          <div class="image-thumbnails">
+            <img *ngFor="let img of data.imagenesSeleccionadas" [src]="img" alt="Imagen seleccionada" class="img-thumbnail">
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <mat-form-field>
-      <mat-label>Mano de Obra</mat-label>
-      <input matInput [(ngModel)]="data.mano_obra" name="mano_obra">
-    </mat-form-field>
+    <!-- Opciones de entrega, fecha y hora -->
+    <div class="card mb-4">
+      <div class="card-header">
+        <h5>Opciones de Entrega</h5>
+      </div>
+      <div class="card-body">
+        <div class="form-check">
+          <input type="radio" id="recogida" [(ngModel)]="data.opcionEntrega" name="opcionEntrega" value="recogida" class="form-check-input">
+          <label for="recogida" class="form-check-label">Recoger en la pastelería</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" id="envio" [(ngModel)]="data.opcionEntrega" name="opcionEntrega" value="envio" class="form-check-input">
+          <label for="envio" class="form-check-label">Enviar a domicilio</label>
+        </div>
 
-    <mat-form-field>
-      <mat-label>Presupuesto Insumos</mat-label>
-      <input matInput [(ngModel)]="data.presupuesto_insumos" name="presupuesto_insumos">
-    </mat-form-field>
+        <div *ngIf="data.opcionEntrega === 'envio'" class="form-group mt-3">
+          <label for="direccion">Dirección de envío</label>
+          <input type="text" id="direccion" [(ngModel)]="data.direccionEnvio" name="direccionEnvio" class="form-control" required>
+        </div>
 
-    <mat-form-field>
-      <mat-label>Total Presupuesto</mat-label>
-      <input matInput [(ngModel)]="data.total_presupuesto" name="total_presupuesto">
-    </mat-form-field>
+        <div class="form-group mt-3">
+          <label for="fechaEntrega">Fecha de entrega</label>
+          <input type="date" id="fechaEntrega" [(ngModel)]="data.fechaEntrega" name="fechaEntrega" class="form-control" required>
+        </div>
+
+        <div class="form-group mt-3">
+          <label for="horaEntrega">Hora de entrega</label>
+          <input type="time" id="horaEntrega" [(ngModel)]="data.horaEntrega" name="horaEntrega" class="form-control" required>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón enviar cotización -->
+    
+    <br>
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
   <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button color="primary">Confirmar</button>
+  <button mat-button color="primary" (click)="confirmar()">Confirmar</button>
 </mat-dialog-actions>
