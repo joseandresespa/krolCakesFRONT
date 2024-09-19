@@ -57,6 +57,7 @@ import { ModalConfirmarComponent } from './components/listar-cotizaciones/modal-
 import { ModalObservacionComponent } from './components/listar-cotizaciones/modal-observacion/modal-observacion.component';
 import { PedidoComponent } from './components/pedido/pedido.component';
 import { ModalAgregarComponent } from './components/pedido/modal-agregar/modal-agregar.component';
+import { ConfirmarCotizacionComponent } from './components/listar-cotizaciones/confirmar-cotizacion/confirmar-cotizacion.component';
 
 
 
@@ -98,7 +99,8 @@ import { ModalAgregarComponent } from './components/pedido/modal-agregar/modal-a
       ModalConfirmarComponent,
       ModalObservacionComponent,
       PedidoComponent,
-      ModalAgregarComponent
+      ModalAgregarComponent,
+      ConfirmarCotizacionComponent
          
       
     

@@ -1,133 +1,30 @@
-<h2 mat-dialog-title>Confirmar Cotización</h2>
-<mat-dialog-content>
-  <form (ngSubmit)="confirmar()">
-    <div class="titulo-container">
-      <h2>FORMULARIO DE COTIZACIÓN</h2>
+<div class="confirmar-cotizacion">
+  <h2>Confirmar Cotización</h2>
+
+  <div>
+    <p><strong>Nombre:</strong> {{ data.nombre }}</p>
+    <p><strong>Teléfono:</strong> {{ data.telefono }}</p>
+    <p><strong>Descripción:</strong> {{ data.descripcion }}</p>
+    <p><strong>Precio Aproximado:</strong> Q{{ data.precio_aproximado }}</p>
+    <p><strong>Opción de Entrega:</strong> {{ data.envio ? 'Envío' : 'Recogida' }}</p>
+    <div *ngIf="data.envio">
+      <p><strong>Dirección de Envío:</strong> {{ data.direccion }}</p>
     </div>
-    <br>
+    <p><strong>Fecha de Entrega:</strong> {{ data.fecha | date:'dd/MM/yyyy' }}</p>
+    <p><strong>Hora de Entrega:</strong> {{ data.hora }}</p>
+  </div>
 
-    <!-- Datos generales -->
-    <div class="card mb-4">
-      <div class="card-header">
-        <h5>Datos Generales</h5>
-      </div>
-      <div class="card-body">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" [(ngModel)]="data.nombre" name="nombre" class="form-control" required>
-          </div>
+  <h4>Productos Seleccionados:</h4>
+  <ul>
+    <li *ngFor="let item of data.desgloses">
+      {{ item.cantidad }} x {{ item.id_producto }} - Q{{ item.subtotal }}
+    </li>
+  </ul>
 
-          <div class="form-group">
-            <label for="telefono">Teléfono</label>
-            <input type="tel" id="telefono" [(ngModel)]="data.telefono" name="telefono" class="form-control" required>
-          </div>
+  <h4>Imágenes:</h4>
+  <div *ngFor="let img of data.imagenes">
+    <img [src]="img.ruta" alt="Imagen" class="img-thumbnail">
+  </div>
 
-          <div class="form-group">
-            <label for="descripcion">Descripción</label>
-            <input type="text" id="descripcion" [(ngModel)]="data.descripcion" name="descripcion" class="form-control" required>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Selección de producto y cantidad -->
-    <div class="card mb-4">
-      <div class="card-header">
-        <h5>Seleccionar Productos</h5>
-      </div>
-      <div class="card-body">
-        <div class="form-row">
-          <div class="col-md-8">
-            <label for="producto">Producto</label>
-            <select id="producto" [(ngModel)]="data.productoSeleccionado" name="productoSeleccionado" class="form-control">
-              <option *ngFor="let producto of data.productosDisponibles" [ngValue]="producto">
-                {{ producto.nombre }} - Q{{ producto.precio_online }}
-              </option>
-            </select>
-          </div>
-
-          <div class="col-md-4">
-            <label for="cantidad">Cantidad/Porciones</label>
-            <input type="number" id="cantidad" [(ngModel)]="data.cantidadProducto" name="cantidadProducto" class="form-control" min="1" value="1">
-          </div>
-        </div>
-
-        <!-- Botón agregar producto -->
-        <button type="button" class="btn btn-primary" (click)="agregarProducto()">Agregar Producto</button>
-
-        <!-- Productos seleccionados -->
-        <div *ngIf="data.productosSeleccionados.length > 0" class="mt-3">
-          <h6>Productos seleccionados</h6>
-          <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center" *ngFor="let item of data.productosSeleccionados; let i = index">
-              {{ item.producto.nombre }} - Q{{ item.producto.precio_online }} x {{ item.cantidad }} = Q{{ item.total }}
-              <button type="button" class="btn btn-danger btn-sm" (click)="eliminarProducto(i)">Eliminar</button>
-            </li>
-          </ul>
-          <h4 class="mt-3">Total: Q.{{ data.totalGeneral }}</h4>
-        </div>
-      </div>
-    </div>
-
-    <!-- Subir imágenes -->
-    <div class="card mb-4">
-      <div class="card-header">
-        <h5>Subir Imágenes</h5>
-      </div>
-      <div class="card-body">
-        <div class="form-group">
-          <label for="imagenes">Seleccionar imágenes</label>
-          <input type="file" id="imagenes" class="form-control" (change)="onFileSelected($event)" multiple>
-        </div>
-        <div class="mt-3">
-          <h6>Imagenes seleccionadas:</h6>
-          <div class="image-thumbnails">
-            <img *ngFor="let img of data.imagenesSeleccionadas" [src]="img" alt="Imagen seleccionada" class="img-thumbnail">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Opciones de entrega, fecha y hora -->
-    <div class="card mb-4">
-      <div class="card-header">
-        <h5>Opciones de Entrega</h5>
-      </div>
-      <div class="card-body">
-        <div class="form-check">
-          <input type="radio" id="recogida" [(ngModel)]="data.opcionEntrega" name="opcionEntrega" value="recogida" class="form-check-input">
-          <label for="recogida" class="form-check-label">Recoger en la pastelería</label>
-        </div>
-        <div class="form-check">
-          <input type="radio" id="envio" [(ngModel)]="data.opcionEntrega" name="opcionEntrega" value="envio" class="form-check-input">
-          <label for="envio" class="form-check-label">Enviar a domicilio</label>
-        </div>
-
-        <div *ngIf="data.opcionEntrega === 'envio'" class="form-group mt-3">
-          <label for="direccion">Dirección de envío</label>
-          <input type="text" id="direccion" [(ngModel)]="data.direccionEnvio" name="direccionEnvio" class="form-control" required>
-        </div>
-
-        <div class="form-group mt-3">
-          <label for="fechaEntrega">Fecha de entrega</label>
-          <input type="date" id="fechaEntrega" [(ngModel)]="data.fechaEntrega" name="fechaEntrega" class="form-control" required>
-        </div>
-
-        <div class="form-group mt-3">
-          <label for="horaEntrega">Hora de entrega</label>
-          <input type="time" id="horaEntrega" [(ngModel)]="data.horaEntrega" name="horaEntrega" class="form-control" required>
-        </div>
-      </div>
-    </div>
-
-    <!-- Botón enviar cotización -->
-    
-    <br>
-  </form>
-</mat-dialog-content>
-
-<mat-dialog-actions align="end">
-  <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button color="primary" (click)="confirmar()">Confirmar</button>
-</mat-dialog-actions>
+  <button class="btn btn-success" (click)="confirmar()">Confirmar</button>
+</div>
