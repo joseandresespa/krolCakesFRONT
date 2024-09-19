@@ -1,23 +1,40 @@
-mat-dialog-content {
-    padding: 16px; /* Añadir un poco de espacio alrededor del contenido */
-  }
-  
-  .form-container {
-    display: flex;
-    flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
-    gap: 16px; /* Espacio entre los elementos */
-  }
-  
-  mat-form-field {
-    flex: 1 1 calc(50% - 16px); /* Dos campos por fila, ajustando el espacio */
-    min-width: 200px; /* Ancho mínimo para los campos */
-  }
-  
-  /* Para pantallas más pequeñas, hacer que los campos ocupen todo el ancho */
-  @media (max-width: 600px) {
-    mat-form-field {
-      flex: 1 1 100%; /* Un campo por fila en pantallas pequeñas */
-    }
-  }
-  
-  
+.confirmar-cotizacion {
+  max-height: 400px; /* altura máxima /
+  overflow-y: auto; /* Habilita el scroll vertical */
+  overflow-x: hidden; /* Oculta el scroll horizontal */
+  padding: 20px; /* Espaciado interno para el contenido */
+}
+
+.confirmar-cotizacion::-webkit-scrollbar {
+  width: 8px; /* Ancho del scrollbar */
+}
+
+.confirmar-cotizacion::-webkit-scrollbar-track {
+  background: #f5f5f5; /* Color de fondo del track del scrollbar */
+}
+
+.confirmar-cotizacion::-webkit-scrollbar-thumb {
+  background: #c19a6b; /* Color del thumb del scrollbar */
+  border-radius: 10px; /* Bordes redondeados del thumb */
+}
+
+.confirmar-cotizacion::-webkit-scrollbar-thumb:hover {
+  background: #b58b5a; /* Color del thumb al pasar el mouse */
+}
+
+h2, h4 {
+  margin-top: 20px; /* Espaciado superior para los encabezados */
+  margin-bottom: 10px; /* Espaciado inferior para los encabezados */
+}
+
+ul {
+  list-style-type: none; /* Elimina los puntos de la lista */
+  padding: 0; /* Elimina el padding */
+  margin: 0; /* Elimina el margen */
+}
+
+ul li {
+  display: flex; /* Para alinear los elementos horizontalmente */
+  align-items: center; /* Alinea los elementos verticalmente */
+  margin: 5px 0; /* Espaciado entre los elementos */
+}

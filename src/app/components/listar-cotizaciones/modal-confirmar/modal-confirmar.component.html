@@ -2,24 +2,32 @@
   <h2>Confirmar Cotización</h2>
 
   <div>
-    <p><strong>Nombre:</strong> {{ data.nombre }}</p>
-    <p><strong>Teléfono:</strong> {{ data.telefono }}</p>
-    <p><strong>Descripción:</strong> {{ data.descripcion }}</p>
-    <p><strong>Precio Aproximado:</strong> Q{{ data.precio_aproximado }}</p>
-    <p><strong>Opción de Entrega:</strong> {{ data.envio ? 'Envío' : 'Recogida' }}</p>
+    <p><strong>Nombre:</strong> <input [(ngModel)]="data.nombre" class="form-control" /></p>
+    <p><strong>Teléfono:</strong> <input [(ngModel)]="data.telefono" class="form-control" /></p>
+    <p><strong>Descripción:</strong> <textarea [(ngModel)]="data.descripcion" class="form-control"></textarea></p>
+    <p><strong>Precio Aproximado:</strong> Q<input [(ngModel)]="data.precio_aproximado" type="number" class="form-control" /></p>
+    <p><strong>Opción de Entrega:</strong>
+      <select [(ngModel)]="data.envio" class="form-control">
+        <option [value]="true">Envío</option>
+        <option [value]="false">Recogida</option>
+      </select>
+    </p>
     <div *ngIf="data.envio">
-      <p><strong>Dirección de Envío:</strong> {{ data.direccion }}</p>
+      <p><strong>Dirección de Envío:</strong> <input [(ngModel)]="data.direccion" class="form-control" /></p>
     </div>
-    <p><strong>Fecha de Entrega:</strong> {{ data.fecha | date:'dd/MM/yyyy' }}</p>
-    <p><strong>Hora de Entrega:</strong> {{ data.hora }}</p>
+    <p><strong>Fecha de Entrega:</strong> <input [(ngModel)]="data.fecha" type="date" class="form-control" /></p>
+    <p><strong>Hora de Entrega:</strong> <input [(ngModel)]="data.hora" type="time" class="form-control" /></p>
   </div>
 
   <h4>Productos Seleccionados:</h4>
   <ul>
-    <li *ngFor="let item of data.desgloses">
-      {{ item.cantidad }} x {{ item.id_producto }} - Q{{ item.subtotal }}
+    <li *ngFor="let item of data.desgloses; let i = index">
+      <span>{{ item.cantidad }} x {{ item.nombre_producto }} - Q{{ item.subtotal }}</span> 
+      <input [(ngModel)]="item.cantidad" type="number" placeholder="Cantidad" class="form-control" (ngModelChange)="calcularTotalGeneral()" />
+      <button class="btn btn-danger btn-sm" (click)="eliminarProducto(i)">Eliminar</button>
     </li>
   </ul>
+  <h5>Total General: Q{{ data.totalGeneral }}</h5>
 
   <h4>Imágenes:</h4>
   <div *ngFor="let img of data.imagenes">
@@ -28,3 +36,4 @@
 
   <button class="btn btn-success" (click)="confirmar()">Confirmar</button>
 </div>
+

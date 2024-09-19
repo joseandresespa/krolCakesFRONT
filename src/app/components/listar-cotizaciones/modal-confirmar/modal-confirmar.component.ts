@@ -1,3 +1,4 @@
+
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
@@ -34,17 +35,19 @@ export class ModalConfirmarComponent {
     this.dialogRef.close(this.data); // Devuelve los datos actualizados al componente que lo abrió
   }
 
+
   agregarProducto(): void {
     if (this.data.productoSeleccionado && this.data.cantidadProducto > 0) {
-      const total = (this.data.productoSeleccionado.precio_online || 0) * this.data.cantidadProducto;
-      this.data.productosSeleccionados.push({ 
-        producto: this.data.productoSeleccionado, 
-        cantidad: this.data.cantidadProducto, 
-        total 
+      const subtotal = (this.data.productoSeleccionado.precio_online || 0) * this.data.cantidadProducto;
+      this.data.desgloses.push({
+        id_producto: this.data.productoSeleccionado.id_producto,
+        nombre_producto: this.data.productoSeleccionado.nombre,  // Aquí agregamos el nombre del producto
+        cantidad: this.data.cantidadProducto,
+        subtotal
       });
-      this.calcularTotalGeneral();
     }
   }
+  
 
   calcularTotalGeneral(): void {
     this.data.totalGeneral = this.data.productosSeleccionados.reduce(
