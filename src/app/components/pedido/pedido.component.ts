@@ -2,8 +2,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { pedido } from 'src/app/models/pedido.interface';
-import { ModalAgregarComponent } from './modal-agregar/modal-agregar.component';
-import { ModalEditarComponent } from './modal-editar/modal-editar.component';
+import { ModalAgregarPedidoComponent } from './modal-agregar-pedido/modal-agregar-pedido.component';
+import { ModalEditarPedidoComponent } from './modal-editar-pedido/modal-editar-pedido.component';
+import { ModalPedidoDesgloseComponent } from './modal-pedido-desglose/modal-pedido-desglose.component';
+import { ModalEstadoPedidoComponent } from './modal-estado-pedido/modal-estado-pedido.component';
+
+
 
 @Component({
   selector: 'app-pedido',
@@ -11,9 +15,7 @@ import { ModalEditarComponent } from './modal-editar/modal-editar.component';
   styleUrls: ['./pedido.component.css']
 })
 export class PedidoComponent implements OnInit {
-  pedidos: pedido[] = [
-   
-  ]; 
+  pedidos: pedido[] = []; 
 
 
   displayedColumns: string[] = ['id', 'fecha','hora','id_estado','id_cliente','observaciones','direccion','id_tipo_entrega','precio_total','acciones'];
@@ -60,19 +62,61 @@ export class PedidoComponent implements OnInit {
     this.paginate();
   }
 
-  abrirModalAgregar(pedidos: pedido): void {
-    this.dialog.open(ModalAgregarComponent, {
-      width: '600px',
-      data: pedidos
+  abrirModalAgregarPedido(pedidos:pedido): void {
+    const dialogRef = this.dialog.open(ModalAgregarPedidoComponent, {
+      width: '600px'
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.pedidos.push(result); // Agregar el nuevo pedido a la lista
+        this.updatePagination();   // Actualizar la tabla
+      }
     });
   }
 
-  abrirModalEditar(pedidos: pedido): void {
-    this.dialog.open(ModalEditarComponent, {
+  abrirModalEditarPedido(pedido: pedido): void {
+    const dialogRef = this.dialog.open(ModalEditarPedidoComponent, {
       width: '600px',
-      data: pedidos
+      data: pedido
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const index = this.pedidos.findIndex(p => p.id === pedido.id);
+        if (index !== -1) {
+          this.pedidos[index] = result; // Actualizar el pedido en la lista
+          this.updatePagination();      // Actualizar la tabla
+        }
+      }
     });
   }
   
+
+  abrirModalPedidoDesglose(pedido: pedido): void {
+    const dialogRef = this.dialog.open(ModalPedidoDesgloseComponent, {
+      width: '600px',
+      data: pedido
+    });
+
+
+}
+
+abrirModalEstadoPedido(pedido: pedido): void {
+  const dialogRef = this.dialog.open(ModalEstadoPedidoComponent, {
+    width: '400px',
+    data: { estado: pedido.id_estado }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result !== undefined) {
+      const index = this.pedidos.findIndex(p => p.id === pedido.id);
+      if (index !== -1) {
+        this.pedidos[index].id_estado = result; // Actualizar el estado
+        this.updatePagination(); // Actualizar la tabla
+      }
+    }
+  });
+}
 
 }

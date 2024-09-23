@@ -1,20 +1,25 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { cotizaciononline } from 'src/app/models/cotizaciononline.interface';
+import { pedido } from 'src/app/models/pedido.interface'; // Ajustar la ruta del modelo según tu proyecto
 
 @Component({
-  selector: 'app-modal-observacion',
-  templateUrl: './modal-observacion.component.html',
-  styleUrls: ['./modal-observacion.component.css']
+  selector: 'app-modal-pedido-desglose',
+  templateUrl: './modal-pedido-desglose.component.html',
+  styleUrls: ['./modal-pedido-desglose.component.css']
 })
-export class ModalObservacionComponent {
+export class ModalPedidoDesgloseComponent {
   observacion: string = ''; // Inicializar la propiedad observacion
   observaciones: string[] = []; // Array para almacenar observaciones
   observacionSeleccionada: string | null = null; // Almacena la observación seleccionada para mostrarla
   imagenesSubidas: string[] = []; // Inicializar como arreglo vacío (imagenes)
+  
 
-   // Método para manejar la subida de imágenes
-   onImageUpload(event: Event): void {
+  productos = [
+    { nombre: '', cantidad: 1, precio_unitario: 0, subtotal: 0 }
+  ];
+
+  // Método para manejar la subida de imágenes
+  onImageUpload(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files) {
       const archivos = Array.from(input.files);
@@ -33,17 +38,41 @@ eliminarImagen(index: number): void {
 }
 
   
-
   constructor(
-    public dialogRef: MatDialogRef<ModalObservacionComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: cotizaciononline
-  ) {}
+    public dialogRef: MatDialogRef<ModalPedidoDesgloseComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: pedido
+  ) { }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
-  // Función para agregar la observación al array
+  confirmar(): void {
+    this.dialogRef.close(this.data); //  acción adicional si es necesario
+  }
+
+   // Lista de productos para el dropdown
+   listaDeProductos: string[] = [];
+
+   // Funciones existentes
+   agregarProducto() {
+     this.productos.push({ nombre: '', cantidad: 1, precio_unitario: 0, subtotal: 0 });
+   }
+ 
+   eliminarProducto(index: number) {
+     this.productos.splice(index, 1);
+   }
+ 
+   actualizarSubtotal(producto: any) {
+     producto.subtotal = producto.cantidad * producto.precio_unitario;
+   }
+ 
+   calcularTotalGeneral() {
+     return this.productos.reduce((total, producto) => total + producto.subtotal, 0);
+   }
+
+
+   // Función para agregar la observación al array
   addObservation() {
     if (this.observacion.trim()) {
       this.observaciones.push(this.observacion); // Agregar la observación
@@ -69,4 +98,4 @@ eliminarImagen(index: number): void {
     console.log('Observaciones confirmadas:', this.observaciones);
     this.dialogRef.close({ observaciones: this.observaciones });
   }
-}
+ }

@@ -1,28 +1,22 @@
-
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-interface Producto {
-  nombre: string;
-  precio_online: number;
-}
-
-interface ProductoSeleccionado {
-  producto: Producto;
-  cantidad: number;
-  total: number;
-}
-
+import { producto } from 'src/app/models/producto.interface'; //ruta del modelo "producto"
 @Component({
   selector: 'app-modal-confirmar',
   templateUrl: './modal-confirmar.component.html',
   styleUrls: ['./modal-confirmar.component.css']
 })
 export class ModalConfirmarComponent {
+  
+  productosDisponibles: producto[] = []; // Inicializa como un array vacío
+
   constructor(
     public dialogRef: MatDialogRef<ModalConfirmarComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-      // Puedes inicializar o manipular los datos aquí si es necesario
+      // Inicializa los valores si son undefined
+      this.data.manoDeObra = this.data.manoDeObra || 0;
+      this.data.insumos = this.data.insumos || 0;
+      this.data.presupuestoTotal = this.data.presupuestoTotal || 0;
   }
 
   onNoClick(): void {
@@ -30,35 +24,45 @@ export class ModalConfirmarComponent {
   }
 
   confirmar(): void {
-    // Lógica de confirmación
     console.log('Confirmar cotización con datos:', this.data);
     this.dialogRef.close(this.data); // Devuelve los datos actualizados al componente que lo abrió
   }
 
-
   agregarProducto(): void {
-    if (this.data.productoSeleccionado && this.data.cantidadProducto > 0) {
-      const subtotal = (this.data.productoSeleccionado.precio_online || 0) * this.data.cantidadProducto;
-      this.data.desgloses.push({
-        id_producto: this.data.productoSeleccionado.id_producto,
-        nombre_producto: this.data.productoSeleccionado.nombre,  // Aquí agregamos el nombre del producto
-        cantidad: this.data.cantidadProducto,
-        subtotal
-      });
-    }
+    // Agregar un nuevo objeto para el producto seleccionado
+    this.data.desgloses.push({
+      id: undefined,
+      nombre: '',
+      descripcion: '',
+      precio_online: 0,
+      cantidad: 1,
+      subtotal: 0
+    });
+  }
+
+  eliminarProducto(index: number): void {
+    this.data.desgloses.splice(index, 1); // Cambiar a desgloses
+    this.calcularTotalGeneral(); // Recalcular el total general después de eliminar
+  }
+
+  actualizarSubtotal(item: any): void {
+    const cantidad = item.cantidad || 0;
+    const precio = item.precio_online || 0;
+
+    item.subtotal = cantidad * precio;
+
+    this.calcularTotalGeneral();
   }
   
-
   calcularTotalGeneral(): void {
-    this.data.totalGeneral = this.data.productosSeleccionados.reduce(
-      (sum: number, item: ProductoSeleccionado) => sum + item.total,
+    this.data.totalGeneral = this.data.desgloses.reduce(
+      (sum: number, item: any) => sum + (item.subtotal || 0),
       0
     );
   }
 
-  eliminarProducto(index: number): void {
-    this.data.productosSeleccionados.splice(index, 1);
-    this.calcularTotalGeneral();
+  calcularPresupuestoTotal(): void {
+    this.data.presupuestoTotal = (this.data.manoDeObra || 0) + (this.data.insumos || 0);
   }
 
   onFileSelected(event: any): void {
@@ -66,7 +70,6 @@ export class ModalConfirmarComponent {
     this.data.imagenesSeleccionadas = []; // Reiniciar el array
 
     for (let i = 0; i < files.length; i++) {
-      console.log('Archivo seleccionado:', files[i].name);
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.data.imagenesSeleccionadas.push(e.target.result); // Agregar la URL de la imagen
@@ -75,3 +78,4 @@ export class ModalConfirmarComponent {
     }
   }
 }
+

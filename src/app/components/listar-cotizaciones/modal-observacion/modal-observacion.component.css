@@ -1,10 +1,98 @@
-.mat-form-field {
+mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: #5a0057; /* #b87400 */
+}
+
+img {
+  border-radius: 8px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.observation-field {
   width: 100%;
-  margin-top: 16px;
 }
 
 textarea {
-  resize: vertical; /* Permite el redimensionamiento vertical, opcional */
-  min-height: 200px; /* Altura mínima para el área de texto */
-  width: 100%; /* Ocupa todo el ancho del contenedor */
+  min-height: 60px;
+  max-height: 100px;
+  resize: none; /* No permitir redimensionar */
+}
+
+button {
+  margin-right: 8px;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  background-color: #f5f5f5;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+span {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+p {
+  background-color: #ffffff;
+  padding: 12px;
+  border-radius: 6px;
+  word-wrap: break-word; /* Ajustar texto largo */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  max-height: 150px;
+  overflow-y: auto; /* Agregar scroll si es necesario */
+}
+
+mat-dialog-actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+h2 {
+  text-align: center;
+  color: #000000;
+  margin-bottom: 16px;
+}
+
+mat-dialog-content h3 {
+  font-weight: 600;
+}
+
+button[mat-button] {
+  background-color: #8a4900;
+  color: white;
+  font-weight: bold;
+}
+
+button[mat-button]:hover {
+  background-color: #593001;
+}
+
+button[mat-button].mat-warn {
+  background-color: #f44336;
+}
+
+button[mat-button].mat-warn:hover {
+  background-color: #c62828;
 }

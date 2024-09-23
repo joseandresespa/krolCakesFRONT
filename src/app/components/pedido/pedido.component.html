@@ -60,10 +60,14 @@
             <ng-container matColumnDef="acciones">
                 <th mat-header-cell *matHeaderCellDef style="text-align: center;" > Acciones </th>
                 <td mat-cell *matCellDef="let pedido">
-                  <button mat-button class="agregar-button" (click)="abrirModalAgregar(pedido)">Agregar pedido</button>
+               
+               <button mat-button class="agregar-button" (click)="abrirModalAgregarPedido(pedido)">Agregar pedido</button>
                 
-                  <button mat-button class="editar-button" (click)="abrirModalEditar(pedido)">Editar</button>
-  
+                    <button mat-button class="editar-button" (click)="abrirModalEditarPedido(pedido)">Editar</button>
+
+                    <button mat-button class="desglose-button" (click)="abrirModalPedidoDesglose(pedido)">Desglose</button>
+                    <button mat-button class="estado-button" (click)="abrirModalEstadoPedido(pedido)">Cambiar Estado</button>
+                   
                 </td>
                 
             </ng-container>
@@ -97,13 +101,10 @@
       </ul>
     </nav>
 
-        <!-- Agregar pedido -->
+        
         
             
-            <div mat-cell *matCellDef="let pedido">
-              <button mat-button class="agregar-button" (click)="abrirModalAgregar(pedido)">Agregar pedido</button>
-
-            </div>
+       
              
 
         

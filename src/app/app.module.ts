@@ -56,8 +56,15 @@ import { ModalCotizacionComponent } from './components/listar-cotizaciones/modal
 import { ModalConfirmarComponent } from './components/listar-cotizaciones/modal-confirmar/modal-confirmar.component';
 import { ModalObservacionComponent } from './components/listar-cotizaciones/modal-observacion/modal-observacion.component';
 import { PedidoComponent } from './components/pedido/pedido.component';
-import { ModalAgregarComponent } from './components/pedido/modal-agregar/modal-agregar.component';
 import { ConfirmarCotizacionComponent } from './components/listar-cotizaciones/confirmar-cotizacion/confirmar-cotizacion.component';
+import { ModalAgregarPedidoComponent } from './components/pedido/modal-agregar-pedido/modal-agregar-pedido.component';
+import { ModalEditarPedidoComponent } from './components/pedido/modal-editar-pedido/modal-editar-pedido.component';
+import { MatListModule } from '@angular/material/list';
+import { CommonModule } from '@angular/common';
+import { ModalPedidoDesgloseComponent } from './components/pedido/modal-pedido-desglose/modal-pedido-desglose.component';
+import { ModalEstadoPedidoComponent } from './components/pedido/modal-estado-pedido/modal-estado-pedido.component';
+
+
 
 
 
@@ -99,8 +106,14 @@ import { ConfirmarCotizacionComponent } from './components/listar-cotizaciones/c
       ModalConfirmarComponent,
       ModalObservacionComponent,
       PedidoComponent,
-      ModalAgregarComponent,
-      ConfirmarCotizacionComponent
+      ConfirmarCotizacionComponent,
+      ModalAgregarPedidoComponent,
+      ModalEditarPedidoComponent,
+      ModalPedidoDesgloseComponent,
+      ModalEstadoPedidoComponent,
+      
+      
+      
          
       
     
@@ -130,7 +143,9 @@ import { ConfirmarCotizacionComponent } from './components/listar-cotizaciones/c
       MatPaginatorModule,
       MatDialogModule,
       ReactiveFormsModule,
-      MatCheckboxModule
+      MatCheckboxModule,
+      MatListModule,
+      CommonModule,
       
     ],
     providers: [SesionService, CatalogosService],

@@ -1,3 +1,4 @@
+
 .confirmar-cotizacion {
   max-height: 400px; /* altura máxima /
   overflow-y: auto; /* Habilita el scroll vertical */
@@ -37,4 +38,22 @@ ul li {
   display: flex; /* Para alinear los elementos horizontalmente */
   align-items: center; /* Alinea los elementos verticalmente */
   margin: 5px 0; /* Espaciado entre los elementos */
+}
+
+.presupuesto-container {
+  display: flex; /* Usar flexbox para alinear los elementos */
+  justify-content: space-between; /* Espacio entre los elementos */
+}
+
+.presupuesto-item {
+  display: flex; /* Alinear el texto y el input en línea */
+  align-items: center; /* Centrar verticalmente */
+  margin-right: 10px; /* Espaciado entre los items */
+}
+
+
+.presupuesto-total {
+  margin-top: 10px; /* Espacio superior para separar del resto */
+  display: flex; /* Alinear el texto y el input en línea */
+  align-items: center; /* Centrar verticalmente */
 }

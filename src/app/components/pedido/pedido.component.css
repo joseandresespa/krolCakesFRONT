@@ -223,3 +223,47 @@
 .agregar-button:hover {
     background-color: #45a049; /* Color de fondo al pasar el mouse */
 }
+
+/* Estilos para el botón de Editar */
+.editar-button {
+  background-color: #6f4c3e; /* Color café */
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  margin-right: 10px; /* Separación a la derecha */
+}
+
+.editar-button:hover {
+  background-color: #8e5d4c; /* Color café más claro */
+}
+
+/* Estilos para el botón de Desglose */
+.desglose-button {
+  background-color: #f28f8f; /* Color rosado */
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  margin-right: 10px; /* Separación a la derecha */
+}
+
+.desglose-button:hover {
+  background-color: #f4a3a3; /* Color rosado más claro */
+}
+
+/* Estilos para el botón de Cambiar Estado */
+.estado-button {
+  background-color: #6b5b9a; /* Color morado */
+  color: white;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.estado-button:hover {
+  background-color: #8a77b0; /* Color morado más claro */
+}
+
+/* Estilo general para todos los botones */
+mat-button {
+  padding: 8px 16px; /* Espaciado interno */
+  border: none; /* Sin borde */
+}
