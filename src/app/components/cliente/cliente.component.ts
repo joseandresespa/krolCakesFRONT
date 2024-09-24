@@ -2,13 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
 import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
+import { cliente } from 'src/app/models/cliente.interface'; 
+import { CatalogosService } from 'src/services/catalogos.service';
 
-export interface Cliente {
-  id: number;
-  nombre: string;
-  telefono: string;
- 
-}
 
 @Component({
   selector: 'app-cliente',
@@ -16,21 +12,24 @@ export interface Cliente {
   styleUrls: ['./cliente.component.css']
 })
 export class ClienteComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'nombre', 'telefono', 'acciones'];
+  displayedColumns: string[] = ['id', 'nombre', 'telefono','nit', 'acciones'];
 
   // array para que quede vacío
-  clientes: Cliente[] = []; 
+  clientes: cliente[] = []; 
 
   currentPage: number = 1;
   itemsPerPage: number = 2;
   totalPages: number = 1;
   pages: number[] = [];
-  dataSource: Cliente[] = [];
+  dataSource: cliente[] = [];
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,private service: CatalogosService) {}
 
   ngOnInit(): void {
-    this.updatePagination();
+    this.service.clientes().subscribe((cliente: cliente[]) => {
+      this.clientes = cliente;
+      this.updatePagination();
+    });
   }
 
   updatePagination(): void {
@@ -64,11 +63,7 @@ export class ClienteComponent implements OnInit {
     this.paginate();
   }
 
-  eliminarCliente(cliente: Cliente): void {
-    console.log('Cliente eliminado:', cliente);
-    this.clientes = this.clientes.filter(c => c.id !== cliente.id);
-    this.updatePagination();
-  }
+
 
   abrirModal(): void {
     const dialogRef = this.dialog.open(ModalGenericoComponent, {
@@ -89,28 +84,40 @@ export class ClienteComponent implements OnInit {
 
 
   // EDITAR
-  editarCliente(cliente: Cliente): void {
+  editarCliente(cliente: cliente): void {
     const dialogRef = this.dialog.open(ModalEditarComponent, {
       width: '400px',
       data: {
         titulo: 'Editar Cliente',
-        campos: ['nombre', 'telefono'],
+        campos: ['nombre', 'telefono','nit'],
         valores: {
           nombre: cliente.nombre,
           telefono: cliente.telefono,
+          nit: cliente.nit
         }
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const clienteEditado = this.clientes.find(c => c.id === cliente.id);
-        if (clienteEditado) {
-          clienteEditado.nombre = result.nombre;
-          clienteEditado.telefono = result.telefono;
+        const clienteActualizado = this.clientes.find(c => c.id === cliente.id);
+        if (clienteActualizado) {
+          clienteActualizado.nombre = result.nombre;
+          clienteActualizado.telefono = result.telefono;
+          clienteActualizado.nit = result.nit;
          
           this.updatePagination();
         }
+        this.service.actualizarCliente(clienteActualizado).subscribe(response => {
+          // Actualizar el producto en la lista local si es necesario
+          const clienteEditado = this.clientes.find(p => p.id === cliente.id);
+          if (clienteEditado) {
+            clienteEditado.nombre = result.nombre;
+            clienteEditado.telefono = result.telefono;
+            clienteEditado.nit = result.precio_online;
+            this.updatePagination();
+          }
+        });
       }
     });
   }

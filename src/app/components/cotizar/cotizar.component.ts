@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+import { CotizacionPedidosService } from 'src/services/cotizacion-pedidos.service';
 import { CatalogosService } from 'src/services/catalogos.service';
 import { producto } from 'src/app/models/producto.interface';
 import { cotizaciononline } from 'src/app/models/cotizaciononline.interface';
@@ -7,6 +8,7 @@ import { imagenreferencia } from 'src/app/models/imagenreferencia.interface';
 import { desgloseonline } from 'src/app/models/desgloseonline.interface';   
 import { Time } from '@angular/common';
 import Swal from 'sweetalert2';
+
 
 @Component({
   selector: 'app-cotizar',
@@ -34,10 +36,10 @@ export class CotizarComponent implements OnInit {
 
   
 
-  constructor(private service: CatalogosService) {}
+  constructor(private service: CotizacionPedidosService,private serviceCatalogos: CatalogosService) {}
 
   ngOnInit(): void {
-    this.service.productos().subscribe((productos) => {
+    this.serviceCatalogos.productos().subscribe((productos) => {
       this.productosDisponibles = productos;
     });
   }

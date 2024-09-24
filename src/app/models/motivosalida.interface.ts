@@ -1,4 +1,4 @@
-export interface motivosalida {
+export interface MotivoSalida {
     id?: number;
     nombre?: string;
   }

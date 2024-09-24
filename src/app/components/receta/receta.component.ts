@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
+import { CatalogosService } from 'src/services/catalogos.service';
+import { receta } from 'src/app/models/receta.interface';
 
-export interface Receta {
-  id: number;
-  nombre: string;
-  descripcion: string;
-}
 
 @Component({
   selector: 'app-receta',
@@ -18,18 +15,21 @@ export class RecetaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'acciones'];
   
   // Se inicializa con un dato de prueba
-  recetas: Receta[] = [];
+  recetas: receta[] = [];
 
   currentPage: number = 1;
   itemsPerPage: number = 2;
   totalPages: number = 1;
   pages: number[] = [];
-  dataSource: Receta[] = [];
+  dataSource: receta[] = [];
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog,private service: CatalogosService) { }
 
   ngOnInit(): void {
-    this.updatePagination();
+    this.service.recetas().subscribe((receta: receta[]) => {
+      this.recetas = receta;
+      this.updatePagination();
+    });
   }
 
   updatePagination(): void {
@@ -63,15 +63,9 @@ export class RecetaComponent implements OnInit {
     this.paginate();
   }
 
-  eliminarReceta(receta: Receta): void {
-    console.log('Receta eliminada:', receta);
-    this.recetas = this.recetas.filter(r => r.id !== receta.id);
-    this.updatePagination();
-  }
-
 
   // EDITAR
-  editarReceta(receta: Receta): void {
+  editarReceta(receta: receta): void {
     const dialogRef = this.dialog.open(ModalEditarComponent, {
       data: {
         titulo: 'Editar Receta',
@@ -88,6 +82,15 @@ export class RecetaComponent implements OnInit {
           recetaEditada.descripcion = result.descripcion;
           this.updatePagination();
         }
+        this.service.actualizarReceta(recetaEditada).subscribe(response => {
+          // Actualizar el producto en la lista local si es necesario
+          const editado = this.recetas.find(p => p.id === receta.id);
+          if (editado) {
+            editado.nombre = result.nombre;
+            editado.descripcion = result.descripcion;
+            this.updatePagination();
+          }
+        });
       }
     });
   }
@@ -102,7 +105,8 @@ export class RecetaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const newReceta: Receta = {
+        this.service.nuevaReceta(result).subscribe(response => {
+        const newReceta: receta = {
           id: this.recetas.length + 1,
           nombre: result.nombre,
           descripcion: result.descripcion
@@ -110,6 +114,7 @@ export class RecetaComponent implements OnInit {
         this.recetas.push(newReceta);
         this.updatePagination();
       }
+    )};
     });
   }
 }

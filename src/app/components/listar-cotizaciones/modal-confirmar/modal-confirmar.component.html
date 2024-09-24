@@ -24,13 +24,13 @@
   <ul>
     <li *ngFor="let item of data.desgloses; let i = index" class="d-flex align-items-center mb-2">
       <!-- Seleccionar producto -->
-      <div class="me-2 flex-grow-1">
-        <label>Producto:</label>
-        <select [(ngModel)]="item.producto" class="form-select" style="width: 150px;">
-          <option value="" disabled selected>Seleccione un producto</option>
-          <option *ngFor="let producto of productosDisponibles" [ngValue]="producto">{{ producto.nombre }} - Q{{ producto.precio_online }}</option>
-        </select>
-      </div>
+    <div class="me-2 flex-grow-1">
+      <label>Producto:</label>
+      <select [(ngModel)]="item.producto" class="form-select" style="width: 150px;">
+        <option value="" disabled>Seleccione un producto</option>
+        <option *ngFor="let producto of productosDisponibles" [ngValue]="producto">{{ producto.nombre }} - Q{{ producto.precio_online }}</option>
+      </select>
+    </div>
       <!-- Cantidad de producto -->
       <div class="me-2" style="width: 58px;">  
         <label>Cantidad:</label>

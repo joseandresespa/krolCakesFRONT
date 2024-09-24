@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
 import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
+import { unidadmedidapreciosugerido } from 'src/app/models/unidadmedidapreciosugerido.interface';
+import { CatalogosService } from 'src/services/catalogos.service';
 
-export interface Umps {
-  id: number;
-  nombre: string;
-}
 
 @Component({
   selector: 'app-umps',
@@ -17,18 +15,21 @@ export class UmpsComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'acciones'];
 
   // array vacio
-  umps: Umps[] = []; 
+  umps: unidadmedidapreciosugerido[] = []; 
 
   currentPage: number = 1;
   itemsPerPage: number = 2;
   totalPages: number = 1;
   pages: number[] = [];
-  dataSource: Umps[] = [];
+  dataSource: unidadmedidapreciosugerido[] = [];
 
-  constructor(public dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private service: CatalogosService) { }
 
   ngOnInit(): void {
-    this.updatePagination();
+    this.service.unidadesPS().subscribe((unidadesPS: unidadmedidapreciosugerido[]) => {
+      this.umps = unidadesPS;
+      this.updatePagination();
+    });
   }
 
   updatePagination(): void {
@@ -62,7 +63,7 @@ export class UmpsComponent implements OnInit {
     this.paginate();
   }
 
-  eliminarUmps(umps: Umps): void {
+  eliminarUmps(umps: unidadmedidapreciosugerido): void {
     console.log('UMPS eliminado:', umps);
     this.umps = this.umps.filter(u => u.id !== umps.id);
     this.updatePagination();
@@ -79,16 +80,23 @@ export class UmpsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const newId = this.umps.length ? Math.max(...this.umps.map(u => u.id)) + 1 : 1; // Generar nuevo ID
-        this.umps.push({ id: newId, nombre: result.nombre });
-        this.updatePagination();
+        // Llamada al servicio para guardar el nuevo producto
+        this.service.nuevaUnidadPS(result).subscribe(response => {
+          // Una vez guardado, actualizamos la lista local de productos
+          const newUmps: unidadmedidapreciosugerido = {
+            id: response.id, // El ID devuelto por el backend
+            nombre: response.nombre
+          };
+          this.umps.push(newUmps);
+          this.updatePagination();
+        });
       }
     });
   }
 
   
   // EDITAR
-  editarUmps(umps: Umps): void {
+  editarUmps(umps: unidadmedidapreciosugerido): void {
     const dialogRef = this.dialog.open(ModalEditarComponent, {
       width: '400px',
       data: {
@@ -99,15 +107,25 @@ export class UmpsComponent implements OnInit {
         }
       }
     });
-
+    
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const umpsEditado = this.umps.find(u => u.id === umps.id);
-        if (umpsEditado) {
-          umpsEditado.nombre = result.nombre;
-          this.updatePagination();
-        }
+        // Crear un objeto con los datos actualizados
+        const upmsActualizado = {
+          id: umps.id, // Necesitas enviar el ID del producto para identificar cuál actualizar
+          nombre: result.nombre
+        };
+        
+        // Llamar al servicio para actualizar el producto en el backend
+        this.service.actualizarUnidadPS(upmsActualizado).subscribe(response => {
+          // Actualizar el producto en la lista local si es necesario
+          const umpsEditado = this.umps.find(p => p.id === umps.id);
+          if (umpsEditado) {
+            umpsEditado.nombre = result.nombre;
+            this.updatePagination();
+          }
+        });
       }
-    });
-  }
+    }
+  )};
 }

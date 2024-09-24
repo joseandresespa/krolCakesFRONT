@@ -5,6 +5,10 @@ import { Usuario, UsuarioCompleto } from 'src/app/models/usuario.interface';
 import { rol } from 'src/app/models/rol.interface';
 import { cotizaciononline } from 'src/app/models/cotizaciononline.interface';
 import { producto } from 'src/app/models/producto.interface';
+import { cliente } from 'src/app/models/cliente.interface';
+import { receta } from 'src/app/models/receta.interface';
+import { proveedor } from 'src/app/models/proveedor.interface';
+import { unidadmedidapreciosugerido } from 'src/app/models/unidadmedidapreciosugerido.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -27,30 +31,67 @@ export class CatalogosService {
     return this.http.get<any[]>(`${this.baseUrl}roles`);
   }
   nuevoRol(datos: any){
-    return this.http.post<any>(`${this.baseUrl}nuevo-usuario`, datos);
+    return this.http.post<any>(`${this.baseUrl}nuevo-rol`, datos);
   }
   ActualizarRol(datos: any){
-    return this.http.post<any>(`${this.baseUrl}actualizar-usuario`, datos);
+    return this.http.post<any>(`${this.baseUrl}actualizar-rol`, datos);
   }
-    // ---------------------------PRODUCTO---------------------------------------
-    productos(): Observable<producto[]> {
-      return this.http.get<any[]>(`${this.baseUrl}productos`);
+  // ---------------------------PRODUCTO---------------------------------------
+  productos(): Observable<producto[]> {
+    return this.http.get<producto[]>(`${this.baseUrl}productos`);
+  }
+  nuevoProducto(datos: any){
+    return this.http.post<any>(`${this.baseUrl}nuevo-producto`, datos);
+  }
+  actualizarProducto(datos: any){
+    return this.http.post<any>(`${this.baseUrl}actualizar-producto`, datos);
+  }
+  // ---------------------------CLIENTE---------------------------------------
+  clientes(): Observable<cliente[]> {
+    return this.http.get<any[]>(`${this.baseUrl}clientes`);
+  }
+  actualizarCliente(datos: any){
+    return this.http.post<any>(`${this.baseUrl}actualizar-cliente`, datos);
+  }
+  // ---------------------------RECETA---------------------------------------
+  recetas(): Observable<receta[]> {
+    return this.http.get<any[]>(`${this.baseUrl}recetas`);
+  }
+  nuevaReceta(datos: any){
+    return this.http.post<any>(`${this.baseUrl}nueva-receta`, datos);
+  }
+  actualizarReceta(datos: any){
+    return this.http.post<any>(`${this.baseUrl}actualizar-receta`, datos);
+  }
+    // ---------------------------PROVEEDORES---------------------------------------
+    proveedores(): Observable<proveedor[]> {
+      return this.http.get<any[]>(`${this.baseUrl}proveedores`);
     }
-    nuevoProducto(datos: any){
-      return this.http.post<any>(`${this.baseUrl}nuevo-producto`, datos);
+    nuevoProveedor(datos: any){
+      return this.http.post<any>(`${this.baseUrl}nuevo-proveedor`, datos);
     }
-    actualizarProducto(datos: any){
-      return this.http.post<any>(`${this.baseUrl}actualizar-producto`, datos);
-    }
-    // ---------------------------COTIZACION ONLINE---------------------------------------
-    enviarCotizacion(cotizacion: cotizaciononline): Observable<any> {
-      return this.http.post<any>( `${this.baseUrl}nueva-cotizaciononline`, cotizacion);
+    actualizarProveedores(datos: any){
+      return this.http.post<any>(`${this.baseUrl}actualizar-proveedor`, datos);
     }
 
-    cotizaciones(): Observable<cotizaciononline[]> {
-      return this.http.get<any[]>(`${this.baseUrl}cotizaciononline`);
+    // ---------------------------UMPS---------------------------------------
+    unidadesPS(): Observable<unidadmedidapreciosugerido[]> {
+      return this.http.get<any[]>(`${this.baseUrl}unidad-medida-precio-sugerido`);
     }
-
-   
-
+    nuevaUnidadPS(datos: any){
+      return this.http.post<any>(`${this.baseUrl}nueva-unidad-medida-precio-sugerido`, datos);
+    }
+    actualizarUnidadPS(datos: any){
+      return this.http.post<any>(`${this.baseUrl}actualizar-unidad-medida-precio-sugerido`, datos);
+    }
+    // ---------------------------MOTIVO SALIDA---------------------------------------
+    motivoSalida(): Observable<unidadmedidapreciosugerido[]> {
+      return this.http.get<any[]>(`${this.baseUrl}motivos-salida`);
+    }
+    nuevoMotivoSalida(datos: any){
+      return this.http.post<any>(`${this.baseUrl}nuevo-motivo-salida`, datos);
+    }
+    actualizarMotivoSalida(datos: any){
+      return this.http.post<any>(`${this.baseUrl}actualizar-motivo-salida`, datos);
+    }    
 }

@@ -10,7 +10,6 @@
     </ul>
   </div>
 
-  
   <ng-template #noImages>
     <p>No hay imágenes de referencia.</p>
   </ng-template>
@@ -19,7 +18,12 @@
   <div *ngIf="cotizacion.desgloses?.length; else noDesglose">
     <ul>
       <li *ngFor="let desglose of cotizacion.desgloses">
-        <p>Producto ID: {{ desglose.id_producto }}, Cantidad: {{ desglose.cantidad }}, Subtotal: Q.{{ desglose.subtotal }}</p>
+        <p>
+          Producto: {{ desglose.id_producto !== undefined ? getNombreProducto(desglose.id_producto) : 'ID no disponible' }},
+          Cantidad: {{ desglose.cantidad }},
+          Subtotal: Q.{{ desglose.subtotal }}
+        </p>
+        
       </li>
     </ul>
   </div>

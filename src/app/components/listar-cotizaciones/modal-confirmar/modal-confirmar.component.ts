@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { producto } from 'src/app/models/producto.interface'; //ruta del modelo "producto"
+import { CatalogosService } from 'src/services/catalogos.service';
 @Component({
   selector: 'app-modal-confirmar',
   templateUrl: './modal-confirmar.component.html',
@@ -12,11 +13,20 @@ export class ModalConfirmarComponent {
 
   constructor(
     public dialogRef: MatDialogRef<ModalConfirmarComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private service: CatalogosService ) {
       // Inicializa los valores si son undefined
       this.data.manoDeObra = this.data.manoDeObra || 0;
       this.data.insumos = this.data.insumos || 0;
       this.data.presupuestoTotal = this.data.presupuestoTotal || 0;
+  }
+
+  ngOnInit(): void {
+    this.service.productos().subscribe((productos: producto[]) => {
+      this.productosDisponibles = productos;
+    }, error => {
+      console.error('Error al cargar productos disponibles', error);
+    });
   }
 
   onNoClick(): void {

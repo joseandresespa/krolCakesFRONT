@@ -2,13 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
 import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
+import { proveedor } from 'src/app/models/proveedor.interface';
+import { CatalogosService } from 'src/services/catalogos.service';
 
-export interface Proveedor {
-  id: number;
-  nombre: string;
-  telefono: string;
-  descripcion: string;
-}
 
 @Component({
   selector: 'app-proveedor',
@@ -19,18 +15,21 @@ export class ProveedorComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'telefono', 'descripcion', 'acciones'];
 
   // Se inicializa el array con un dato de prueba
-  proveedores: Proveedor[] = []; 
+  proveedores: proveedor[] = []; 
 
   currentPage: number = 1;
   itemsPerPage: number = 2;
   totalPages: number = 1;
   pages: number[] = [];
-  dataSource: Proveedor[] = [];
+  dataSource: proveedor[] = [];
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private service: CatalogosService) { }
 
   ngOnInit(): void {
-    this.updatePagination();
+    this.service.proveedores().subscribe((productos: proveedor[]) => {
+      this.proveedores = productos;
+      this.updatePagination();
+    });
   }
 
   updatePagination(): void {
@@ -64,7 +63,7 @@ export class ProveedorComponent implements OnInit {
     this.paginate();
   }
 
-  eliminarProveedor(proveedor: Proveedor): void {
+  eliminarProveedor(proveedor: proveedor): void {
     console.log('Proveedor eliminado:', proveedor);
     this.proveedores = this.proveedores.filter(p => p.id !== proveedor.id);
     this.updatePagination();
@@ -73,40 +72,63 @@ export class ProveedorComponent implements OnInit {
   abrirModalAgregar(): void {
     const dialogRef = this.dialog.open(ModalGenericoComponent, {
       width: '400px',
-      data: { titulo: 'Agregar Proveedor', campos: ['Nombre', 'Teléfono', 'Descripción'] }
+      data: { titulo: 'Agregar Proveedor',
+      campos: ['nombre', 'telefono', 'descripcion'] }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const newId = this.proveedores.length ? Math.max(...this.proveedores.map(p => p.id)) + 1 : 1; // Generar nuevo ID
-        this.proveedores.push({ id: newId, ...result });
-        this.updatePagination();
+        // Llamada al servicio para guardar el nuevo producto
+        this.service.nuevoProveedor(result).subscribe(response => {
+          // Una vez guardado, actualizamos la lista local de productos
+          const newProveedor: proveedor = {
+            id: response.id,
+            nombre: response.nombre,
+            telefono: response.telefono,
+            descripcion: response.descripcion
+          };
+          this.proveedores.push(newProveedor);
+          this.updatePagination();
+        });
       }
     });
   }
 //EDITAR
-  editarProveedor(proveedor: Proveedor): void {
-    const dialogRef = this.dialog.open(ModalEditarComponent, {
-      width: '400px',
-      data: {
-        titulo: 'Editar Proveedor',
-        campos: ['nombre', 'telefono', 'descripcion'],
-        valores: {
-          nombre: proveedor.nombre,
-          telefono: proveedor.telefono,
-          descripcion: proveedor.descripcion
-        }
+editarProveedor(proveedor: proveedor): void {
+  const dialogRef = this.dialog.open(ModalEditarComponent, {
+    data: {
+      titulo: 'Editar Producto',
+      campos: ['nombre', 'telefono', 'descripcion'],
+      valores: {
+        nombre: proveedor.nombre,
+        telefono: proveedor.telefono,
+        descripcion: proveedor.descripcion
       }
-    });
+    }
+  });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      // Crear un objeto con los datos actualizados
+      const proveedorActualizado = {
+        id: proveedor.id, 
+        nombre: result.nombre,
+        telefono: result.telefono,
+        descripcion: result.descripcion
+      };
+      
+      // Llamar al servicio para actualizar el producto en el backend
+      this.service.actualizarProveedores(proveedorActualizado).subscribe(response => {
+        // Actualizar el producto en la lista local si es necesario
         const proveedorEditado = this.proveedores.find(p => p.id === proveedor.id);
         if (proveedorEditado) {
-          Object.assign(proveedorEditado, result);
+          proveedorEditado.nombre = result.nombre;
+          proveedorEditado.telefono = result.telefono;
+          proveedorEditado.descripcion = result.descripcion;
           this.updatePagination();
         }
-      }
-    });
-  }
+      });
+    }
+  });
+}
 }

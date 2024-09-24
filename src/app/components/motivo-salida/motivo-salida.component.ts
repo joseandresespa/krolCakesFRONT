@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
 import { ModalEditarComponent } from '../modal-editar/modal-editar.component'; // importar el componente de edición
-
-export interface MotivoSalida {
-  id: number;
-  nombre: string;
-}
+import { MotivoSalida } from 'src/app/models/motivosalida.interface';
 
 @Component({
   selector: 'app-motivo-salida',
@@ -79,9 +75,9 @@ export class MotivoSalidaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const newId = this.motivosSalida.length ? Math.max(...this.motivosSalida.map(m => m.id)) + 1 : 1; // Generar nuevo ID
-        this.motivosSalida.push({ id: newId, ...result });
-        this.updatePagination();
+        // const newId = this.motivosSalida.length ? Math.max(...this.motivosSalida.map(m => m.id)) + 1 : 1; // Generar nuevo ID
+        // this.motivosSalida.push({ id: newId, ...result });
+        // this.updatePagination();
       }
     });
   }

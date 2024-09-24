@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { cotizaciononline } from 'src/app/models/cotizaciononline.interface';
-import { CatalogosService } from 'src/services/catalogos.service';
+import { CotizacionPedidosService } from 'src/services/cotizacion-pedidos.service';
 import { ModalCotizacionComponent } from './modal-cotizacion/modal-cotizacion.component';
 import { ModalConfirmarComponent } from './modal-confirmar/modal-confirmar.component';
 import { ModalObservacionComponent } from './modal-observacion/modal-observacion.component';
@@ -23,7 +23,7 @@ export class ListarCotizacionesComponent implements OnInit {
   pages: number[] = [];
   dataSource: cotizaciononline[] = [];
 
-  constructor(public dialog: MatDialog, private service: CatalogosService) { }
+  constructor(public dialog: MatDialog, private service: CotizacionPedidosService) { }
 
   ngOnInit(): void {
     this.service.cotizaciones().subscribe((cotizaciones: cotizaciononline[]) => {
