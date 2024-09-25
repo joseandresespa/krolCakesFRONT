@@ -9,6 +9,7 @@ import { cliente } from 'src/app/models/cliente.interface';
 import { receta } from 'src/app/models/receta.interface';
 import { proveedor } from 'src/app/models/proveedor.interface';
 import { unidadmedidapreciosugerido } from 'src/app/models/unidadmedidapreciosugerido.interface';
+import { estado } from 'src/app/models/estado.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -93,5 +94,30 @@ export class CatalogosService {
     }
     actualizarMotivoSalida(datos: any){
       return this.http.post<any>(`${this.baseUrl}actualizar-motivo-salida`, datos);
-    }    
+    } 
+    // ---------------------------Masas---------------------------------------
+    masas(): Observable<unidadmedidapreciosugerido[]> {
+      return this.http.get<any[]>(`${this.baseUrl}masas`);
+    }
+    nuevaMasa(datos: any){
+      return this.http.post<any>(`${this.baseUrl}nueva-masa`, datos);
+    }
+    actualizarMasa(datos: any){
+      return this.http.post<any>(`${this.baseUrl}actualizar-masa`, datos);
+    } 
+    // ---------------------------Rellenos---------------------------------------
+    rellenos(): Observable<unidadmedidapreciosugerido[]> {
+      return this.http.get<any[]>(`${this.baseUrl}rellenos`);
+    }
+    nuevoRelleno(datos: any){
+      return this.http.post<any>(`${this.baseUrl}nuevo-relleno`, datos);
+    }
+    actualizarRelleno(datos: any){
+      return this.http.post<any>(`${this.baseUrl}actualizar-relleno`, datos);
+    }
+    // ---------------------------Estado---------------------------------------
+    estado(): Observable<estado[]> {
+      return this.http.get<any[]>(`${this.baseUrl}estados`);
+    }              
+    
 }

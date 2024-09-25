@@ -59,7 +59,7 @@
 
           <ng-container matColumnDef="estado">
             <th mat-header-cell *matHeaderCellDef> Estado </th>
-            <td mat-cell *matCellDef="let cotizacion"> {{ cotizacion.estado}} </td>
+            <td mat-cell *matCellDef="let cotizacion"> {{ getNombreEstado(cotizacion.estado)}} </td>
           </ng-container>
 
           <ng-container matColumnDef="mano_obra">

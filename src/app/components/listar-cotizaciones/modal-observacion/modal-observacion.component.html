@@ -1,37 +1,10 @@
 <h2 mat-dialog-title>Observación de Cotización</h2>
 
 <mat-dialog-content>
-  <h3>Imágenes de Referencia</h3>
-  <div *ngIf="imagenesSubidas.length > 0; else noImages">
-    <ul>
-      <li *ngFor="let imagen of imagenesSubidas; let i = index">
-        <img [src]="imagen" alt="Imagen de referencia" width="50" />
-        <!-- Botón para eliminar la imagen -->
-        <button mat-button color="warn" (click)="eliminarImagen(i)">Eliminar</button>
-      </li>
-    </ul>
-  </div>
-  <ng-template #noImages>
-    <p>No hay imágenes de referencia.</p>
-  </ng-template>
-
   <!-- Campo para subir imágenes -->
   <h3>Subir imágenes:</h3>
   <input type="file" (change)="onImageUpload($event)" accept="image/*" multiple />
 
-
-
-  <h3>Desglose</h3>
-  <div *ngIf="data.desgloses?.length; else noDesglose">
-    <ul>
-      <li *ngFor="let desglose of data.desgloses">
-        <p>Producto ID: {{ desglose.id_producto }}, Cantidad: {{ desglose.cantidad }}, Subtotal: Q.{{ desglose.subtotal }}</p>
-      </li>
-    </ul>
-  </div>
-  <ng-template #noDesglose>
-    <p>No hay desglose disponible.</p>
-  </ng-template>
 
   <!-- Campo para agregar/modificar observación -->
   <h3>Agregar una observación:</h3>
@@ -40,28 +13,7 @@
     <textarea matInput [(ngModel)]="observacion" name="observacion"></textarea>
   </mat-form-field>
 
-  <!-- Botón para guardar la observación -->
-  <button mat-button color="primary" (click)="addObservation()">Agregar Observación</button>
 
-  <!-- Lista de observaciones agregadas -->
-  <div *ngIf="observaciones.length > 0">
-    <h3>Observaciones Agregadas</h3>
-    <ul>
-      <li *ngFor="let obs of observaciones; let i = index">
-        <span>Observación {{ i + 1 }}: </span>
-        <!-- Botón para ver observación -->
-        <button mat-button color="accent" (click)="verObservacion(obs)">Ver</button>
-        <!-- Botón para eliminar observación -->
-        <button mat-button color="warn" (click)="eliminarObservacion(i)">Eliminar Observación</button>
-      </li>
-    </ul>
-  </div>
-
-  <!-- Mostrar la observación seleccionada -->
-  <div *ngIf="observacionSeleccionada">
-    <h3>Observación Seleccionada</h3>
-    <p>{{ observacionSeleccionada }}</p>
-  </div>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">

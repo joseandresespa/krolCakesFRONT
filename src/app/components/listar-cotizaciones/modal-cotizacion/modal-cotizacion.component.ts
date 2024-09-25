@@ -20,6 +20,7 @@ export class ModalCotizacionComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadProductos();
+    console.log(this.cotizacion);
   }
 
   loadProductos(): void {

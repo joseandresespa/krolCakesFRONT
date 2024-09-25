@@ -10,12 +10,34 @@ export class CotizacionPedidosService {
   constructor(private http : HttpClient) { }
 
 
-        // ---------------------------COTIZACION ONLINE---------------------------------------
-        enviarCotizacion(cotizacion: cotizaciononline): Observable<any> {
-          return this.http.post<any>( `${this.baseUrl}nueva-cotizaciononline`, cotizacion);
-        }
+  // ---------------------------COTIZACION ONLINE---------------------------------------
+  enviarCotizacion(cotizacion: cotizaciononline): Observable<any> {
+    return this.http.post<any>( `${this.baseUrl}nueva-cotizaciononline`, cotizacion);
+  }
+
+  cotizaciones(): Observable<cotizaciononline[]> {
+    return this.http.get<any[]>(`${this.baseUrl}cotizaciononline`);
+  }
+    // ---------------------------CONFIRMAR COTIZACION ONLINE---------------------------------------
+
+  confirmarCotizacion(datos: any){
+    return this.http.post<any>(`${this.baseUrl}confirmar-cotizacion`, datos);
+  }
+    // ---------------------------INSERTAR IMAGENES Y OBSERVACION---------------------------------------
+    InsertarImagenObs(datos: any) {
+      const formData = new FormData();
     
-        cotizaciones(): Observable<cotizaciononline[]> {
-          return this.http.get<any[]>(`${this.baseUrl}cotizaciononline`);
-        }
+      // Agregar las imágenes al FormData
+      datos.imagenes.forEach((imagen: File) => {
+        formData.append('imagenes', imagen);
+      });
+    
+      // Agregar la observación y el ID de cotización
+      formData.append('observacion', datos.observacion);
+      formData.append('id_cotizacion_online', datos.id_cotizacion_online);
+    
+      // Enviar la solicitud HTTP con el FormData
+      return this.http.post<any>(`${this.baseUrl}insertar-imagen-observacion`, formData);
+    }
+    
 }

@@ -22,11 +22,11 @@ export class ModalEditarPedidoComponent implements OnInit {
       fecha: [this.data.fecha ? new Date(this.data.fecha) : new Date(), Validators.required],
       hora: [this.data.hora, Validators.required],
       id_estado: [this.data.id_estado, Validators.required],
-      id_cliente: [this.data.id_cliente, Validators.required],
+      id_cliente: [this.data.cliente_id, Validators.required],
       observaciones: [this.data.observaciones],
       direccion: [this.data.direccion, Validators.required],
-      id_tipo_entrega: [this.data.id_tipo_entrega, Validators.required],
-      precio_total: [this.data.precio_total, Validators.required],
+      id_tipo_entrega: [this.data.envio, Validators.required],
+      precio_total: [this.data.precio_aproximado, Validators.required],
     });
   }
 

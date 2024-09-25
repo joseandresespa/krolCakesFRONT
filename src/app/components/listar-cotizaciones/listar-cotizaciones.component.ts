@@ -6,6 +6,8 @@ import { CotizacionPedidosService } from 'src/services/cotizacion-pedidos.servic
 import { ModalCotizacionComponent } from './modal-cotizacion/modal-cotizacion.component';
 import { ModalConfirmarComponent } from './modal-confirmar/modal-confirmar.component';
 import { ModalObservacionComponent } from './modal-observacion/modal-observacion.component';
+import { CatalogosService } from 'src/services/catalogos.service';
+import { estado } from 'src/app/models/estado.interface';
 
 @Component({
   selector: 'app-listar-cotizaciones',
@@ -14,6 +16,7 @@ import { ModalObservacionComponent } from './modal-observacion/modal-observacion
 })
 export class ListarCotizacionesComponent implements OnInit {
   cotizaciones: cotizaciononline[] = []; 
+  estados: estado[] = []; 
 
 
   displayedColumns: string[] = ['id', 'nombre','telefono','descripcion','precio_aproximado','direccion','envio','fecha','hora','estado','mano_obra','presupuesto_insumos', 'total_presupuesto', 'acciones'];
@@ -23,13 +26,21 @@ export class ListarCotizacionesComponent implements OnInit {
   pages: number[] = [];
   dataSource: cotizaciononline[] = [];
 
-  constructor(public dialog: MatDialog, private service: CotizacionPedidosService) { }
+  constructor(public dialog: MatDialog, private service: CotizacionPedidosService,private CatalogoService: CatalogosService) { }
 
   ngOnInit(): void {
     this.service.cotizaciones().subscribe((cotizaciones: cotizaciononline[]) => {
       this.cotizaciones = cotizaciones;
       this.updatePagination();
     });
+      this.CatalogoService.estado().subscribe((estados: estado[]) => {
+        this.estados = estados;
+      });
+  }
+
+  getNombreEstado(id: number): string {
+    const estado = this.estados.find(p => p.id === id);
+    return estado?.estado ?? 'estado no encontrado'; // Usa el operador de coalescencia nula
   }
 
   updatePagination(): void {
@@ -72,7 +83,7 @@ export class ListarCotizacionesComponent implements OnInit {
 
   abrirModalConfirmar(cotizacion: cotizaciononline): void {
     this.dialog.open(ModalConfirmarComponent, {
-      width: '600px',
+      width: '800px',
       data: cotizacion
     });
   }

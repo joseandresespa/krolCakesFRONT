@@ -1,19 +1,20 @@
 <h2 mat-dialog-title>Detalles de Cotización</h2>
 <mat-dialog-content>
+
+  <!-- Imágenes de Referencia -->
   <h3>Imágenes de Referencia</h3>
   <div *ngIf="cotizacion.imagenes?.length; else noImages">
     <ul>
       <li *ngFor="let imagen of cotizacion.imagenes">
         <img [src]="imagen.ruta" alt="Imagen de referencia" width="150" />
-        <p>Observación: {{ imagen.observacion }}</p>
       </li>
     </ul>
   </div>
-
   <ng-template #noImages>
     <p>No hay imágenes de referencia.</p>
   </ng-template>
 
+  <!-- Desglose -->
   <h3>Desglose</h3>
   <div *ngIf="cotizacion.desgloses?.length; else noDesglose">
     <ul>
@@ -23,13 +24,26 @@
           Cantidad: {{ desglose.cantidad }},
           Subtotal: Q.{{ desglose.subtotal }}
         </p>
-        
       </li>
     </ul>
   </div>
   <ng-template #noDesglose>
     <p>No hay desglose disponible.</p>
   </ng-template>
+
+  <!-- Observaciones -->
+  <h3>Observaciones</h3>
+  <div *ngIf="cotizacion.observacion?.length; else noObservaciones">
+    <ul>
+      <li *ngFor="let observacion of cotizacion.observacion">
+        <p>{{ observacion.observacion }}</p>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noObservaciones>
+    <p>No hay observaciones.</p>
+  </ng-template>
+
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="close()">Cerrar</button>
