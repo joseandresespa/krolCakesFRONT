@@ -1,6 +1,6 @@
 import { desgloseonline } from "./desgloseonline.interface";
 import { detallepedido } from "./detallepedido.interface";
-import { imagenreferencia } from "./imagenreferencia.interface";
+import { imagenreferenciaonline } from "./imagenreferenciaonline.interface";
 import { observaciones } from "./observaciones.interface";
 
 export interface pedido {
@@ -24,7 +24,7 @@ export interface pedido {
   cliente_id?: number;                  // Proviene del modelo cotizacion online
 
   desgloses?: desgloseonline[];   // Lista de desglosesOnline
-  imagenes?: imagenreferencia[];  // Lista de imagenes
+  imagenes?: imagenreferenciaonline[];  // Lista de imagenes
   detalles?: detallepedido[];   // Lista de detalles
   Observacion?: observaciones[];  // Lista de observaciones
 

@@ -3,121 +3,93 @@
 
   <div class="info-pedido">
     <div class="mb-2">
-      <label for="idCliente"><strong>Cliente:</strong></label>
-      <input id="idCliente" [(ngModel)]="data.cliente_id" class="form-control" />
+      <label><strong>  Cliente:</strong></label>
+      <span>{{ data.nombre }}</span>
+      <label><strong>  Telefono:</strong></label>
+      <span> {{ data.telefono }} </span>
+      <label><strong>  Estado Pedido:</strong></label>
+      <span> {{ data.estado }} </span>
     </div>
-
+    <div class="card mb-3 p-3">
+      <h3>Descripcion del pedido</h3>
+      <div class="mb-2">
+        <p>{{ data.descripcion }}</p>
+      </div>
+    </div>
     <!-- Observaciones Seccion en Cuadro -->
     <div class="card mb-3 p-3">
-      <h3>Observaciones</h3>
+      <h3>Observaciones del pedido</h3>
       <div class="mb-2">
-        <label for="observaciones"><strong>Observaciones:</strong></label>
-        <input id="observaciones" [(ngModel)]="data.observaciones" class="form-control" />
-      </div>
-
-      <!-- Campo para agregar/modificar observación -->
-      <h4>Agregar una observación:</h4>
-      <mat-form-field class="observation-field">
-        <mat-label>Observación:</mat-label>
-        <textarea matInput [(ngModel)]="observacion" name="observacion"></textarea>
-      </mat-form-field>
-  
-      <button mat-button color="primary" (click)="addObservation()">Agregar Observación</button>
-  
-      <div *ngIf="observaciones.length > 0">
-        <h4>Observaciones Agregadas</h4>
-        <ul>
-          <li *ngFor="let obs of observaciones; let i = index">
-            <span>Observación {{ i + 1 }}: </span>
-            <button mat-button color="accent" (click)="verObservacion(obs)">Ver</button>
-            <button mat-button color="warn" (click)="eliminarObservacion(i)">Eliminar Observación</button>
-          </li>
-        </ul>
-      </div>
-
-      <div *ngIf="observacionSeleccionada">
-        <h4>Observación Seleccionada</h4>
-        <p>{{ observacionSeleccionada }}</p>
+        <p>{{ data.observaciones }}</p>
       </div>
     </div>
+
+    <div class="mb-2">
+      <label><strong>Precio:</strong></label>
+      <span>mano de obra:Q.{{ data.mano_obra }} Insumos: Q.{{ data.presupuesto_insumos }}</span>
+      <span>Total Q.{{ data.total_presupuesto }} </span>
+    </div>
+
+    <div class="card mb-3 p-3">
+      <h3>Entrega</h3>
+      <div class="mb-2">
+        <label><strong>Envio:</strong></label>
+        <p>{{ data.envio }}</p>
+        <label><strong>Fecha:</strong></label>
+        <p>{{ data.fecha }}</p>
+        <label><strong>Hora:</strong></label>
+        <p>{{ data.hora }}</p>
+        <label><strong>Direccion:</strong></label>
+        <p>{{ data.direccion }}</p>
+      </div>
+    </div>
+
+  <!-- Observaciones -->
+  <h3>Observaciones</h3>
+  <div *ngIf="data.Observacion?.length; else noObservaciones">
+    <ul>
+      <li *ngFor="let observacionh of data.Observacion">
+        <p>{{ observacionh.observacion }}</p>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noObservaciones>
+    <p>No hay observaciones.</p>
+  </ng-template>
 
     <!-- Imágenes Seccion en Cuadro -->
-    <div class="card mb-3 p-3">
-      <h3>Imágenes de Referencia</h3>
-      <div *ngIf="imagenesSubidas.length > 0; else noImages">
-        <ul>
-          <li *ngFor="let imagen of imagenesSubidas; let i = index">
-            <img [src]="imagen" alt="Imagen de referencia" width="50" />
-            <button mat-button color="warn" (click)="eliminarImagen(i)">Eliminar</button>
-          </li>
-        </ul>
-      </div>
-      <ng-template #noImages>
-        <p>No hay imágenes de referencia.</p>
-      </ng-template>
-
-      <!-- Campo para subir imágenes -->
-      <h4>Subir imágenes:</h4>
-      <input type="file" (change)="onImageUpload($event)" accept="image/*" multiple />
+    <h3>Imágenes de Referencia</h3>
+    <div *ngIf="data.imagenes?.length; else noImages">
+      <ul>
+        <li *ngFor="let imagen of data.imagenes">
+          <img [src]="imagen.ruta" alt="Imagen de referencia" width="150" />
+        </li>
+      </ul>
     </div>
+    <ng-template #noImages>
+      <p>No hay imágenes de referencia.</p>
+    </ng-template>
   </div>
 
   <!-- Productos y total -->
-  <h4>Productos:</h4>
-  <ul class="list-group">
-    <li *ngFor="let producto of productos; let i = index" class="list-group-item mb-3 p-3">
-      <div class="row">
-        <div class="col-md-4 mb-3">
-          <label><strong>Producto:</strong></label>
-          <select [(ngModel)]="producto.nombre" class="form-control">
-            <option *ngFor="let item of listaDeProductos" [value]="item">{{ item }}</option>
-          </select>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label><strong>Masa:</strong></label>
-          <select class="form-control">
-            <option value="" disabled selected>Seleccione una masa</option>
-          </select>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label><strong>Relleno:</strong></label>
-          <select class="form-control">
-            <option value="" disabled selected>Seleccione un relleno</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-4 mb-3">
-          <label><strong>Cant. porciones:</strong></label>
-          <input [(ngModel)]="producto.cantidad" type="number" class="form-control" (ngModelChange)="actualizarSubtotal(producto)" min="1" />
-        </div>
-        <div class="col-md-4 mb-3">
-          <label><strong>Precio Unitario:</strong></label>
-          <input [(ngModel)]="producto.precio_unitario" type="number" class="form-control" (ngModelChange)="actualizarSubtotal(producto)" />
-        </div>
-        <div class="col-md-4 mb-3">
-          <label><strong>Subtotal:</strong></label>
-          <input [(ngModel)]="producto.subtotal" type="number" class="form-control" readonly />
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-md-12 text-end">
-          <button class="btn btn-danger btn-sm" (click)="eliminarProducto(i)">Eliminar</button>
-        </div>
-      </div>
-    </li>
-  </ul>
-
-  <div class="mt-3">
-    <button class="btn btn-primary" (click)="agregarProducto()">Agregar Producto</button>
+  <h3>Desglose</h3>
+  <div *ngIf="data.detalles?.length; else noDesglose">
+    <ul>
+      <li *ngFor="let detalle of data.detalles">
+        <p>
+          Producto: {{ detalle.nombre }},
+          masa: {{ detalle.sabor_masa }},
+          relleno: {{ detalle.sabor_relleno }},
+          Cantidad: {{ detalle.cantidad_porciones }},
+          Subtotal: Q.{{ detalle.total }}
+        </p>
+      </li>
+    </ul>
   </div>
-
-  <h5 class="mt-3">Total General: Q{{ calcularTotalGeneral() }}</h5>
-
-  <div class="modal-actions">
-    <button class="btn btn-success" (click)="confirmar()">Confirmar</button>
-    <button class="btn btn-secondary" (click)="onNoClick()">Cancelar</button>
-  </div>
+  <p>
+    Total pedido Q.{{ data.total_presupuesto }},
+  </p>
+  <ng-template #noDesglose>
+    <p>No hay desglose disponible.</p>
+  </ng-template>
 </div>

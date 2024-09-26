@@ -7,4 +7,8 @@ export interface detallepedido {
     cantidad_porciones?: number;
     precio_unitario?: number;
     total?: number;
+    //para el completo
+    sabor_masa?: string;
+    sabor_relleno?: string;
+    nombre?: string;
   }

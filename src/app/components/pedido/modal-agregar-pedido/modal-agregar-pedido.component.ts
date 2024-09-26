@@ -1,8 +1,12 @@
-
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { masa } from 'src/app/models/masa.interface';
 import { pedido } from 'src/app/models/pedido.interface';
+import { producto } from 'src/app/models/producto.interface';
+import { relleno } from 'src/app/models/relleno.interface';
+import { CatalogosService } from 'src/services/catalogos.service';
+import { CotizacionPedidosService } from 'src/services/cotizacion-pedidos.service';
 
 @Component({
   selector: 'app-modal-agregar-pedido',
@@ -18,6 +22,9 @@ export class ModalAgregarPedidoComponent implements OnInit {
   manoDeObra: number = 0;
   insumos: number = 0;
   presupuestoTotal: number = 0;
+  producto: producto[] = [];
+  rellenos: relleno[] = [];
+  masas: masa[] = [];
 
   productos = [
     { nombre: '', cantidad: 1, precio_unitario: 0, subtotal: 0 }
@@ -48,7 +55,8 @@ eliminarImagen(index: number): void {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<ModalAgregarPedidoComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: pedido) {
+    @Inject(MAT_DIALOG_DATA) public data: pedido, private service: CatalogosService,
+  private pedidoService: CotizacionPedidosService) {
       
     }
 
@@ -63,6 +71,19 @@ eliminarImagen(index: number): void {
       id_tipo_entrega: [null, Validators.required],
       precio_total: [null, Validators.required],
     });
+
+    this.service.masas().subscribe(data => {
+      this.masas = data;
+    });
+
+    this.service.rellenos().subscribe(data => {
+      this.rellenos = data;
+    });
+
+    this.service.productos().subscribe(data => {
+      this.masas = data;
+    });
+
   }
 
   onSubmit(): void {
@@ -75,7 +96,7 @@ eliminarImagen(index: number): void {
     this.dialogRef.close();
   }
 // Lista de productos para el dropdown
-listaDeProductos: string[] = [];
+
 
 // Funciones existentes
 agregarProducto() {
