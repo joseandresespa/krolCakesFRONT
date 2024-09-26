@@ -46,9 +46,9 @@
 
   <!-- Observaciones -->
   <h3>Observaciones</h3>
-  <div *ngIf="data.Observacion?.length; else noObservaciones">
+  <div *ngIf="data.observacion?.length; else noObservaciones">
     <ul>
-      <li *ngFor="let observacionh of data.Observacion">
+      <li *ngFor="let observacionh of data.observacion">
         <p>{{ observacionh.observacion }}</p>
       </li>
     </ul>

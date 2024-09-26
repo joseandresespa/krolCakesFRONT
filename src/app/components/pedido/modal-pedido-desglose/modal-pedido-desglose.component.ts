@@ -8,9 +8,6 @@ import { pedido } from 'src/app/models/pedido.interface'; // Ajustar la ruta del
   styleUrls: ['./modal-pedido-desglose.component.css']
 })
 export class ModalPedidoDesgloseComponent {
-  observacion: string = ''; // Inicializar la propiedad observacion
-  observaciones: string[] = []; // Array para almacenar observaciones
-  observacionSeleccionada: string | null = null; // Almacena la observación seleccionada para mostrarla
   imagenesSubidas: string[] = []; // Inicializar como arreglo vacío (imagenes)
   
 
@@ -73,29 +70,29 @@ eliminarImagen(index: number): void {
 
 
    // Función para agregar la observación al array
-  addObservation() {
-    if (this.observacion.trim()) {
-      this.observaciones.push(this.observacion); // Agregar la observación
-      this.observacion = ''; // Limpiar el campo de texto
-    }
-  }
+  // addObservation() {
+  //   if (this.observacion.trim()) {
+  //     this.observaciones.push(this.observacion); // Agregar la observación
+  //     this.observacion = ''; // Limpiar el campo de texto
+  //   }
+  // }
 
-  // Función para mostrar la observación seleccionada al hacer clic en "Ver"
-  verObservacion(observacion: string) {
-    this.observacionSeleccionada = observacion;
-  }
+  // // Función para mostrar la observación seleccionada al hacer clic en "Ver"
+  // verObservacion(observacion: string) {
+  //   this.observacionSeleccionada = observacion;
+  // }
 
-  // Función para eliminar una observación específica
-  eliminarObservacion(index: number) {
-    this.observaciones.splice(index, 1); // Eliminar la observación en el índice especificado
-    if (this.observacionSeleccionada === this.observaciones[index]) {
-      this.observacionSeleccionada = null; // Limpiar la observación seleccionada si fue eliminada
-    }
-  }
+  // // Función para eliminar una observación específica
+  // eliminarObservacion(index: number) {
+  //   this.observaciones.splice(index, 1); // Eliminar la observación en el índice especificado
+  //   if (this.observacionSeleccionada === this.observaciones[index]) {
+  //     this.observacionSeleccionada = null; // Limpiar la observación seleccionada si fue eliminada
+  //   }
+  // }
 
-  // Confirmar todas las observaciones
-  confirmObservation() {
-    console.log('Observaciones confirmadas:', this.observaciones);
-    this.dialogRef.close({ observaciones: this.observaciones });
-  }
+  // // Confirmar todas las observaciones
+  // confirmObservation() {
+  //   console.log('Observaciones confirmadas:', this.observaciones);
+  //   this.dialogRef.close({ observaciones: this.observaciones });
+  // }
  }

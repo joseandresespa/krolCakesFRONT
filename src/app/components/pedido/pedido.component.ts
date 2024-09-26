@@ -102,6 +102,7 @@ export class PedidoComponent implements OnInit {
       width: '600px',
       data: pedido
     });
+    console.log(pedido);
 
 
 }

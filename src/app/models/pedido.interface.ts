@@ -26,7 +26,7 @@ export interface pedido {
   desgloses?: desgloseonline[];   // Lista de desglosesOnline
   imagenes?: imagenreferenciaonline[];  // Lista de imagenes
   detalles?: detallepedido[];   // Lista de detalles
-  Observacion?: observaciones[];  // Lista de observaciones
+  observacion?: observaciones[];  // Lista de observaciones
 
   nombre?: string;                      // Proviene del modelo cliente
   telefono?: number;                    // Proviene del modelo cliente
