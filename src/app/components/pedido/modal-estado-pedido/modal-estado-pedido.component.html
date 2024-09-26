@@ -1,14 +1,17 @@
 <h1 mat-dialog-title>Cambiar Estado del Pedido</h1>
 <div mat-dialog-content>
   <p>Estado actual: {{ data.estado }}</p>
+  
   <mat-form-field appearance="fill">
     <mat-label>Nuevo Estado</mat-label>
-    <mat-select [(ngModel)]="nuevoEstado">
-      <mat-option [value]="1">Activo</mat-option>
-      <mat-option [value]="0">Inactivo</mat-option>
+    <mat-select [(ngModel)]="nuevoEstado" required>
+      <mat-option *ngFor="let estado of estados" [value]="estado.id">
+        {{ estado.estado }}
+      </mat-option>
     </mat-select>
   </mat-form-field>
 </div>
+
 <div mat-dialog-actions align="end">
   <button mat-button (click)="onCancel()">Cancelar</button>
   <button mat-button color="primary" (click)="onConfirm()">Confirmar</button>

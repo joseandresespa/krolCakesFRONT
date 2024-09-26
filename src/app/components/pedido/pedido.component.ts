@@ -6,6 +6,7 @@ import { ModalAgregarPedidoComponent } from './modal-agregar-pedido/modal-agrega
 import { ModalEditarPedidoComponent } from './modal-editar-pedido/modal-editar-pedido.component';
 import { ModalPedidoDesgloseComponent } from './modal-pedido-desglose/modal-pedido-desglose.component';
 import { ModalEstadoPedidoComponent } from './modal-estado-pedido/modal-estado-pedido.component';
+import { CotizacionPedidosService } from 'src/services/cotizacion-pedidos.service';
 
 
 
@@ -18,18 +19,21 @@ export class PedidoComponent implements OnInit {
   pedidos: pedido[] = []; 
 
 
-  displayedColumns: string[] = ['id', 'fecha','hora','id_estado','id_cliente','observaciones','direccion','id_tipo_entrega','precio_total','acciones'];
+  displayedColumns: string[] = ['id', 'descripcion', 'cliente','estado', 'manobra','insumos','total_presupuesto',
+   'fecha','hora', 'observaciones','telefono','direccion','envio','acciones'];
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalPages: number = 1;
   pages: number[] = [];
   dataSource: pedido[] = [];
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog, private service: CotizacionPedidosService) { }
 
   ngOnInit(): void {
-
-    this.updatePagination();
+    this.service.pedidos().subscribe((pedido: pedido[]) => {
+      this.pedidos = pedido;
+      this.updatePagination();
+    });
   }
 
   updatePagination(): void {
@@ -105,7 +109,7 @@ export class PedidoComponent implements OnInit {
 abrirModalEstadoPedido(pedido: pedido): void {
   const dialogRef = this.dialog.open(ModalEstadoPedidoComponent, {
     width: '400px',
-    data: { estado: pedido.id_estado }
+    data: { estado: pedido.id_estado, id_pedido: pedido.id }
   });
 
   dialogRef.afterClosed().subscribe(result => {
@@ -115,6 +119,7 @@ abrirModalEstadoPedido(pedido: pedido): void {
         this.pedidos[index].id_estado = result; // Actualizar el estado
         this.updatePagination(); // Actualizar la tabla
       }
+      
     }
   });
 }
