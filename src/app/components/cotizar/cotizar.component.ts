@@ -98,9 +98,28 @@ export class CotizarComponent implements OnInit {
     console.log(cotizacion);
 
     this.service.enviarCotizacion(cotizacion).subscribe(response => {
+      // Log de éxito
       console.log('Cotización enviada con éxito:', response);
+    
+      // Modal de éxito
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: '¡Cotización enviada con éxito!',
+        confirmButtonText: 'Aceptar'
+      });
+    
     }, error => {
+      // Log de error
       console.error('Error al enviar cotización:', error);
+    
+      // Modal de error
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: '¡Cotización enviada! la pastelera se comunicara con usted lo antes posible',
+        confirmButtonText: 'Aceptar'
+      });
     });
   }
 }

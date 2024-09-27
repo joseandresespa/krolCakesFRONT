@@ -1,59 +1,153 @@
-
 .confirmar-cotizacion {
-  max-height: 400px; /* altura máxima /
-  overflow-y: auto; /* Habilita el scroll vertical */
-  overflow-x: hidden; /* Oculta el scroll horizontal */
-  padding: 20px; /* Espaciado interno para el contenido */
+  max-height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 30px;
+  border-radius: 10px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 1200px; /* Ajusta el ancho para que sea más grande hacia los lados */
+  max-width: 100%; /* Evita que exceda el ancho de la pantalla */
+  margin: 0 auto;
 }
 
-.confirmar-cotizacion::-webkit-scrollbar {
-  width: 8px; /* Ancho del scrollbar */
-}
-
-.confirmar-cotizacion::-webkit-scrollbar-track {
-  background: #f5f5f5; /* Color de fondo del track del scrollbar */
-}
-
-.confirmar-cotizacion::-webkit-scrollbar-thumb {
-  background: #c19a6b; /* Color del thumb del scrollbar */
-  border-radius: 10px; /* Bordes redondeados del thumb */
-}
-
-.confirmar-cotizacion::-webkit-scrollbar-thumb:hover {
-  background: #b58b5a; /* Color del thumb al pasar el mouse */
-}
-
-h2, h4 {
-  margin-top: 20px; /* Espaciado superior para los encabezados */
-  margin-bottom: 10px; /* Espaciado inferior para los encabezados */
+.confirmar-cotizacion h2,
+.confirmar-cotizacion h4 {
+  color: #333;
+  font-family: 'Arial', sans-serif;
 }
 
 ul {
-  list-style-type: none; /* Elimina los puntos de la lista */
-  padding: 0; /* Elimina el padding */
-  margin: 0; /* Elimina el margen */
+  margin: 15px 0;
 }
 
 ul li {
-  display: flex; /* Para alinear los elementos horizontalmente */
-  align-items: center; /* Alinea los elementos verticalmente */
-  margin: 5px 0; /* Espaciado entre los elementos */
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.btn {
+  margin-top: 10px;
+  width: 100%;
 }
 
 .presupuesto-container {
-  display: flex; /* Usar flexbox para alinear los elementos */
-  justify-content: space-between; /* Espacio entre los elementos */
+  flex-direction: column;
 }
 
 .presupuesto-item {
-  display: flex; /* Alinear el texto y el input en línea */
-  align-items: center; /* Centrar verticalmente */
-  margin-right: 10px; /* Espaciado entre los items */
+  margin-bottom: 10px;
+}
+
+.cantidad-container,
+.precio-container {
+  width: 65px;
+}
+
+.cantidad-input,
+.precio-input {
+  width: 100%;
+}
+
+.producto-item {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se distribuyan en varias líneas */
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f7f7f7;
+  margin-bottom: 10px;
+}
+
+.form-group {
+  flex: 1 1 100%; /* Se asegura que los selects ocupen el ancho completo */
+}
+
+.producto-select {
+  width: 180px;
+}
+
+.me-2, 
+.precio-container, 
+.subtotal-container {
+  flex: 1; /* Estos campos ocupan el ancho disponible */
+}
+
+.precio-group,
+.subtotal-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90px;
+}
+
+.eliminar-btn {
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  width: auto;
+  height: auto;
+  line-height: 1.2;
+  white-space: normal;
+  text-align: center;
+  transition: transform 0.3s ease; /* Añade una transición suave */
+}
+
+.eliminar-btn:hover {
+  transform: scale(1.1); /* Aumenta el tamaño del botón en un 10% */
+}
+
+.agregar-btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 8px;
+  width: 100%;
+  text-transform: uppercase;
+  margin-top: 15px;
+  transition: transform 0.3s ease; /* Añade una transición suave */
+}
+
+.agregar-btn:hover {
+  transform: scale(1.05); /* Aumenta el tamaño del botón en un 5% */
+}
+
+.total-general-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.total-general-group input {
+  width: 100px;
+  text-align: right;
+}
+
+.precio-container {
+  width: 80px;
+}
+
+.precio-input {
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.subtotal-container {
+  width: 90px;
+}
+
+.subtotal-input {
+  width: 100%;
+  font-size: 0.9rem;
 }
 
 
-.presupuesto-total {
-  margin-top: 10px; /* Espacio superior para separar del resto */
-  display: flex; /* Alinear el texto y el input en línea */
-  align-items: center; /* Centrar verticalmente */
-}
+

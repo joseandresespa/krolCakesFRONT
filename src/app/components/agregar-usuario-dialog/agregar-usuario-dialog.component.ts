@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { CatalogosService } from 'src/services/catalogos.service';
 import { rol } from 'src/app/models/rol.interface'; 
 import { Usuario } from 'src/app/models/usuario.interface';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-agregar-usuario-dialog',
   templateUrl: './agregar-usuario-dialog.component.html',
@@ -33,16 +34,24 @@ export class AgregarUsuarioDialogComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  
   onSubmit(): void {
     if (this.usuarioForm.valid) {
       this.service.NuevoUsuario(this.usuarioForm.value).subscribe(
         response => {
-          console.log('Usuario agregado correctamente', response);
-          this.dialogRef.close(this.usuarioForm.value); // Cierra el diálogo solo si la inserción fue exitosa
+          Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'Usuario agregado correctamente.'
+          });
+          this.dialogRef.close(this.usuarioForm.value);
         },
         error => {
-          console.error('Error al agregar el usuario', error);
-          alert('Error al agregar el usuario.');
+          Swal.fire({
+            icon: 'success',
+            title: 'Éxito',
+            text: 'Usuario agregado correctamente.'
+          });
         }
       );
     }

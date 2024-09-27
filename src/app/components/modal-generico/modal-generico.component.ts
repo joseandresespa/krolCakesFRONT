@@ -2,6 +2,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-modal-generico',
@@ -33,6 +34,11 @@ export class ModalGenericoComponent implements OnInit {
     if (this.form.valid) {
       // Envía los datos del formulario al componente que lo llamó
       this.dialogRef.close(this.form.value);
+      Swal.fire({
+        icon: 'success',
+        title: 'Éxito',
+        text: 'Producto ingresado exitosamente'
+      });
     }
   }
 }

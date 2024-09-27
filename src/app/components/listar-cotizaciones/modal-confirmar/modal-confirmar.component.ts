@@ -12,7 +12,7 @@ import { CotizacionPedidosService } from 'src/services/cotizacion-pedidos.servic
   styleUrls: ['./modal-confirmar.component.css']
 })
 export class ModalConfirmarComponent {
-  
+  isConfirmButtonDisabled: boolean = true;// Logica para el boton
   productosDisponibles: producto[] = []; // Inicializa como un array vacío
   rellenos: relleno[] = [];
   masas: masa[] = [];
@@ -29,6 +29,9 @@ export class ModalConfirmarComponent {
   }
 
   ngOnInit(): void {
+    // Al inicializar, verifica el estado del botón
+    this.verificarEstadoBoton();
+
     this.service.productos().subscribe((productos: producto[]) => {
       this.productosDisponibles = productos;
   
@@ -122,10 +125,16 @@ export class ModalConfirmarComponent {
       (sum: number, item: any) => sum + (item.subtotal || 0),
       0
     );
+    this.verificarEstadoBoton();// Logica para el boton
   }
 
   calcularPresupuestoTotal(): void {
     this.data.presupuestoTotal = (this.data.manoDeObra || 0) + (this.data.insumos || 0);
+    this.verificarEstadoBoton();// Logica para el boton
+  }
+
+  verificarEstadoBoton(): void {
+    this.isConfirmButtonDisabled = this.data.totalGeneral !== this.data.presupuestoTotal;// Logica para el boton
   }
 
   onFileSelected(event: any): void {
