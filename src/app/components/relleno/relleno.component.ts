@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
 import { ModalEditarComponent } from '../modal-editar/modal-editar.component'; 
-
-export interface Relleno {
-  id: number;
-  sabor: string;
-}
+import { relleno } from 'src/app/models/relleno.interface';
+import { CatalogosService } from 'src/services/catalogos.service';
 
 @Component({
   selector: 'app-relleno',
@@ -14,23 +11,25 @@ export interface Relleno {
   styleUrls: ['./relleno.component.css']
 })
 export class RellenoComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'sabor', 'acciones'];
+  displayedColumns: string[] = ['id', 'sabor_relleno', 'acciones'];
   
   // Se inicializa el array con un dato de prueba
-  rellenos: Relleno[] = []; 
+  rellenos: relleno[] = []; 
 
   currentPage: number = 1;
-  itemsPerPage: number = 2;
+  itemsPerPage: number = 10;
   totalPages: number = 1;
   pages: number[] = [];
-  dataSource: Relleno[] = [];
+  dataSource: relleno[] = [];
 
-  constructor(private dialog: MatDialog) {}
+  constructor(public dialog: MatDialog,private service: CatalogosService) { }
 
   ngOnInit(): void {
-    this.updatePagination();
+    this.service.rellenos().subscribe((datos: relleno[]) => {
+      this.rellenos = datos;
+      this.updatePagination();
+    });
   }
-
   updatePagination(): void {
     this.totalPages = Math.ceil(this.rellenos.length / this.itemsPerPage);
     this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
@@ -62,7 +61,7 @@ export class RellenoComponent implements OnInit {
     this.paginate();
   }
 
-  eliminarRelleno(relleno: Relleno): void {
+  eliminarRelleno(relleno: relleno): void {
     console.log('Relleno eliminado:', relleno);
     this.rellenos = this.rellenos.filter(r => r.id !== relleno.id);
     this.updatePagination();
@@ -73,36 +72,48 @@ export class RellenoComponent implements OnInit {
       width: '400px',
       data: {
         titulo: 'Agregar Relleno',
-        campos: ['sabor']
+        campos: ['sabor_relleno']
       }
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const newId = this.rellenos.length ? Math.max(...this.rellenos.map(r => r.id)) + 1 : 1; // Generar nuevo ID
-        this.rellenos.push({ id: newId, ...result });
+        this.service.nuevoRelleno(result).subscribe(response => {
+        const nuevo: relleno = {
+          id: this.rellenos.length + 1,
+          sabor_relleno: result.sabor_relleno
+        };
+        this.rellenos.push(nuevo);
         this.updatePagination();
       }
-    });
-  }
+    )};
+  });
 
-  abrirModalEdicion(relleno: Relleno): void {
+  }
+//EDITAR
+  abrirModalEdicion(relleno: relleno): void {
     const dialogRef = this.dialog.open(ModalEditarComponent, {
       width: '400px',
       data: {
         titulo: 'Editar Relleno',
-        campos: ['sabor'],
-        valores: { sabor: relleno.sabor } // Precargar el valor actual del relleno
+        campos: ['sabor_relleno'],
+        valores: { sabor_relleno: relleno.sabor_relleno } // Precargar el valor actual del relleno
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const index = this.rellenos.findIndex(r => r.id === relleno.id);
-        if (index !== -1) {
-          this.rellenos[index] = { ...this.rellenos[index], ...result };
+        const editado = this.rellenos.find(r => r.id === relleno.id);
+        if (editado) {
+          editado.sabor_relleno = result.sabor_relleno;
           this.updatePagination();
         }
+        this.service.actualizarRelleno(editado).subscribe(response => {
+          const editado = this.rellenos.find(p => p.id === relleno.id);
+          if (editado) {
+            editado.sabor_relleno = result.sabor_relleno;
+            this.updatePagination();
+          }
+        });
       }
     });
   }

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
 import { ModalEditarComponent } from '../modal-editar/modal-editar.component'; // importar el componente de edición
 import { MotivoSalida } from 'src/app/models/motivosalida.interface';
+import { CatalogosService } from 'src/services/catalogos.service';
 
 @Component({
   selector: 'app-motivo-salida',
@@ -21,10 +22,13 @@ export class MotivoSalidaComponent implements OnInit {
   pages: number[] = [];
   dataSource: MotivoSalida[] = [];
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,private service: CatalogosService) { }
 
   ngOnInit(): void {
-    this.updatePagination();
+    this.service.tipoSalida().subscribe((datos: MotivoSalida[]) => {
+      this.motivosSalida = datos;
+      this.updatePagination();
+    });
   }
 
   updatePagination(): void {
@@ -75,11 +79,16 @@ export class MotivoSalidaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // const newId = this.motivosSalida.length ? Math.max(...this.motivosSalida.map(m => m.id)) + 1 : 1; // Generar nuevo ID
-        // this.motivosSalida.push({ id: newId, ...result });
-        // this.updatePagination();
+        this.service.nuevoTipoSalida(result).subscribe(response => {
+        const nuevo: MotivoSalida = {
+          id: this.motivosSalida.length + 1,
+          nombre: result.nombre
+        };
+        this.motivosSalida.push(nuevo);
+        this.updatePagination();
       }
-    });
+    )};
+  });
   }
 
   // EDITAR
@@ -95,11 +104,18 @@ export class MotivoSalidaComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const index = this.motivosSalida.findIndex(m => m.id === motivoSalida.id);
-        if (index !== -1) {
-          this.motivosSalida[index] = { ...this.motivosSalida[index], ...result };
+        const editado = this.motivosSalida.find(r => r.id === motivoSalida.id);
+        if (editado) {
+          editado.nombre = result.nombre;
           this.updatePagination();
         }
+        this.service.ActualizarTipoSalida(editado).subscribe(response => {
+          const editado = this.motivosSalida.find(p => p.id === motivoSalida.id);
+          if (editado) {
+            editado.nombre = result.nombre;
+            this.updatePagination();
+          }
+        });
       }
     });
   }

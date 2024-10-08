@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
 import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
+import { tipoevento } from 'src/app/models/tipoevento.interface';
+import { CatalogosService } from 'src/services/catalogos.service';
 
-export interface TipoEvento {
-  id: number;
-  nombre: string;
-}
 
 @Component({
   selector: 'app-tipo-evento',
@@ -17,18 +15,21 @@ export class TipoEventoComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'acciones'];
 
   // array vacio
-  tiposEvento: TipoEvento[] = []; 
+  tiposEvento: tipoevento[] = []; 
 
   currentPage: number = 1;
   itemsPerPage: number = 2;
   totalPages: number = 1;
   pages: number[] = [];
-  dataSource: TipoEvento[] = [];
+  dataSource: tipoevento[] = [];
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,private service: CatalogosService) { }
 
   ngOnInit(): void {
-    this.updatePagination();
+    this.service.tipoEvento().subscribe((cliente: tipoevento[]) => {
+      this.tiposEvento = cliente;
+      this.updatePagination();
+    });
   }
 
   updatePagination(): void {
@@ -62,7 +63,7 @@ export class TipoEventoComponent implements OnInit {
     this.paginate();
   }
 
-  eliminarTipoEvento(tipoEvento: TipoEvento): void {
+  eliminarTipoEvento(tipoEvento: tipoevento): void {
     console.log('Tipo de evento eliminado:', tipoEvento);
     this.tiposEvento = this.tiposEvento.filter(t => t.id !== tipoEvento.id);
     this.updatePagination();
@@ -75,18 +76,25 @@ export class TipoEventoComponent implements OnInit {
         titulo: 'Agregar Tipo de Evento',
         campos: ['nombre']
       }
+      
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.tiposEvento.push(result);
-        this.updatePagination();
-      }
+        if (result) {
+          this.service.nuevoTipoEvento(result).subscribe(response => {
+          const nuevo: tipoevento = {
+            id: this.tiposEvento.length + 1,
+            nombre: result.nombre
+          };
+          this.tiposEvento.push(nuevo);
+          this.updatePagination();
+        }
+      )};
     });
   }
 
   // EDITAR
-  editarTipoEvento(tipoEvento: TipoEvento): void {
+  editarTipoEvento(tipoEvento: tipoevento): void {
     const dialogRef = this.dialog.open(ModalEditarComponent, {
       width: '400px',
       data: {
@@ -100,12 +108,23 @@ export class TipoEventoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const tipoEventoEditado = this.tiposEvento.find(t => t.id === tipoEvento.id);
-        if (tipoEventoEditado) {
-          tipoEventoEditado.nombre = result.nombre;
+        const editado = this.tiposEvento.find(r => r.id === tipoEvento.id);
+        if (editado) {
+          editado.nombre = result.nombre;
           this.updatePagination();
         }
+        this.service.ActualizarTipoEvento(editado).subscribe(response => {
+          const editado = this.tiposEvento.find(p => p.id === tipoEvento.id);
+          if (editado) {
+            editado.nombre = result.nombre;
+            this.updatePagination();
+          }
+        });
       }
     });
+
   }
+
+
+
 }

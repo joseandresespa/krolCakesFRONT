@@ -83,7 +83,6 @@ export class RecetaComponent implements OnInit {
           this.updatePagination();
         }
         this.service.actualizarReceta(recetaEditada).subscribe(response => {
-          // Actualizar el producto en la lista local si es necesario
           const editado = this.recetas.find(p => p.id === receta.id);
           if (editado) {
             editado.nombre = result.nombre;
@@ -113,7 +112,7 @@ export class RecetaComponent implements OnInit {
         };
         this.recetas.push(newReceta);
         this.updatePagination();
-      }
+      } 
     )};
     });
   }

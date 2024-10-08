@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
 import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
-
-export interface TipoInsumoUtencilio {
-  id: number;
-  tipo: string;
-}
+import { tipoinsumoutensilio } from 'src/app/models/tipoinsumoutensilio.interface';
+import { CatalogosService } from 'src/services/catalogos.service';
 
 @Component({
   selector: 'app-tipo-insumo-utencilio',
@@ -17,18 +14,21 @@ export class TipoInsumoUtencilioComponent implements OnInit {
   displayedColumns: string[] = ['id', 'tipo', 'acciones'];
 
   // Se inicializa el array con un dato de prueba
-  tiposInsumoUtencilio: TipoInsumoUtencilio[] = []; 
+  tiposInsumoUtencilio: tipoinsumoutensilio[] = []; 
 
   currentPage: number = 1;
   itemsPerPage: number = 2;
   totalPages: number = 1;
   pages: number[] = [];
-  dataSource: TipoInsumoUtencilio[] = [];
+  dataSource: tipoinsumoutensilio[] = [];
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,private service: CatalogosService) { }
 
   ngOnInit(): void {
-    this.updatePagination();
+    this.service.tipoInsumoUtensilio().subscribe((datos: tipoinsumoutensilio[]) => {
+      this.tiposInsumoUtencilio = datos;
+      this.updatePagination();
+    });
   }
 
   updatePagination(): void {
@@ -62,7 +62,7 @@ export class TipoInsumoUtencilioComponent implements OnInit {
     this.paginate();
   }
 
-  eliminarTipoInsumoUtencilio(tipoInsumoUtencilio: TipoInsumoUtencilio): void {
+  eliminarTipoInsumoUtencilio(tipoInsumoUtencilio: tipoinsumoutensilio): void {
     console.log('Tipo de insumo o utensilio eliminado:', tipoInsumoUtencilio);
     this.tiposInsumoUtencilio = this.tiposInsumoUtencilio.filter(t => t.id !== tipoInsumoUtencilio.id);
     this.updatePagination();
@@ -79,15 +79,20 @@ export class TipoInsumoUtencilioComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const newId = this.tiposInsumoUtencilio.length ? Math.max(...this.tiposInsumoUtencilio.map(t => t.id)) + 1 : 1; // Generar nuevo ID
-        this.tiposInsumoUtencilio.push({ id: newId, tipo: result.tipo });
+        this.service.nuevoTipoInsumoUtensilio(result).subscribe(response => {
+        const nuevo: tipoinsumoutensilio = {
+          id: this.tiposInsumoUtencilio.length + 1,
+          tipo: result.tipo
+        };
+        this.tiposInsumoUtencilio.push(nuevo);
         this.updatePagination();
       }
-    });
+    )};
+  });
   }
 
   // EDITAR
-  editarTipoInsumoUtencilio(tipoInsumoUtencilio: TipoInsumoUtencilio): void {
+  editarTipoInsumoUtencilio(tipoInsumoUtencilio: tipoinsumoutensilio): void {
     const dialogRef = this.dialog.open(ModalEditarComponent, {
       width: '400px',
       data: {
@@ -101,11 +106,18 @@ export class TipoInsumoUtencilioComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const tipoEditado = this.tiposInsumoUtencilio.find(t => t.id === tipoInsumoUtencilio.id);
-        if (tipoEditado) {
-          tipoEditado.tipo = result.tipo;
+        const editado = this.tiposInsumoUtencilio.find(r => r.id === tipoInsumoUtencilio.id);
+        if (editado) {
+          editado.tipo = result.tipo;
           this.updatePagination();
         }
+        this.service.ActualizarTipoInsumoUtensilio(editado).subscribe(response => {
+          const editado = this.tiposInsumoUtencilio.find(p => p.id === tipoInsumoUtencilio.id);
+          if (editado) {
+            editado.tipo = result.tipo;
+            this.updatePagination();
+          }
+        });
       }
     });
   }

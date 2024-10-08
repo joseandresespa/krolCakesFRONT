@@ -10,6 +10,12 @@ import { receta } from 'src/app/models/receta.interface';
 import { proveedor } from 'src/app/models/proveedor.interface';
 import { unidadmedidapreciosugerido } from 'src/app/models/unidadmedidapreciosugerido.interface';
 import { estado } from 'src/app/models/estado.interface';
+import { tipoevento } from 'src/app/models/tipoevento.interface';
+import { insumoutensilio } from 'src/app/models/insumoutensilio.interface';
+import { tipoinsumoutensilio } from 'src/app/models/tipoinsumoutensilio.interface';
+import { MotivoSalida } from 'src/app/models/motivosalida.interface';
+import { masa } from 'src/app/models/masa.interface';
+import { relleno } from 'src/app/models/relleno.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -85,18 +91,8 @@ export class CatalogosService {
     actualizarUnidadPS(datos: any){
       return this.http.post<any>(`${this.baseUrl}actualizar-unidad-medida-precio-sugerido`, datos);
     }
-    // ---------------------------MOTIVO SALIDA---------------------------------------
-    motivoSalida(): Observable<unidadmedidapreciosugerido[]> {
-      return this.http.get<any[]>(`${this.baseUrl}motivos-salida`);
-    }
-    nuevoMotivoSalida(datos: any){
-      return this.http.post<any>(`${this.baseUrl}nuevo-motivo-salida`, datos);
-    }
-    actualizarMotivoSalida(datos: any){
-      return this.http.post<any>(`${this.baseUrl}actualizar-motivo-salida`, datos);
-    } 
     // ---------------------------Masas---------------------------------------
-    masas(): Observable<unidadmedidapreciosugerido[]> {
+    masas(): Observable<masa[]> {
       return this.http.get<any[]>(`${this.baseUrl}masas`);
     }
     nuevaMasa(datos: any){
@@ -106,7 +102,7 @@ export class CatalogosService {
       return this.http.post<any>(`${this.baseUrl}actualizar-masa`, datos);
     } 
     // ---------------------------Rellenos---------------------------------------
-    rellenos(): Observable<unidadmedidapreciosugerido[]> {
+    rellenos(): Observable<relleno[]> {
       return this.http.get<any[]>(`${this.baseUrl}rellenos`);
     }
     nuevoRelleno(datos: any){
@@ -119,5 +115,35 @@ export class CatalogosService {
     estado(): Observable<estado[]> {
       return this.http.get<any[]>(`${this.baseUrl}estados`);
     }              
-    
+    // ---------------------------TipoEvento---------------------------------------
+  tipoEvento(): Observable<tipoevento[]> {
+    return this.http.get<tipoevento[]>(`${this.baseUrl}tipos-evento`);
+  }
+  nuevoTipoEvento(datos: any): Observable<any>{
+    return this.http.post<any>(`${this.baseUrl}nuevo-tipo-evento`, datos);
+  }
+  ActualizarTipoEvento(datos: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}actualizar-tipo-evento`, datos);
+  }
+      // ---------------------------TipoEvento---------------------------------------
+  tipoInsumoUtensilio(): Observable<tipoinsumoutensilio[]> {
+    return this.http.get<tipoinsumoutensilio[]>(`${this.baseUrl}tipos-insumo-utensilio`);
+  }
+  nuevoTipoInsumoUtensilio(datos: any): Observable<any>{
+    return this.http.post<any>(`${this.baseUrl}nuevo-tipo-insumo-utensilio`, datos);
+  }
+  ActualizarTipoInsumoUtensilio(datos: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}actualizar-tipo-insumo-utensilio`, datos);
+  }
+       // ---------------------------TipoSalida---------------------------------------
+  tipoSalida(): Observable<MotivoSalida[]> {
+    return this.http.get<MotivoSalida[]>(`${this.baseUrl}motivos-salida`);
+  }
+  nuevoTipoSalida(datos: any): Observable<any>{
+    return this.http.post<any>(`${this.baseUrl}nuevo-motivo-salida`, datos);
+  }
+  ActualizarTipoSalida(datos: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}actualizar-motivo-salida`, datos);
+  }
+  
 }

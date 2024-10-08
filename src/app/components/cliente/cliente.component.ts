@@ -23,7 +23,7 @@ export class ClienteComponent implements OnInit {
   pages: number[] = [];
   dataSource: cliente[] = [];
 
-  constructor(public dialog: MatDialog,private service: CatalogosService) {}
+  constructor(public dialog: MatDialog ,private service: CatalogosService) {}
 
   ngOnInit(): void {
     this.service.clientes().subscribe((cliente: cliente[]) => {

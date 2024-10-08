@@ -3,11 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
 import { masa } from 'src/app/models/masa.interface';
 import { ModalEditarComponent } from '../modal-editar/modal-editar.component'; // importar el componente de edición
+import { CatalogosService } from 'src/services/catalogos.service';
 
-export interface Masa {
-  id: number;
-  sabor: string;
-}
 
 @Component({
   selector: 'app-masas',
@@ -15,10 +12,10 @@ export interface Masa {
   styleUrls: ['./masas.component.css']
 })
 export class MasasComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'sabor', 'acciones'];
+  displayedColumns: string[] = ['id', 'sabor_masa', 'acciones'];
 
   // Se inicializa el array para que quede vacio
-  masas: Masa[] = [];
+  masas: masa [] = [];
 
   currentPage: number = 1;
   itemsPerPage: number = 5;
@@ -26,10 +23,13 @@ export class MasasComponent implements OnInit {
   pages: number[] = [];
   dataSource: masa[] = [];
 
-  constructor(public dialog: MatDialog) { }
+  constructor(public dialog: MatDialog,private service: CatalogosService) { }
 
   ngOnInit(): void {
-    this.updatePagination();
+    this.service.masas().subscribe((datos: masa[]) => {
+      this.masas = datos;
+      this.updatePagination();
+    });
   }
 
   updatePagination(): void {
@@ -63,46 +63,54 @@ export class MasasComponent implements OnInit {
     this.paginate();
   }
 
-  eliminarMasa(masa: masa): void {
-    console.log('Masa eliminada:', masa);
-    this.masas = this.masas.filter(m => m.id !== masa.id);
-    this.updatePagination();
-  }
 
   abrirModal(): void {
     const dialogRef = this.dialog.open(ModalGenericoComponent, {
       width: '400px',
       data: {
         titulo: 'Agregar Masa',
-        campos: ['sabor']
+        campos: ['sabor_masa']
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.masas.push(result);
+        this.service.nuevaMasa(result).subscribe(response => {
+        const nuevo: masa = {
+          id: this.masas.length + 1,
+          sabor_masa: result.sabor_masa
+        };
+        this.masas.push(nuevo);
         this.updatePagination();
-      } 
-    });
+      }
+    )};
+  });
   }
-
-  abrirModalEditar(masa: Masa): void {
+//EDITAR
+  abrirModalEditar(masa: masa): void {
     const dialogRef = this.dialog.open(ModalEditarComponent, {
       width: '400px',
       data: {
         titulo: 'Editar Masa',
-        campos: ['sabor'],
-        valores: { sabor: masa.sabor } // Precargar el valor actual de la masa
+        campos: ['sabor_masa'],
+        valores: { sabor_masa: masa.sabor_masa } // Precargar el valor actual de la masa
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        const index = this.masas.findIndex(m => m.id === masa.id);
-        if (index !== -1) {
-          this.masas[index] = { ...this.masas[index], ...result };
+        const editado = this.masas.find(r => r.id === masa.id);
+        if (editado) {
+          editado.sabor_masa = result.sabor_masa;
           this.updatePagination();
         }
+        this.service.actualizarMasa(editado).subscribe(response => {
+          const editado = this.masas.find(p => p.id === masa.id);
+          if (editado) {
+            editado.sabor_masa = result.sabor_masa;
+            this.updatePagination();
+          }
+        });
       }
     });
   }

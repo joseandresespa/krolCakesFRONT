@@ -45,7 +45,7 @@ export class CotizacionPedidosService {
       return this.http.get<any[]>(`${this.baseUrl}pedidos`);
     }
     nuevoPedido(datos: any){
-      return this.http.post<any>(`${this.baseUrl}nuevo-pedido`, datos);
+      return this.http.post<any>(`${this.baseUrl}Nuevo-pedido`, datos);
     }
     cambioEstadoPedido(id_pedido: number,id_status: number){
       const datos = {
