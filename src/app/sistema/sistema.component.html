@@ -14,7 +14,7 @@
         Inicio
     </div>
 
-    <div class="nav-item" (click)="navigateTo('/pedido')"><!-- Botón de regresar al menu principal -->
+    <div class="nav-item" (click)="navigateTo('/pedido')">
         <mat-icon>cake</mat-icon>
         Pedidos
     </div>
@@ -34,9 +34,9 @@
         <mat-icon>calendar_today</mat-icon>
         Agenda
         <div class="dropdown" [ngClass]="{'show': isDropdownOpen('agenda')}">
-            <a href="#">item1</a>
-            <a href="#">item2</a>
-            <a href="#">item3</a>
+            <a href="/pagina-en-blanco"><mat-icon>kitchen</mat-icon>Pagina en blanco</a>
+            
+            
         </div>
     </div>
 
@@ -70,6 +70,20 @@
         </div>
     </div>
 
+    <div class="nav-item" (click)="navigateTo('/unidad-medida')">
+        <mat-icon>cake</mat-icon>
+        Unidades de medida
+    </div>
+
+    <div class="nav-item" (click)="navigateTo('/estado')">
+        <mat-icon>cake</mat-icon>
+        Estado
+    </div>
+
+    <div class="nav-item" (click)="navigateTo('/pastel-realizado')">
+        <mat-icon>cake</mat-icon>
+        Pasteles realizados
+    </div>
 
       <div class="logout-section" (click)="onLogout()"><!-- Botón de salir -->
         <mat-icon>exit_to_app</mat-icon>

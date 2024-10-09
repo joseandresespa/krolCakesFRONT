@@ -1,0 +1,56 @@
+/* Estilos para el modal */
+.mat-dialog-container {
+    width: 70vw; /* Ancho del modal en relación al viewport */
+    max-width: 800px; /* Tamaño máximo del modal */
+    min-height: 450px; /* Aumenta la altura mínima del modal */
+    padding: 20px; /* Espacio interior del modal */
+}
+
+/* Estilos para el título */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 30px; /* Tamaño del título */
+    color: #333;
+}
+
+/* Estilos para el formulario */
+form {
+    display: flex;
+    flex-direction: column; /* Orientación vertical */
+    align-items: flex-start; /* Alinear a la izquierda */
+    width: 100%;
+}
+
+/* Estilos para los campos de formulario */
+mat-form-field {
+    width: 100%; /* Los campos ocupan todo el ancho del formulario */
+    margin-bottom: 25px; /* Espacio entre campos */
+}
+
+/* Estilos para el botón */
+button {
+    background-color: #c59e02; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    margin-top: 20px; /* Espacio superior */
+    width: 70%; /* Ancho del botón */
+    font-size: 18px; /* Tamaño del texto del botón */
+    padding: 12px; /* Padding del botón */
+}
+
+/* Efecto hover en el botón */
+button:hover {
+    opacity: 0.9; /* Ligera transparencia al pasar el mouse */
+}
+
+/* Estilos para los inputs */
+mat-form-field input {
+    text-align: left; /* Alinear el texto dentro de los campos de formulario */
+    font-size: 16px; /* Tamaño del texto dentro de los inputs */
+}
+
+/* Estilos adicionales para mejorar la estética */
+.mat-form-field-label {
+    color: #790094; /* Color del label */
+    font-weight: bold;
+}

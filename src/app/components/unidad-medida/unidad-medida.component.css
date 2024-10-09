@@ -1,0 +1,42 @@
+.table-container {
+    display: flex;
+    justify-content: center; /* Centra el contenido interno */
+    align-items: center;
+    width: 80%; /* Mantiene el ancho del 80% */
+    overflow-x: auto; 
+    padding: 20px;
+    background-color: #f0f0f0;
+    margin: 20px auto; /* Centra el contenedor horizontalmente y agrega márgenes superior e inferior */
+}
+
+table {
+    width: 100%;
+    max-width: 1000px; /* Mantiene el ancho máximo de la tabla */
+}
+
+.button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.titulo-container {
+    background-color: black; /* Fondo negro */
+    border-radius: 8px; /* Esquinas redondeadas */
+    padding: 5px 15px; /* Espaciado interno reducido */
+    text-align: center; /* Centra el texto dentro del contenedor */
+    width: fit-content; /* Ajusta el ancho al tamaño del contenido */
+    transition: transform 0.3s; /* Transición para el aumento de tamaño */
+    cursor: pointer; /* Cambiar el cursor a una manita */
+    margin: 20px auto; /* Centra el contenedor y agrega márgenes superior e inferior */
+}
+
+.titulo-container:hover {
+    transform: scale(1.1); /* Aumentar el tamaño al pasar el mouse */
+}
+
+.titulo-container h2 {
+    color: white; /* Color del texto */
+    margin: 0; /* Elimina el margen del h2 */
+    font-size: 1.2em; /* Tamaño de fuente ajustable */
+}

@@ -1,0 +1,19 @@
+<h2>Editar Pastel</h2>
+<form>
+  <mat-form-field>
+    <mat-label>Tipo de Evento</mat-label>
+    <input matInput [(ngModel)]="pastel.id_tipo_evento" placeholder="Editar el tipo de evento">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Pedido</mat-label>
+    <input matInput [(ngModel)]="pastel.id_pedido" placeholder="Editar el pedido">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Imagen</mat-label>
+    <input matInput [(ngModel)]="pastel.imagen" placeholder="Editar la URL de la imagen">
+  </mat-form-field>
+
+  <button mat-button color="primary">Guardar</button>
+</form>

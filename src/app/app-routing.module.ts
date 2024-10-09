@@ -23,6 +23,11 @@ import { TipoInsumoUtencilioComponent } from './components/tipo-insumo-utencilio
 import { MotivoSalidaComponent } from './components/motivo-salida/motivo-salida.component'
 import { ProveedorComponent } from './components/proveedor/proveedor.component';
 import { PedidoComponent } from './components/pedido/pedido.component';
+import { UnidadMedidaComponent } from './components/unidad-medida/unidad-medida.component';
+import { EstadoComponent } from './components/estado/estado.component';
+import { PastelRealizadoComponent } from './components/pastel-realizado/pastel-realizado.component';
+import { PaginaEnBlancoComponent } from './components/pagina-en-blanco/pagina-en-blanco.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirige a 'login' por defecto
@@ -49,6 +54,10 @@ const routes: Routes = [
   { path: 'motivo-salida', component:  MotivoSalidaComponent },
   { path: 'proveedor', component:  ProveedorComponent },
   { path: 'pedido', component:  PedidoComponent },
+  { path: 'unidad-medida', component:  UnidadMedidaComponent },
+  { path: 'estado', component:  EstadoComponent },
+  { path: 'pastel-realizado', component:  PastelRealizadoComponent },
+  { path: 'pagina-en-blanco', component:  PaginaEnBlancoComponent }
 ];
 
 @NgModule({

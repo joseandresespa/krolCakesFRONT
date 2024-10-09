@@ -63,6 +63,18 @@ import { MatListModule } from '@angular/material/list';
 import { CommonModule } from '@angular/common';
 import { ModalPedidoDesgloseComponent } from './components/pedido/modal-pedido-desglose/modal-pedido-desglose.component';
 import { ModalEstadoPedidoComponent } from './components/pedido/modal-estado-pedido/modal-estado-pedido.component';
+import { UnidadMedidaComponent } from './components/unidad-medida/unidad-medida.component';
+import { ModaleditarUnidadComponent } from './components/unidad-medida/modaleditar-unidad/modaleditar-unidad.component';
+import { ModalAgregarUnidadComponent } from './components/unidad-medida/modal-agregar-unidad/modal-agregar-unidad.component';
+import { EstadoComponent } from './components/estado/estado.component';
+import { ModalAgregarEstadoComponent } from './components/estado/modal-agregar-estado/modal-agregar-estado.component';
+import { ModalEditarEstadoComponent } from './components/estado/modal-editar-estado/modal-editar-estado.component';
+import { PastelRealizadoComponent } from './components/pastel-realizado/pastel-realizado.component';
+import { ModalAgregarPastelComponent } from './components/pastel-realizado/modal-agregar-pastel/modal-agregar-pastel.component';
+import { ModalEditarPastelComponent } from './components/pastel-realizado/modal-editar-pastel/modal-editar-pastel.component';
+import { PaginaEnBlancoComponent } from './components/pagina-en-blanco/pagina-en-blanco.component';
+
+
 
 
 
@@ -111,6 +123,17 @@ import { ModalEstadoPedidoComponent } from './components/pedido/modal-estado-ped
       ModalEditarPedidoComponent,
       ModalPedidoDesgloseComponent,
       ModalEstadoPedidoComponent,
+      UnidadMedidaComponent,
+      ModaleditarUnidadComponent,
+      ModalAgregarUnidadComponent,
+      EstadoComponent,
+      ModalAgregarEstadoComponent,
+      ModalEditarEstadoComponent,
+      PastelRealizadoComponent,
+      ModalAgregarPastelComponent,
+      ModalEditarPastelComponent,
+      PaginaEnBlancoComponent,
+      
       
       
       

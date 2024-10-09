@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Editar Unidad de Medida</h2>
+
+<div mat-dialog-content>
+  <form>
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput [(ngModel)]="unidad.nombre" placeholder="Ingrese el nombre">
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="cerrarModal()">Cancelar</button>
+  <button mat-button color="primary">Guardar</button>
+</div>

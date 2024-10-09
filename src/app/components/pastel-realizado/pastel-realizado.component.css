@@ -1,0 +1,71 @@
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+/* estilos para la tabla */
+.mat-elevation-z8 {
+  width: 100%;
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+/* estilos para los encabezados de la tabla */
+.mat-header-cell {
+  background-color: #790094; /* Color de fondo */
+  color: white; /* Color del texto */
+  font-weight: bold; /* Texto en negrita */
+  padding: 12px; /* Espaciado */
+  text-align: center; /* Alinear los títulos al centro */
+  border-bottom: 2px solid white; /* Línea inferior en los encabezados */
+}
+
+/* estilos para las celdas de la tabla */
+.mat-cell {
+  padding: 12px; /* Espaciado */
+  text-align: center; /* Alinear el texto al centro */
+  border-bottom: 1px solid #e0e0e0; /* Línea inferior */
+}
+
+/* estilos para las imágenes en la tabla */
+.mat-cell img {
+  border-radius: 4px; /* Bordes redondeados */
+}
+
+/* estilos para los botones */
+button {
+  margin: 5px; /* Espaciado entre botones */
+}
+
+/* estilos para el botón de agregar pastel */
+button[color="primary"] {
+  background-color: #c59e02; /* Color de fondo para el botón de agregar */
+  color: white; /* Color del texto */
+}
+
+/* estilos para el botón de eliminar */
+button[color="warn"] {
+  background-color: #f44336; /* Color de fondo para el botón de eliminar */
+  color: white; /* Color del texto */
+}
+
+/* estilos de transición para los botones */
+button:hover {
+  opacity: 0.9; /* Efecto de hover */
+}
+
+/* estilos para el contenedor de la tabla */
+table {
+  border-radius: 8px; /* Bordes redondeados */
+  overflow: hidden; /* Esconde cualquier desbordamiento */
+  width: 80%; /* Reduce el ancho de la tabla para que los títulos se vean más centrados */
+  margin: 0 auto; /* Centramos la tabla en el contenedor */
+}
+
+/* Alinear la tabla y los títulos para que queden centrados */
+.mat-table {
+  width: 100%;
+}
+
