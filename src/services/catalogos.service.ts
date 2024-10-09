@@ -16,6 +16,7 @@ import { tipoinsumoutensilio } from 'src/app/models/tipoinsumoutensilio.interfac
 import { MotivoSalida } from 'src/app/models/motivosalida.interface';
 import { masa } from 'src/app/models/masa.interface';
 import { relleno } from 'src/app/models/relleno.interface';
+import { unidadmedida } from 'src/app/models/unidadmedida.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -91,6 +92,16 @@ export class CatalogosService {
     actualizarUnidadPS(datos: any){
       return this.http.post<any>(`${this.baseUrl}actualizar-unidad-medida-precio-sugerido`, datos);
     }
+        // ---------------------------UMPS---------------------------------------
+    unidadesCosto(): Observable<unidadmedida[]> {
+      return this.http.get<any[]>(`${this.baseUrl}unidad-medida-costo`);
+    }
+    nuevaUnidadCosto(datos: any){
+      return this.http.post<any>(`${this.baseUrl}nueva-unidad-medida-costo`, datos);
+    }
+    actualizarUnidadCosto(datos: any){
+      return this.http.post<any>(`${this.baseUrl}actualizar-unidad-medida-costo`, datos);
+    }
     // ---------------------------Masas---------------------------------------
     masas(): Observable<masa[]> {
       return this.http.get<any[]>(`${this.baseUrl}masas`);
@@ -114,7 +125,13 @@ export class CatalogosService {
     // ---------------------------Estado---------------------------------------
     estado(): Observable<estado[]> {
       return this.http.get<any[]>(`${this.baseUrl}estados`);
-    }              
+    }    
+    nuevoEstado(datos: any){
+      return this.http.post<any>(`${this.baseUrl}nuevo-estado`, datos);
+    }
+    actualizarEstado(datos: any){
+      return this.http.post<any>(`${this.baseUrl}actualizar-estado`, datos);
+    }          
     // ---------------------------TipoEvento---------------------------------------
   tipoEvento(): Observable<tipoevento[]> {
     return this.http.get<tipoevento[]>(`${this.baseUrl}tipos-evento`);

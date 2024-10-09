@@ -13,7 +13,7 @@ import { SisprincipalComponent } from './components/sisprincipal/sisprincipal.co
 import { ListarCotizacionesComponent } from './components/listar-cotizaciones/listar-cotizaciones.component';
 import { MasasComponent } from './components/masas/masas.component';
 import { RellenoComponent } from './components/relleno/relleno.component';
-import { RecetaComponent } from './components/receta/receta.component';
+import { RecetaComponent } from './components/receta/receta.component'; 
 import { ProductoComponent } from './components/producto/producto.component';
 import { ClienteComponent } from './components/cliente/cliente.component';
 import { TipoEntregaComponent } from './components/tipo-entrega/tipo-entrega.component';
