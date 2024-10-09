@@ -73,6 +73,8 @@ import { PastelRealizadoComponent } from './components/pastel-realizado/pastel-r
 import { ModalAgregarPastelComponent } from './components/pastel-realizado/modal-agregar-pastel/modal-agregar-pastel.component';
 import { ModalEditarPastelComponent } from './components/pastel-realizado/modal-editar-pastel/modal-editar-pastel.component';
 import { PaginaEnBlancoComponent } from './components/pagina-en-blanco/pagina-en-blanco.component';
+import { AgendaComponent } from './components/agenda/agenda.component';
+
 
 
 
@@ -133,6 +135,8 @@ import { PaginaEnBlancoComponent } from './components/pagina-en-blanco/pagina-en
       ModalAgregarPastelComponent,
       ModalEditarPastelComponent,
       PaginaEnBlancoComponent,
+      AgendaComponent,
+      
       
       
       

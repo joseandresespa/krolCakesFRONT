@@ -27,6 +27,7 @@ import { UnidadMedidaComponent } from './components/unidad-medida/unidad-medida.
 import { EstadoComponent } from './components/estado/estado.component';
 import { PastelRealizadoComponent } from './components/pastel-realizado/pastel-realizado.component';
 import { PaginaEnBlancoComponent } from './components/pagina-en-blanco/pagina-en-blanco.component';
+import { AgendaComponent } from './components/agenda/agenda.component';
 
 
 const routes: Routes = [
@@ -57,7 +58,8 @@ const routes: Routes = [
   { path: 'unidad-medida', component:  UnidadMedidaComponent },
   { path: 'estado', component:  EstadoComponent },
   { path: 'pastel-realizado', component:  PastelRealizadoComponent },
-  { path: 'pagina-en-blanco', component:  PaginaEnBlancoComponent }
+  { path: 'pagina-en-blanco', component:  PaginaEnBlancoComponent },
+  { path: 'agenda', component:  AgendaComponent }
 ];
 
 @NgModule({
