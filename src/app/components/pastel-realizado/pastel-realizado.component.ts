@@ -13,11 +13,7 @@ import { ModalEditarPastelComponent } from './modal-editar-pastel/modal-editar-p
 export class PastelRealizadoComponent implements OnInit {
   displayedColumns: string[] = ['id', 'id_tipo_evento', 'id_pedido', 'imagen', 'acciones'];
 
-  pasteles: pastelrealizado[] = [
-    { id: 1, id_tipo_evento: 1, id_pedido: 101, imagen: 'img1.jpg' },
-    { id: 2, id_tipo_evento: 2, id_pedido: 102, imagen: 'img2.jpg' },
-    { id: 3, id_tipo_evento: 3, id_pedido: 103, imagen: 'img3.jpg' }
-  ];
+  pasteles: pastelrealizado[] = [];
 
   constructor(public dialog: MatDialog) { }
 

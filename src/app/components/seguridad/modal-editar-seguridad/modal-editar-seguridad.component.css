@@ -1,0 +1,39 @@
+/* Estilo del encabezado del modal */
+h2 {
+    font-size: 24px; /* Tamaño de fuente */
+    margin-bottom: 20px; /* Espacio inferior */
+    color: #333; /* Color del texto */
+    text-align: center; /* Centrar el texto */
+}
+
+/* Estilo del formulario */
+form {
+    display: flex; /* Usar flexbox para alinear los elementos */
+    flex-direction: column; /* Colocar los elementos en columna */
+    align-items: center; /* Centrar elementos en el eje horizontal */
+    gap: 15px; /* Espacio entre los elementos */
+    margin: 0 auto; /* Centrar el formulario en el modal */
+    max-width: 400px; /* Ancho máximo del formulario */
+}
+
+/* Estilo de los campos de formulario */
+mat-form-field {
+    width: 100%; /* Hacer que el campo ocupe todo el ancho disponible */
+}
+
+/* Estilo del botón */
+button {
+    width: 100%; /* Hacer que el botón ocupe todo el ancho disponible */
+    margin-top: 10px; /* Espacio superior para el botón */
+}
+
+/* Estilo del botón principal */
+button[color="primary"] {
+    background-color: #3f51b5; /* Color de fondo */
+    color: white; /* Color del texto */
+}
+
+/* Estilo del botón en hover */
+button[color="primary"]:hover {
+    background-color: #303f9f; /* Color de fondo en hover */
+}

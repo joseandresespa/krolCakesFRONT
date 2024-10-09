@@ -28,7 +28,9 @@ import { EstadoComponent } from './components/estado/estado.component';
 import { PastelRealizadoComponent } from './components/pastel-realizado/pastel-realizado.component';
 import { PaginaEnBlancoComponent } from './components/pagina-en-blanco/pagina-en-blanco.component';
 import { AgendaComponent } from './components/agenda/agenda.component';
-
+import { RolComponent } from './components/rol/rol.component';
+import { AccesoMantenimientoComponent } from './components/acceso-mantenimiento/acceso-mantenimiento.component';
+import { SeguridadComponent } from './components/seguridad/seguridad.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirige a 'login' por defecto
@@ -59,7 +61,10 @@ const routes: Routes = [
   { path: 'estado', component:  EstadoComponent },
   { path: 'pastel-realizado', component:  PastelRealizadoComponent },
   { path: 'pagina-en-blanco', component:  PaginaEnBlancoComponent },
-  { path: 'agenda', component:  AgendaComponent }
+  { path: 'agenda', component:  AgendaComponent },
+  { path: 'rol', component:  RolComponent },
+  { path: 'acceso-mantenimiento', component:  AccesoMantenimientoComponent },
+  { path: 'seguridad', component:  SeguridadComponent }
 ];
 
 @NgModule({

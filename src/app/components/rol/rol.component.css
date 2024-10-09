@@ -1,0 +1,30 @@
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .mat-elevation-z8 {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+  }
+  
+  .mat-header-cell {
+    background-color: #790094;
+    color: white;
+    font-weight: bold;
+    padding: 12px;
+  }
+  
+  .mat-cell {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  button {
+    margin: 5px;
+  }
+  

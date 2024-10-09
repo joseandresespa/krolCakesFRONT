@@ -1,0 +1,57 @@
+/* Estilo del encabezado principal */
+h2 {
+    font-size: 28px; /* Tamaño de fuente */
+    margin-bottom: 20px; /* Espacio inferior */
+    color: #333; /* Color del texto */
+    text-align: center; /* Centrar el texto */
+    font-weight: bold; /* Negrita */
+}
+
+/* Estilo del subencabezado */
+h3 {
+    font-size: 22px; /* Tamaño de fuente */
+    margin-bottom: 15px; /* Espacio inferior */
+    color: #555; /* Color del texto */
+    text-align: center; /* Centrar el texto */
+    font-weight: normal; /* Normal */
+}
+
+/* Estilo de la tabla */
+table {
+    width: 100%; /* O puedes especificar un ancho específico */
+    max-width: 800px; /* Ancho máximo para la tabla */
+    margin: 0 auto 20px; /* Centrar la tabla y añadir margen inferior */
+    border-collapse: collapse; /* Colapsar bordes de la tabla */
+}
+
+/* Estilo de las celdas */
+th.mat-header-cell {
+    background-color: #f5f5f5; /* Color de fondo de los encabezados */
+    color: #333; /* Color del texto en los encabezados */
+    padding: 10px; /* Espaciado interno */
+    text-align: center; /* Centrar texto en encabezados */
+    font-weight: bold; /* Negrita para encabezados */
+}
+
+td.mat-cell {
+    padding: 10px; /* Espaciado interno */
+    text-align: center; /* Centrar texto en celdas */
+    border-bottom: 1px solid #ddd; /* Línea entre filas */
+}
+
+/* Estilo de la lista de accesos */
+ul {
+    list-style-type: none; /* Quitar puntos de la lista */
+    padding: 0; /* Quitar padding de la lista */
+    margin: 0; /* Quitar margin de la lista */
+}
+
+/* Estilo para los botones */
+button {
+    margin: 5px; /* Espacio entre botones */
+}
+
+/* Botón principal de agregar rol */
+button[color="primary"] {
+    margin-top: 20px; /* Espacio superior para el botón de agregar rol */
+}

@@ -74,6 +74,16 @@ import { ModalAgregarPastelComponent } from './components/pastel-realizado/modal
 import { ModalEditarPastelComponent } from './components/pastel-realizado/modal-editar-pastel/modal-editar-pastel.component';
 import { PaginaEnBlancoComponent } from './components/pagina-en-blanco/pagina-en-blanco.component';
 import { AgendaComponent } from './components/agenda/agenda.component';
+import { RolComponent } from './components/rol/rol.component';
+import { ModalAgregarRolComponent } from './components/rol/modal-agregar-rol/modal-agregar-rol.component';
+import { ModalEditarRolComponent } from './components/rol/modal-editar-rol/modal-editar-rol.component';
+import { AccesoMantenimientoComponent } from './components/acceso-mantenimiento/acceso-mantenimiento.component';
+import { ModalAgregarAccesoComponent } from './components/acceso-mantenimiento/modal-agregar-acceso/modal-agregar-acceso.component';
+import { ModalEditarAccesoComponent } from './components/acceso-mantenimiento/modal-editar-acceso/modal-editar-acceso.component';
+import { SeguridadComponent } from './components/seguridad/seguridad.component';
+import { ModalAgregarComponent } from './components/seguridad/modal-agregar/modal-agregar.component';
+import { ModalEditarSeguridadComponent } from './components/seguridad/modal-editar-seguridad/modal-editar-seguridad.component';
+
 
 
 
@@ -136,6 +146,15 @@ import { AgendaComponent } from './components/agenda/agenda.component';
       ModalEditarPastelComponent,
       PaginaEnBlancoComponent,
       AgendaComponent,
+      RolComponent,
+      ModalAgregarRolComponent,
+      ModalEditarRolComponent,
+      AccesoMantenimientoComponent,
+      ModalAgregarAccesoComponent,
+      ModalEditarAccesoComponent,
+      SeguridadComponent,
+      ModalAgregarComponent,
+      ModalEditarSeguridadComponent,
       
       
       
