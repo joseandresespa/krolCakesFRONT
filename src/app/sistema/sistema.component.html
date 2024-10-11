@@ -15,6 +15,14 @@
     Inicio
 </div>
 
+<div class="nav-item" (click)="toggleDropdown('agenda')">
+    <mat-icon>calendar_today</mat-icon>
+    Agenda
+    <div class="dropdown" [ngClass]="{'show': isDropdownOpen('agenda')}">
+        <a href="/agenda"><mat-icon>event_note</mat-icon>Calendario</a>
+    </div>
+</div>
+
 <div class="nav-item" (click)="toggleDropdown('pedidos')">
     <mat-icon>cake</mat-icon>
     Pedidos
@@ -30,7 +38,6 @@
     <div class="dropdown" [ngClass]="{'show': isDropdownOpen('cotizaciones')}">
         <a href="/listar-cotizaciones"><mat-icon>book</mat-icon>Ver cotizaciones</a>
         <a href="/cliente"><mat-icon>person</mat-icon>Clientes</a>
-        <a href="/tipo-entrega"><mat-icon>face</mat-icon>Entregas</a>
         <a href="/tipo-evento"><mat-icon>house</mat-icon>Eventos</a>
     </div>
 </div>
@@ -63,7 +70,6 @@
     <div class="dropdown" [ngClass]="{'show': isDropdownOpen('usuarios')}">
         <a href="/rol"><mat-icon>cake</mat-icon>Roles</a>
         <a href="/acceso-mantenimiento"><mat-icon>cake</mat-icon>Accesos</a>
-        <a href="/seguridad"><mat-icon>cake</mat-icon>Seguridad</a>
         <a href="/mantenimiento"><mat-icon>edit</mat-icon>Mantenimiento</a>
     </div>
 </div>

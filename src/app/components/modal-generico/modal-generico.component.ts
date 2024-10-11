@@ -37,7 +37,7 @@ export class ModalGenericoComponent implements OnInit {
       Swal.fire({
         icon: 'success',
         title: 'Éxito',
-        text: 'Producto ingresado exitosamente'
+        text: 'Ingresado exitosamente'
       });
     }
   }

@@ -17,7 +17,7 @@ export class RellenoComponent implements OnInit {
   rellenos: relleno[] = []; 
 
   currentPage: number = 1;
-  itemsPerPage: number = 10;
+  itemsPerPage: number = 5;
   totalPages: number = 1;
   pages: number[] = [];
   dataSource: relleno[] = [];

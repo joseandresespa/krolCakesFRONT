@@ -18,7 +18,7 @@ export class ClienteComponent implements OnInit {
   clientes: cliente[] = []; 
 
   currentPage: number = 1;
-  itemsPerPage: number = 2;
+  itemsPerPage: number = 5;
   totalPages: number = 1;
   pages: number[] = [];
   dataSource: cliente[] = [];

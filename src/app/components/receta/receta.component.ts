@@ -18,7 +18,7 @@ export class RecetaComponent implements OnInit {
   recetas: receta[] = [];
 
   currentPage: number = 1;
-  itemsPerPage: number = 2;
+  itemsPerPage: number = 5;
   totalPages: number = 1;
   pages: number[] = [];
   dataSource: receta[] = [];

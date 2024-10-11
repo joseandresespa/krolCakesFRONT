@@ -18,7 +18,7 @@ export class UmpsComponent implements OnInit {
   umps: unidadmedidapreciosugerido[] = []; 
 
   currentPage: number = 1;
-  itemsPerPage: number = 2;
+  itemsPerPage: number = 5;
   totalPages: number = 1;
   pages: number[] = [];
   dataSource: unidadmedidapreciosugerido[] = [];
