@@ -1,0 +1,43 @@
+<app-sistema>
+<div class="container">
+  <h1 class="titulo-centrado">Insumos y Utensilios</h1>
+    <br>
+    <button class="add-button" (click)="openAddModal()">Agregar Insumo/Utensilio</button>
+  
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Tipo de Insumo</th>
+          <th>Unidad de Medida</th>
+          <th>Precio Unitario</th>
+          <th>Cantidad</th>
+          <th>Inventario Renovable</th>
+          <th>Fecha de Ingreso</th>
+          <th>Fecha de Vencimiento</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let insumo of insumosUtensilios">
+          <td>{{ insumo.id }}</td>
+          <td>{{ insumo.nombre }}</td>
+          <td>{{ insumo.id_tipo_insumo }}</td>
+          <td>{{ insumo.id_unidad_medida }}</td>
+          <td>{{ insumo.precio_unitario }}</td>
+          <td>{{ insumo.cantidad }}</td>
+          <td>{{ insumo.inventarioRenovable ? 'Sí' : 'No' }}</td>
+          <td>{{ insumo.fecha_ingreso | date }}</td>
+          <td>{{ insumo.fecha_vencimiento ? (insumo.fecha_vencimiento | date) : 'N/A' }}</td>
+          <td>
+            <div class="button-group">
+              <button class="edit-button" (click)="openEditModal(insumo)">Editar</button>
+              <button class="delete-button">Eliminar</button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</app-sistema>

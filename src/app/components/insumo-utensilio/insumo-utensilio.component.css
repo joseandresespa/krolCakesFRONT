@@ -1,0 +1,87 @@
+.container {
+    padding: 20px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.add-button, .edit-button, .delete-button {
+    padding: 8px 12px;
+    margin: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Añadir transición para el efecto de hover */
+}
+
+.add-button {
+    background-color: #91802d;
+    color: white;
+}
+
+.edit-button {
+    background-color: #df6dda;
+    color: white;
+}
+
+.delete-button {
+    background-color: #f44336;
+    color: white;
+}
+
+.modal {
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+}
+
+.modal input, .modal select {
+    width: 100%;
+    padding: 8px;
+    margin: 10px 0;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.save-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.cancel-button {
+    background-color: #f44336;
+    color: white;
+    padding: 10px;
+}
+
+.button-group {
+    display: flex; 
+    justify-content: center; 
+    gap: 8px; 
+}
+
+.add-button:hover, .edit-button:hover, .delete-button:hover {
+    transform: scale(1.05); /* Aumenta el tamaño al pasar el mouse */
+}
+
+.titulo-centrado {
+    text-align: center;  
+    margin: 20px 0;     
+    font-size: 24px;    
+    font-weight: bold;   
+    color: #333;        
+    text-transform: uppercase; 
+    letter-spacing: 1px; 
+}

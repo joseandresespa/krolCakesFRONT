@@ -32,6 +32,8 @@ import { RolComponent } from './components/rol/rol.component';
 import { AccesoMantenimientoComponent } from './components/acceso-mantenimiento/acceso-mantenimiento.component';
 import { SeguridadComponent } from './components/seguridad/seguridad.component';
 import { CostoComponent } from './components/agenda/costo/costo.component';
+import { InsumoUtensilioComponent } from './components/insumo-utensilio/insumo-utensilio.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirige a 'login' por defecto
@@ -66,7 +68,8 @@ const routes: Routes = [
   { path: 'rol', component:  RolComponent },
   { path: 'acceso-mantenimiento', component:  AccesoMantenimientoComponent },
   { path: 'seguridad', component:  SeguridadComponent },
-  {path: 'costo', component: CostoComponent}
+  { path: 'costo', component: CostoComponent},
+  { path: 'insumo-utencilio', component: InsumoUtensilioComponent}
 ];
 
 @NgModule({

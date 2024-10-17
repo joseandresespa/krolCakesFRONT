@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { RouterModule } from '@angular/router';
 
+
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import { AppRoutingModule } from './app-routing.module'; // Importa tus rutas
@@ -85,6 +86,9 @@ import { ModalAgregarComponent } from './components/seguridad/modal-agregar/moda
 import { ModalEditarSeguridadComponent } from './components/seguridad/modal-editar-seguridad/modal-editar-seguridad.component';
 import { ModalFinPedidoAgendaComponent } from './components/agenda/modal-fin-pedido-agenda/modal-fin-pedido-agenda.component';
 import { CostoComponent } from './components/agenda/costo/costo.component';
+import { InsumoUtensilioComponent } from './components/insumo-utensilio/insumo-utensilio.component';
+import { ModalAgregarInsumoComponent } from './components/insumo-utensilio/modal-agregar-insumo/modal-agregar-insumo.component';
+import { ModalEditarInsumoComponent } from './components/insumo-utensilio/modal-editar-insumo/modal-editar-insumo.component';
 
 
 
@@ -159,6 +163,9 @@ import { CostoComponent } from './components/agenda/costo/costo.component';
       ModalEditarSeguridadComponent,
       ModalFinPedidoAgendaComponent,
       CostoComponent,
+      InsumoUtensilioComponent,
+      ModalAgregarInsumoComponent,
+      ModalEditarInsumoComponent,
       
       
       

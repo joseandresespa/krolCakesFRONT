@@ -1,0 +1,32 @@
+<h2>Editar Insumo/Utensilio</h2>
+<form>
+  <label>Nombre:</label>
+  <input type="text" [(ngModel)]="data.nombre" placeholder="Nombre del insumo/utensilio">
+
+  <label>Tipo de Insumo:</label>
+  <select [(ngModel)]="data.id_tipo_insumo" placeholder="Seleccione un tipo">
+    <option *ngFor="let tipo of tiposInsumo" [value]="tipo">{{ tipo }}</option>
+  </select>
+
+  <label>Precio Unitario:</label>
+  <input type="number" [(ngModel)]="data.precio_unitario" placeholder="Precio unitario">
+
+  <label>Cantidad:</label>
+  <input type="number" [(ngModel)]="data.cantidad" placeholder="Cantidad">
+
+  <label>Unidad de Medida:</label>
+  <select [(ngModel)]="data.id_unidad_medida" placeholder="Seleccione una unidad">
+    <option *ngFor="let unidad of unidadesMedida" [value]="unidad">{{ unidad }}</option>
+  </select>
+
+  <label>
+    Inventario Renovable: <input type="checkbox" style="vertical-align: middle;">
+  </label>
+  
+
+  <div class="buttons">
+    <button type="button" class="save-button" (click)="saveInsumo()">Guardar</button>
+    <button type="button" class="cancel-button" (click)="close()">Cancelar</button>
+  </div>
+</form>
+
