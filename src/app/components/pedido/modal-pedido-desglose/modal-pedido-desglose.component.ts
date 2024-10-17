@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { pedido } from 'src/app/models/pedido.interface'; // Ajustar la ruta del modelo según tu proyecto
+import { pedido } from 'src/app/models/pedido.interface'; 
 
 @Component({
   selector: 'app-modal-pedido-desglose',
@@ -67,32 +67,4 @@ eliminarImagen(index: number): void {
    calcularTotalGeneral() {
      return this.productos.reduce((total, producto) => total + producto.subtotal, 0);
    }
-
-
-   // Función para agregar la observación al array
-  // addObservation() {
-  //   if (this.observacion.trim()) {
-  //     this.observaciones.push(this.observacion); // Agregar la observación
-  //     this.observacion = ''; // Limpiar el campo de texto
-  //   }
-  // }
-
-  // // Función para mostrar la observación seleccionada al hacer clic en "Ver"
-  // verObservacion(observacion: string) {
-  //   this.observacionSeleccionada = observacion;
-  // }
-
-  // // Función para eliminar una observación específica
-  // eliminarObservacion(index: number) {
-  //   this.observaciones.splice(index, 1); // Eliminar la observación en el índice especificado
-  //   if (this.observacionSeleccionada === this.observaciones[index]) {
-  //     this.observacionSeleccionada = null; // Limpiar la observación seleccionada si fue eliminada
-  //   }
-  // }
-
-  // // Confirmar todas las observaciones
-  // confirmObservation() {
-  //   console.log('Observaciones confirmadas:', this.observaciones);
-  //   this.dialogRef.close({ observaciones: this.observaciones });
-  // }
  }

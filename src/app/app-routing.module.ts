@@ -31,6 +31,7 @@ import { AgendaComponent } from './components/agenda/agenda.component';
 import { RolComponent } from './components/rol/rol.component';
 import { AccesoMantenimientoComponent } from './components/acceso-mantenimiento/acceso-mantenimiento.component';
 import { SeguridadComponent } from './components/seguridad/seguridad.component';
+import { CostoComponent } from './components/agenda/costo/costo.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Redirige a 'login' por defecto
@@ -64,7 +65,8 @@ const routes: Routes = [
   { path: 'agenda', component:  AgendaComponent },
   { path: 'rol', component:  RolComponent },
   { path: 'acceso-mantenimiento', component:  AccesoMantenimientoComponent },
-  { path: 'seguridad', component:  SeguridadComponent }
+  { path: 'seguridad', component:  SeguridadComponent },
+  {path: 'costo', component: CostoComponent}
 ];
 
 @NgModule({

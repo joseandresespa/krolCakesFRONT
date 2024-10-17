@@ -7,8 +7,9 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra sutil */
   font-family: 'Arial', sans-serif; /* Fuente */
   overflow-y: auto; /* Scroll vertical automático */
-  max-height: 600px; /* Altura máxima para que el scroll funcione */
+  max-height: 80vh; /* Altura máxima para que el scroll funcione */
 }
+
 
 /* Restante del CSS */
 
@@ -28,6 +29,8 @@ h3 {
 
 .info-pedido {
   margin-bottom: 20px; /* Margen inferior para el contenedor de información del pedido */
+  overflow-y: auto; /* Agrega desplazamiento vertical */
+  max-height: 60vh; /* Altura máxima para el contenido */
 }
 
 label {

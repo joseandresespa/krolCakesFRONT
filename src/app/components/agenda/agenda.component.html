@@ -1,3 +1,31 @@
 <app-sistema>
-    
-</app-sistema>
+    <div class="calendar">
+      <div class="header">
+        <button (click)="previousMonth()">« Anterior</button>
+        <h2>{{ getMonthName(month) }} {{ year }}</h2>
+        <button (click)="nextMonth()">Siguiente »</button>
+      </div>
+      
+      <div class="days-of-week">
+        <div *ngFor="let day of ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb']" class="day-name">
+          {{ day }}
+        </div>
+      </div>
+      
+      <div class="weeks">
+        <div class="week" *ngFor="let week of calendar">
+          <div class="day" *ngFor="let day of week" [ngClass]="{'empty': day.day === 0}">
+            <div class="day-number">{{ day.day > 0 ? day.day : '' }}</div>
+            <div *ngIf="day.clientNames && day.clientNames.length">
+              <button *ngFor="let client of day.clientNames" 
+                      (click)="openModal(client.pedido)" 
+                      class="client-name">
+                {{ client.name }}
+              </button>
+            </div>
+          </div>
+        </div>              
+      </div>
+    </div>
+  </app-sistema>
+  

@@ -83,6 +83,8 @@ import { ModalEditarAccesoComponent } from './components/acceso-mantenimiento/mo
 import { SeguridadComponent } from './components/seguridad/seguridad.component';
 import { ModalAgregarComponent } from './components/seguridad/modal-agregar/modal-agregar.component';
 import { ModalEditarSeguridadComponent } from './components/seguridad/modal-editar-seguridad/modal-editar-seguridad.component';
+import { ModalFinPedidoAgendaComponent } from './components/agenda/modal-fin-pedido-agenda/modal-fin-pedido-agenda.component';
+import { CostoComponent } from './components/agenda/costo/costo.component';
 
 
 
@@ -155,6 +157,8 @@ import { ModalEditarSeguridadComponent } from './components/seguridad/modal-edit
       SeguridadComponent,
       ModalAgregarComponent,
       ModalEditarSeguridadComponent,
+      ModalFinPedidoAgendaComponent,
+      CostoComponent,
       
       
       

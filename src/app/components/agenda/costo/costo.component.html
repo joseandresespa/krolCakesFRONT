@@ -1,0 +1,62 @@
+<app-sistema> 
+    <div class="container">
+        <h2>Registro de Costos</h2>
+      
+        <form (ngSubmit)="agregarProducto()">
+          <table>
+            <thead>
+              <tr>
+                <th>Unidad de Medida</th>
+                <th>Insumo</th>
+                <th>Cantidad</th>
+                <th>Precio Unitario</th>
+                <th>Subtotal</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let producto of productos; let i = index">
+                <td>
+                  <select [(ngModel)]="producto.unidad" name="unidad-{{i}}">
+                    <option *ngFor="let unidad of unidadesDeMedida" [value]="unidad">{{ unidad }}</option>
+                  </select>
+                </td>
+                <td>
+                  <select [(ngModel)]="producto.insumo" name="insumo-{{i}}">
+                    <option *ngFor="let insumo of insumos" [value]="insumo">{{ insumo }}</option>
+                  </select>
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="producto.cantidad" (ngModelChange)="actualizarSubtotal(producto)" name="cantidad-{{i}}" min="1"/>
+                </td>
+                <td>
+                  <input type="number" [(ngModel)]="producto.precio_unitario" (ngModelChange)="actualizarSubtotal(producto)" name="precio-{{i}}" min="0" step="0.01"/>
+                </td>
+                <td>
+                  <input type="text" [value]="producto.subtotal" readonly />
+                </td>
+                <td>
+                  <button type="button" (click)="eliminarProducto(i)">Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+      
+          <button type="submit">Agregar Producto</button>
+        </form>
+      
+        <h3>Total General: {{ calcularTotalGeneral() | currency }}</h3>
+      
+        <div class="upload-section">
+          <h4>Subir Imágenes</h4>
+          <input type="file" (change)="onImageUpload($event)" multiple />
+          <div class="image-preview">
+            <div *ngFor="let img of imagenesSubidas">
+              <img [src]="img" alt="Imagen subida" width="100" />
+              <button (click)="eliminarImagen(imagenesSubidas.indexOf(img))">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+</app-sistema>
