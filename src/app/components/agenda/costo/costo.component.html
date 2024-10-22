@@ -1,62 +1,98 @@
 <app-sistema> 
-    <div class="container">
-        <h2>Registro de Costos</h2>
-      
-        <form (ngSubmit)="agregarProducto()">
-          <table>
-            <thead>
-              <tr>
-                <th>Unidad de Medida</th>
-                <th>Insumo</th>
-                <th>Cantidad</th>
-                <th>Precio Unitario</th>
-                <th>Subtotal</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let producto of productos; let i = index">
-                <td>
-                  <select [(ngModel)]="producto.unidad" name="unidad-{{i}}">
-                    <option *ngFor="let unidad of unidadesDeMedida" [value]="unidad">{{ unidad }}</option>
-                  </select>
-                </td>
-                <td>
-                  <select [(ngModel)]="producto.insumo" name="insumo-{{i}}">
-                    <option *ngFor="let insumo of insumos" [value]="insumo">{{ insumo }}</option>
-                  </select>
-                </td>
-                <td>
-                  <input type="number" [(ngModel)]="producto.cantidad" (ngModelChange)="actualizarSubtotal(producto)" name="cantidad-{{i}}" min="1"/>
-                </td>
-                <td>
-                  <input type="number" [(ngModel)]="producto.precio_unitario" (ngModelChange)="actualizarSubtotal(producto)" name="precio-{{i}}" min="0" step="0.01"/>
-                </td>
-                <td>
-                  <input type="text" [value]="producto.subtotal" readonly />
-                </td>
-                <td>
-                  <button type="button" (click)="eliminarProducto(i)">Eliminar</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-      
-          <button type="submit">Agregar Producto</button>
-        </form>
-      
-        <h3>Total General: {{ calcularTotalGeneral() | currency }}</h3>
-      
-        <div class="upload-section">
-          <h4>Subir Imágenes</h4>
-          <input type="file" (change)="onImageUpload($event)" multiple />
-          <div class="image-preview">
-            <div *ngFor="let img of imagenesSubidas">
-              <img [src]="img" alt="Imagen subida" width="100" />
-              <button (click)="eliminarImagen(imagenesSubidas.indexOf(img))">Eliminar</button>
-            </div>
-          </div>
+  <div class="container">
+
+    <div *ngIf="pedido">
+      <h3>Información del Pedido</h3>
+      <p><strong>Nombre del Cliente:</strong> {{ pedido.nombre }}</p>
+      <p><strong>Fecha del Pedido:</strong> {{ pedido.fecha }}</p>
+      <p><strong>Telefono:</strong> {{ pedido.telefono }}</p>
+      <p><strong>Descripcion:</strong> {{ pedido.descripcion }}</p>
+      <h3>Desglose</h3>
+      <div *ngIf="pedido.detalles?.length; else noDesglose">
+        <ul>
+          <li *ngFor="let detalle of pedido.detalles">
+            <p>
+              Producto: {{ detalle.nombre }},
+              masa: {{ detalle.sabor_masa }},
+              relleno: {{ detalle.sabor_relleno }},
+              Cantidad: {{ detalle.cantidad_porciones }},
+              Subtotal: Q.{{ detalle.total }}
+            </p>
+          </li>
+        </ul>
+      </div>
+      <p>
+        Total pedido Q.{{ pedido.total_presupuesto }},
+      </p>
+      <ng-template #noDesglose>
+        <p>No hay desglose disponible.</p>
+      </ng-template>
+    </div>
+    
+    <h2>Registro de Costos</h2>
+
+    <form (ngSubmit)="agregarProducto()">
+      <table>
+        <thead>
+          <tr>
+            <th>Unidad de Medida</th>
+            <th>Insumo</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Subtotal</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let producto of productos; let i = index">
+            <td>
+              <select [(ngModel)]="producto.unidad" name="unidad-{{i}}">
+                <option *ngFor="let unidad of unidades" [value]="unidad.id">{{ unidad.nombre }}</option>
+              </select>
+            </td>
+            <td>
+              <select [(ngModel)]="producto.insumo" name="insumo-{{i}}">
+                <option *ngFor="let insumo of insumosUtensilios" [value]="insumo.id">{{ insumo.nombre }}</option>
+              </select>
+            </td>            
+            <td>
+              <input type="number" [(ngModel)]="producto.cantidad" (ngModelChange)="actualizarSubtotal(producto)" name="cantidad-{{i}}" min="1"/>
+            </td>
+            <td>
+              <input type="number" [(ngModel)]="producto.precio_unitario" (ngModelChange)="actualizarSubtotal(producto)" name="precio-{{i}}" min="0" step="0.01"/>
+            </td>
+            <td>
+              <input type="text" [value]="producto.subtotal" readonly />
+            </td>
+            <td>
+              <button type="button" (click)="eliminarProducto(i)">Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button type="submit">Agregar Producto</button>
+    </form>
+
+    <h3>Costo General: Q.{{ calcularTotalGeneral() }}</h3>
+    <h3>Ganancia: Q.{{ ganancia }}</h3>
+
+    <h4>Seleccionar Tipo de Evento</h4>
+    <select [(ngModel)]="tipoEventoSeleccionado" name="tipoEvento">
+      <option *ngFor="let evento of eventos" [value]="evento.id">{{ evento.nombre }}</option>
+    </select>
+
+    <div class="upload-section">
+      <h4>Subir Imágenes</h4>
+      <input type="file" (change)="onImageUpload($event)" multiple />
+      <div class="image-preview">
+        <div *ngFor="let img of imagenesSubidas">
+          <img [src]="img" alt="Imagen subida" width="100" />
+          <button (click)="eliminarImagen(imagenesSubidas.indexOf(img))">Eliminar</button>
         </div>
       </div>
-      
+    </div>
+
+    <button (click)="enviarCosto()">Enviar Costo</button>
+  </div>
 </app-sistema>

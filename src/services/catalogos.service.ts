@@ -82,26 +82,7 @@ export class CatalogosService {
       return this.http.post<any>(`${this.baseUrl}actualizar-proveedor`, datos);
     }
 
-    // ---------------------------UMPS---------------------------------------
-    unidadesPS(): Observable<unidadmedidapreciosugerido[]> {
-      return this.http.get<any[]>(`${this.baseUrl}unidad-medida-precio-sugerido`);
-    }
-    nuevaUnidadPS(datos: any){
-      return this.http.post<any>(`${this.baseUrl}nueva-unidad-medida-precio-sugerido`, datos);
-    }
-    actualizarUnidadPS(datos: any){
-      return this.http.post<any>(`${this.baseUrl}actualizar-unidad-medida-precio-sugerido`, datos);
-    }
-        // ---------------------------UMPS---------------------------------------
-    unidadesCosto(): Observable<unidadmedida[]> {
-      return this.http.get<any[]>(`${this.baseUrl}unidad-medida-costo`);
-    }
-    nuevaUnidadCosto(datos: any){
-      return this.http.post<any>(`${this.baseUrl}nueva-unidad-medida-costo`, datos);
-    }
-    actualizarUnidadCosto(datos: any){
-      return this.http.post<any>(`${this.baseUrl}actualizar-unidad-medida-costo`, datos);
-    }
+
     // ---------------------------Masas---------------------------------------
     masas(): Observable<masa[]> {
       return this.http.get<any[]>(`${this.baseUrl}masas`);
@@ -163,4 +144,35 @@ export class CatalogosService {
     return this.http.post<any>(`${this.baseUrl}actualizar-motivo-salida`, datos);
   }
   
+  // ---------------------------TipoIsumo---------------------------------------
+  insumos(): Observable<insumoutensilio[]> {
+    return this.http.get<insumoutensilio[]>(`${this.baseUrl}insumos`);
+  }
+  nuevoInsumo(datos: any): Observable<any>{
+    return this.http.post<any>(`${this.baseUrl}nuevo-insumo`, datos);
+  }
+  Actualizarinsumo(datos: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}actualizar-insumo`, datos);
+  }
+
+  // ---------------------------UMPS---------------------------------------
+  unidadesCosto(): Observable<unidadmedidapreciosugerido[]> {
+    return this.http.get<any[]>(`${this.baseUrl}unidad-medida-precio-sugerido`);
+  }
+  nuevaUnidadCosto(datos: any){
+    return this.http.post<any>(`${this.baseUrl}nueva-unidad-medida-precio-sugerido`, datos);
+  }
+  actualizarUnidadCosto(datos: any){
+    return this.http.post<any>(`${this.baseUrl}actualizar-unidad-medida-precio-sugerido`, datos);
+  }
+  // ---------------------------UMInventario---------------------------------------
+  unidadesInventario(): Observable<unidadmedida[]> {
+    return this.http.get<any[]>(`${this.baseUrl}unidad-medida-inventario`);
+  }
+  nuevaUnidadInventario(datos: any){
+    return this.http.post<any>(`${this.baseUrl}nueva-unidad-medida-inventario`, datos);
+  }
+  actualizarUnidadInventario(datos: any){
+    return this.http.post<any>(`${this.baseUrl}actualizar-unidad-medida-inventario`, datos);
+  }
 }

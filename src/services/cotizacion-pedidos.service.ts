@@ -55,5 +55,11 @@ export class CotizacionPedidosService {
       return this.http.post<any>(`${this.baseUrl}cambio-estado-pedido`, datos);
     } 
 
+    finPedido(datos: any){
+      return this.http.post<any>(`${this.baseUrl}fin-pedido`, datos);
+    }
 
+    enviarCosto(datos: any){
+      return this.http.post<any>(`${this.baseUrl}costo-pedido`, datos);
+    }
 }

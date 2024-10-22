@@ -1,26 +1,32 @@
 <h2>Agregar Insumo/Utensilio</h2>
 <form>
   <label>Nombre:</label>
-  <input type="text" placeholder="Nombre del insumo/utensilio">
+  <input type="text" [(ngModel)]="nombre" name="nombre" placeholder="Nombre del insumo/utensilio">
 
   <label>Tipo de Insumo:</label>
-  <select [(ngModel)]="selectedTipoInsumo" placeholder="Seleccione un tipo">
-    <option *ngFor="let tipo of tiposInsumo" [value]="tipo">{{ tipo }}</option>
+  <select [(ngModel)]="selectedTipoInsumo" name="tipoInsumo" placeholder="Seleccione un tipo">
+    <option *ngFor="let tipo of tiposInsumo" [value]="tipo.id">{{ tipo.tipo }}</option>
   </select>
 
   <label>Precio Unitario:</label>
-  <input type="number" placeholder="Precio unitario">
+  <input type="number" [(ngModel)]="precioUnitario" name="precioUnitario" placeholder="Precio unitario">
 
   <label>Cantidad:</label>
-  <input type="number" placeholder="Cantidad">
+  <input type="number" [(ngModel)]="cantidad" name="cantidad" placeholder="Cantidad">
 
   <label>Unidad de Medida:</label>
-  <select [(ngModel)]="selectedUnidadMedida" placeholder="Seleccione una unidad">
-    <option *ngFor="let unidad of unidadesMedida" [value]="unidad">{{ unidad }}</option>
+  <select [(ngModel)]="selectedUnidadMedida" name="unidadMedida" placeholder="Seleccione una unidad">
+    <option *ngFor="let unidad of unidadesMedida" [value]="unidad.id">{{ unidad.nombre }}</option>
   </select>
 
+  <label>Fecha de Ingreso:</label>
+  <input type="date" [(ngModel)]="fechaIngreso" name="fechaIngreso" placeholder="Fecha de ingreso">
+
+  <label>Fecha de Vencimiento:</label>
+  <input type="date" [(ngModel)]="fechaVencimiento" name="fechaVencimiento" placeholder="Fecha de vencimiento">
+
   <label>
-    Inventario Renovable: <input type="checkbox" style="vertical-align: middle;">
+    Inventario Renovable: <input type="checkbox" [(ngModel)]="inventarioRenovable" name="inventarioRenovable" style="vertical-align: middle;">
   </label>
 
   <div class="buttons">
@@ -28,6 +34,3 @@
     <button type="button" class="cancel-button" (click)="close()">Cancelar</button>
   </div>
 </form>
-
-
-  

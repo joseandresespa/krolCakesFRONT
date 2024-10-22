@@ -8,4 +8,7 @@ export interface insumoutensilio {
     inventarioRenovable?: Boolean;
     fecha_ingreso?: Date;
     fecha_vencimiento?: Date;
+
+    tipo?: string;
+    nombre_unidad_medida?: string;
   }

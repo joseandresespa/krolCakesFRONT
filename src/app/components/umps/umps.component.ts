@@ -26,7 +26,7 @@ export class UmpsComponent implements OnInit {
   constructor(private dialog: MatDialog, private service: CatalogosService) { }
 
   ngOnInit(): void {
-    this.service.unidadesPS().subscribe((unidadesPS: unidadmedidapreciosugerido[]) => {
+    this.service.unidadesInventario().subscribe((unidadesPS: unidadmedidapreciosugerido[]) => {
       this.umps = unidadesPS;
       this.updatePagination();
     });
@@ -81,7 +81,7 @@ export class UmpsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         // Llamada al servicio para guardar el nuevo producto
-        this.service.nuevaUnidadPS(result).subscribe(response => {
+        this.service.nuevaUnidadInventario(result).subscribe(response => {
           // Una vez guardado, actualizamos la lista local de productos
           const newUmps: unidadmedidapreciosugerido = {
             id: response.id, // El ID devuelto por el backend
@@ -117,7 +117,7 @@ export class UmpsComponent implements OnInit {
         };
         
         // Llamar al servicio para actualizar el producto en el backend
-        this.service.actualizarUnidadPS(upmsActualizado).subscribe(response => {
+        this.service.actualizarUnidadInventario(upmsActualizado).subscribe(response => {
           // Actualizar el producto en la lista local si es necesario
           const umpsEditado = this.umps.find(p => p.id === umps.id);
           if (umpsEditado) {
