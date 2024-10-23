@@ -59,7 +59,8 @@ export class CotizacionPedidosService {
       return this.http.post<any>(`${this.baseUrl}fin-pedido`, datos);
     }
 
-    enviarCosto(datos: any){
-      return this.http.post<any>(`${this.baseUrl}costo-pedido`, datos);
+    enviarCosto(formData: FormData) {
+      return this.http.post<any>(`${this.baseUrl}costo-pedido`, formData);
     }
+    
 }

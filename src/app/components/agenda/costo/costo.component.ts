@@ -5,10 +5,10 @@ import { CatalogosService } from 'src/services/catalogos.service';
 import { pedido } from 'src/app/models/pedido.interface';
 import { costo } from 'src/app/models/costo.interface';
 import { detallecosto } from 'src/app/models/detallecosto.interface';
-import { pastelrealizado } from 'src/app/models/pastelrealizado.interface';
 import { insumoutensilio } from 'src/app/models/insumoutensilio.interface';
 import { unidadmedida } from 'src/app/models/unidadmedida.interface';
 import { tipoevento } from 'src/app/models/tipoevento.interface';
+
 @Component({
   selector: 'app-costo',
   templateUrl: './costo.component.html',
@@ -23,9 +23,9 @@ export class CostoComponent implements OnInit {
   productos = [
     { unidad: '', insumo: '', cantidad: 1, precio_unitario: 0, subtotal: 0 }
   ];
-  imagenesSubidas: string[] = [];
-  ganancia: number = 0;  
-  tipoEventoSeleccionado: number | null = null;  // Nueva propiedad para el ID del tipo de evento
+  imagenes: File[] = []; // Cambiado a File[]
+  ganancia: number = 0;
+  tipoEventoSeleccionado: number | null = null;
 
   constructor(
     private route: ActivatedRoute,
@@ -94,51 +94,55 @@ export class CostoComponent implements OnInit {
     this.ganancia = (this.pedido?.total_presupuesto || 0) - costoGeneral;
   }
 
+  // Manejar la subida de imágenes
   onImageUpload(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files) {
-      const archivos = Array.from(input.files);
-      archivos.forEach((archivo) => {
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.imagenesSubidas.push(e.target.result);
-        };
-        reader.readAsDataURL(archivo);
-      });
+      this.imagenes = Array.from(input.files); // Guardar como File[]
     }
   }
 
   eliminarImagen(index: number): void {
-    this.imagenesSubidas.splice(index, 1);
+    this.imagenes.splice(index, 1);
   }
 
   enviarCosto() {
     const detalle: detallecosto[] = this.productos.map(producto => ({
-        id_insumo_utensilio: Number(producto.insumo),
-        cantidad: producto.cantidad,
-        id_unidad_medida: Number(producto.unidad)
+      id_insumo_utensilio: Number(producto.insumo),
+      cantidad: producto.cantidad,
+      id_unidad_medida: Number(producto.unidad)
     }));
 
-    const imagenesRealizado: pastelrealizado[] = this.imagenesSubidas.map(img => ({
-        imagen: img,
-        id_tipo_evento: this.tipoEventoSeleccionado !== null ? this.tipoEventoSeleccionado : undefined 
-    }));
+    const formData = new FormData();
 
-    const costoData: costo = {
-        id_pedido: this.pedido ? this.pedido.id : undefined,
-        costo: this.calcularTotalGeneral(),
-        ganancia: this.ganancia,
-        detalle,
-        imagenesRealizado
+    // Serializar los datos de costo y detalles en un objeto
+    const costoData = {
+      id_pedido: this.pedido?.id?.toString() || '',
+      costo: this.calcularTotalGeneral().toString(),
+      ganancia: this.ganancia.toString(),
+      detalles: detalle, // Asegurarse de que el detalle esté correctamente estructurado
+      id_tipo_pedido: this.tipoEventoSeleccionado?.toString() || '1'
     };
 
-    this.service.enviarCosto(costoData).subscribe({
-        next: (response) => {
-            console.log('Costo enviado exitosamente', costoData);
-        },
-        error: (error) => {
-            console.error('Error al enviar el costo', costoData);
-        }
+    // Agregar el JSON serializado
+    formData.append('costoJSON', JSON.stringify(costoData)); // Aquí es importante que el nombre sea 'nuevoPedidoJSON'
+
+    // Agregar las imágenes al FormData
+    this.imagenes.forEach((imagen: File) => {
+      formData.append('imagenes', imagen);
     });
-  }
+
+    console.log
+
+    // Enviar la solicitud al backend
+    this.service.enviarCosto(formData).subscribe({
+      next: (response) => {
+        console.log('Costo enviado exitosamente', response);
+      },
+      error: (error) => {
+        console.error('Error al enviar el costo', error);
+      }
+    });
+}
+
 }

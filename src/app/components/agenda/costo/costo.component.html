@@ -86,9 +86,9 @@
       <h4>Subir Imágenes</h4>
       <input type="file" (change)="onImageUpload($event)" multiple />
       <div class="image-preview">
-        <div *ngFor="let img of imagenesSubidas">
+        <div *ngFor="let img of imagenes">
           <img [src]="img" alt="Imagen subida" width="100" />
-          <button (click)="eliminarImagen(imagenesSubidas.indexOf(img))">Eliminar</button>
+          <button (click)="eliminarImagen(imagenes.indexOf(img))">Eliminar</button>
         </div>
       </div>
     </div>
