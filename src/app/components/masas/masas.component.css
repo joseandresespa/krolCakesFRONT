@@ -1,7 +1,8 @@
 .table-container {
     display: flex;
+    flex-direction: column; /* Cambiar a columna para mantener el contenido en orden vertical */
     justify-content: center; /* Asegura que el contenido interno esté centrado */
-    align-items: center;
+    align-items: center; /* Alinea el contenido al centro */
     width: 80%; /* Mantiene el ancho del 80% */
     overflow-x: auto; 
     padding: 20px;
@@ -10,8 +11,16 @@
 }
 
 table {
-    width: 100%;
+    width: 100%; /* Mantiene la tabla al 100% del contenedor */
     max-width: 1000px; /* Mantiene el ancho máximo de la tabla */
+    border-collapse: collapse; /* Asegura que las celdas no tengan espacio entre sí */
+}
+
+th, td {
+    padding: 10px; /* Espaciado interno de las celdas */
+    text-align: center; /* Alineación del texto al centro */
+    vertical-align: middle; /* Alineación vertical al medio */
+    border: 1px solid #ddd; /* Bordes de las celdas */
 }
 
 .button-container {

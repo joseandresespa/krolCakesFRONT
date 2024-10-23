@@ -1,58 +1,68 @@
 <app-sistema>
     <br>
     <div class="titulo-container">
-      <h2>RELLENOS</h2>
+        <h2>RELLENOS</h2>
     </div>
+    
+    <!-- Buscador y botón de ordenamiento -->
+    <div class="input-container">
+        <input type="text" [(ngModel)]="searchQuery" (input)="onSearchQueryChange(searchQuery)" placeholder="Buscar por sabor..." />
+        <button mat-button (click)="toggleSortDirection()">
+            Ordenar {{ sortDirection === 'asc' ? '↓' : '↑' }}
+        </button>
+    </div>
+  
     <div class="table-container mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   
-        <!-- ID Column -->
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef> ID </th>
-          <td mat-cell *matCellDef="let relleno"> {{ relleno.id }} </td>
-        </ng-container>
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let relleno"> {{ relleno.id }} </td>
+            </ng-container>
   
-        <!-- Sabor de Relleno Column -->
-        <ng-container matColumnDef="sabor_relleno">
-          <th mat-header-cell *matHeaderCellDef> Sabor </th>
-          <td mat-cell *matCellDef="let relleno"> {{ relleno.sabor_relleno }} </td>
-        </ng-container>
+            <!-- Sabor de Relleno Column -->
+            <ng-container matColumnDef="sabor_relleno">
+                <th mat-header-cell *matHeaderCellDef> Sabor </th>
+                <td mat-cell *matCellDef="let relleno"> {{ relleno.sabor_relleno }} </td>
+            </ng-container>
   
-        <!-- Acciones Column -->
-        <ng-container matColumnDef="acciones">
-          <th mat-header-cell *matHeaderCellDef> Acciones </th>
-          <td mat-cell *matCellDef="let relleno">
-            <button mat-button color="primary" (click)="abrirModalEdicion(relleno)">Editar</button>
-          </td>
-        </ng-container>
+            <!-- Acciones Column -->
+            <ng-container matColumnDef="acciones">
+                <th mat-header-cell *matHeaderCellDef> Acciones </th>
+                <td mat-cell *matCellDef="let relleno">
+                    <button mat-button color="primary" (click)="abrirModalEdicion(relleno)">Editar</button>
+                </td>
+            </ng-container>
   
-        <!-- Header and Row Definitions -->
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
+            <!-- Header and Row Definitions -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
     </div>
   
     <!-- Paginación -->
     <br>
     <nav aria-label="Page navigation">
-      <ul class="pagination justify-content-center">
-        <li class="page-item" [class.disabled]="currentPage === 1">
-          <a class="page-link" (click)="previousPage()" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-          </a>
-        </li>
-        <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
-          <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
-        </li>
-        <li class="page-item" [class.disabled]="currentPage === totalPages">
-          <a class="page-link" (click)="nextPage()" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-          </a>
-        </li>
-      </ul>
+        <ul class="pagination justify-content-center">
+            <li class="page-item" [class.disabled]="currentPage === 1">
+                <a class="page-link" (click)="previousPage()" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+                <a class="page-link" (click)="goToPage(page)">{{ page }}</a>
+            </li>
+            <li class="page-item" [class.disabled]="currentPage === totalPages">
+                <a class="page-link" (click)="nextPage()" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
     </nav>
   
     <!-- Botón para abrir el modal de agregar -->
     <button mat-fab color="primary" (click)="abrirModalAgregar()" class="fab-button">+</button>
   </app-sistema>
+  
   

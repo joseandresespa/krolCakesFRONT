@@ -12,17 +12,16 @@ import { CatalogosService } from 'src/services/catalogos.service';
 })
 export class RellenoComponent implements OnInit {
   displayedColumns: string[] = ['id', 'sabor_relleno', 'acciones'];
-  
-  // Se inicializa el array con un dato de prueba
   rellenos: relleno[] = []; 
-
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalPages: number = 1;
   pages: number[] = [];
   dataSource: relleno[] = [];
+  searchQuery: string = ''; // Variable para el buscador
+  sortDirection: 'asc' | 'desc' = 'asc'; // Dirección de ordenamiento
 
-  constructor(public dialog: MatDialog,private service: CatalogosService) { }
+  constructor(public dialog: MatDialog, private service: CatalogosService) { }
 
   ngOnInit(): void {
     this.service.rellenos().subscribe((datos: relleno[]) => {
@@ -30,8 +29,9 @@ export class RellenoComponent implements OnInit {
       this.updatePagination();
     });
   }
+
   updatePagination(): void {
-    this.totalPages = Math.ceil(this.rellenos.length / this.itemsPerPage);
+    this.totalPages = Math.ceil(this.filteredAndSortedData().length / this.itemsPerPage);
     this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     this.paginate();
   }
@@ -39,7 +39,8 @@ export class RellenoComponent implements OnInit {
   paginate(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    this.dataSource = this.rellenos.slice(startIndex, endIndex);
+
+    this.dataSource = this.filteredAndSortedData().slice(startIndex, endIndex);
   }
 
   previousPage(): void {
@@ -61,6 +62,30 @@ export class RellenoComponent implements OnInit {
     this.paginate();
   }
 
+  // Filtrado por búsqueda y orden
+  filteredAndSortedData(): relleno[] {
+    return this.rellenos
+      .filter(relleno => relleno.sabor_relleno && relleno.sabor_relleno.toLowerCase().includes(this.searchQuery.toLowerCase())) // Filtrado por búsqueda
+      .sort((a, b) => {
+        const nameA = a.sabor_relleno || ''; // Usar un string vacío si es undefined
+        const nameB = b.sabor_relleno || ''; // Usar un string vacío si es undefined
+        const comparison = nameA.localeCompare(nameB);
+        return this.sortDirection === 'asc' ? comparison : -comparison;
+      });
+  }
+
+  // Manejar cambio de búsqueda
+  onSearchQueryChange(query: string): void {
+    this.searchQuery = query;
+    this.updatePagination();
+  }
+
+  // Alternar dirección de orden
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.paginate();
+  }
+
   eliminarRelleno(relleno: relleno): void {
     console.log('Relleno eliminado:', relleno);
     this.rellenos = this.rellenos.filter(r => r.id !== relleno.id);
@@ -78,25 +103,24 @@ export class RellenoComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.service.nuevoRelleno(result).subscribe(response => {
-        const nuevo: relleno = {
-          id: this.rellenos.length + 1,
-          sabor_relleno: result.sabor_relleno
-        };
-        this.rellenos.push(nuevo);
-        this.updatePagination();
+          const nuevo: relleno = {
+            id: this.rellenos.length + 1,
+            sabor_relleno: result.sabor_relleno
+          };
+          this.rellenos.push(nuevo);
+          this.updatePagination();
+        });
       }
-    )};
-  });
-
+    });
   }
-//EDITAR
+
   abrirModalEdicion(relleno: relleno): void {
     const dialogRef = this.dialog.open(ModalEditarComponent, {
       width: '400px',
       data: {
         titulo: 'Editar Relleno',
         campos: ['sabor_relleno'],
-        valores: { sabor_relleno: relleno.sabor_relleno } // Precargar el valor actual del relleno
+        valores: { sabor_relleno: relleno.sabor_relleno }
       }
     });
 

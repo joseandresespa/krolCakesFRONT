@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
 import { masa } from 'src/app/models/masa.interface';
-import { ModalEditarComponent } from '../modal-editar/modal-editar.component'; // importar el componente de edición
+import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 import { CatalogosService } from 'src/services/catalogos.service';
-
 
 @Component({
   selector: 'app-masas',
@@ -13,17 +12,16 @@ import { CatalogosService } from 'src/services/catalogos.service';
 })
 export class MasasComponent implements OnInit {
   displayedColumns: string[] = ['id', 'sabor_masa', 'acciones'];
-
-  // Se inicializa el array para que quede vacio
-  masas: masa [] = [];
-
+  masas: masa[] = [];
+  dataSource: masa[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalPages: number = 1;
   pages: number[] = [];
-  dataSource: masa[] = [];
+  searchQuery: string = ''; // Para la búsqueda
+  sortDirection: 'asc' | 'desc' = 'asc'; // Para la ordenación
 
-  constructor(public dialog: MatDialog,private service: CatalogosService) { }
+  constructor(public dialog: MatDialog, private service: CatalogosService) { }
 
   ngOnInit(): void {
     this.service.masas().subscribe((datos: masa[]) => {
@@ -39,9 +37,12 @@ export class MasasComponent implements OnInit {
   }
 
   paginate(): void {
+    const filteredMasas = this.filteredAndSortedData();
+
+    // Paginación
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    this.dataSource = this.masas.slice(startIndex, endIndex);
+    this.dataSource = filteredMasas.slice(startIndex, endIndex);
   }
 
   previousPage(): void {
@@ -63,37 +64,52 @@ export class MasasComponent implements OnInit {
     this.paginate();
   }
 
+  // Filtrado por búsqueda y orden
+  filteredAndSortedData(): masa[] {
+    return this.masas
+      .filter(masa => masa.sabor_masa && masa.sabor_masa.toLowerCase().includes(this.searchQuery.toLowerCase())) // Filtrado por búsqueda
+      .sort((a, b) => {
+        const saborA = a.sabor_masa || ''; // Usar un string vacío si es undefined
+        const saborB = b.sabor_masa || ''; // Usar un string vacío si es undefined
+        const comparison = saborA.localeCompare(saborB);
+        return this.sortDirection === 'asc' ? comparison : -comparison;
+      });
+  }
+
+  onSearchChange(): void {
+    this.currentPage = 1; // Reiniciar a la primera página al buscar
+    this.paginate();
+  }
+
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.paginate();
+  }
 
   abrirModal(): void {
     const dialogRef = this.dialog.open(ModalGenericoComponent, {
       width: '400px',
-      data: {
-        titulo: 'Agregar Masa',
-        campos: ['sabor_masa']
-      }
+      data: { titulo: 'Agregar Masa', campos: ['sabor_masa'] }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.service.nuevaMasa(result).subscribe(response => {
-        const nuevo: masa = {
-          id: this.masas.length + 1,
-          sabor_masa: result.sabor_masa
-        };
-        this.masas.push(nuevo);
-        this.updatePagination();
+          const nuevo: masa = { id: this.masas.length + 1, sabor_masa: result.sabor_masa };
+          this.masas.push(nuevo);
+          this.updatePagination();
+        });
       }
-    )};
-  });
+    });
   }
-//EDITAR
+
   abrirModalEditar(masa: masa): void {
     const dialogRef = this.dialog.open(ModalEditarComponent, {
       width: '400px',
       data: {
         titulo: 'Editar Masa',
         campos: ['sabor_masa'],
-        valores: { sabor_masa: masa.sabor_masa } // Precargar el valor actual de la masa
+        valores: { sabor_masa: masa.sabor_masa }
       }
     });
 
@@ -103,15 +119,12 @@ export class MasasComponent implements OnInit {
         if (editado) {
           editado.sabor_masa = result.sabor_masa;
           this.updatePagination();
-        }
-        this.service.actualizarMasa(editado).subscribe(response => {
-          const editado = this.masas.find(p => p.id === masa.id);
-          if (editado) {
-            editado.sabor_masa = result.sabor_masa;
+          this.service.actualizarMasa(editado).subscribe(response => {
             this.updatePagination();
-          }
-        });
+          });
+        }
       }
     });
   }
 }
+

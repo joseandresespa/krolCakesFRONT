@@ -5,25 +5,24 @@ import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 import { cliente } from 'src/app/models/cliente.interface'; 
 import { CatalogosService } from 'src/services/catalogos.service';
 
-
 @Component({
   selector: 'app-cliente',
   templateUrl: './cliente.component.html',
   styleUrls: ['./cliente.component.css']
 })
 export class ClienteComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'nombre', 'telefono','nit', 'acciones'];
-
-  // array para que quede vacío
+  displayedColumns: string[] = ['id', 'nombre', 'telefono', 'nit', 'acciones'];
   clientes: cliente[] = []; 
-
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalPages: number = 1;
   pages: number[] = [];
   dataSource: cliente[] = [];
+  
+  searchQuery: string = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
 
-  constructor(public dialog: MatDialog ,private service: CatalogosService) {}
+  constructor(public dialog: MatDialog, private service: CatalogosService) {}
 
   ngOnInit(): void {
     this.service.clientes().subscribe((cliente: cliente[]) => {
@@ -33,7 +32,7 @@ export class ClienteComponent implements OnInit {
   }
 
   updatePagination(): void {
-    this.totalPages = Math.ceil(this.clientes.length / this.itemsPerPage);
+    this.totalPages = Math.ceil(this.filteredAndSortedData().length / this.itemsPerPage);
     this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     this.paginate();
   }
@@ -41,7 +40,7 @@ export class ClienteComponent implements OnInit {
   paginate(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    this.dataSource = this.clientes.slice(startIndex, endIndex);
+    this.dataSource = this.filteredAndSortedData().slice(startIndex, endIndex);
   }
 
   previousPage(): void {
@@ -63,7 +62,29 @@ export class ClienteComponent implements OnInit {
     this.paginate();
   }
 
+  // Filtrado por búsqueda y orden
+  filteredAndSortedData(): cliente[] {
+    return this.clientes
+      .filter(cliente => 
+        cliente.nombre && cliente.nombre.toLowerCase().includes(this.searchQuery.toLowerCase())
+      )
+      .sort((a, b) => {
+        const nameA = a.nombre || ''; 
+        const nameB = b.nombre || ''; 
+        const comparison = nameA.localeCompare(nameB);
+        return this.sortDirection === 'asc' ? comparison : -comparison;
+      });
+  }
 
+  onSearchQueryChange(query: string): void {
+    this.searchQuery = query;
+    this.updatePagination();
+  }
+
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.updatePagination();
+  }
 
   abrirModal(): void {
     const dialogRef = this.dialog.open(ModalGenericoComponent, {
@@ -82,14 +103,13 @@ export class ClienteComponent implements OnInit {
     });
   }
 
-
   // EDITAR
   editarCliente(cliente: cliente): void {
     const dialogRef = this.dialog.open(ModalEditarComponent, {
       width: '400px',
       data: {
         titulo: 'Editar Cliente',
-        campos: ['nombre', 'telefono','nit'],
+        campos: ['nombre', 'telefono', 'nit'],
         valores: {
           nombre: cliente.nombre,
           telefono: cliente.telefono,
@@ -105,20 +125,11 @@ export class ClienteComponent implements OnInit {
           clienteActualizado.nombre = result.nombre;
           clienteActualizado.telefono = result.telefono;
           clienteActualizado.nit = result.nit;
-         
           this.updatePagination();
         }
-        this.service.actualizarCliente(clienteActualizado).subscribe(response => {
-          // Actualizar el producto en la lista local si es necesario
-          const clienteEditado = this.clientes.find(p => p.id === cliente.id);
-          if (clienteEditado) {
-            clienteEditado.nombre = result.nombre;
-            clienteEditado.telefono = result.telefono;
-            clienteEditado.nit = result.precio_online;
-            this.updatePagination();
-          }
-        });
+        this.service.actualizarCliente(clienteActualizado).subscribe();
       }
     });
   }
 }
+

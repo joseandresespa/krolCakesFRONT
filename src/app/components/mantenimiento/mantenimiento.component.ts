@@ -6,7 +6,6 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 import { Usuario, UsuarioCompleto } from 'src/app/models/usuario.interface'; 
 import { CatalogosService } from 'src/services/catalogos.service'; 
 
-
 @Component({
   selector: 'app-mantenimiento',
   templateUrl: './mantenimiento.component.html',
@@ -14,17 +13,14 @@ import { CatalogosService } from 'src/services/catalogos.service';
 })
 export class MantenimientoComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'correo', 'contraseña', 'visibilidad', 'rol', 'acciones'];
-  dataSource: UsuarioCompleto[] = []; // Array con todos los datos
-  filteredData: UsuarioCompleto[] = []; // Array con los datos filtrados
-  selectedOrder: string = 'none'; // Orden seleccionado
-  
-  
-  // Paginación
-  currentPage = 1;
-  itemsPerPage = 5;
-  totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
+  dataSource: UsuarioCompleto[] = [];
+  filteredData: UsuarioCompleto[] = [];
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalPages: number = 1;
   pages: number[] = [];
-  filterValue: string = ''; // Valor de búsqueda
+  filterValue: string = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
 
   constructor(private dialog: MatDialog, private service: CatalogosService) { }
 
@@ -36,8 +32,7 @@ export class MantenimientoComponent implements OnInit {
     this.service.usuarios().subscribe(data => {
       this.dataSource = data;
       this.filteredData = data;
-      this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
-      this.calculatePages();
+      this.updatePagination();
     });
   }
 
@@ -48,20 +43,21 @@ export class MantenimientoComponent implements OnInit {
         String(value).toLowerCase().includes(this.filterValue)
       );
     });
-    this.sortData(); // Aplica el ordenamiento después de filtrar
-    this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
-    this.calculatePages();
-  }
-  
-  sortData() {
-    if (this.selectedOrder === 'asc') {
-      this.filteredData.sort((a, b) => (a.nombre ?? '').localeCompare(b.nombre ?? ''));
-    } else if (this.selectedOrder === 'desc') {
-      this.filteredData.sort((a, b) => (b.nombre ?? '').localeCompare(a.nombre ?? ''));
-    }
+    this.sortData();
+    this.updatePagination();
   }
 
-  calculatePages() {
+  sortData() {
+    this.filteredData.sort((a, b) => {
+      const nameA = a.nombre ?? '';
+      const nameB = b.nombre ?? '';
+      return this.sortDirection === 'asc' ? nameA.localeCompare(nameB) : nameB.localeCompare(nameA);
+    });
+    this.updatePagination();
+  }
+
+  updatePagination(): void {
+    this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
     this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
   }
 
@@ -89,31 +85,28 @@ export class MantenimientoComponent implements OnInit {
   editUser(user: any) {
     const dialogRef = this.dialog.open(EditarUsuarioDialogComponent, {
       width: '400px',
-      data: { ...user } // Pasa los datos del usuario al diálogo
+      data: { ...user }
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Actualiza el usuario en la dataSource
         const index = this.dataSource.findIndex(u => u.id_usuario === user.id);
         if (index !== -1) {
-          this.dataSource[index] = result; // Reemplaza el usuario editado
-          this.applyFilter({ target: { value: this.filterValue } } as any); // Vuelve a aplicar el filtro
+          this.dataSource[index] = result;
+          this.applyFilter({ target: { value: this.filterValue } } as any);
         }
       }
     });
   }
 
   deleteUser(user: any) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent); // Abre el diálogo de confirmación
+    const dialogRef = this.dialog.open(ConfirmDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Si el usuario confirma la eliminación, procede a eliminarlo
         this.dataSource = this.dataSource.filter(u => u.id_usuario !== user.id);
         this.filteredData = this.filteredData.filter(u => u.id_usuario !== user.id);
-        this.totalPages = Math.ceil(this.filteredData.length / this.itemsPerPage);
-        this.calculatePages();
+        this.updatePagination();
       }
     });
   }
@@ -126,14 +119,17 @@ export class MantenimientoComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.dataSource.push({
-          id: this.dataSource.length + 1, // Genera un nuevo ID
-          ...result,                      // Los datos del nuevo usuario
-          visibilidad: 'Visible'          // Asigna visibilidad por defecto
+          id: this.dataSource.length + 1,
+          ...result,
+          visibilidad: 'Visible'
         });
-        this.applyFilter({ target: { value: this.filterValue } } as any); // Vuelve a aplicar el filtro
+        this.applyFilter({ target: { value: this.filterValue } } as any);
       }
     });
   }
 
-  
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.sortData();
+  }
 }

@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { unidadmedida } from 'src/app/models/unidadmedida.interface';
 import { CatalogosService } from 'src/services/catalogos.service';
-import { ModaleditarUnidadComponent } from './modaleditar-unidad/modaleditar-unidad.component';
-import { ModalAgregarUnidadComponent } from './modal-agregar-unidad/modal-agregar-unidad.component';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
 import { ModalEditarComponent } from '../modal-editar/modal-editar.component'; 
 
@@ -14,8 +12,6 @@ import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 })
 export class UnidadMedidaComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'acciones'];
-
-  // array vacio
   unidadmedida: unidadmedida[] = [];
   
   currentPage: number = 1;
@@ -23,8 +19,11 @@ export class UnidadMedidaComponent implements OnInit {
   totalPages: number = 1;
   pages: number[] = [];
   dataSource: unidadmedida[] = [];
+  
+  searchQuery: string = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
 
-  constructor(public dialog: MatDialog,private service: CatalogosService) { }
+  constructor(public dialog: MatDialog, private service: CatalogosService) { }
 
   ngOnInit(): void {
     this.service.unidadesCosto().subscribe((datos: unidadmedida[]) => {
@@ -42,7 +41,7 @@ export class UnidadMedidaComponent implements OnInit {
   paginate(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    this.dataSource = this.unidadmedida.slice(startIndex, endIndex);
+    this.dataSource = this.filteredAndSortedData().slice(startIndex, endIndex);
   }
 
   previousPage(): void {
@@ -64,14 +63,36 @@ export class UnidadMedidaComponent implements OnInit {
     this.paginate();
   }
 
-  //Editar medida
+  // Filtrado por búsqueda y orden
+  filteredAndSortedData(): unidadmedida[] {
+    return this.unidadmedida
+      .filter(unidad => unidad.nombre && unidad.nombre.toLowerCase().includes(this.searchQuery.toLowerCase())) // Filtrado por búsqueda
+      .sort((a, b) => {
+        const nameA = a.nombre || ''; // Usar un string vacío si es undefined
+        const nameB = b.nombre || ''; // Usar un string vacío si es undefined
+        const comparison = nameA.localeCompare(nameB);
+        return this.sortDirection === 'asc' ? comparison : -comparison;
+      });
+  }
+
+  onSearchQueryChange(query: string): void {
+    this.searchQuery = query;
+    this.paginate();
+  }
+
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.paginate();
+  }
+
+  // Editar unidad de medida
   editarUnidadMedida(unidad: unidadmedida): void {
     const dialogRef = this.dialog.open(ModalEditarComponent, {
       width: '400px',
       data: {
         titulo: 'Editar nombre',
         campos: ['nombre'],
-        valores: { nombre: unidad.nombre } // Precargar el valor actual del relleno
+        valores: { nombre: unidad.nombre }
       }
     });
 
@@ -82,19 +103,12 @@ export class UnidadMedidaComponent implements OnInit {
           editado.nombre = result.nombre;
           this.updatePagination();
         }
-        this.service.actualizarUnidadCosto(editado).subscribe(response => {
-          const editado = this.unidadmedida.find(p => p.id === unidad.id);
-          if (editado) {
-            editado.nombre = result.nombre;
-            this.updatePagination();
-          }
-        });
+        this.service.actualizarUnidadCosto(editado).subscribe();
       }
     });
   }
-  
 
-  //Agregar medida
+  // Agregar unidad de medida
   agregarUnidadMedida(): void {
     const dialogRef = this.dialog.open(ModalGenericoComponent, {
       width: '400px',
@@ -106,20 +120,15 @@ export class UnidadMedidaComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.service.nuevaUnidadCosto(result).subscribe(response => {
-        const nuevo: unidadmedida = {
-          id: this.unidadmedida.length + 1,
-          nombre: result.nombre
-        };
-        this.unidadmedida.push(nuevo);
-        this.updatePagination();
+          const nuevo: unidadmedida = {
+            id: this.unidadmedida.length + 1,
+            nombre: result.nombre
+          };
+          this.unidadmedida.push(nuevo);
+          this.updatePagination();
+        });
       }
-    )};
-  });
-
+    });
   }
-  
-
-
-  
-
 }
+

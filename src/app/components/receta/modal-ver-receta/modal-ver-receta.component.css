@@ -1,0 +1,26 @@
+/* Estilos generales del modal */
+mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espaciado entre los elementos */
+}
+
+/* Estilo para el textarea */
+textarea {
+    width: 100%; /* Hacer que el textarea ocupe todo el ancho */
+    height: 300px; /* Ajustar la altura del textarea */
+    resize: none; /* Evitar redimensionamiento */
+    padding: 10px; /* Espaciado interno */
+    font-size: 16px; /* Ajustar tamaño de fuente */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 4px; /* Esquinas redondeadas */
+}
+
+/* Estilo para el input */
+input {
+    width: 100%; /* Hacer que el input ocupe todo el ancho */
+    padding: 10px; /* Espaciado interno */
+    font-size: 16px; /* Ajustar tamaño de fuente */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 4px; /* Esquinas redondeadas */
+}

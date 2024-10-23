@@ -89,6 +89,7 @@ import { CostoComponent } from './components/agenda/costo/costo.component';
 import { InsumoUtensilioComponent } from './components/insumo-utensilio/insumo-utensilio.component';
 import { ModalAgregarInsumoComponent } from './components/insumo-utensilio/modal-agregar-insumo/modal-agregar-insumo.component';
 import { ModalEditarInsumoComponent } from './components/insumo-utensilio/modal-editar-insumo/modal-editar-insumo.component';
+import { ModalVerRecetaComponent } from './components/receta/modal-ver-receta/modal-ver-receta.component';
 
 
 
@@ -166,6 +167,7 @@ import { ModalEditarInsumoComponent } from './components/insumo-utensilio/modal-
       InsumoUtensilioComponent,
       ModalAgregarInsumoComponent,
       ModalEditarInsumoComponent,
+      ModalVerRecetaComponent,
       
       
       

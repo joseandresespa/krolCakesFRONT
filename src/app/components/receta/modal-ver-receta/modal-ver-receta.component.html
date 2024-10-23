@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Ver Receta</h2>
+<mat-dialog-content>
+  <div>
+    <label for="nombre">Nombre:</label>
+    <input id="nombre" [(ngModel)]="data.receta.nombre" />
+  </div>
+  <div>
+    <label for="descripcion">Descripción:</label>
+    <textarea id="descripcion" [(ngModel)]="data.receta.descripcion" rows="5"></textarea>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onCancel()">Cancelar</button>
+  <button mat-button color="primary" (click)="onSave()">Guardar</button>
+</mat-dialog-actions>
+

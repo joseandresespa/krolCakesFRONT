@@ -5,7 +5,6 @@ import { ModalEditarInsumoComponent } from './modal-editar-insumo/modal-editar-i
 import { insumoutensilio } from 'src/app/models/insumoutensilio.interface';
 import { CatalogosService } from 'src/services/catalogos.service';
 
-
 @Component({
   selector: 'app-insumo-utensilio',
   templateUrl: './insumo-utensilio.component.html',
@@ -14,8 +13,8 @@ import { CatalogosService } from 'src/services/catalogos.service';
 export class InsumoUtensilioComponent implements OnInit {
 
   insumosUtensilios: insumoutensilio[] = [];
-  displayedColumns: string[] = ['id', 'tipo','nombre','nombre_unidad_medida','precio_unitario',
-    'cantidad', 'inventarioRenovable','fecha_ing','fecha_ven', 'acciones'];
+  displayedColumns: string[] = ['id', 'tipo', 'nombre', 'nombre_unidad_medida', 'precio_unitario',
+    'cantidad', 'inventarioRenovable', 'fecha_ing', 'fecha_ven', 'acciones'];
 
   currentPage: number = 1;
   itemsPerPage: number = 5;
@@ -23,7 +22,10 @@ export class InsumoUtensilioComponent implements OnInit {
   pages: number[] = [];
   dataSource: insumoutensilio[] = [];
 
-  constructor(public dialog: MatDialog ,private service: CatalogosService) {}
+  searchQuery: string = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
+
+  constructor(public dialog: MatDialog, private service: CatalogosService) {}
 
   ngOnInit(): void {
     this.service.insumos().subscribe((insumo: insumoutensilio[]) => {
@@ -31,11 +33,9 @@ export class InsumoUtensilioComponent implements OnInit {
       this.updatePagination();
     });
   }
-  
-  
 
   updatePagination(): void {
-    this.totalPages = Math.ceil(this.insumosUtensilios.length / this.itemsPerPage);
+    this.totalPages = Math.ceil(this.filteredAndSortedData().length / this.itemsPerPage);
     this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     this.paginate();
   }
@@ -43,7 +43,7 @@ export class InsumoUtensilioComponent implements OnInit {
   paginate(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    this.dataSource = this.insumosUtensilios.slice(startIndex, endIndex);
+    this.dataSource = this.filteredAndSortedData().slice(startIndex, endIndex);
   }
 
   previousPage(): void {
@@ -65,57 +65,60 @@ export class InsumoUtensilioComponent implements OnInit {
     this.paginate();
   }
 
+  // Filtrado por búsqueda y orden
+  filteredAndSortedData(): insumoutensilio[] {
+    return this.insumosUtensilios
+      .filter(insumo => 
+        insumo.nombre && insumo.nombre.toLowerCase().includes(this.searchQuery.toLowerCase())) // Filtrado por búsqueda
+      .sort((a, b) => {
+        const nameA = a.nombre || ''; // Usar un string vacío si es undefined
+        const nameB = b.nombre || ''; // Usar un string vacío si es undefined
+        const comparison = nameA.localeCompare(nameB);
+        return this.sortDirection === 'asc' ? comparison : -comparison;
+      });
+  }
 
+  onSearchQueryChange(query: string): void {
+    this.searchQuery = query;
+    this.updatePagination();
+  }
+
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.paginate();
+  }
 
   openAddModal() {
     const dialogRef = this.dialog.open(ModalAgregarInsumoComponent, {
       width: '400px'
     });
-   
+
     dialogRef.afterClosed().subscribe(result => {
-      console.log('Modal de agregar cerrado');
-      
-      if (result) { // Verifica si hay datos devueltos
-        this.service.nuevoInsumo(result).subscribe({
-          next: (response) => {
-            console.log('Insumo agregado con éxito:', response);
-            // Aquí puedes manejar la respuesta, actualizar la lista de insumos, etc.
-          },
-          error: (error) => {
-            console.error('Error al agregar insumo:', error);
-            // Maneja el error aquí
-          }
+      if (result) {
+        this.service.nuevoInsumo(result).subscribe(response => {
+          this.insumosUtensilios.push(response); // Actualiza la lista de insumos con la respuesta
+          this.updatePagination(); // Actualiza la paginación
         });
       }
     });
   }
-  
 
   openEditModal(insumo: insumoutensilio) {
     const dialogRef = this.dialog.open(ModalEditarInsumoComponent, {
       width: '400px',
       data: { ...insumo }
     });
-  
+
     dialogRef.afterClosed().subscribe(result => {
-      console.log('Modal de agregar cerrado', result); // Aquí deberías ver los datos que envías
-    
-      if (result) { // Verifica si hay datos devueltos
-        this.service.Actualizarinsumo(result).subscribe({
-          next: (response) => {
-            console.log('Insumo agregado con éxito:', response);
-            // Aquí puedes manejar la respuesta, actualizar la lista de insumos, etc.
-          },
-          error: (error) => {
-            console.error('Error al agregar insumo:', error);
-            // Maneja el error aquí
+      if (result) {
+        this.service.Actualizarinsumo(result).subscribe(response => {
+          const index = this.insumosUtensilios.findIndex(i => i.id === result.id);
+          if (index !== -1) {
+            this.insumosUtensilios[index] = result; // Actualiza el insumo editado
+            this.updatePagination(); // Actualiza la paginación
           }
         });
       }
     });
-    
   }
-  
-
-
 }

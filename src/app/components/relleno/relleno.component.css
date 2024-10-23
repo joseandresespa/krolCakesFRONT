@@ -48,3 +48,17 @@ table {
     margin: 0; /* Elimina el margen del h2 */
     font-size: 1.2em; /* Tamaño de fuente ajustable */
 }
+
+/* Estilos para el buscador */
+.search-container {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0; /* Margen vertical para separación */
+}
+
+.search-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 300px; /* Ancho fijo para el input */
+}

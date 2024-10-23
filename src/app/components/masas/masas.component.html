@@ -3,43 +3,49 @@
   <div class="titulo-container">
     <h2>MASAS</h2>
   </div>
-  
+
+  <!-- Contenedor para el buscador y los botones de ordenamiento -->
+  <div class="search-container">
+    <input
+      type="text"
+      placeholder="Buscar por sabor..."
+      [(ngModel)]="searchQuery"
+      (input)="onSearchChange()"
+      class="search-input"
+    />
+    <button mat-button (click)="toggleSortDirection()">
+      Ordenar {{ sortDirection === 'asc' ? '↓' : '↑' }}
+    </button>
+  </div>
 
   <div class="table-container mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-      <!-- ID Column -->
       <ng-container matColumnDef="id">
         <th mat-header-cell *matHeaderCellDef> ID </th>
         <td mat-cell *matCellDef="let masa"> {{ masa.id }} </td>
       </ng-container>
 
-      <!-- Sabor de Masa Column -->
       <ng-container matColumnDef="sabor_masa">
         <th mat-header-cell *matHeaderCellDef> Sabor </th>
         <td mat-cell *matCellDef="let masa"> {{ masa.sabor_masa }} </td>
       </ng-container>
 
-      <!-- Acciones Column -->
       <ng-container matColumnDef="acciones">
         <th mat-header-cell *matHeaderCellDef> Acciones </th>
         <td mat-cell *matCellDef="let masa">
-
           <button mat-button color="primary" (click)="abrirModalEditar(masa)">Editar</button>
         </td>
       </ng-container>
 
-      <!-- Header and Row Definitions -->
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
   </div>
 
-  <!-- Botón para abrir el modal -->
   <div class="button-container">
     <button mat-fab color="primary" (click)="abrirModal()">+</button>
   </div>
 
-  <!-- Paginación -->
   <br>
   <nav aria-label="Page navigation">
     <ul class="pagination justify-content-center">

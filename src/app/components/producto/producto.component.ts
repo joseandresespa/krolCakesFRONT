@@ -1,10 +1,9 @@
-import { Component, OnInit, Provider } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 import { ModalGenericoComponent } from '../modal-generico/modal-generico.component';
 import { producto } from 'src/app/models/producto.interface';
 import { CatalogosService } from 'src/services/catalogos.service';
-
 
 @Component({
   selector: 'app-producto',
@@ -13,15 +12,16 @@ import { CatalogosService } from 'src/services/catalogos.service';
 })
 export class ProductoComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'descripcion', 'precio_online', 'acciones'];
-  
-  // Array vacio
-  productos: producto[] = [];
 
+  productos: producto[] = [];
+  dataSource: producto[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalPages: number = 1;
   pages: number[] = [];
-  dataSource: producto[] = [];
+  
+  searchQuery: string = ''; // Para el buscador
+  sortDirection: 'asc' | 'desc' = 'asc'; // Dirección de ordenamiento
 
   constructor(private dialog: MatDialog, private service: CatalogosService) { }
 
@@ -39,9 +39,24 @@ export class ProductoComponent implements OnInit {
   }
 
   paginate(): void {
+    const filteredProducts = this.filteredAndSortedProducts();
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    this.dataSource = this.productos.slice(startIndex, endIndex);
+    this.dataSource = filteredProducts.slice(startIndex, endIndex);
+  }
+
+  // Filtrado por búsqueda
+  filteredAndSortedProducts(): producto[] {
+    return this.productos
+      .filter(producto => 
+        producto.nombre?.toLowerCase().includes(this.searchQuery.toLowerCase())
+      )
+      .sort((a, b) => {
+        const nameA = a.nombre || ''; // Usar un string vacío si es undefined
+        const nameB = b.nombre || ''; // Usar un string vacío si es undefined
+        const comparison = nameA.localeCompare(nameB);
+        return this.sortDirection === 'asc' ? comparison : -comparison;
+      });
   }
 
   previousPage(): void {
@@ -64,13 +79,10 @@ export class ProductoComponent implements OnInit {
   }
 
   eliminarProducto(producto: producto): void {
-    console.log('Producto eliminado:', producto);
     this.productos = this.productos.filter(p => p.id !== producto.id);
     this.updatePagination();
   }
 
-  
-// EDITAR
   editarProducto(producto: producto): void {
     const dialogRef = this.dialog.open(ModalEditarComponent, {
       data: {
@@ -86,22 +98,17 @@ export class ProductoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Crear un objeto con los datos actualizados
         const productoActualizado = {
-          id: producto.id, // Necesitas enviar el ID del producto para identificar cuál actualizar
+          id: producto.id,
           nombre: result.nombre,
           descripcion: result.descripcion,
           precio_online: result.precio_online
         };
         
-        // Llamar al servicio para actualizar el producto en el backend
-        this.service.actualizarProducto(productoActualizado).subscribe(response => {
-          // Actualizar el producto en la lista local si es necesario
+        this.service.actualizarProducto(productoActualizado).subscribe(() => {
           const productoEditado = this.productos.find(p => p.id === producto.id);
           if (productoEditado) {
-            productoEditado.nombre = result.nombre;
-            productoEditado.descripcion = result.descripcion;
-            productoEditado.precio_online = result.precio_online;
+            Object.assign(productoEditado, result);
             this.updatePagination();
           }
         });
@@ -119,11 +126,9 @@ export class ProductoComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Llamada al servicio para guardar el nuevo producto
         this.service.nuevoProducto(result).subscribe(response => {
-          // Una vez guardado, actualizamos la lista local de productos
           const newProducto: producto = {
-            id: response.id, // El ID devuelto por el backend
+            id: response.id,
             nombre: response.nombre,
             descripcion: response.descripcion,
             precio_online: response.precio_online
@@ -134,4 +139,12 @@ export class ProductoComponent implements OnInit {
       }
     });
   }
+
+  // Métodos para cambiar la dirección de ordenamiento
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.paginate();
+  }
 }
+
+
