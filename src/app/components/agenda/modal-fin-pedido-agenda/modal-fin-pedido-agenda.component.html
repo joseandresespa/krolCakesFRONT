@@ -1,98 +1,98 @@
 <div class="desglose-pedido">
-    <h2>Desglose del Pedido</h2>
-  
-    <div class="info-pedido">
+  <h2>Desglose del Pedido</h2>
+
+  <div class="info-pedido">
       <div class="mb-2">
-        <label><strong>  Cliente:</strong></label>
-        <span>{{ data.nombre }}</span>
-        <label><strong>  Telefono:</strong></label>
-        <span> {{ data.telefono }} </span>
-        <label><strong>  Estado Pedido:</strong></label>
-        <span> {{ data.estado }} </span>
+          <label><strong> Cliente: </strong></label>
+          <span>{{ data.nombre }}</span>
+          <br>
+          <label><strong>Teléfono:</strong></label>
+          <span>{{ data.telefono }}</span>
+          <br>
+          <label><strong>Estado Pedido:</strong></label>
+          <span>{{ data.estado }}</span>
       </div>
+
       <div class="card mb-3 p-3">
-        <h3>Descripcion del pedido</h3>
-        <div class="mb-2">
-          <p>{{ data.descripcion }}</p>
-        </div>
+          <h3>Descripción del pedido</h3>
+          <div class="mb-2">
+              <p>{{ data.descripcion }}</p>
+          </div>
       </div>
-      <!-- Observaciones Seccion en Cuadro -->
+
       <div class="card mb-3 p-3">
-        <h3>Observaciones del pedido</h3>
-        <div class="mb-2">
-          <p>{{ data.observaciones }}</p>
-        </div>
+          <h3>Observaciones del pedido</h3>
+          <div class="mb-2">
+              <p>{{ data.observaciones }}</p>
+          </div>
       </div>
-  
+
       <div class="mb-2">
-        <label><strong>Precio:</strong></label>
-        <span>mano de obra:Q.{{ data.mano_obra }} Insumos: Q.{{ data.presupuesto_insumos }}</span>
-        <span>Total Q.{{ data.total_presupuesto }} </span>
+          <label><strong>Precio:</strong></label> <br>
+          <span>Mano de obra: Q.{{ data.mano_obra }} | Insumos: Q.{{ data.presupuesto_insumos }}</span>
+          <br>
+          <span>Total: Q.{{ data.total_presupuesto }}</span>
       </div>
-  
+
       <div class="card mb-3 p-3">
-        <h3>Entrega</h3>
-        <div class="mb-2">
-          <label><strong>Envio:</strong></label>
-          <p>{{ data.envio }}</p>
-          <label><strong>Fecha:</strong></label>
-          <p>{{ data.fecha }}</p>
-          <label><strong>Hora:</strong></label>
-          <p>{{ data.hora }}</p>
-          <label><strong>Direccion:</strong></label>
-          <p>{{ data.direccion }}</p>
-        </div>
+          <h3>Entrega</h3>
+          <div class="mb-2">
+              <label><strong>Envío:</strong></label>
+              <p>{{ data.envio }}</p>
+              <label><strong>Fecha:</strong></label>
+              <p>{{ data.fecha }}</p>
+              <label><strong>Hora:</strong></label>
+              <p>{{ data.hora }}</p>
+              <label><strong>Dirección:</strong></label>
+              <p>{{ data.direccion }}</p>
+          </div>
       </div>
-  
-    <!-- Observaciones -->
-    <h3>Observaciones</h3>
-    <div *ngIf="data.observacion?.length; else noObservaciones">
-      <ul>
-        <li *ngFor="let observacionh of data.observacion">
-          <p>{{ observacionh.observacion }}</p>
-        </li>
-      </ul>
-    </div>
-    <ng-template #noObservaciones>
-      <p>No hay observaciones.</p>
-    </ng-template>
-  
-      <!-- Imágenes Seccion en Cuadro -->
+
+      <h3>Observaciones</h3>
+      <div *ngIf="data.observacion?.length; else noObservaciones">
+          <ul>
+              <li *ngFor="let observacionh of data.observacion">
+                  <p>{{ observacionh.observacion }}</p>
+              </li>
+          </ul>
+      </div>
+      <ng-template #noObservaciones>
+          <p>No hay observaciones.</p>
+      </ng-template>
+
       <h3>Imágenes de Referencia</h3>
       <div *ngIf="data.imagenes?.length; else noImages">
-        <ul>
-          <li *ngFor="let imagen of data.imagenes">
-            <img [src]="imagen.ruta" alt="Imagen de referencia" width="150" />
-          </li>
-        </ul>
+          <ul>
+              <li *ngFor="let imagen of data.imagenes">
+                  <img [src]="imagen.ruta" alt="Imagen de referencia" width="150" />
+              </li>
+          </ul>
       </div>
       <ng-template #noImages>
-        <p>No hay imágenes de referencia.</p>
+          <p>No hay imágenes de referencia.</p>
       </ng-template>
-    </div>
-  
-    <!-- Productos y total -->
-    <h3>Desglose</h3>
-    <div *ngIf="data.detalles?.length; else noDesglose">
-      <ul>
-        <li *ngFor="let detalle of data.detalles">
-          <p>
-            Producto: {{ detalle.nombre }},
-            masa: {{ detalle.sabor_masa }},
-            relleno: {{ detalle.sabor_relleno }},
-            Cantidad: {{ detalle.cantidad_porciones }},
-            Subtotal: Q.{{ detalle.total }}
-          </p>
-        </li>
-      </ul>
-    </div>
-    <p>
-      Total pedido Q.{{ data.total_presupuesto }},
-    </p>
-    <ng-template #noDesglose>
-      <p>No hay desglose disponible.</p>
-    </ng-template>
-
-    <button class="boton-modal" (click)="openCosto(data)">Finalizar Pedido Costo</button>
   </div>
+
+  <h3>Desglose</h3>
+  <div *ngIf="data.detalles?.length; else noDesglose">
+      <ul>
+          <li *ngFor="let detalle of data.detalles">
+              <p>
+                  Producto: {{ detalle.nombre }},
+                  Masa: {{ detalle.sabor_masa }},
+                  Relleno: {{ detalle.sabor_relleno }},
+                  Cantidad: {{ detalle.cantidad_porciones }},
+                  Subtotal: Q.{{ detalle.total }}
+              </p>
+          </li>
+      </ul>
+  </div>
+  <p>Total pedido: Q.{{ data.total_presupuesto }}</p>
+  <ng-template #noDesglose>
+      <p>No hay desglose disponible.</p>
+  </ng-template>
+
+  <button class="boton-modal" (click)="openCosto(data)">Finalizar Pedido Costo</button>
+</div>
+
   

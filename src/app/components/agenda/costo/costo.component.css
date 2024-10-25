@@ -1,115 +1,113 @@
 /* Estilo general del contenedor */
 .container {
-  margin: 20px auto; /* Centrado del contenedor con margen superior e inferior */
-  padding: 20px; /* Espaciado interno */
-  border: 1px solid #ccc; /* Borde alrededor del contenedor */
-  border-radius: 8px; /* Bordes redondeados */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para efecto de elevación */
-  background-color: #f9f9f9; /* Fondo claro */
-  overflow-x: auto; /* Permitir desplazamiento horizontal si es necesario */
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  overflow-x: auto;
 }
 
 /* Estilo de los títulos */
-.pedido-title,
-.desglose-title {
-  margin-top: 20px; /* Espacio superior */
-  color: #333; /* Color del texto */
+h3, h2 {
+  margin-top: 20px;
+  color: #6a4c93; /* Morado suave */
+  font-size: 1.6em;
 }
 
 .pedido-info {
-  background-color: #ffffff; /* Fondo blanco para el área de información */
-  border: 1px solid #ddd; /* Borde alrededor de la información */
-  border-radius: 5px; /* Bordes redondeados */
-  padding: 15px; /* Espaciado interno */
+  background-color: #fff; 
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
 }
 
 /* Estilo de la lista de desglose */
-.desglose-list {
-  list-style-type: none; /* Quitar los puntos de la lista */
-  padding: 0; /* Quitar el padding de la lista */
+ul {
+  list-style-type: none;
+  padding: 0;
 }
 
-.desglose-item {
-  border-bottom: 1px solid #ddd; /* Borde inferior para separar los items */
-  padding: 10px 0; /* Espacio interno para los items */
+li {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
 }
 
 .total-pedido {
-  font-weight: bold; /* Negrita para el total */
-  color: #4CAF50; /* Color verde para el total */
+  font-weight: bold;
+  color: #bb86fc; /* Morado suave */
 }
 
 /* Estilo de la tabla */
 table {
-  width: 100%; /* Ancho completo */
-  border-collapse: collapse; /* Colapsar bordes */
-  margin-bottom: 20px; /* Espaciado inferior */
-  table-layout: auto; /* Permitir que la tabla ajuste automáticamente el ancho de las columnas */
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  table-layout: auto;
 }
 
-/* Estilo de las celdas de la tabla */
 th, td {
-  border: 1px solid #ddd; /* Borde de celdas */
-  padding: 12px; /* Espaciado interno */
-  text-align: center; /* Alinear texto al centro */
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
 }
 
-/* Estilo de los encabezados de la tabla */
 th {
-  background-color: #4CAF50; /* Fondo verde */
-  color: white; /* Color de texto blanco */
+  background-color: #ae5d01; /* Morado pastel */
+  color: white;
 }
 
 /* Efecto hover en las celdas */
 tr:hover td {
-  background-color: #f1f1f1; /* Fondo gris claro en hover */
+  background-color: #f1e4ff; /* Fondo morado claro en hover */
 }
 
 /* Estilo de los botones */
 button {
-  background-color: #4CAF50; /* Color de fondo verde */
-  color: white; /* Color de texto blanco */
-  border: none; /* Sin borde */
-  padding: 10px 15px; /* Espaciado interno */
-  border-radius: 5px; /* Bordes redondeados */
-  cursor: pointer; /* Cursor pointer para indicar clickeable */
-  transition: background-color 0.3s; /* Transición para el hover */
+  background-color: #bb86fc; /* Morado suave */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-  background-color: #45a049; /* Color verde más oscuro en hover */
+  background-color: #9b59b6; /* Morado más oscuro en hover */
 }
 
 /* Estilo de la sección de subida de imágenes */
 .upload-section {
-  margin-top: 20px; /* Espacio superior */
-  border: 1px dashed #ccc; /* Borde punteado */
-  padding: 15px; /* Espaciado interno */
-  border-radius: 5px; /* Bordes redondeados */
-  background-color: #fff; /* Fondo blanco */
+  margin-top: 20px;
+  border: 1px dashed #bbb;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: #fff;
 }
 
 /* Estilo para las imágenes en miniatura */
 .image-preview {
-  display: flex; /* Usar flexbox para alineación */
-  flex-wrap: wrap; /* Permitir que las imágenes se ajusten */
-  justify-content: center; /* Centrar contenido */
-  margin-top: 10px; /* Espacio superior */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 10px;
 }
 
 .image-preview img {
-  margin: 5px; /* Margen alrededor de las imágenes */
-  border: 1px solid #ddd; /* Borde de las imágenes */
-  border-radius: 4px; /* Bordes redondeados para las imágenes */
-  width: 100px; /* Ancho de las imágenes */
+  margin: 5px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: 100px;
 }
 
 /* Estilo de los selects */
 select {
-  padding: 8px; /* Espaciado interno */
-  border-radius: 4px; /* Bordes redondeados */
-  border: 1px solid #ccc; /* Borde */
-  width: 100%; /* Ancho completo */
-  background-color: #f9f9f9; /* Fondo claro */
-  margin-bottom: 10px; /* Espacio inferior */
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  width: 100%;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
 }

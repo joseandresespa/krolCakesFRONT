@@ -5,7 +5,6 @@ import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 import { tipoevento } from 'src/app/models/tipoevento.interface';
 import { CatalogosService } from 'src/services/catalogos.service';
 
-
 @Component({
   selector: 'app-tipo-evento',
   templateUrl: './tipo-evento.component.html',
@@ -14,26 +13,31 @@ import { CatalogosService } from 'src/services/catalogos.service';
 export class TipoEventoComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'acciones'];
 
-  // array vacio
-  tiposEvento: tipoevento[] = []; 
+  // Array de tipos de evento
+  tiposEvento: tipoevento[] = [];
 
+  // Parámetros de paginación
   currentPage: number = 1;
-  itemsPerPage: number = 2;
+  itemsPerPage: number = 5;
   totalPages: number = 1;
   pages: number[] = [];
   dataSource: tipoevento[] = [];
 
-  constructor(public dialog: MatDialog,private service: CatalogosService) { }
+  // Parámetros de búsqueda y ordenamiento
+  searchQuery: string = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
+
+  constructor(public dialog: MatDialog, private service: CatalogosService) {}
 
   ngOnInit(): void {
-    this.service.tipoEvento().subscribe((cliente: tipoevento[]) => {
-      this.tiposEvento = cliente;
+    this.service.tipoEvento().subscribe((eventos: tipoevento[]) => {
+      this.tiposEvento = eventos;
       this.updatePagination();
     });
   }
 
   updatePagination(): void {
-    this.totalPages = Math.ceil(this.tiposEvento.length / this.itemsPerPage);
+    this.totalPages = Math.ceil(this.filteredAndSortedData().length / this.itemsPerPage);
     this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     this.paginate();
   }
@@ -41,7 +45,7 @@ export class TipoEventoComponent implements OnInit {
   paginate(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    this.dataSource = this.tiposEvento.slice(startIndex, endIndex);
+    this.dataSource = this.filteredAndSortedData().slice(startIndex, endIndex);
   }
 
   previousPage(): void {
@@ -63,12 +67,36 @@ export class TipoEventoComponent implements OnInit {
     this.paginate();
   }
 
+  // Filtrado y ordenamiento
+  filteredAndSortedData(): tipoevento[] {
+    return this.tiposEvento
+      .filter(tipo => tipo.nombre && tipo.nombre.toLowerCase().includes(this.searchQuery.toLowerCase())) // Filtrar por búsqueda
+      .sort((a, b) => {
+        const nameA = a.nombre || ''; // Asegurarse de que no sea undefined
+        const nameB = b.nombre || '';
+        const comparison = nameA.localeCompare(nameB);
+        return this.sortDirection === 'asc' ? comparison : -comparison;
+      });
+  }
+
+  onSearchQueryChange(query: string): void {
+    this.searchQuery = query;
+    this.updatePagination();
+  }
+
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.updatePagination();
+  }
+
+  // Eliminar tipo de evento
   eliminarTipoEvento(tipoEvento: tipoevento): void {
     console.log('Tipo de evento eliminado:', tipoEvento);
     this.tiposEvento = this.tiposEvento.filter(t => t.id !== tipoEvento.id);
     this.updatePagination();
   }
 
+  // Abrir modal para agregar nuevo tipo de evento
   abrirModal(): void {
     const dialogRef = this.dialog.open(ModalGenericoComponent, {
       width: '400px',
@@ -76,24 +104,23 @@ export class TipoEventoComponent implements OnInit {
         titulo: 'Agregar Tipo de Evento',
         campos: ['nombre']
       }
-      
     });
 
     dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.service.nuevoTipoEvento(result).subscribe(response => {
+      if (result) {
+        this.service.nuevoTipoEvento(result).subscribe(response => {
           const nuevo: tipoevento = {
             id: this.tiposEvento.length + 1,
             nombre: result.nombre
           };
           this.tiposEvento.push(nuevo);
           this.updatePagination();
-        }
-      )};
+        });
+      }
     });
   }
 
-  // EDITAR
+  // Editar tipo de evento
   editarTipoEvento(tipoEvento: tipoevento): void {
     const dialogRef = this.dialog.open(ModalEditarComponent, {
       width: '400px',
@@ -113,18 +140,8 @@ export class TipoEventoComponent implements OnInit {
           editado.nombre = result.nombre;
           this.updatePagination();
         }
-        this.service.ActualizarTipoEvento(editado).subscribe(response => {
-          const editado = this.tiposEvento.find(p => p.id === tipoEvento.id);
-          if (editado) {
-            editado.nombre = result.nombre;
-            this.updatePagination();
-          }
-        });
+        this.service.ActualizarTipoEvento(editado).subscribe();
       }
     });
-
   }
-
-
-
 }
