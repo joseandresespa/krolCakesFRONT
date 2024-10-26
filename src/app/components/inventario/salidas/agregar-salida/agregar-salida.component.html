@@ -1,5 +1,5 @@
 <div class="modal-header">  
-    <h5 class="modal-title">Agregar Registro</h5>
+    <h5 class="modal-title">Agregar Salida de inventario</h5>
     <button type="button" class="close" (click)="cerrarModal()">
       <span>&times;</span>
     </button>
@@ -33,10 +33,10 @@
                 <select formControlName="motivo" class="form-control">
                     <option *ngFor="let motivo of motivos" [value]="motivo.id">{{ motivo.nombre }}</option>
                 </select>
-                <button type="button" (click)="eliminarInsumo(i)">Eliminar</button>
+                <button type="button" class="eliminar-insumo" (click)="eliminarInsumo(i)">Eliminar</button>
             </div>
         </div>
-        <button type="button" (click)="agregarInsumo()">Agregar Insumo</button>
+        <button type="button" class="agregar-insumo" (click)="agregarInsumo()">Agregar Insumo</button>
     </form>
 </div>
 <div class="modal-footer">

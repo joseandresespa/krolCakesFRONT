@@ -39,3 +39,10 @@
     color: white;
   }
   
+  /* Estilos para el buscador y botón de ordenamiento */
+.input-container {
+  display: flex;
+  justify-content: center; /* Centra el buscador y el botón de ordenamiento */
+  margin: 20px auto; /* Centra verticalmente el contenedor */
+}
+

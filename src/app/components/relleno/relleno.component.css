@@ -49,16 +49,15 @@ table {
     font-size: 1.2em; /* Tamaño de fuente ajustable */
 }
 
-/* Estilos para el buscador */
-.search-container {
+/* Estilos para el buscador y botón de ordenamiento */
+.input-container {
     display: flex;
-    justify-content: center;
-    margin: 20px 0; /* Margen vertical para separación */
+    justify-content: center; /* Centra el buscador y el botón de ordenamiento */
+    margin: 20px auto; /* Centra verticalmente el contenedor */
 }
 
-.search-input {
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 300px; /* Ancho fijo para el input */
+.input-container input {
+    width: 300px; /* Mantiene el ancho original para el input */
+    margin-right: 10px; /* Espaciado entre el input y el botón */
 }
+

@@ -2,6 +2,14 @@
 
   <h2>Listado de Roles</h2>
 
+  <!-- Buscador -->
+  <div class="input-container">
+    <input [(ngModel)]="searchQuery" (input)="changePage(1)" placeholder="Buscar por rol" />
+    <button mat-button (click)="toggleSortDirection()">
+      Ordenar: {{ sortDirection === 'asc' ? '↓' : '↑' }}
+    </button>
+  </div>
+
   <table mat-table [dataSource]="paginatedRoles" class="mat-elevation-z8">
     <ng-container matColumnDef="id">
       <th mat-header-cell *matHeaderCellDef> ID </th>

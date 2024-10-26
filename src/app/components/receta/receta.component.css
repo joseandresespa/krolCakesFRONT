@@ -40,3 +40,12 @@ table {
     margin: 0; /* Elimina el margen del h2 */
     font-size: 1.2em; /* Tamaño de fuente ajustable */
 }
+
+/* Estilos para el buscador y botón de ordenamiento */
+.input-container {
+    display: flex;
+    justify-content: center; /* Centra el buscador y el botón de ordenamiento */
+    margin: 20px auto; /* Centra verticalmente el contenedor */
+}
+
+

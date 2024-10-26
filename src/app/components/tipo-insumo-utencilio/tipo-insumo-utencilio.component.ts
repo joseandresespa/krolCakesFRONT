@@ -17,12 +17,15 @@ export class TipoInsumoUtencilioComponent implements OnInit {
   tiposInsumoUtencilio: tipoinsumoutensilio[] = []; 
 
   currentPage: number = 1;
-  itemsPerPage: number = 2;
+  itemsPerPage: number = 5;
   totalPages: number = 1;
   pages: number[] = [];
   dataSource: tipoinsumoutensilio[] = [];
 
-  constructor(public dialog: MatDialog,private service: CatalogosService) { }
+  searchQuery: string = ''; // Para el buscador
+  sortDirection: 'asc' | 'desc' = 'asc'; // Dirección de ordenamiento
+
+  constructor(public dialog: MatDialog, private service: CatalogosService) { }
 
   ngOnInit(): void {
     this.service.tipoInsumoUtensilio().subscribe((datos: tipoinsumoutensilio[]) => {
@@ -32,7 +35,7 @@ export class TipoInsumoUtencilioComponent implements OnInit {
   }
 
   updatePagination(): void {
-    this.totalPages = Math.ceil(this.tiposInsumoUtencilio.length / this.itemsPerPage);
+    this.totalPages = Math.ceil(this.filteredAndSortedProducts().length / this.itemsPerPage);
     this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     this.paginate();
   }
@@ -40,7 +43,21 @@ export class TipoInsumoUtencilioComponent implements OnInit {
   paginate(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    this.dataSource = this.tiposInsumoUtencilio.slice(startIndex, endIndex);
+    this.dataSource = this.filteredAndSortedProducts().slice(startIndex, endIndex);
+  }
+
+  // Filtrado por búsqueda y ordenamiento
+  filteredAndSortedProducts(): tipoinsumoutensilio[] {
+    return this.tiposInsumoUtencilio
+      .filter(tipo => 
+        tipo.tipo?.toLowerCase().includes(this.searchQuery.toLowerCase())
+      )
+      .sort((a, b) => {
+        const tipoA = a.tipo || ''; // Usar un string vacío si es undefined
+        const tipoB = b.tipo || ''; // Usar un string vacío si es undefined
+        const comparison = tipoA.localeCompare(tipoB);
+        return this.sortDirection === 'asc' ? comparison : -comparison;
+      });
   }
 
   previousPage(): void {
@@ -80,15 +97,15 @@ export class TipoInsumoUtencilioComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.service.nuevoTipoInsumoUtensilio(result).subscribe(response => {
-        const nuevo: tipoinsumoutensilio = {
-          id: this.tiposInsumoUtencilio.length + 1,
-          tipo: result.tipo
-        };
-        this.tiposInsumoUtencilio.push(nuevo);
-        this.updatePagination();
+          const nuevo: tipoinsumoutensilio = {
+            id: this.tiposInsumoUtencilio.length + 1,
+            tipo: result.tipo
+          };
+          this.tiposInsumoUtencilio.push(nuevo);
+          this.updatePagination();
+        });
       }
-    )};
-  });
+    });
   }
 
   // EDITAR
@@ -121,5 +138,12 @@ export class TipoInsumoUtencilioComponent implements OnInit {
       }
     });
   }
+
+  // Métodos para cambiar la dirección de ordenamiento
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.paginate();
+  }
 }
+
 

@@ -5,7 +5,6 @@ import { ModalEditarComponent } from '../modal-editar/modal-editar.component';
 import { unidadmedidapreciosugerido } from 'src/app/models/unidadmedidapreciosugerido.interface';
 import { CatalogosService } from 'src/services/catalogos.service';
 
-
 @Component({
   selector: 'app-umps',
   templateUrl: './umps.component.html',
@@ -14,14 +13,15 @@ import { CatalogosService } from 'src/services/catalogos.service';
 export class UmpsComponent implements OnInit {
   displayedColumns: string[] = ['id', 'nombre', 'acciones'];
 
-  // array vacio
   umps: unidadmedidapreciosugerido[] = []; 
-
+  dataSource: unidadmedidapreciosugerido[] = [];
   currentPage: number = 1;
   itemsPerPage: number = 5;
   totalPages: number = 1;
   pages: number[] = [];
-  dataSource: unidadmedidapreciosugerido[] = [];
+  
+  searchQuery: string = ''; // Para el buscador
+  sortDirection: 'asc' | 'desc' = 'asc'; // Dirección de ordenamiento
 
   constructor(private dialog: MatDialog, private service: CatalogosService) { }
 
@@ -33,15 +33,30 @@ export class UmpsComponent implements OnInit {
   }
 
   updatePagination(): void {
-    this.totalPages = Math.ceil(this.umps.length / this.itemsPerPage);
+    this.totalPages = Math.ceil(this.filteredAndSortedUmps().length / this.itemsPerPage);
     this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     this.paginate();
   }
 
   paginate(): void {
+    const filteredUmps = this.filteredAndSortedUmps();
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    this.dataSource = this.umps.slice(startIndex, endIndex);
+    this.dataSource = filteredUmps.slice(startIndex, endIndex);
+  }
+
+  // Filtrado por búsqueda
+  filteredAndSortedUmps(): unidadmedidapreciosugerido[] {
+    return this.umps
+      .filter(umps => 
+        umps.nombre?.toLowerCase().includes(this.searchQuery.toLowerCase())
+      )
+      .sort((a, b) => {
+        const nameA = a.nombre || '';
+        const nameB = b.nombre || '';
+        const comparison = nameA.localeCompare(nameB);
+        return this.sortDirection === 'asc' ? comparison : -comparison;
+      });
   }
 
   previousPage(): void {
@@ -80,11 +95,9 @@ export class UmpsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Llamada al servicio para guardar el nuevo producto
         this.service.nuevaUnidadInventario(result).subscribe(response => {
-          // Una vez guardado, actualizamos la lista local de productos
           const newUmps: unidadmedidapreciosugerido = {
-            id: response.id, // El ID devuelto por el backend
+            id: response.id,
             nombre: response.nombre
           };
           this.umps.push(newUmps);
@@ -94,8 +107,6 @@ export class UmpsComponent implements OnInit {
     });
   }
 
-  
-  // EDITAR
   editarUmps(umps: unidadmedidapreciosugerido): void {
     const dialogRef = this.dialog.open(ModalEditarComponent, {
       width: '400px',
@@ -110,15 +121,12 @@ export class UmpsComponent implements OnInit {
     
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        // Crear un objeto con los datos actualizados
         const upmsActualizado = {
-          id: umps.id, // Necesitas enviar el ID del producto para identificar cuál actualizar
+          id: umps.id,
           nombre: result.nombre
         };
         
-        // Llamar al servicio para actualizar el producto en el backend
         this.service.actualizarUnidadInventario(upmsActualizado).subscribe(response => {
-          // Actualizar el producto en la lista local si es necesario
           const umpsEditado = this.umps.find(p => p.id === umps.id);
           if (umpsEditado) {
             umpsEditado.nombre = result.nombre;
@@ -126,6 +134,12 @@ export class UmpsComponent implements OnInit {
           }
         });
       }
-    }
-  )};
+    });
+  }
+
+  // Métodos para cambiar la dirección de ordenamiento
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.paginate();
+  }
 }

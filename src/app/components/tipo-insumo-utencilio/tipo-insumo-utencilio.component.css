@@ -18,6 +18,19 @@ table {
     position: fixed;
     bottom: 20px;
     right: 20px;
+    width: 60px; /* Ancho del contenedor */
+    height: 60px; /* Altura del contenedor */
+    border-radius: 50%; /* Hace que el contenedor sea redondo */
+    background-color: #6A5ACD; /* Color de fondo, puedes cambiarlo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para un efecto de profundidad */
+    transition: background-color 0.3s; /* Transición para el color de fondo */
+}
+
+.button-container:hover {
+    background-color: #7B68EE; /* Cambia el color al pasar el mouse */
 }
   
 .titulo-container {
@@ -40,3 +53,10 @@ table {
     margin: 0; /* Elimina el margen del h2 */
     font-size: 1.2em; /* Tamaño de fuente ajustable */
 }
+
+.input-container {
+    display: flex;
+    justify-content: center; /* Centra el buscador y el botón de ordenamiento */
+    margin: 20px auto; /* Centra verticalmente el contenedor */
+  }
+  

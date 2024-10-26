@@ -1,5 +1,5 @@
 <div class="modal-header">  
-    <h5 class="modal-title">Agregar Registro</h5>
+  <h5 class="modal-title" style="flex: 1; text-align: center;">Agregar Compra</h5>
     <button type="button" class="close" (click)="cerrarModal()">
       <span>&times;</span>
     </button>
@@ -33,10 +33,10 @@
           <input type="number" formControlName="cantidad" class="form-control" placeholder="Cantidad" (input)="calcularSubtotal(i)">
           <input type="number" formControlName="precioCompra" class="form-control" placeholder="Precio de Compra" (input)="calcularSubtotal(i)">
           <input type="text" formControlName="subtotal" class="form-control" placeholder="Subtotal" readonly>
-          <button type="button" (click)="eliminarInsumo(i)">Eliminar</button>
+          <button type="button" class="eliminar-insumo" (click)="eliminarInsumo(i)">Eliminar</button>
         </div>
       </div>
-      <button type="button" (click)="agregarInsumo()">Agregar Insumo</button>
+      <button type="button" class="agregar-insumo" (click)="agregarInsumo()">Agregar Insumo</button>
     </form>
   
     <div>

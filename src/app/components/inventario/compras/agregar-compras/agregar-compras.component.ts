@@ -5,6 +5,7 @@ import { insumoutensilio } from 'src/app/models/insumoutensilio.interface';
 import { proveedor } from 'src/app/models/proveedor.interface';
 import { CatalogosService } from 'src/services/catalogos.service';
 import { InventarioService } from 'src/services/inventario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-agregar-compras',
@@ -88,31 +89,51 @@ export class AgregarComprasComponent implements OnInit {
 
   guardarRegistro() {
     if (this.registroForm.valid) {
-      const compraData: comprainventario = {
-        fecha_compra: this.registroForm.value.fecha,
-        id_proveedor: this.registroForm.value.proveedor,
-        detalleCompra: this.insumos.value.map((insumo: { insumo: any; cantidad: any; precioCompra: any; subtotal: any; }) => ({
-          id_insumo_utensilio: insumo.insumo,
-          cantidad: insumo.cantidad,
-          precio_unitario: insumo.precioCompra,
-          subtotal: insumo.subtotal
-        })),
-        total: this.totalGeneral // Asigna el total general
-      };
+        const compraData: comprainventario = {
+            fecha_compra: this.registroForm.value.fecha,
+            id_proveedor: this.registroForm.value.proveedor,
+            detalleCompra: this.insumos.value.map((insumo: { insumo: any; cantidad: any; precioCompra: any; subtotal: any; }) => ({
+                id_insumo_utensilio: insumo.insumo,
+                cantidad: insumo.cantidad,
+                precio_unitario: insumo.precioCompra,
+                subtotal: insumo.subtotal
+            })),
+            total: this.totalGeneral // Asigna el total general
+        };
 
-      console.log(compraData);
-      // Llama al servicio para enviar la nueva compra
-      this.inventarioService.nuevaCompra(compraData).subscribe(
-        response => {
-          console.log('Compra registrada exitosamente:', response);
-          this.cerrarModal(); // Cierra el modal o realiza otra acción
-        },
-        error => {
-          console.error('Error al registrar la compra:', error);
-        }
-      );
+        console.log(compraData);
+        // Llama al servicio para enviar la nueva compra
+        this.inventarioService.nuevaCompra(compraData).subscribe(
+            response => {
+                console.log('Compra registrada exitosamente:', response);
+                
+                // Muestra el modal de éxito con SweetAlert2
+                Swal.fire({
+                    title: '¡Éxito!',
+                    text: 'Compra registrada exitosamente.',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then(() => {
+                    this.cerrarModal(); // Cierra el modal o realiza otra acción
+                });
+            },
+            error => {
+              
+                console.log('Compra registrada exitosamente:', error);
+                
+                // Muestra el modal de éxito con SweetAlert2
+                Swal.fire({
+                    title: '¡Éxito!',
+                    text: 'Compra registrada exitosamente.',
+                    icon: 'success',
+                    confirmButtonText: 'Aceptar'
+                }).then(() => {
+                    this.cerrarModal(); // Cierra el modal o realiza otra acción
+                });
+            }
+        );
     } else {
-      console.log('Formulario no válido');
+        console.log('Formulario no válido');
     }
-  }
+}
 }

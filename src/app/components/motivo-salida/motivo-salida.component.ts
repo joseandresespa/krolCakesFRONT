@@ -15,14 +15,17 @@ export class MotivoSalidaComponent implements OnInit {
 
   // array vacio
   motivosSalida: MotivoSalida[] = [];
-
-  currentPage: number = 1;
-  itemsPerPage: number = 2;
-  totalPages: number = 1;
-  pages: number[] = [];
   dataSource: MotivoSalida[] = [];
 
-  constructor(public dialog: MatDialog,private service: CatalogosService) { }
+  currentPage: number = 1;
+  itemsPerPage: number = 5;
+  totalPages: number = 1;
+  pages: number[] = [];
+
+  searchQuery: string = ''; // Para el buscador
+  sortDirection: 'asc' | 'desc' = 'asc'; // Dirección de ordenamiento
+
+  constructor(public dialog: MatDialog, private service: CatalogosService) { }
 
   ngOnInit(): void {
     this.service.tipoSalida().subscribe((datos: MotivoSalida[]) => {
@@ -32,7 +35,7 @@ export class MotivoSalidaComponent implements OnInit {
   }
 
   updatePagination(): void {
-    this.totalPages = Math.ceil(this.motivosSalida.length / this.itemsPerPage);
+    this.totalPages = Math.ceil(this.filteredAndSortedMotivosSalida().length / this.itemsPerPage);
     this.pages = Array.from({ length: this.totalPages }, (_, i) => i + 1);
     this.paginate();
   }
@@ -40,7 +43,21 @@ export class MotivoSalidaComponent implements OnInit {
   paginate(): void {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
-    this.dataSource = this.motivosSalida.slice(startIndex, endIndex);
+    this.dataSource = this.filteredAndSortedMotivosSalida().slice(startIndex, endIndex);
+  }
+
+  // Filtrado por búsqueda y ordenamiento
+  filteredAndSortedMotivosSalida(): MotivoSalida[] {
+    return this.motivosSalida
+      .filter(motivo => 
+        motivo.nombre?.toLowerCase().includes(this.searchQuery.toLowerCase())
+      )
+      .sort((a, b) => {
+        const nameA = a.nombre || '';
+        const nameB = b.nombre || '';
+        const comparison = nameA.localeCompare(nameB);
+        return this.sortDirection === 'asc' ? comparison : -comparison;
+      });
   }
 
   previousPage(): void {
@@ -80,15 +97,15 @@ export class MotivoSalidaComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.service.nuevoTipoSalida(result).subscribe(response => {
-        const nuevo: MotivoSalida = {
-          id: this.motivosSalida.length + 1,
-          nombre: result.nombre
-        };
-        this.motivosSalida.push(nuevo);
-        this.updatePagination();
+          const nuevo: MotivoSalida = {
+            id: this.motivosSalida.length + 1,
+            nombre: result.nombre
+          };
+          this.motivosSalida.push(nuevo);
+          this.updatePagination();
+        });
       }
-    )};
-  });
+    });
   }
 
   // EDITAR
@@ -118,5 +135,11 @@ export class MotivoSalidaComponent implements OnInit {
         });
       }
     });
+  }
+
+  // Métodos para cambiar la dirección de ordenamiento
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+    this.paginate();
   }
 }

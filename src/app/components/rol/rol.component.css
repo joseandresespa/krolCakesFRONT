@@ -12,8 +12,8 @@ h2 {
   }
   
   .mat-header-cell {
-    background-color: #790094;
-    color: white;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
     font-weight: bold;
     padding: 12px;
   }
@@ -28,3 +28,8 @@ h2 {
     margin: 5px;
   }
   
+  .input-container {
+    display: flex;
+    justify-content: center; /* Centra el buscador y el botón de ordenamiento */
+    margin: 20px auto; /* Centra verticalmente el contenedor */
+  }

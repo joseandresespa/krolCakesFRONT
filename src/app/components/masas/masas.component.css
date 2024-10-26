@@ -20,7 +20,7 @@ th, td {
     padding: 10px; /* Espaciado interno de las celdas */
     text-align: center; /* Alineación del texto al centro */
     vertical-align: middle; /* Alineación vertical al medio */
-    border: 1px solid #ddd; /* Bordes de las celdas */
+    
 }
 
 .button-container {
@@ -49,3 +49,16 @@ th, td {
     margin: 0; /* Elimina el margen del h2 */
     font-size: 1.2em; /* Tamaño de fuente ajustable */
 }
+
+/* Nuevos estilos para centrar el buscador y el botón de ordenación */
+.search-container {
+    display: flex;
+    justify-content: center; /* Centra los elementos dentro del contenedor */
+    align-items: center; /* Alinea verticalmente */
+    margin: 20px 0; /* Espaciado vertical alrededor del contenedor */
+}
+
+.search-input {
+    margin-right: 10px; /* Espacio entre el input y el botón */
+}
+

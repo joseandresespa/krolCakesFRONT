@@ -1,108 +1,171 @@
 :host {
-    display: block; /* Asegura que el componente use el espacio completo */
-  }
-  
-  .custom-modal {
-    max-width: 800px; /* Ancho máximo del modal */
-    width: 90%; /* Ancho del modal */
-    background-color: #ffffff; /* Color de fondo */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
-    padding: 20px; /* Espaciado interno */
-  }
-  
-  .modal-header {
-    display: flex;
-    justify-content: space-between; /* Espaciado entre título y botón */
-    align-items: center; /* Centrar verticalmente */
-    border-bottom: 1px solid #e0e0e0; /* Línea inferior */
-    padding-bottom: 10px; /* Espaciado inferior */
-  }
-  
-  .modal-title {
-    font-size: 1.5rem; /* Tamaño de la fuente del título */
-    color: #333; /* Color del texto del título */
-  }
-  
-  .close {
-    background: none;
-    border: none;
-    font-size: 1.5rem; /* Tamaño del icono de cerrar */
-    cursor: pointer; /* Cambiar cursor al pasar el mouse */
-  }
-  
-  .modal-body {
-    padding: 20px; /* Espaciado interno del cuerpo */
-  }
-  
-  .form-group {
-    margin-bottom: 15px; /* Espacio entre campos */
-  }
-  
-  .form-control {
-    width: 100%; /* Ancho completo */
-    padding: 10px; /* Espaciado interno */
-    border: 1px solid #ccc; /* Borde */
-    border-radius: 4px; /* Bordes redondeados */
-  }
-  
-  .form-control:focus {
-    border-color: #007bff; /* Color del borde al hacer foco */
-    outline: none; /* Quitar el contorno */
-  }
-  
-  .insumo-row {
-    display: flex; /* Alinear en fila */
-    align-items: center; /* Centrar verticalmente */
-    margin-bottom: 10px; /* Espacio entre filas de insumos */
-  }
-  
-  .insumo-row select,
-  .insumo-row input {
-    margin-right: 10px; /* Espacio entre campos en la fila de insumos */
-  }
-  
-  .btn {
-    padding: 10px 15px; /* Espaciado interno de los botones */
-    border-radius: 4px; /* Bordes redondeados */
-    cursor: pointer; /* Cambiar cursor al pasar el mouse */
-  }
-  
-  .btn-primary {
-    background-color: #007bff; /* Color de fondo del botón primario */
-    color: #fff; /* Color del texto */
-  }
-  
-  .btn-secondary {
-    background-color: #6c757d; /* Color de fondo del botón secundario */
-    color: #fff; /* Color del texto */
-  }
-  
-  .btn-primary:hover,
-  .btn-secondary:hover {
-    opacity: 0.9; /* Opacidad al pasar el mouse */
-  }
-  
-  .total-general {
-    font-weight: bold; /* Negrita para el total */
-    font-size: 1.2rem; /* Tamaño de la fuente */
-  }
-  
-  .insumo-header, .insumo-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr auto; /* Distribuye los elementos */
-    gap: 10px;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .insumo-header {
-    font-weight: bold;
-    text-align: center;
-    border-bottom: 2px solid #ccc;
-    padding-bottom: 5px;
-  }
-  
-  .header-item, .insumo-item {
-    padding: 5px;
-  }
+  display: block;
+}
+
+.custom-modal {
+  max-width: 800px;
+  width: 90%;
+  background-color: #faf4f8;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 20px;
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d4c2b8;
+  padding-bottom: 10px;
+  background-color: #e7dfde;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  color: #663399;
+  text-align: center; /* Centrar título */
+  flex: 1; /* Asegura que ocupe el espacio disponible */
+}
+
+.close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #663399;
+}
+
+.modal-body {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 20px;
+  scrollbar-width: none;
+}
+
+.modal-body::-webkit-scrollbar {
+  display: none;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #c1b1a1;
+  border-radius: 5px;
+}
+
+.form-control:focus {
+  border-color: #bb99cc;
+  outline: none;
+}
+
+.insumo-header, .insumo-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Define cuatro columnas iguales */
+  gap: 10px; /* Espacio entre columnas */
+  align-items: center; /* Alinea verticalmente los elementos en el centro */
+  margin-bottom: 10px;
+}
+
+.header-item, .insumo-item {
+  padding: 5px;
+  text-align: center; /* Centra el texto en cada columna */
+}
+
+.insumo-row select, 
+.insumo-row input {
+  padding: 10px; /* Espaciado interno para inputs y selects */
+  border: 1px solid #c1b1a1; /* Borde uniforme */
+  border-radius: 5px; /* Bordes redondeados */
+  width: 100%; /* Ancho completo */
+}
+
+.insumo-row input[formControlName="subtotal"] {
+  background-color: #f2f2f2; /* Fondo gris claro para el subtotal */
+  cursor: not-allowed; /* Cursor de no permitido en el subtotal */
+  color: #333; /* Color de texto */
+  font-weight: bold; /* Texto en negrita para el subtotal */
+}
+
+.btn {
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #663399;
+  color: #ffffff;
+  border: 1px solid #52297a;
+}
+
+.btn-primary:hover {
+  background-color: #52297a;
+  transform: scale(1.05);
+}
+
+.btn-secondary {
+  background-color: #a1887f;
+  color: #ffffff;
+  border: 1px solid #8b6b63;
+}
+
+.btn-secondary:hover {
+  background-color: #8b6b63;
+  transform: scale(1.05);
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between; /* Separa los botones */
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.total-general {
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #663399;
+}
+
+/* Botón de Agregar Insumo */
+button.agregar-insumo {
+  background-color: #663399; /* Morado */
+  color: #ffffff; /* Texto blanco */
+  border: 1px solid #52297a; /* Borde más oscuro */
+  padding: 10px 15px; /* Espaciado interno */
+  border-radius: 5px; /* Bordes redondeados */
+  margin-top: 15px; /* Espacio superior */
+  font-size: 1rem; /* Tamaño de texto */
+  font-weight: bold; /* Texto en negrita */
+  cursor: pointer; /* Cursor de mano */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Efecto de transición */
+}
+
+button.agregar-insumo:hover {
+  background-color: #52297a; /* Morado más oscuro en hover */
+  transform: scale(1.05); /* Aumenta el tamaño en hover */
+}
+
+/* Botón de Eliminar Insumo */
+.insumo-row button.eliminar-insumo {
+  background-color: #eb1b10; /* Color de fondo rojo */
+  color: #ffffff; /* Texto blanco */
+  border: 1px solid #fa0808; /* Borde rojo más oscuro */
+  padding: 5px 10px; /* Espaciado interno */
+  border-radius: 4px; /* Bordes redondeados */
+  font-size: 0.9rem; /* Tamaño de texto */
+  cursor: pointer; /* Cursor de mano */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Efecto de transición */
+}
+
+.insumo-row button.eliminar-insumo:hover {
+  background-color: #841a00; /* Marrón más oscuro en hover */
+  transform: scale(1.05); /* Aumenta el tamaño en hover */
+}

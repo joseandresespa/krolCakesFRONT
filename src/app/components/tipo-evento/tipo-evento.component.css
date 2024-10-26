@@ -19,7 +19,7 @@ table {
     bottom: 20px;
     right: 20px;
 }
-  
+
 .titulo-container {
     background-color: black; /* Fondo negro */
     border-radius: 8px; /* Esquinas redondeadas */
@@ -39,4 +39,16 @@ table {
     color: white; /* Color del texto */
     margin: 0; /* Elimina el margen del h2 */
     font-size: 1.2em; /* Tamaño de fuente ajustable */
+}
+
+/* Nuevos estilos para centrar el buscador y el botón de ordenación */
+.input-container {
+    display: flex;
+    justify-content: center; /* Centra los elementos dentro del contenedor */
+    align-items: center; /* Alinea verticalmente */
+    margin: 20px 0; /* Espaciado vertical alrededor del contenedor */
+}
+
+.input-container input {
+    margin-right: 10px; /* Espacio entre el input y el botón */
 }

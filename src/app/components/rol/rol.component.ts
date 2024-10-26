@@ -15,6 +15,8 @@ export class RolComponent implements OnInit {
   currentPage: number = 1; // Página actual
   itemsPerPage: number = 5; // Cantidad de items por página
   totalItems: number = 0; // Total de items para calcular la paginación
+  searchQuery: string = ''; // Para el buscador
+  sortDirection: 'asc' | 'desc' = 'asc'; // Dirección de ordenamiento
 
   constructor(public dialog: MatDialog) {}
 
@@ -40,13 +42,32 @@ export class RolComponent implements OnInit {
 
   // Método para obtener los roles de la página actual
   get paginatedRoles(): rol[] {
+    const filteredRoles = this.filteredAndSortedRoles();
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    return this.roles.slice(startIndex, startIndex + this.itemsPerPage);
+    return filteredRoles.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  // Filtrado por búsqueda y ordenamiento
+  filteredAndSortedRoles(): rol[] {
+    return this.roles
+      .filter(rol => 
+        rol.nombre?.toLowerCase().includes(this.searchQuery.toLowerCase())
+      )
+      .sort((a, b) => {
+        const nameA = a.nombre || ''; // Usar un string vacío si es undefined
+        const nameB = b.nombre || ''; // Usar un string vacío si es undefined
+        const comparison = nameA.localeCompare(nameB);
+        return this.sortDirection === 'asc' ? comparison : -comparison;
+      });
   }
 
   // Método para calcular el número total de páginas
   get totalPages(): number {
-    return Math.ceil(this.totalItems / this.itemsPerPage);
+    return Math.ceil(this.filteredAndSortedRoles().length / this.itemsPerPage);
+  }
+
+  // Método para cambiar la dirección de ordenamiento
+  toggleSortDirection(): void {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
   }
 }
-

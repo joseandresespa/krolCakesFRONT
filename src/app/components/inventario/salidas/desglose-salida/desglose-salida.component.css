@@ -1,53 +1,53 @@
-/* Estilos generales del componente */
-h1 {
-    font-size: 24px;
-    margin-bottom: 16px;
-    color: #333;
-}
-
-h2 {
-    font-size: 20px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    color: #555;
-}
-
-/* Estilos para la tabla */
-table {
+/* Estilos generales de la tabla */
+table.mat-elevation-z8 {
     width: 100%;
-    border-collapse: collapse; /* Para eliminar el espacio entre las celdas */
-    margin-top: 10px;
+    border-collapse: collapse;
+    background-color: #faf4f8; /* Fondo suave */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-th {
-    background-color: #007bff; /* Color de fondo de los encabezados */
-    color: white; /* Color del texto de los encabezados */
-    padding: 12px; /* Espaciado interno */
-    text-align: left; /* Alinear el texto a la izquierda */
+/* Encabezado de la tabla */
+th.mat-header-cell {
+    background-color: #d4c2b8; /* Café claro */
+    color: #663399; /* Morado */
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid #bb99cc; /* Borde morado claro */
 }
 
-td {
-    border: 1px solid #ddd; /* Borde de las celdas */
-    padding: 12px; /* Espaciado interno */
+/* Celdas de la tabla */
+td.mat-cell {
+    background-color: #f3e9e7; /* Fondo café muy claro */
+    color: #52297a; /* Morado oscuro */
+    padding: 8px 12px;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #e7dfde; /* Borde sutil */
 }
 
-/* Estilo para filas alternas */
-tr:nth-child(even) {
-    background-color: #f2f2f2; /* Color de fondo para filas pares */
+/* Estilo de filas al pasar el cursor */
+tr.mat-row:hover {
+    background-color: #e8dfe7; /* Suave morado claro */
 }
 
-/* Estilo para el botón */
-button {
-    margin-top: 20px; /* Margen superior para el botón */
-    padding: 10px 15px; /* Espaciado interno del botón */
-    background-color: #007bff; /* Color de fondo del botón */
-    color: white; /* Color del texto del botón */
-    border: none; /* Sin borde */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer; /* Cambiar el cursor al pasar el mouse */
-    transition: background-color 0.3s; /* Transición suave al cambiar el color */
+/* Alineación y tamaño de fuente */
+th.mat-header-cell, td.mat-cell {
+    text-align: center;
 }
 
-button:hover {
-    background-color: #0056b3; /* Color de fondo al pasar el mouse */
+/* Estilos específicos de cada columna */
+td.mat-column-producto {
+    font-weight: bold;
+}
+
+td.mat-column-cantidad, td.mat-column-motivo {
+    font-size: 0.9rem;
+}
+
+/* Agrega un pequeño margen entre las filas de la tabla */
+tr.mat-header-row, tr.mat-row {
+    margin-bottom: 2px;
 }
