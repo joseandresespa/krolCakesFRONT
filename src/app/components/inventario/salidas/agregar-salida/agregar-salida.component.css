@@ -1,0 +1,114 @@
+:host {
+    display: block; /* Asegura que el componente use el espacio completo */
+  }
+  
+  .custom-modal {
+    max-width: 800px; /* Ancho máximo del modal */
+    width: 90%; /* Ancho del modal */
+    background-color: #ffffff; /* Color de fondo */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra */
+    padding: 20px; /* Espaciado interno */
+  }
+  
+  .modal-header {
+    display: flex;
+    justify-content: space-between; /* Espaciado entre título y botón */
+    align-items: center; /* Centrar verticalmente */
+    border-bottom: 1px solid #e0e0e0; /* Línea inferior */
+    padding-bottom: 10px; /* Espaciado inferior */
+  }
+  
+  .modal-title {
+    font-size: 1.5rem; /* Tamaño de la fuente del título */
+    color: #333; /* Color del texto del título */
+  }
+  
+  .close {
+    background: none;
+    border: none;
+    font-size: 1.5rem; /* Tamaño del icono de cerrar */
+    cursor: pointer; /* Cambiar cursor al pasar el mouse */
+  }
+  
+  .modal-body {
+    padding: 20px; /* Espaciado interno del cuerpo */
+  }
+  
+  .form-group {
+    margin-bottom: 15px; /* Espacio entre campos */
+  }
+  
+  .form-control {
+    width: 100%; /* Ancho completo */
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde */
+    border-radius: 4px; /* Bordes redondeados */
+  }
+  
+  .form-control:focus {
+    border-color: #007bff; /* Color del borde al hacer foco */
+    outline: none; /* Quitar el contorno */
+  }
+  
+  .insumo-row {
+    display: flex; /* Alinear en fila */
+    align-items: center; /* Centrar verticalmente */
+    margin-bottom: 10px; /* Espacio entre filas de insumos */
+  }
+  
+  .insumo-row select,
+  .insumo-row input {
+    margin-right: 10px; /* Espacio entre campos en la fila de insumos */
+  }
+  
+  .btn {
+    padding: 10px 15px; /* Espaciado interno de los botones */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor al pasar el mouse */
+  }
+  
+  .btn-primary {
+    background-color: #007bff; /* Color de fondo del botón primario */
+    color: #fff; /* Color del texto */
+  }
+  
+  .btn-secondary {
+    background-color: #6c757d; /* Color de fondo del botón secundario */
+    color: #fff; /* Color del texto */
+  }
+  
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    opacity: 0.9; /* Opacidad al pasar el mouse */
+  }
+  
+  .total-general {
+    font-weight: bold; /* Negrita para el total */
+    font-size: 1.2rem; /* Tamaño de la fuente */
+  }
+  
+
+
+.insumo-header, .insumo-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto; /* Distribuye los elementos */
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.insumo-header {
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 5px;
+}
+
+.header-item, .insumo-item {
+  padding: 5px;
+
+  
+}
+
+

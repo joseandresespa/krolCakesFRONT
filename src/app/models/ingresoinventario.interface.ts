@@ -5,4 +5,7 @@ export interface ingresoinventario {
     precio_unitario?: number;
     id_compra_inventario?: number;
     subtotal?: number;
+    nombre?: string;
+    id_unidad_medida?: number;
+    nombreUnidad?: string;
   }

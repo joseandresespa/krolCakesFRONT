@@ -1,0 +1,45 @@
+<div class="modal-header">  
+    <h5 class="modal-title">Agregar Registro</h5>
+    <button type="button" class="close" (click)="cerrarModal()">
+      <span>&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="registroForm">
+        <div class="form-group">
+            <label for="fecha">Fecha:</label>
+            <input type="date" formControlName="fecha" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="notas">Notas:</label>
+            <input type="text" formControlName="notas" class="form-control">
+        </div>
+  
+        <div class="insumo-header">
+            <div class="header-item">Insumos</div>
+            <div class="header-item">Cantidad Actual</div>
+            <div class="header-item">Cantidad de Salida</div>
+            <div class="header-item">Motivo Salida</div>
+            <div class="header-item"></div>
+        </div>
+
+        <div formArrayName="insumos">
+            <div *ngFor="let insumo of insumos.controls; let i = index" [formGroupName]="i" class="insumo-row">
+                <select formControlName="insumo" class="form-control" (change)="actualizarCantidadActual(i)">
+                    <option *ngFor="let insumo of listaInsumos" [value]="insumo.id">{{ insumo.nombre }} {{ insumo.nombre_unidad_medida }}</option>
+                </select>
+                <input type="number" formControlName="cantidadActual" class="form-control" placeholder="Cantidad Actual" readonly>
+                <input type="number" formControlName="cantidadSalida" class="form-control" placeholder="Cantidad de Salida " (input)="validarCantidadSalida(i)">
+                <select formControlName="motivo" class="form-control">
+                    <option *ngFor="let motivo of motivos" [value]="motivo.id">{{ motivo.nombre }}</option>
+                </select>
+                <button type="button" (click)="eliminarInsumo(i)">Eliminar</button>
+            </div>
+        </div>
+        <button type="button" (click)="agregarInsumo()">Agregar Insumo</button>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cerrar</button>
+    <button type="button" class="btn btn-primary" (click)="guardarRegistro()">Guardar</button>
+</div>

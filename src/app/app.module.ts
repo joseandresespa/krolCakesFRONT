@@ -90,6 +90,12 @@ import { InsumoUtensilioComponent } from './components/insumo-utensilio/insumo-u
 import { ModalAgregarInsumoComponent } from './components/insumo-utensilio/modal-agregar-insumo/modal-agregar-insumo.component';
 import { ModalEditarInsumoComponent } from './components/insumo-utensilio/modal-editar-insumo/modal-editar-insumo.component';
 import { ModalVerRecetaComponent } from './components/receta/modal-ver-receta/modal-ver-receta.component';
+import { SalidasComponent } from './components/inventario/salidas/salidas.component';
+import { ComprasComponent } from './components/inventario/compras/compras.component';
+import { DesgloceComprasComponent } from './components/inventario/compras/desgloce-compras/desgloce-compras.component';
+import { AgregarComprasComponent } from './components/inventario/compras/agregar-compras/agregar-compras.component';
+import { DesgloseSalidaComponent } from './components/inventario/salidas/desglose-salida/desglose-salida.component';
+import { AgregarSalidaComponent } from './components/inventario/salidas/agregar-salida/agregar-salida.component';
 
 
 
@@ -168,6 +174,12 @@ import { ModalVerRecetaComponent } from './components/receta/modal-ver-receta/mo
       ModalAgregarInsumoComponent,
       ModalEditarInsumoComponent,
       ModalVerRecetaComponent,
+      SalidasComponent,
+      ComprasComponent,
+      DesgloceComprasComponent,
+      AgregarComprasComponent,
+      DesgloseSalidaComponent,
+      AgregarSalidaComponent,
       
       
       

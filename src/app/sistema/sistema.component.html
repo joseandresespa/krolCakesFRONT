@@ -29,6 +29,8 @@
     <div class="dropdown" [ngClass]="{'show': isDropdownOpen('pedidos')}">
         <a href="/pedido"><mat-icon>assignment</mat-icon>Gestionar Pedidos</a>
         <a href="/pastel-realizado"><mat-icon>cake</mat-icon>Pasteles realizados</a>
+        <a href="/tipo-evento"><mat-icon>house</mat-icon>Tipo_Eventos</a>
+        <a href="/estado"><mat-icon>house</mat-icon>estado</a>
     </div>
 </div>
 
@@ -38,7 +40,29 @@
     <div class="dropdown" [ngClass]="{'show': isDropdownOpen('cotizaciones')}">
         <a href="/listar-cotizaciones"><mat-icon>book</mat-icon>Ver cotizaciones</a>
         <a href="/cliente"><mat-icon>person</mat-icon>Clientes</a>
-        <a href="/tipo-evento"><mat-icon>house</mat-icon>Eventos</a>
+    </div>
+</div>
+
+<div class="nav-item" (click)="toggleDropdown('producto')">
+    <mat-icon>inventory</mat-icon>
+    Productos
+    <div class="dropdown" [ngClass]="{'show': isDropdownOpen('producto')}">
+        <a href="/masas"><mat-icon>cake</mat-icon>Masas</a>
+        <a href="/relleno"><mat-icon>cake</mat-icon>Rellenos</a>
+        <a href="/receta"><mat-icon>cake</mat-icon>Recetas</a>
+        <a href="/producto"><mat-icon>cake</mat-icon>Productos</a>
+        <a href="/umps"><mat-icon>house</mat-icon>Unidades de medida inventario</a>
+        <a href="/unidad-medida"><mat-icon>house</mat-icon>Unidades de medida Costo</a>
+    </div>
+</div>
+
+<div class="nav-item" (click)="toggleDropdown('CatalogosInventario')">
+    <mat-icon>inventory</mat-icon>
+    Catalogos Inventario
+    <div class="dropdown" [ngClass]="{'show': isDropdownOpen('CatalogosInventario')}">
+        <a href="/tipo-insumo-utencilio"><mat-icon>kitchen</mat-icon>Tipos de insumos y utensilios</a>
+        <a href="/motivo-salida"><mat-icon>kitchen</mat-icon>Motivos de salidas de inventario</a>
+        <a href="/proveedor"><mat-icon>persons</mat-icon>Proveedores</a>
     </div>
 </div>
 
@@ -46,21 +70,9 @@
     <mat-icon>inventory</mat-icon>
     Inventario
     <div class="dropdown" [ngClass]="{'show': isDropdownOpen('inventario')}">
-        <a href="/masas"><mat-icon>cake</mat-icon>Masas</a>
-        <a href="/relleno"><mat-icon>cake</mat-icon>Rellenos</a>
-        <a href="/receta"><mat-icon>cake</mat-icon>Recetas</a>
-        <a href="/producto"><mat-icon>cake</mat-icon>Productos</a>
-        <a href="/umps"><mat-icon>house</mat-icon>Unidades de medida</a>
-    </div>
-</div>
-
-<div class="nav-item" (click)="toggleDropdown('ventas')">
-    <mat-icon>shopping_cart</mat-icon>
-    Ventas
-    <div class="dropdown" [ngClass]="{'show': isDropdownOpen('ventas')}">
-        <a href="/tipo-insumo-utencilio"><mat-icon>kitchen</mat-icon>Tipos de insumos y utensilios</a>
-        <a href="/motivo-salida"><mat-icon>kitchen</mat-icon>Motivos de salidas de inventario</a>
-        <a href="/proveedor"><mat-icon>persons</mat-icon>Proveedores</a>
+        <a href="/insumo-utencilio"><mat-icon>kitchen</mat-icon>Insumos Utencilios</a>
+        <a href="/salidas"><mat-icon>house</mat-icon>salidas</a>
+        <a href="/compras"><mat-icon>house</mat-icon>entradas</a>
     </div>
 </div>
 
@@ -74,20 +86,20 @@
     </div>
 </div>
 
-<div class="nav-item" (click)="navigateTo('/unidad-medida')">
+<!-- <div class="nav-item" (click)="navigateTo('/unidad-medida')">
     <mat-icon>cake</mat-icon>
     Unidades de medida
-</div>
+</div> -->
 
-<div class="nav-item" (click)="navigateTo('/insumo-utencilio')">
+<!-- <div class="nav-item" (click)="navigateTo('/insumo-utencilio')">
     <mat-icon>cake</mat-icon>
     Insumos y utencilios
-</div>
+</div> -->
 
-<div class="nav-item" (click)="navigateTo('/estado')">
+<!-- <div class="nav-item" (click)="navigateTo('/estado')">
     <mat-icon>cake</mat-icon>
     Estado
-</div>
+</div> -->
 
 
     

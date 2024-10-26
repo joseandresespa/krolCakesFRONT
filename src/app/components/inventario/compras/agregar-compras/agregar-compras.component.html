@@ -1,0 +1,50 @@
+<div class="modal-header">  
+    <h5 class="modal-title">Agregar Registro</h5>
+    <button type="button" class="close" (click)="cerrarModal()">
+      <span>&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="registroForm">
+      <div class="form-group">
+        <label for="fecha">Fecha:</label>
+        <input type="date" formControlName="fecha" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="proveedor">Proveedor:</label>
+        <select formControlName="proveedor" class="form-control">
+          <option *ngFor="let proveedor of proveedores" [value]="proveedor.id">{{ proveedor.nombre }}</option>
+        </select>
+      </div>
+  
+      <div class="insumo-header">
+        <div class="header-item">Insumos</div>
+        <div class="header-item">Cantidad</div>
+        <div class="header-item">precio_unitario de compra</div>
+        <div class="header-item">subtotal</div>
+        <div class="header-item"></div>
+    </div>
+
+      <div formArrayName="insumos" *ngFor="let insumo of insumos.controls; let i = index">
+        <div [formGroupName]="i" class="insumo-row">
+          <select formControlName="insumo" class="form-control">
+            <option *ngFor="let insumo of listaInsumos" [value]="insumo.id">{{ insumo.nombre }} {{ insumo.nombre_unidad_medida }}</option>
+          </select>
+          <input type="number" formControlName="cantidad" class="form-control" placeholder="Cantidad" (input)="calcularSubtotal(i)">
+          <input type="number" formControlName="precioCompra" class="form-control" placeholder="Precio de Compra" (input)="calcularSubtotal(i)">
+          <input type="text" formControlName="subtotal" class="form-control" placeholder="Subtotal" readonly>
+          <button type="button" (click)="eliminarInsumo(i)">Eliminar</button>
+        </div>
+      </div>
+      <button type="button" (click)="agregarInsumo()">Agregar Insumo</button>
+    </form>
+  
+    <div>
+      <h5>Total General: {{ totalGeneral }}</h5>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="cerrarModal()">Cerrar</button>
+    <button type="button" class="btn btn-primary" (click)="guardarRegistro()">Guardar</button>
+  </div>
+  

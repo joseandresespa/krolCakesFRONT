@@ -31,6 +31,7 @@ export class InsumoUtensilioComponent implements OnInit {
     this.service.insumos().subscribe((insumo: insumoutensilio[]) => {
       this.insumosUtensilios = insumo;
       this.updatePagination();
+      console.log(this.insumosUtensilios);
     });
   }
 

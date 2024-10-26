@@ -1,0 +1,53 @@
+/* Estilos generales del componente */
+h1 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+h2 {
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* Estilos para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Para eliminar el espacio entre las celdas */
+    margin-top: 10px;
+}
+
+th {
+    background-color: #007bff; /* Color de fondo de los encabezados */
+    color: white; /* Color del texto de los encabezados */
+    padding: 12px; /* Espaciado interno */
+    text-align: left; /* Alinear el texto a la izquierda */
+}
+
+td {
+    border: 1px solid #ddd; /* Borde de las celdas */
+    padding: 12px; /* Espaciado interno */
+}
+
+/* Estilo para filas alternas */
+tr:nth-child(even) {
+    background-color: #f2f2f2; /* Color de fondo para filas pares */
+}
+
+/* Estilo para el botón */
+button {
+    margin-top: 20px; /* Margen superior para el botón */
+    padding: 10px 15px; /* Espaciado interno del botón */
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar el cursor al pasar el mouse */
+    transition: background-color 0.3s; /* Transición suave al cambiar el color */
+}
+
+button:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el mouse */
+}

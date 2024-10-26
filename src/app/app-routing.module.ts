@@ -33,6 +33,10 @@ import { AccesoMantenimientoComponent } from './components/acceso-mantenimiento/
 import { SeguridadComponent } from './components/seguridad/seguridad.component';
 import { CostoComponent } from './components/agenda/costo/costo.component';
 import { InsumoUtensilioComponent } from './components/insumo-utensilio/insumo-utensilio.component';
+import { SalidasComponent } from './components/inventario/salidas/salidas.component';
+import { ComprasComponent } from './components/inventario/compras/compras.component';
+import { DesgloceComprasComponent } from './components/inventario/compras/desgloce-compras/desgloce-compras.component';
+import { AgregarComprasComponent } from './components/inventario/compras/agregar-compras/agregar-compras.component';
 
 
 const routes: Routes = [
@@ -69,7 +73,11 @@ const routes: Routes = [
   { path: 'acceso-mantenimiento', component:  AccesoMantenimientoComponent },
   { path: 'seguridad', component:  SeguridadComponent },
   { path: 'costo', component: CostoComponent},
-  { path: 'insumo-utencilio', component: InsumoUtensilioComponent}
+  { path: 'insumo-utencilio', component: InsumoUtensilioComponent},
+  { path: 'salidas', component: SalidasComponent},
+  { path: 'compras', component: ComprasComponent},
+  { path: 'desgloce-compras', component: DesgloceComprasComponent},
+  { path: 'agregar-compras', component: AgregarComprasComponent},
 ];
 
 @NgModule({
