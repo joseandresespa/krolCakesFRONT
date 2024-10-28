@@ -1,7 +1,9 @@
 import { desgloseonline } from "./desgloseonline.interface";
+import { detallecosto } from "./detallecosto.interface";
 import { detallepedido } from "./detallepedido.interface";
 import { imagenreferenciaonline } from "./imagenreferenciaonline.interface";
 import { observaciones } from "./observaciones.interface";
+import { pastelrealizado } from "./pastelrealizado.interface";
 
 export interface pedido {
   id?: number;                          // Proviene del modelo pedido
@@ -31,4 +33,11 @@ export interface pedido {
   nombre?: string;                      // Proviene del modelo cliente
   telefono?: number;                    // Proviene del modelo cliente
   nit?: string;                         // Proviene del modelo cliente
+
+  costo?: number;        
+  ganancia?: number;           
+  id_costo?: number; 
+
+  imagenesFin?: pastelrealizado[];   // Lista de detalles
+  detalleCosto?: detallecosto[];  // Lista de observaciones
 }

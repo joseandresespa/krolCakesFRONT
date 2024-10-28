@@ -1,0 +1,68 @@
+<div class="desglose-pedido">
+    <h2>Costo del Pedido</h2>
+  
+    <div class="info-pedido">
+      <div class="mb-2">
+        <label><strong>  Cliente:</strong></label>
+        <span>{{ data.nombre }}</span>
+        <label><strong>  Telefono:</strong></label>
+        <span> {{ data.telefono }} </span>
+        <label><strong>  Estado Pedido:</strong></label>
+        <span> {{ data.estado }} </span>
+      </div>
+      <div class="card mb-3 p-3">
+        <h3>Descripcion del pedido</h3>
+        <div class="mb-2">
+          <p>{{ data.descripcion }}</p>
+        </div>
+      </div>
+      <!-- Observaciones Seccion en Cuadro -->
+      <div class="card mb-3 p-3">
+        <h3>Observaciones del pedido</h3>
+        <div class="mb-2">
+          <p>{{ data.observaciones }}</p>
+        </div>
+      </div>
+    
+      <div class="card mb-3 p-3">
+        <h3>Entrega</h3>
+        <div class="mb-2">
+          <label><strong>Envio:</strong></label>
+          <p>{{ data.envio }}</p>
+          <label><strong>Fecha:</strong></label>
+          <p>{{ data.fecha }}</p>
+          <label><strong>Hora:</strong></label>
+          <p>{{ data.hora }}</p>
+          <label><strong>Direccion:</strong></label>
+          <p>{{ data.direccion }}</p>
+        </div>
+      </div>
+  
+  
+    <!-- Productos y total -->
+    <h3>Desglose Costo</h3>
+    <div class="mb-2">
+        <label><strong>Precio:</strong></label>
+        <span>Costo:Q.{{ data.costo }} Ganancia: Q.{{ data.ganancia }}</span>
+      </div>
+    <div *ngIf="data.detalleCosto?.length; else noDesglose">
+      <ul>
+        <li *ngFor="let detalle of data.detalleCosto">
+          <p>
+            Insumo: {{ detalle.insumo }},
+            Unidad de Medida: {{ detalle.unidad }},
+            Cantidad: {{ detalle.cantidad }},
+            Precio Unitario: {{ detalle.precio_unitario }},
+            Subtotal: Q.{{ detalle.subtotal }}
+          </p>
+        </li>
+      </ul>
+    </div>
+    <p>
+      Total Costo Q.{{ data.total_presupuesto }},
+    </p>
+    <ng-template #noDesglose>
+      <p>No hay costo disponible.</p>
+    </ng-template>
+  </div>
+  

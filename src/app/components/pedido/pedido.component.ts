@@ -7,6 +7,9 @@ import { ModalEditarPedidoComponent } from './modal-editar-pedido/modal-editar-p
 import { ModalPedidoDesgloseComponent } from './modal-pedido-desglose/modal-pedido-desglose.component';
 import { ModalEstadoPedidoComponent } from './modal-estado-pedido/modal-estado-pedido.component';
 import { CotizacionPedidosService } from 'src/services/cotizacion-pedidos.service';
+import { ModalDesgloceCostoComponent } from './modal-desgloce-costo/modal-desgloce-costo.component';
+import { ModalImagenesFinComponent } from './modal-imagenes-fin/modal-imagenes-fin.component';
+import { Router } from '@angular/router';
 
 
 
@@ -27,7 +30,7 @@ export class PedidoComponent implements OnInit {
   pages: number[] = [];
   dataSource: pedido[] = [];
 
-  constructor(public dialog: MatDialog, private service: CotizacionPedidosService) { }
+  constructor(public dialog: MatDialog, private service: CotizacionPedidosService,private router: Router) { }
 
   ngOnInit(): void {
     this.service.pedidos().subscribe((pedido: pedido[]) => {
@@ -103,8 +106,6 @@ export class PedidoComponent implements OnInit {
       data: pedido
     });
     console.log(pedido);
-
-
 }
 
 abrirModalEstadoPedido(pedido: pedido): void {
@@ -123,6 +124,28 @@ abrirModalEstadoPedido(pedido: pedido): void {
       
     }
   });
+}
+
+openCosto(pedido: pedido): void {
+  this.router.navigate(['/costo'], {
+    queryParams: { pedidoId: pedido.id } 
+  });
+}
+
+ModalDesgloceCosto(pedido: pedido): void {
+  const dialogRef = this.dialog.open(ModalDesgloceCostoComponent, {
+    width: '600px',
+    data: pedido
+  });
+  console.log(pedido);
+}
+
+ModalImagenes(pedido: pedido): void {
+  const dialogRef = this.dialog.open(ModalImagenesFinComponent, {
+    width: '600px',
+    data: pedido
+  });
+  console.log(pedido);
 }
 
 }

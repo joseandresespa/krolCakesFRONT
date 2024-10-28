@@ -1,0 +1,21 @@
+<div class="desglose-pedido">
+    <h2>Imagenes Finales</h2>
+  
+    <div class="info-pedido">
+      <!-- Imágenes Seccion en Cuadro -->
+      <h3>Imágenes Finales</h3>
+      <div *ngIf="data.imagenesFin?.length; else noImages">
+        <ul>
+          <li *ngFor="let imagen of data.imagenesFin">
+            <img [src]="imagen.imagen" alt="Imagen de referencia" width="150" />
+          </li>
+        </ul>
+      </div>
+      <ng-template #noImages>
+        <p>No hay imágenes.</p>
+      </ng-template>
+    </div>
+
+    
+  </div>
+  

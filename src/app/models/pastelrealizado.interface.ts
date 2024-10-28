@@ -3,4 +3,5 @@ export interface pastelrealizado {
     id_tipo_evento?: number;
     id_pedido?: number;
     imagen?: string;
+    tipo?: string;
   }

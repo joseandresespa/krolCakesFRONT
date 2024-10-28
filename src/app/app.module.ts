@@ -96,6 +96,8 @@ import { DesgloceComprasComponent } from './components/inventario/compras/desglo
 import { AgregarComprasComponent } from './components/inventario/compras/agregar-compras/agregar-compras.component';
 import { DesgloseSalidaComponent } from './components/inventario/salidas/desglose-salida/desglose-salida.component';
 import { AgregarSalidaComponent } from './components/inventario/salidas/agregar-salida/agregar-salida.component';
+import { ModalDesgloceCostoComponent } from './components/pedido/modal-desgloce-costo/modal-desgloce-costo.component';
+import { ModalImagenesFinComponent } from './components/pedido/modal-imagenes-fin/modal-imagenes-fin.component';
 
 
 
@@ -180,6 +182,8 @@ import { AgregarSalidaComponent } from './components/inventario/salidas/agregar-
       AgregarComprasComponent,
       DesgloseSalidaComponent,
       AgregarSalidaComponent,
+      ModalDesgloceCostoComponent,
+      ModalImagenesFinComponent,
       
       
       

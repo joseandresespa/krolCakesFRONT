@@ -73,8 +73,11 @@
 
               <ng-container matColumnDef="envio">
                 <th mat-header-cell *matHeaderCellDef> Envio </th>
-                <td mat-cell *matCellDef="let pedido"> {{ pedido.envio }} </td>
+                <td mat-cell *matCellDef="let pedido"> 
+                  {{ pedido.envio ? 'Si' : 'Recoge en pastelería' }} 
+                </td>
               </ng-container>
+              
   
            
             <!-- Acciones Column -->
@@ -86,15 +89,16 @@
                 
                     <!-- <button mat-button class="editar-button" (click)="abrirModalEditarPedido(pedido)">Editar</button>-->
 
-                    <button mat-button class="desglose-button" (click)="abrirModalPedidoDesglose(pedido)">Desglose</button> 
+                    <button mat-button class="desglose-button" (click)="abrirModalPedidoDesglose(pedido)">Desglose Pedido</button> 
                     <button mat-button class="estado-button" (click)="abrirModalEstadoPedido(pedido)">Cambiar Estado</button>
+                    <button mat-button class="desglose-button" (click)="openCosto(pedido)" [disabled]="pedido.id_estado == 10">Costear Pedido</button> 
+                    <button mat-button class="estado-button" (click)="ModalDesgloceCosto(pedido)" [disabled]="pedido.id_estado !== 10"> Ver Desglose Costo </button>
+                    <button mat-button class="desglose-button" (click)="ModalImagenes(pedido)" [disabled]="pedido.id_estado !== 10">Imagenes Pastel Realizado</button>
+            
                    
                 </td>
                 
             </ng-container>
-  
-            
-  
             <!-- Header and Row Definitions -->
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
