@@ -33,7 +33,7 @@ export class CotizarComponent implements OnInit {
   horaEntrega: Time | undefined; // Agregar hora de entrega
   nombre: string = ''; 
   telefono: number | undefined; 
-
+  minFechaEntrega: string | undefined;
   
 
   constructor(private service: CotizacionPedidosService,private serviceCatalogos: CatalogosService) {}
@@ -42,6 +42,9 @@ export class CotizarComponent implements OnInit {
     this.serviceCatalogos.productos().subscribe((productos) => {
       this.productosDisponibles = productos;
     });
+    const today = new Date();
+    today.setDate(today.getDate() + 2);
+    this.minFechaEntrega = today.toISOString().split('T')[0]; // Formato YYYY-MM-DD
   }
 
   agregarProducto(): void {

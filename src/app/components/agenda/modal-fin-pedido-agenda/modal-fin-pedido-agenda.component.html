@@ -92,7 +92,7 @@
       <p>No hay desglose disponible.</p>
   </ng-template>
 
-  <button class="boton-modal" (click)="openCosto(data)">Finalizar Pedido Costo</button>
+  <button class="boton-modal" (click)="openCosto(data)" [disabled]="data.id_estado == 10">Finalizar Pedido Costo</button>
 </div>
 
   

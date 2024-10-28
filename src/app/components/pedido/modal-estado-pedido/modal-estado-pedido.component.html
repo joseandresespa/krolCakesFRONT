@@ -5,7 +5,7 @@
   <mat-form-field appearance="fill">
     <mat-label>Nuevo Estado</mat-label>
     <mat-select [(ngModel)]="nuevoEstado" required>
-      <mat-option *ngFor="let estado of estados" [value]="estado.id">
+      <mat-option *ngFor="let estado of estadosFiltrados" [value]="estado.id">
         {{ estado.estado }}
       </mat-option>
     </mat-select>
