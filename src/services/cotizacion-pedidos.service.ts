@@ -7,7 +7,7 @@ import { pedido } from 'src/app/models/pedido.interface';
   providedIn: 'root'
 })
 export class CotizacionPedidosService {
-  private baseUrl:string = "https://localhost:44373/api/CotizacionPedido/"
+  private baseUrl:string = "https://localhost:80/api/CotizacionPedido/"
   constructor(private http : HttpClient) { }
 
 

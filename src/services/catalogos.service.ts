@@ -17,11 +17,12 @@ import { MotivoSalida } from 'src/app/models/motivosalida.interface';
 import { masa } from 'src/app/models/masa.interface';
 import { relleno } from 'src/app/models/relleno.interface';
 import { unidadmedida } from 'src/app/models/unidadmedida.interface';
+import { pastelrealizado } from 'src/app/models/pastelrealizado.interface';
 @Injectable({
   providedIn: 'root'
 })
 export class CatalogosService {
-  private baseUrl:string = "https://localhost:44373/api/catalogos/"
+  private baseUrl:string = "https://localhost:80/api/catalogos/"
   constructor(private http : HttpClient) { }
 
 // ---------------------------USUARIOS---------------------------------------
@@ -175,4 +176,8 @@ export class CatalogosService {
   actualizarUnidadInventario(datos: any){
     return this.http.post<any>(`${this.baseUrl}actualizar-unidad-medida-inventario`, datos);
   }
+  pastelesRealizados(): Observable<pastelrealizado[]> {
+    return this.http.get<any[]>(`${this.baseUrl}pastel-realizado`);
+  }
+
 }

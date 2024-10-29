@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { pastelrealizado } from 'src/app/models/pastelrealizado.interface';
+import { tipoevento } from 'src/app/models/tipoevento.interface';
+import { CatalogosService } from 'src/services/catalogos.service';
 
 @Component({
   selector: 'app-pasteles-realizados',
@@ -12,13 +15,26 @@ export class PastelesRealizadosComponent implements OnInit {
   totalPaginas: number; // Total de páginas
   mostrarModal: boolean = false; // Controla la visibilidad del modal
   imagenSeleccionada: string = ''; // Guarda la imagen seleccionada
-
-  constructor() {
+  tipos: tipoevento[] = [];
+  pastelesRealizado: pastelrealizado[] = [];
+  constructor(private service: CatalogosService) {
+    
     this.pasteles = []; //Array vacio
     this.totalPaginas = Math.ceil(this.pasteles.length / this.paginacion);
+
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.service.tipoEvento().subscribe((datos: tipoevento[]) => {
+      this.tipos = datos;
+      console.log(this.tipos);
+    });
+    this.service.pastelesRealizados().subscribe((datos: pastelrealizado[]) => {
+      this.pastelesRealizado = datos;
+      console.log(this.pastelesRealizado);
+    });
+
+  }
 
   obtenerPastelesPorPagina(): string[] {
     const inicio = (this.paginaActual - 1) * this.paginacion;
