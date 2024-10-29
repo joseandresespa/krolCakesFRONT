@@ -1,9 +1,63 @@
 h1 {
-    font-size: 1.5em;
-  }
-  
-  mat-dialog-content {
-    min-width: 300px;
-  }
+  font-size: 1.5em;
+  color: #8b5d7c; /* Morado suave */
+  text-align: center;
+  margin-bottom: 15px;
+}
 
-  
+mat-dialog-content {
+  min-width: 300px;
+  background-color: #fdf7fa; /* Fondo rosado suave */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+p {
+  color: #645c5a; /* Café suave */
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+mat-form-field {
+  width: 100%;
+  background-color: #f5eef8; /* Fondo violeta claro */
+  border-radius: 4px;
+}
+
+mat-label {
+  color: #8b5d7c; /* Morado suave */
+}
+
+mat-select {
+  color: #4a3337; /* Café oscuro para contrastar */
+}
+
+mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding-top: 15px;
+}
+
+button[mat-button] {
+  color: #fff; 
+  font-weight: bold;
+  border-radius: 4px;
+  padding: 8px 16px;
+}
+
+button[mat-button]:first-of-type {
+  background-color: #f5b7b1; /* Rosado suave para botón de cancelar */
+}
+
+button[mat-button]:first-of-type:hover {
+  background-color: #f1948a; /* Rosado más oscuro en hover */
+}
+
+button[mat-button][color="primary"] {
+  background-color: #b39ddb; /* Morado suave para botón de confirmar */
+}
+
+button[mat-button][color="primary"]:hover {
+  background-color: #9575cd; /* Morado más oscuro en hover */
+}

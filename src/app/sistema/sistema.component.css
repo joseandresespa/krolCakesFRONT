@@ -123,3 +123,10 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transform: scale(1.02);
 }
+
+.n_usuario {
+    font-family: 'Georgia', serif; /* Cambia la fuente a una más elegante */
+    font-size: 19px; /* Aumenta el tamaño del texto */
+    color: #ffffff; /* Mantiene el color del texto */
+    text-align: center; /* Centra el texto */
+}

@@ -1,0 +1,52 @@
+<app-inicio>
+    <div class="galeria-pasteles">
+        <h2>PASTELES REALIZADOS</h2>
+        
+
+        <!--Seleccionar evento-->   
+        <div class="filtro-evento">
+       <label for="tipoEvento"> Selecciona el tipo de evento: </label>
+          <select id="tipoEvento" class="combo-evento">
+            <option value=" "> Selecciona un evento </option>
+            <option value="boda">Boda</option>
+            <option value="cumpleaños">Cumpleaños</option>
+            <option value="aniversario">Aniversario</option>
+          </select>
+        </div>
+
+        <!--Contenedor de imagenes--> 
+        <div class="contenedor-imagenes">
+          <img *ngFor="let pastel of obtenerPastelesPorPagina()" 
+               [src]="pastel" 
+               alt="Pastel de ejemplo" 
+               class="imagen-pastel" 
+               (click)="abrirModal(pastel)" />
+        </div>
+        
+
+        <!--Paginacion--> 
+        <nav>
+            <ul class="pagination justify-content-center">
+              <li class="page-item" [class.disabled]="paginaActual === 1">
+                <a class="page-link" (click)="cambiarPagina(paginaActual - 1)">Anterior</a>
+              </li>
+              <li *ngFor="let pagina of [].constructor(totalPaginas); let i = index" 
+                  class="page-item" 
+                  [class.active]="i + 1 === paginaActual">
+                <a class="page-link" (click)="cambiarPagina(i + 1)">{{ i + 1 }}</a>
+              </li>
+              <li class="page-item" [class.disabled]="paginaActual === totalPaginas">
+                <a class="page-link" (click)="cambiarPagina(paginaActual + 1)">Siguiente</a>
+              </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Modal para ver imágenes -->
+<div class="modal" [ngClass]="{'active': mostrarModal}">
+    <div class="modal-contenido">
+        <span class="cerrar" (click)="cerrarModal()">&times;</span>
+        <img [src]="imagenSeleccionada" alt="Pastel ampliado" />
+    </div>
+</div>
+</app-inicio>

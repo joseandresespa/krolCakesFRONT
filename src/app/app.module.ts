@@ -98,6 +98,7 @@ import { DesgloseSalidaComponent } from './components/inventario/salidas/desglos
 import { AgregarSalidaComponent } from './components/inventario/salidas/agregar-salida/agregar-salida.component';
 import { ModalDesgloceCostoComponent } from './components/pedido/modal-desgloce-costo/modal-desgloce-costo.component';
 import { ModalImagenesFinComponent } from './components/pedido/modal-imagenes-fin/modal-imagenes-fin.component';
+import { PastelesRealizadosComponent } from './components/pasteles-realizados/pasteles-realizados.component';
 
 
 
@@ -184,6 +185,7 @@ import { ModalImagenesFinComponent } from './components/pedido/modal-imagenes-fi
       AgregarSalidaComponent,
       ModalDesgloceCostoComponent,
       ModalImagenesFinComponent,
+      PastelesRealizadosComponent,
       
       
       

@@ -1,93 +1,120 @@
 .desglose-pedido {
-    max-width: 800px; /* Ancho máximo del modal */
-    margin: 0 auto; /* Centrar el modal */
-    padding: 20px; /* Espaciado interno */
-    border-radius: 10px; /* Bordes redondeados */
-    background-color: #fff; /* Fondo blanco */
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-    font-family: 'Arial', sans-serif; /* Fuente */
-    overflow-y: auto; /* Scroll vertical automático */
-    max-height: 80vh; /* Altura máxima para que el scroll funcione */
-  }
-  
-  
-  /* Restante del CSS */
-  
-  h2 {
-    font-size: 1.5rem; /* Tamaño del encabezado */
-    color: #333; /* Color del texto */
-    margin-bottom: 20px; /* Margen inferior */
-    text-align: center; /* Centrar el texto */
-  }
-  
-  h3 {
-    font-size: 1.2rem; /* Tamaño del subencabezado */
-    color: #555; /* Color del texto */
-    margin-top: 20px; /* Margen superior */
-    margin-bottom: 10px; /* Margen inferior */
-  }
-  
-  .info-pedido {
-    margin-bottom: 20px; /* Margen inferior para el contenedor de información del pedido */
-    overflow-y: auto; /* Agrega desplazamiento vertical */
-    max-height: 60vh; /* Altura máxima para el contenido */
-  }
-  
-  label {
-    font-weight: bold; /* Negrita para las etiquetas */
-  }
-  
-  .card {
-    border: 1px solid #e0e0e0; /* Bordes sutiles */
-    border-radius: 8px; /* Bordes redondeados */
-    background-color: #f9f9f9; /* Fondo claro */
-    padding: 15px; /* Espaciado interno */
-    margin-bottom: 15px; /* Margen inferior */
-  }
-  
-  .mb-2 {
-    margin-bottom: 10px; /* Margen inferior */
-  }
-  
-  ul {
-    list-style: none; /* Quitar viñetas de la lista */
-    padding: 0; /* Quitar padding */
-  }
-  
-  ul li {
-    padding: 10px; /* Espaciado interno de cada elemento de la lista */
-    border: 1px solid #e0e0e0; /* Bordes sutiles */
-    border-radius: 5px; /* Bordes redondeados */
-    background-color: #f1f1f1; /* Fondo ligero */
-    margin-bottom: 10px; /* Margen inferior */
-  }
-  
-  img {
-    border-radius: 5px; /* Bordes redondeados para imágenes */
-    margin: 5px; /* Espaciado alrededor de las imágenes */
-  }
-  
-  p {
-    margin: 5px 0; /* Margen para párrafos */
-    color: #666; /* Color del texto */
-  }
-  
-  /* Ocultar la barra de desplazamiento de la derecha */
-  .desglose-pedido::-webkit-scrollbar {
-    width: 8px; /* Ancho de la barra de desplazamiento */
-  }
-  
-  .desglose-pedido::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.1); /* Color de la barra de desplazamiento */
-    border-radius: 10px; /* Bordes redondeados de la barra de desplazamiento */
-  }
-  
-  .desglose-pedido::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 0, 0.3); /* Color al pasar el ratón */
-  }
-  
-  .desglose-pedido::-webkit-scrollbar-track {
-    background: transparent; /* Fondo transparente para el área de desplazamiento */
-  }
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 15px;
+  background-color: #fdf7fa;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  font-family: 'Arial', sans-serif;
+  overflow-y: auto;
+  max-height: 80vh;
+  border: 2px solid #e8d9e3;
+}
+
+h2 {
+  font-size: 1.6rem;
+  color: #8b5d7c;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+  border-bottom: 2px dashed #c3a6b4;
+  padding-bottom: 8px;
+}
+
+h3 {
+  font-size: 1.3rem;
+  color: #5f4b5b;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  text-align: left;
+  padding-left: 10px;
+  border-left: 4px solid #c3a6b4;
+}
+
+.info-pedido {
+  margin-bottom: 20px;
+  overflow-y: auto;
+  max-height: 60vh;
+  background-color: #f7f1f5;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+label {
+  font-weight: bold;
+  color: #4a3337;
+  display: inline-block;
+  width: 100px;
+}
+
+.card {
+  border: 1px solid #e0d7e5;
+  border-radius: 10px;
+  background-color: #f9f0f9;
+  padding: 15px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.mb-2 {
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 12px;
+  border: 1px solid #e0d7e5;
+  border-radius: 8px;
+  background-color: #f1ebf1;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease;
+}
+
+ul li:hover {
+  background-color: #e9d8e1;
+}
+
+img {
+  border-radius: 5px;
+  margin: 5px;
+  border: 2px solid #c3a6b4;
+  transition: transform 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.05);
+}
+
+p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.desglose-pedido::-webkit-scrollbar {
+  width: 8px;
+}
+
+.desglose-pedido::-webkit-scrollbar-thumb {
+  background-color: rgba(139, 93, 124, 0.3);
+  border-radius: 10px;
+}
+
+.desglose-pedido::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(139, 93, 124, 0.5);
+}
+
+.desglose-pedido::-webkit-scrollbar-track {
+  background: transparent;
+}
+
   
   

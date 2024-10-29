@@ -3,15 +3,16 @@
   
     <div class="info-pedido">
       <div class="mb-2">
-        <label><strong>  Cliente:</strong></label>
-        <span>{{ data.nombre }}</span>
-        <label><strong>  Telefono:</strong></label>
+        <label> <strong>  Cliente: </strong> </label>
+        <span> {{ data.nombre }} </span>
+        <br>
+        <label> <strong>  Telefono: </strong> </label>
         <span> {{ data.telefono }} </span>
-        <label><strong>  Estado Pedido:</strong></label>
-        <span> {{ data.estado }} </span>
+        <br>
+        <label> <strong>  Estado  :</strong> </label>  <span> {{ data.estado }} </span>
       </div>
       <div class="card mb-3 p-3">
-        <h3>Descripcion del pedido</h3>
+        <h3>Descripcion del pedido  </h3>
         <div class="mb-2">
           <p>{{ data.descripcion }}</p>
         </div>
@@ -43,23 +44,28 @@
     <h3>Desglose Costo</h3>
     <div class="mb-2">
         <label><strong>Precio:</strong></label>
-        <span>Costo:Q.{{ data.costo }} Ganancia: Q.{{ data.ganancia }}</span>
+        <br>
+        <span>Costo:Q.{{ data.costo }} <br> Ganancia: Q.{{ data.ganancia }}</span>
       </div>
     <div *ngIf="data.detalleCosto?.length; else noDesglose">
       <ul>
         <li *ngFor="let detalle of data.detalleCosto">
           <p>
-            Insumo: {{ detalle.insumo }},
-            Unidad de Medida: {{ detalle.unidad }},
-            Cantidad: {{ detalle.cantidad }},
-            Precio Unitario: {{ detalle.precio_unitario }},
+            Insumo: {{ detalle.insumo }}
+            <br>
+            Unidad de Medida: {{ detalle.unidad }}
+            <br>
+            Cantidad: {{ detalle.cantidad }}
+            <br>
+            Precio Unitario: {{ detalle.precio_unitario }}
+            <br>
             Subtotal: Q.{{ detalle.subtotal }}
           </p>
         </li>
       </ul>
     </div>
     <p>
-      Total Costo Q.{{ data.total_presupuesto }},
+      Total Costo Q.{{ data.total_presupuesto }}
     </p>
     <ng-template #noDesglose>
       <p>No hay costo disponible.</p>

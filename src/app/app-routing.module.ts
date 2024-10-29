@@ -37,6 +37,7 @@ import { SalidasComponent } from './components/inventario/salidas/salidas.compon
 import { ComprasComponent } from './components/inventario/compras/compras.component';
 import { DesgloceComprasComponent } from './components/inventario/compras/desgloce-compras/desgloce-compras.component';
 import { AgregarComprasComponent } from './components/inventario/compras/agregar-compras/agregar-compras.component';
+import { PastelesRealizadosComponent } from './components/pasteles-realizados/pasteles-realizados.component';
 
 
 const routes: Routes = [
@@ -78,6 +79,7 @@ const routes: Routes = [
   { path: 'compras', component: ComprasComponent},
   { path: 'desgloce-compras', component: DesgloceComprasComponent},
   { path: 'agregar-compras', component: AgregarComprasComponent},
+  { path: 'pasteles-realizados', component: PastelesRealizadosComponent},
 ];
 
 @NgModule({

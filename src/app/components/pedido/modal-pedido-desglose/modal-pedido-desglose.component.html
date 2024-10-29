@@ -3,11 +3,13 @@
 
   <div class="info-pedido">
     <div class="mb-2">
-      <label><strong>  Cliente:</strong></label>
-      <span>{{ data.nombre }}</span>
-      <label><strong>  Telefono:</strong></label>
+      <label> <strong>  Cliente: </strong> </label>
+      <span> {{ data.nombre }} </span>
+      <br>
+      <label> <strong>  Telefono: </strong> </label>
       <span> {{ data.telefono }} </span>
-      <label><strong>  Estado Pedido:</strong></label>
+      <br>
+      <label> <strong>  Estado: </strong> </label>
       <span> {{ data.estado }} </span>
     </div>
     <div class="card mb-3 p-3">
@@ -77,17 +79,21 @@
     <ul>
       <li *ngFor="let detalle of data.detalles">
         <p>
-          Producto: {{ detalle.nombre }},
-          masa: {{ detalle.sabor_masa }},
-          relleno: {{ detalle.sabor_relleno }},
-          Cantidad: {{ detalle.cantidad_porciones }},
+          Producto: {{ detalle.nombre }}
+          <br>
+          masa: {{ detalle.sabor_masa }}
+          <br>
+          relleno: {{ detalle.sabor_relleno }}
+          <br>
+          Cantidad: {{ detalle.cantidad_porciones }}
+          <br>
           Subtotal: Q.{{ detalle.total }}
         </p>
       </li>
     </ul>
   </div>
   <p>
-    Total pedido Q.{{ data.total_presupuesto }},
+    Total pedido Q.{{ data.total_presupuesto }}
   </p>
   <ng-template #noDesglose>
     <p>No hay desglose disponible.</p>
