@@ -79,50 +79,60 @@ export class CotizarComponent implements OnInit {
   }
 
   enviarCotizacion(): void {
-    console.log('Opción de entrega:', this.opcionEntrega);
+    // Prepara el objeto JSON para enviar como string
     const cotizacion: cotizaciononline = {
-      id:0,
+      id: 0,
       nombre: this.nombre,
       descripcion: this.descripcion,
-      telefono: this.telefono,  
-      precio_aproximado: this.totalGeneral.toString(),  
-      envio: this.opcionEntrega === 'recogida'? false : true,
+      telefono: this.telefono,
+      precio_aproximado: this.totalGeneral.toString(),
+      envio: this.opcionEntrega === 'recogida' ? false : true,
       fecha: this.fechaEntrega,
       hora: this.horaEntrega,
       direccion: this.opcionEntrega === 'envio' ? this.direccionEnvio : 'Recoge en Pasteleria',
-      imagenes: [],  
+      imagenes: [], // Las imágenes se enviarán como archivos, no aquí
       desgloses: this.productosSeleccionados.map(item => ({
         id_producto: item.producto.id,
         subtotal: item.total,
         cantidad: item.cantidad
       }))
     };
-
-    console.log(cotizacion);
-
-    this.service.enviarCotizacion(cotizacion).subscribe(response => {
-      // Log de éxito
-      console.log('Cotización enviada con éxito:', response);
+  
+    // Convierte el objeto a JSON
+    const cotizacionJSON = JSON.stringify(cotizacion);
+  
+    // Prepara el FormData
+    const formData = new FormData();
     
-      // Modal de éxito
+    // Agrega el JSON como un campo de string
+    formData.append('nuevoPedidoJSON', cotizacionJSON);
+  
+    // Agrega cada archivo de imagen al FormData
+    const fileInput = document.getElementById('imagenes') as HTMLInputElement;
+    if (fileInput && fileInput.files) {
+      for (let i = 0; i < fileInput.files.length; i++) {
+        formData.append('imagenes', fileInput.files[i]);
+      }
+    }
+  
+    // Envía el FormData al servicio
+    this.service.enviarCotizacion(formData).subscribe(response => {
+      console.log('Cotización enviada con éxito:', response);
       Swal.fire({
         icon: 'success',
         title: 'Éxito',
         text: '¡Cotización enviada con éxito!',
         confirmButtonText: 'Aceptar'
       });
-    
     }, error => {
-      // Log de error
       console.error('Error al enviar cotización:', error);
-    
-      // Modal de error
       Swal.fire({
-        icon: 'success',
-        title: 'Éxito',
-        text: '¡Cotización enviada! la pastelera se comunicara con usted lo antes posible',
+        icon: 'error',
+        title: 'Error',
+        text: 'Hubo un problema al enviar la cotización, intente nuevamente.',
         confirmButtonText: 'Aceptar'
       });
     });
   }
+  
 }

@@ -29,6 +29,7 @@ export class AgregarUsuarioDialogComponent implements OnInit {
     // Cargar los roles
     this.service.roles().subscribe((data: rol[]) => {
       this.roles = data;
+      console.log(this.roles);
     });
   }
   onNoClick(): void {

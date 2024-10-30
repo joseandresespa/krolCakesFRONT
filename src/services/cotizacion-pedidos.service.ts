@@ -7,13 +7,13 @@ import { pedido } from 'src/app/models/pedido.interface';
   providedIn: 'root'
 })
 export class CotizacionPedidosService {
-  private baseUrl:string = "https://localhost:80/api/CotizacionPedido/"
+  private baseUrl:string = "https://localhost:44373/api/CotizacionPedido/"
   constructor(private http : HttpClient) { }
 
 
   // ---------------------------COTIZACION ONLINE---------------------------------------
-  enviarCotizacion(cotizacion: cotizaciononline): Observable<any> {
-    return this.http.post<any>( `${this.baseUrl}nueva-cotizaciononline`, cotizacion);
+  enviarCotizacion(formData: FormData): Observable<any> {
+    return this.http.post<any>( `${this.baseUrl}nueva-cotizaciononline`, formData);
   }
 
   cotizaciones(): Observable<cotizaciononline[]> {

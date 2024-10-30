@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SesionService {
-  private baseUrl:string = "https://localhost:80/api/login/"
+  private baseUrl:string = "https://localhost:44373/api/login/"
   constructor(private http : HttpClient) { }
   sesion(credenciales: any){
     return this.http.post<any>(`${this.baseUrl}sesion`, credenciales);
