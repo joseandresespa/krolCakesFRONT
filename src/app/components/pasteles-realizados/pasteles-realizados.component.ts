@@ -9,7 +9,7 @@ import { CatalogosService } from 'src/services/catalogos.service';
   styleUrls: ['./pasteles-realizados.component.css']
 })
 export class PastelesRealizadosComponent implements OnInit {
-  pasteles: string[] = []; // Array para las imágenes de pasteles
+  pasteles: pastelrealizado[] = []; // Array para las imágenes de pasteles
   paginacion: number = 10; // Número máximo de imágenes por página
   paginaActual: number = 1; // Página actual
   totalPaginas: number; // Total de páginas
@@ -17,26 +17,32 @@ export class PastelesRealizadosComponent implements OnInit {
   imagenSeleccionada: string = ''; // Guarda la imagen seleccionada
   tipos: tipoevento[] = [];
   pastelesRealizado: pastelrealizado[] = [];
-  constructor(private service: CatalogosService) {
-    
-    this.pasteles = []; //Array vacio
-    this.totalPaginas = Math.ceil(this.pasteles.length / this.paginacion);
+  eventoSeleccionadoId: string = ''; // ID del evento seleccionado
 
+  constructor(private service: CatalogosService) {
+    this.totalPaginas = Math.ceil(this.pasteles.length / this.paginacion);
   }
 
   ngOnInit(): void {
     this.service.tipoEvento().subscribe((datos: tipoevento[]) => {
       this.tipos = datos;
-      console.log(this.tipos);
     });
     this.service.pastelesRealizados().subscribe((datos: pastelrealizado[]) => {
       this.pastelesRealizado = datos;
-      console.log(this.pastelesRealizado);
     });
-
   }
 
-  obtenerPastelesPorPagina(): string[] {
+  filtrarPasteles(event: Event): void {
+    const eventoId = Number((event.target as HTMLSelectElement).value); // Convertimos a número
+    this.eventoSeleccionadoId = eventoId.toString();
+    this.pasteles = this.pastelesRealizado.filter(
+      (pastel) => pastel.id_tipo_evento === eventoId
+    );
+    this.totalPaginas = Math.ceil(this.pasteles.length / this.paginacion);
+    this.paginaActual = 1; // Reiniciar a la primera página
+  }
+  
+  obtenerPastelesPorPagina(): pastelrealizado[] {
     const inicio = (this.paginaActual - 1) * this.paginacion;
     return this.pasteles.slice(inicio, inicio + this.paginacion);
   }
