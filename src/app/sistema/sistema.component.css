@@ -3,7 +3,7 @@ body {
     flex-direction: column;
     min-height: 100vh; /* Mantiene la altura mínima */
     margin: 0; /* Elimina el margen por defecto */
-    background-image: url('http://localhost:4200/assets/p1.png');
+    background-image: url('/assets/p1.png');
     background-size: cover; /* La imagen cubre toda la pantalla */
     background-position: center; /* Centra la imagen */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
@@ -13,7 +13,7 @@ body {
 .sidebar {
     width: 250px;
     background-color: #db8a00; /* #ead863 */
-    background-image: url('http://localhost:4200/assets/brown.jpg'); /* Ruta a la imagen de fondo */
+    background-image: url('/assets/brown.jpg'); /* Ruta a la imagen de fondo */
     padding: 20px;
     position: fixed;
     top: 0;

@@ -5,7 +5,7 @@
     <!-- Usuario -->
     <div class="user-section">
         <p  class="n_usuario">K-rol's Cakes</p>
-        <a href="/sisprincipal"> <img src="assets/cake.gif"alt="Usuario" class="user-image"></a>
+        <a routerLink="/sisprincipal"> <img src="assets/cake.gif"alt="Usuario" class="user-image"></a>
     </div>
   
     <!-- Menú desplegable -->
@@ -19,7 +19,7 @@
     <mat-icon>calendar_today</mat-icon>
     Agenda
     <div class="dropdown" [ngClass]="{'show': isDropdownOpen('agenda')}">
-        <a href="/agenda"><mat-icon>event_note</mat-icon>Calendario</a>
+        <a routerLink="/agenda"><mat-icon>event_note</mat-icon>Calendario</a>
     </div>
 </div>
 
@@ -27,9 +27,9 @@
     <mat-icon>cake</mat-icon>
     Pedidos
     <div class="dropdown" [ngClass]="{'show': isDropdownOpen('pedidos')}">
-        <a href="/pedido"><mat-icon>assignment</mat-icon>Gestionar Pedidos</a>
-        <a href="/tipo-evento"><mat-icon>house</mat-icon>Tipo_Eventos</a>
-        <a href="/estado"><mat-icon>house</mat-icon>estado</a>
+        <a routerLink="/pedido"><mat-icon>assignment</mat-icon>Gestionar Pedidos</a>
+        <a routerLink="/tipo-evento"><mat-icon>house</mat-icon>Tipo_Eventos</a>
+        <a routerLink="/estado"><mat-icon>house</mat-icon>estado</a>
     </div>
 </div>
 
@@ -37,8 +37,8 @@
     <mat-icon>assignment</mat-icon>
     Cotizaciones
     <div class="dropdown" [ngClass]="{'show': isDropdownOpen('cotizaciones')}">
-        <a href="/listar-cotizaciones"><mat-icon>book</mat-icon>Ver cotizaciones</a>
-        <a href="/cliente"><mat-icon>person</mat-icon>Clientes</a>
+        <a routerLink="/listar-cotizaciones"><mat-icon>book</mat-icon>Ver cotizaciones</a>
+        <a routerLink="/cliente"><mat-icon>person</mat-icon>Clientes</a>
     </div>
 </div>
 
@@ -46,12 +46,12 @@
     <mat-icon>inventory</mat-icon>
     Productos
     <div class="dropdown" [ngClass]="{'show': isDropdownOpen('producto')}">
-        <a href="/masas"><mat-icon>cake</mat-icon>Masas</a>
-        <a href="/relleno"><mat-icon>cake</mat-icon>Rellenos</a>
-        <a href="/receta"><mat-icon>cake</mat-icon>Recetas</a>
-        <a href="/producto"><mat-icon>cake</mat-icon>Productos</a>
-        <a href="/umps"><mat-icon>house</mat-icon>Unidades de medida inventario</a>
-        <a href="/unidad-medida"><mat-icon>house</mat-icon>Unidades de medida Costo</a>
+        <a routerLink="/masas"><mat-icon>cake</mat-icon>Masas</a>
+        <a routerLink="/relleno"><mat-icon>cake</mat-icon>Rellenos</a>
+        <a routerLink="/receta"><mat-icon>cake</mat-icon>Recetas</a>
+        <a routerLink="/producto"><mat-icon>cake</mat-icon>Productos</a>
+        <a routerLink="/umps"><mat-icon>house</mat-icon>Unidades de medida inventario</a>
+        <a routerLink="/unidad-medida"><mat-icon>house</mat-icon>Unidades de medida Costo</a>
     </div>
 </div>
 
@@ -59,9 +59,9 @@
     <mat-icon>inventory</mat-icon>
     Catalogos Inventario
     <div class="dropdown" [ngClass]="{'show': isDropdownOpen('CatalogosInventario')}">
-        <a href="/tipo-insumo-utencilio"><mat-icon>kitchen</mat-icon>Tipos de insumos y utensilios</a>
-        <a href="/motivo-salida"><mat-icon>kitchen</mat-icon>Motivos de salidas de inventario</a>
-        <a href="/proveedor"><mat-icon>persons</mat-icon>Proveedores</a>
+        <a routerLink="/tipo-insumo-utencilio"><mat-icon>kitchen</mat-icon>Tipos de insumos y utensilios</a>
+        <a routerLink="/motivo-salida"><mat-icon>kitchen</mat-icon>Motivos de salidas de inventario</a>
+        <a routerLink="/proveedor"><mat-icon>persons</mat-icon>Proveedores</a>
     </div>
 </div>
 
@@ -69,9 +69,9 @@
     <mat-icon>inventory</mat-icon>
     Inventario
     <div class="dropdown" [ngClass]="{'show': isDropdownOpen('inventario')}">
-        <a href="/insumo-utencilio"><mat-icon>kitchen</mat-icon>Insumos Utencilios</a>
-        <a href="/salidas"><mat-icon>house</mat-icon>salidas</a>
-        <a href="/compras"><mat-icon>house</mat-icon>entradas</a>
+        <a routerLink="/insumo-utencilio"><mat-icon>kitchen</mat-icon>Insumos Utencilios</a>
+        <a routerLink="/salidas"><mat-icon>house</mat-icon>salidas</a>
+        <a routerLink="/compras"><mat-icon>house</mat-icon>entradas</a>
     </div>
 </div>
 
@@ -79,25 +79,9 @@
     <mat-icon>person</mat-icon>
     Usuarios
     <div class="dropdown" [ngClass]="{'show': isDropdownOpen('usuarios')}">
-        <a href="/mantenimiento"><mat-icon>edit</mat-icon>Mantenimiento</a>
+        <a routerLink="/mantenimiento"><mat-icon>edit</mat-icon>Mantenimiento</a>
     </div>
 </div>
-
-<!-- <div class="nav-item" (click)="navigateTo('/unidad-medida')">
-    <mat-icon>cake</mat-icon>
-    Unidades de medida
-</div> -->
-
-<!-- <div class="nav-item" (click)="navigateTo('/insumo-utencilio')">
-    <mat-icon>cake</mat-icon>
-    Insumos y utencilios
-</div> -->
-
-<!-- <div class="nav-item" (click)="navigateTo('/estado')">
-    <mat-icon>cake</mat-icon>
-    Estado
-</div> -->
-
 
     
       <div class="logout-section" (click)="onLogout()"><!-- Botón de salir -->

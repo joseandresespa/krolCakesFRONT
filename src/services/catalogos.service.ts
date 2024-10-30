@@ -22,7 +22,7 @@ import { pastelrealizado } from 'src/app/models/pastelrealizado.interface';
   providedIn: 'root'
 })
 export class CatalogosService {
-  private baseUrl:string = "https://localhost:44373/api/catalogos/"
+  private baseUrl:string = "http://localhost:80/apikrolcakes/api/catalogos/"
   constructor(private http : HttpClient) { }
 
 // ---------------------------USUARIOS---------------------------------------
