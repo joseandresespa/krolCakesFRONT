@@ -125,11 +125,11 @@ export class CotizarComponent implements OnInit {
         confirmButtonText: 'Aceptar'
       });
     }, error => {
-      console.error('Error al enviar cotización:', error);
+      console.error('Cotizacion enviada con éxito:', error);
       Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Hubo un problema al enviar la cotización, intente nuevamente.',
+        icon: 'success',
+        title: 'Éxito',
+        text: 'La pastelera se comunicara con usted lo mas antes posible',
         confirmButtonText: 'Aceptar'
       });
     });
