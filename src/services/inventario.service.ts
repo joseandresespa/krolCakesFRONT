@@ -8,7 +8,8 @@ import { salidainventario } from 'src/app/models/salidainventario.interface';
   providedIn: 'root'
 })
 export class InventarioService {
-  private baseUrl:string = "http://localhost:80/apikrolcakes/api/inventario/"
+  private baseUrl:string = "https://localhost:44373/api/inventario/"
+  //private baseUrl:string = "http://54.174.198.133/apikrolcakes/api/inventario/"
   constructor(private http : HttpClient) { }
 
   compras(): Observable<comprainventario[]> {

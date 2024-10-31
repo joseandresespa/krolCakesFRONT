@@ -54,6 +54,7 @@ export class ModalEstadoPedidoComponent implements OnInit {
     } else {
       console.error('Nuevo estado no definido');
     }
+    this.dialogRef.close();
   }
 
   // Método para cancelar

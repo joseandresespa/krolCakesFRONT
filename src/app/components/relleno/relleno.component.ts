@@ -110,6 +110,9 @@ export class RellenoComponent implements OnInit {
           this.rellenos.push(nuevo);
           this.updatePagination();
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 800);
       }
     });
   }

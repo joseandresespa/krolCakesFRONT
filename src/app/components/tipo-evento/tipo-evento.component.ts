@@ -114,8 +114,11 @@ export class TipoEventoComponent implements OnInit {
             nombre: result.nombre
           };
           this.tiposEvento.push(nuevo);
-          this.updatePagination();
+          
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 800);
       }
     });
   }

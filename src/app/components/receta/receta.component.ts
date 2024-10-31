@@ -134,6 +134,9 @@ export class RecetaComponent implements OnInit {
           this.recetas.push(newReceta);
           this.updatePagination();
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 800);
       }
     });
   }

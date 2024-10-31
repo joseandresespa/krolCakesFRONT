@@ -103,6 +103,9 @@ export class UmpsComponent implements OnInit {
           this.umps.push(newUmps);
           this.updatePagination();
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 800);
       }
     });
   }
@@ -133,6 +136,7 @@ export class UmpsComponent implements OnInit {
             this.updatePagination();
           }
         });
+
       }
     });
   }

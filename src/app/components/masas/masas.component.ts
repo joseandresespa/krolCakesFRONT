@@ -99,6 +99,9 @@ export class MasasComponent implements OnInit {
           this.masas.push(nuevo);
           this.updatePagination();
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 800);
       }
     });
   }

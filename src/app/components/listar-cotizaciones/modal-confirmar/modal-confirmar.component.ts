@@ -91,6 +91,7 @@ export class ModalConfirmarComponent {
       },
       error => {
         console.error('Error al confirmar la cotización:', error);
+        this.dialogRef.close();
       }
     );
   }

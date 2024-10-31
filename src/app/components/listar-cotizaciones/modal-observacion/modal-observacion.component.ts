@@ -48,6 +48,7 @@ export class ModalObservacionComponent {
         },
         (error) => {
           console.error('Error al enviar los datos:', error);
+           this.dialogRef.close();
         }
       );
     

@@ -136,6 +136,9 @@ export class ProductoComponent implements OnInit {
           this.productos.push(newProducto);
           this.updatePagination();
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 800);
       }
     });
   }

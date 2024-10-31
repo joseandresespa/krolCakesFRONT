@@ -105,6 +105,9 @@ export class EstadoComponent implements OnInit {
           this.estados.push(nuevo);
           this.updatePagination(); // Actualizar paginación después de agregar
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 800);
       }
     });
   }

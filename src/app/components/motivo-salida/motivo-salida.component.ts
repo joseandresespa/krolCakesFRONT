@@ -104,6 +104,9 @@ export class MotivoSalidaComponent implements OnInit {
           this.motivosSalida.push(nuevo);
           this.updatePagination();
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 800);
       }
     });
   }

@@ -100,6 +100,9 @@ export class InsumoUtensilioComponent implements OnInit {
           this.insumosUtensilios.push(response); // Actualiza la lista de insumos con la respuesta
           this.updatePagination(); // Actualiza la paginación
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 800);
       }
     });
   }

@@ -126,6 +126,7 @@ export class MantenimientoComponent implements OnInit {
         this.applyFilter({ target: { value: this.filterValue } } as any);
       }
     });
+    window.location.reload();
   }
 
   toggleSortDirection(): void {

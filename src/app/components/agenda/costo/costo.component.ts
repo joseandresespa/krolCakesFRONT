@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CotizacionPedidosService } from 'src/services/cotizacion-pedidos.service';
 import { CatalogosService } from 'src/services/catalogos.service';
 import { pedido } from 'src/app/models/pedido.interface';
@@ -30,7 +30,8 @@ export class CostoComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private service: CotizacionPedidosService,
-    private serviceCatalogos: CatalogosService
+    private serviceCatalogos: CatalogosService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -143,6 +144,7 @@ export class CostoComponent implements OnInit {
         console.error('Error al enviar el costo', error);
       }
     });
+    this.router.navigate(['/pedido']);
 }
 
 }

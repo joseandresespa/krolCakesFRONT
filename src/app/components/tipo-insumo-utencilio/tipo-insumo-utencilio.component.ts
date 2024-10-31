@@ -104,6 +104,9 @@ export class TipoInsumoUtencilioComponent implements OnInit {
           this.tiposInsumoUtencilio.push(nuevo);
           this.updatePagination();
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 800);
       }
     });
   }
