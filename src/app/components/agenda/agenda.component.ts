@@ -41,20 +41,17 @@ export class AgendaComponent implements OnInit {
     this.calendar = [];
     let week: { day: number, clientNames?: { name: string, pedido: pedido }[] }[] = [];
   
-    // Rellenar la primera semana
+    // Rellenar la primera semana con días vacíos si es necesario
     for (let i = 0; i < firstDay; i++) {
-      week.push({ day: 0 }); // Días vacíos
+      week.push({ day: 0 });
     }
   
     // Rellenar los días del mes
     for (let day = 1; day <= daysInMonth; day++) {
-      const deliveryDate = new Date(this.year, this.month, day);
-      const formattedDate = `${day.toString().padStart(2, '0')}/${(this.month + 1).toString().padStart(2, '0')}/${this.year} 00:00:00`;
-  
       const matchingPedidos = this.pedidos.filter(p => {
-        if (p.fecha) {
-          const pedidoDateParts = p.fecha.split(' ')[0].split('/');
-          const pedidoDate = new Date(+pedidoDateParts[2], +pedidoDateParts[1] - 1, +pedidoDateParts[0]);
+        if (p.fecha && p.hora) {
+          // Crear el objeto Date combinando la fecha y la hora
+          const pedidoDate = new Date(`${p.fecha}T${p.hora}`);
           return pedidoDate.getFullYear() === this.year && pedidoDate.getMonth() === this.month && pedidoDate.getDate() === day;
         }
         return false;
@@ -65,24 +62,29 @@ export class AgendaComponent implements OnInit {
         week.push({
           day,
           clientNames: matchingPedidos.map(p => ({
-            name: p.nombre || 'Sin Nombre', // Asignar un valor por defecto si nombre es undefined
+            name: p.nombre || 'Sin Nombre',
             pedido: p
           }))
         });
       } else {
-        week.push({ day }); // Solo el día sin pedidos
+        week.push({ day });
       }
   
+      // Agrupar en semanas
       if (week.length === 7) {
         this.calendar.push(week);
         week = [];
       }
     }
   
+    // Añadir la última semana si quedó incompleta
     if (week.length > 0) {
       this.calendar.push(week);
     }
+  
+    console.log('Calendario generado:', this.calendar);
   }
+  
   
 
   // Método para ir al mes anterior
