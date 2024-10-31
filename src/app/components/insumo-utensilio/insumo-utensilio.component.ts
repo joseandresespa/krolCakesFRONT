@@ -101,7 +101,7 @@ export class InsumoUtensilioComponent implements OnInit {
           this.updatePagination(); // Actualiza la paginación
         });
         setTimeout(() => {
-          window.location.reload();
+          
         }, 800);
       }
     });

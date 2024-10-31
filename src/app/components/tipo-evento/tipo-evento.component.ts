@@ -117,7 +117,7 @@ export class TipoEventoComponent implements OnInit {
           
         });
         setTimeout(() => {
-          window.location.reload();
+          
         }, 800);
       }
     });

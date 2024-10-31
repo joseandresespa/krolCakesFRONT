@@ -94,7 +94,7 @@ export class ComprasComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.ngOnInit(); // Vuelve a cargar las compras
-        window.location.reload();
+        
       }
     });
   }

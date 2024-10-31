@@ -105,7 +105,7 @@ export class MotivoSalidaComponent implements OnInit {
           this.updatePagination();
         });
         setTimeout(() => {
-          window.location.reload();
+          
         }, 800);
       }
     });

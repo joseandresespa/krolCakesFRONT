@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AgregarUsuarioDialogComponent } from '../agregar-usuario-dialog/agregar-usuario-dialog.component';
 import { EditarUsuarioDialogComponent } from '../editar-usuario-dialog/editar-usuario-dialog.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
@@ -22,10 +22,14 @@ export class MantenimientoComponent implements OnInit {
   filterValue: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
 
-  constructor(private dialog: MatDialog, private service: CatalogosService) { }
+  constructor(public dialogRef: MatDialogRef<AgregarUsuarioDialogComponent>,private dialog: MatDialog, private service: CatalogosService) { }
 
   ngOnInit(): void {
     this.cargarUsuarios();
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
   cargarUsuarios(): void {
@@ -99,18 +103,6 @@ export class MantenimientoComponent implements OnInit {
     });
   }
 
-  deleteUser(user: any) {
-    const dialogRef = this.dialog.open(ConfirmDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.dataSource = this.dataSource.filter(u => u.id_usuario !== user.id);
-        this.filteredData = this.filteredData.filter(u => u.id_usuario !== user.id);
-        this.updatePagination();
-      }
-    });
-  }
-
   openAddUserDialog(): void {
     const dialogRef = this.dialog.open(AgregarUsuarioDialogComponent, {
       width: '400px',
@@ -125,9 +117,7 @@ export class MantenimientoComponent implements OnInit {
         });
         this.applyFilter({ target: { value: this.filterValue } } as any);
       }
-      window.location.reload();
     });
-    
   }
 
   toggleSortDirection(): void {

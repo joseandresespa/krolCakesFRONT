@@ -7,8 +7,8 @@ import { pedido } from 'src/app/models/pedido.interface';
   providedIn: 'root'
 })
 export class CotizacionPedidosService {
-  //private baseUrl:string = "https://localhost:44373/api/CotizacionPedido/"
-  private baseUrl:string = "http://54.174.198.133/apikrolcakes/api/CotizacionPedido/"
+  private baseUrl:string = "https://localhost:44373/api/CotizacionPedido/"
+  //private baseUrl:string = "http://54.174.198.133/apikrolcakes/api/CotizacionPedido/"
   constructor(private http : HttpClient) { }
 
 

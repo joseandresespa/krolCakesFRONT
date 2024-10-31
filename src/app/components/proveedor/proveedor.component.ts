@@ -88,7 +88,7 @@ export class ProveedorComponent implements OnInit {
           this.updatePagination();
         });
         setTimeout(() => {
-          window.location.reload();
+          
         }, 800);
       }
     });
