@@ -8,9 +8,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class SesionService {
-  private baseUrl:string = "http://localhost:44373/api/login/"
+  private baseUrl:string = "https://localhost:44373/api/login/"
   //private baseUrl:string = "http://54.174.198.133/apikrolcakes/api/login/"
   constructor(private http : HttpClient) { }
+
+
   sesion(credenciales: any){
     return this.http.post<any>(`${this.baseUrl}sesion`, credenciales);
   }
