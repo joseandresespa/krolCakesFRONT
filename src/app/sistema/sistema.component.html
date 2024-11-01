@@ -46,22 +46,22 @@
     <mat-icon>inventory</mat-icon>
     Productos
     <div class="dropdown" [ngClass]="{'show': isDropdownOpen('producto')}">
+        <a routerLink="/unidad-medida"><mat-icon>house</mat-icon>Unidades de medida Costo</a>
         <a routerLink="/masas"><mat-icon>cake</mat-icon>Masas</a>
         <a routerLink="/relleno"><mat-icon>cake</mat-icon>Rellenos</a>
         <a routerLink="/receta"><mat-icon>cake</mat-icon>Recetas</a>
         <a routerLink="/producto"><mat-icon>cake</mat-icon>Productos</a>
-        <a routerLink="/umps"><mat-icon>house</mat-icon>Unidades de medida inventario</a>
-        <a routerLink="/unidad-medida"><mat-icon>house</mat-icon>Unidades de medida Costo</a>
     </div>
 </div>
+
 
 <div class="nav-item" (click)="toggleDropdown('CatalogosInventario')">
     <mat-icon>inventory</mat-icon>
     Catalogos Inventario
     <div class="dropdown" [ngClass]="{'show': isDropdownOpen('CatalogosInventario')}">
+        <a routerLink="/umps"><mat-icon>house</mat-icon>Unidades de medida inventario</a>
         <a routerLink="/tipo-insumo-utencilio"><mat-icon>kitchen</mat-icon>Tipos de insumos y utensilios</a>
         <a routerLink="/motivo-salida"><mat-icon>kitchen</mat-icon>Motivos de salidas de inventario</a>
-        <a routerLink="/proveedor"><mat-icon>persons</mat-icon>Proveedores</a>
     </div>
 </div>
 
@@ -70,10 +70,12 @@
     Inventario
     <div class="dropdown" [ngClass]="{'show': isDropdownOpen('inventario')}">
         <a routerLink="/insumo-utencilio"><mat-icon>kitchen</mat-icon>Insumos Utencilios</a>
+        <a routerLink="/proveedor"><mat-icon>persons</mat-icon>Proveedores</a>
         <a routerLink="/salidas"><mat-icon>house</mat-icon>salidas</a>
         <a routerLink="/compras"><mat-icon>house</mat-icon>entradas</a>
     </div>
 </div>
+
 
 <div class="nav-item" (click)="toggleDropdown('usuarios')">
     <mat-icon>person</mat-icon>
