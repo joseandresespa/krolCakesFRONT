@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { AgregarUsuarioDialogComponent } from '../agregar-usuario-dialog/agregar-usuario-dialog.component';
 import { EditarUsuarioDialogComponent } from '../editar-usuario-dialog/editar-usuario-dialog.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
@@ -22,14 +22,10 @@ export class MantenimientoComponent implements OnInit {
   filterValue: string = '';
   sortDirection: 'asc' | 'desc' = 'asc';
 
-  constructor(public dialogRef: MatDialogRef<AgregarUsuarioDialogComponent>,private dialog: MatDialog, private service: CatalogosService) { }
+  constructor(private dialog: MatDialog, private service: CatalogosService) { }
 
   ngOnInit(): void {
     this.cargarUsuarios();
-  }
-
-  onNoClick(): void {
-    this.dialogRef.close();
   }
 
   cargarUsuarios(): void {
