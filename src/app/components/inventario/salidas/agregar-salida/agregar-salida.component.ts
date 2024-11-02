@@ -5,6 +5,7 @@ import { insumoutensilio } from 'src/app/models/insumoutensilio.interface';
 import { MotivoSalida } from 'src/app/models/motivosalida.interface';
 import { CatalogosService } from 'src/services/catalogos.service';
 import { InventarioService } from 'src/services/inventario.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-agregar-salida',
@@ -19,6 +20,7 @@ export class AgregarSalidaComponent implements OnInit {
   totalGeneral: number = 0;
 
   constructor(
+    public dialogRef: MatDialogRef<AgregarSalidaComponent>,
     private fb: FormBuilder,
     private service: CatalogosService,
     private inventarioService: InventarioService
@@ -66,10 +68,11 @@ export class AgregarSalidaComponent implements OnInit {
     this.insumos.removeAt(index);
   }
 
-
   cerrarModal() {
-    // lógica para cerrar el modal
+    this.dialogRef.close();
   }
+
+
 
   guardarRegistro() {
     if (this.registroForm.valid) {
@@ -88,10 +91,11 @@ export class AgregarSalidaComponent implements OnInit {
       this.inventarioService.nuevaSalida(compraSalida).subscribe(
         response => {
           console.log('Salida registrada exitosamente:', response);
-          this.cerrarModal(); // Cierra el modal o realiza otra acción
+          this.dialogRef.close();
         },
         error => {
           console.error('Error al registrar la Salida:', error);
+          this.dialogRef.close();
         }
       );
     } else {

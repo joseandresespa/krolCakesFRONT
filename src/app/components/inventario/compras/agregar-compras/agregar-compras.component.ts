@@ -6,6 +6,8 @@ import { proveedor } from 'src/app/models/proveedor.interface';
 import { CatalogosService } from 'src/services/catalogos.service';
 import { InventarioService } from 'src/services/inventario.service';
 import Swal from 'sweetalert2';
+import { AgregarSalidaComponent } from '../../salidas/agregar-salida/agregar-salida.component';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-agregar-compras',
@@ -20,6 +22,7 @@ export class AgregarComprasComponent implements OnInit {
   totalGeneral: number = 0;
 
   constructor(
+    public dialogRef: MatDialogRef<AgregarSalidaComponent>,
     private fb: FormBuilder,
     private service: CatalogosService,
     private inventarioService: InventarioService
@@ -84,7 +87,7 @@ export class AgregarComprasComponent implements OnInit {
   }
 
   cerrarModal() {
-    // lógica para cerrar el modal
+    this.dialogRef.close();
   }
 
   guardarRegistro() {
